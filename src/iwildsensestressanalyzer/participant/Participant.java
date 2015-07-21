@@ -33,4 +33,19 @@ public class Participant {
         return IMEI;
     }
     
+    /**
+     * Creates a set of StressSurvey objects using the lines that contain
+     * the provided answers
+     * 
+     * @param linesAnswers the set of lines with the answers to the stress surveys 
+     */
+    public void addSurveyAnswers(ArrayList<String> linesAnswers) {
+        
+        stressSurveyList = new ArrayList<StressSurvey>();
+        
+        for (String answer: linesAnswers) {
+            stressSurveyList.add(new StressSurvey(answer));
+        }   
+    }
+    
 }

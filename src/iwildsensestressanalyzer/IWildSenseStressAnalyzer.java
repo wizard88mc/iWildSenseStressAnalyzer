@@ -1,6 +1,8 @@
 package iwildsensestressanalyzer;
 
 import iwildsensestressanalyzer.filereader.IMEIListReader;
+import iwildsensestressanalyzer.filereader.SurveyQuestionnaireReader;
+import iwildsensestressanalyzer.participant.Participant;
 import java.util.ArrayList;
 
 /**
@@ -28,8 +30,41 @@ public class IWildSenseStressAnalyzer {
          * Step 2: For each IMEI, we create a Participant object that will hold
          * all the answers and his/her behavior
          */
+        ArrayList<Participant> participantList = new ArrayList<Participant>();
         
+        for (String imei: listImei) {
+            
+            /**
+             * Creating a new Participant
+             */
+            Participant newParticipant = new Participant(imei);
+            
+            /**
+             * Retrieving all the answers provided
+             */
+            ArrayList<String> surveyAnswers = new ArrayList<String>(),
+                    questionnaireAnswers = new ArrayList<String>();
+            
+            SurveyQuestionnaireReader.readFile(imei, surveyAnswers, 
+                    questionnaireAnswers);
+            
+            /**
+             * Adding the answers to the Surveys
+             */
+            newParticipant.addSurveyAnswers(surveyAnswers);
+            
+            /**
+             * Adding the answers to the Questionnaire 
+             */
+            
+            
+            participantList.add(new Participant(imei));
+        }
         
+        /**
+         * Step 3: retrieve all the answers provided by the participant to the 
+         * surveys
+         */
     }
     
 }
