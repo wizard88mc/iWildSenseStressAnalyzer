@@ -1,7 +1,9 @@
 package iwildsensestressanalyzer;
 
+import iwildsensestressanalyzer.dataanalyzer.SurveyAnalyzer;
 import iwildsensestressanalyzer.filereader.IMEIListReader;
 import iwildsensestressanalyzer.filereader.SurveyQuestionnaireReader;
+import iwildsensestressanalyzer.filereader.UserPresenceEventsReader;
 import iwildsensestressanalyzer.participant.Participant;
 import java.util.ArrayList;
 
@@ -57,14 +59,25 @@ public class IWildSenseStressAnalyzer {
              * Adding the answers to the Questionnaire 
              */
             
+            /**
+             * Adding the UserPresenceEvent events to the participants
+             */
+            ArrayList<String> userPresenceEventsLines = 
+                    UserPresenceEventsReader.readAllFiles(newParticipant);
             
-            participantList.add(new Participant(imei));
+            newParticipant.addUserPresenceEvents(userPresenceEventsLines);
+            
+            
+            participantList.add(newParticipant);
         }
         
         /**
-         * Step 3: retrieve all the answers provided by the participant to the 
-         * surveys
+         * Step 3: Printing statistics about the surveys
          */
+        SurveyAnalyzer.analyzeSurveysAnswers(participantList);
+        
+        
+        
     }
     
 }

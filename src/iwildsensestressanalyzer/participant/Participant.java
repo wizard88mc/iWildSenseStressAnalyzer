@@ -1,6 +1,7 @@
 package iwildsensestressanalyzer.participant;
 
 import iwildsensestressanalyzer.esm.StressSurvey;
+import iwildsensestressanalyzer.userpresenceevent.UserPresenceEvent;
 import java.util.ArrayList;
 
 /**
@@ -15,6 +16,7 @@ public class Participant {
     
     private final String IMEI;
     private ArrayList<StressSurvey> stressSurveyList;
+    private ArrayList<UserPresenceEvent> userPresenceEventList;
     
     /**
      * Constructor with the IMEI of the participant
@@ -46,6 +48,39 @@ public class Participant {
         for (String answer: linesAnswers) {
             stressSurveyList.add(new StressSurvey(answer));
         }   
+    }
+    
+    /**
+     * Creates a set of UserPresenceEvent objects that represents an interaction
+     * of the participant with the screen
+     * 
+     * @param linesEvents 
+     */
+    public void addUserPresenceEvents(ArrayList<String> linesEvents) {
+        
+        userPresenceEventList = new ArrayList<UserPresenceEvent>();
+        
+        for (String event: linesEvents) {
+            userPresenceEventList.add(new UserPresenceEvent(event));
+        }
+    }
+    
+    /**
+     * Returns the StressSurvey provided by the Participant
+     * @return the ArrayList of StressSurvey answers
+     */
+    public ArrayList<StressSurvey> getStressSurveys() {
+        
+        return this.stressSurveyList;
+    }
+    
+    /**
+     * Returns the number of answers provided to the Surveys
+     * @return 
+     */
+    public int getSurveyAnswersCount() {
+        
+        return this.stressSurveyList.size();
     }
     
 }

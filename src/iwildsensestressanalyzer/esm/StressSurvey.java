@@ -37,4 +37,28 @@ public class StressSurvey {
         energy = Integer.valueOf(elementsSurvey[1]);
         stress = Integer.valueOf(elementsSurvey[2]);
     }
+    
+    /**
+     * Returns the energy answer
+     * @return the energy answer
+     */
+    public int getEnergy() {
+        return this.energy;
+    }
+    
+    /**
+     * Returns the valence answer
+     * @return the valence answer
+     */
+    public int getValence() {
+        return this.valence;
+    }
+    
+    /**
+     * Returns the stress answer
+     * @return the stress answer
+     */
+    public int getStress() {
+        return this.stress;
+    }
 }
