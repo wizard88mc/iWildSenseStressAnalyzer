@@ -60,12 +60,16 @@ public class IWildSenseStressAnalyzer {
              */
             
             /**
-             * Adding the UserPresenceEvent events to the participants
+             * Adding the UserPresenceEvent events to the participant
              */
             ArrayList<String> userPresenceEventsLines = 
-                    UserPresenceEventsReader.readAllFiles(newParticipant);
+                    UserPresenceEventsReader.getAllUserPresenceEventsLines(newParticipant);
             
             newParticipant.addUserPresenceEvents(userPresenceEventsLines);
+            
+            /**
+             * Adding the UserActivityEvent events to the participant
+             */
             
             
             participantList.add(newParticipant);

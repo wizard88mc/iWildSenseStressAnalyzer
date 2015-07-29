@@ -3,13 +3,13 @@ package iwildsensestressanalyzer.userpresenceevent;
 /**
  *
  * This class represents and event on the screen, that could be
- * - turn on
- * - turn off
- * - unlocked
- * - rotation_0: normal orientation
- * - rotation_90: phone rotated 90 degrees
- * - rotation_180: phone rotated 180 degrees
- * - rotation_270: phone rotated 270 degrees
+ * - turn on: ON
+ * - turn off: OFF
+ * - unlocked: PRESENT 
+ * - rotation_0: normal orientation: ROTATION_0
+ * - rotation_90: phone rotated 90 degrees: ROTATION_90
+ * - rotation_180: phone rotated 180 degrees: ROTATION_180
+ * - rotation_270: phone rotated 270 degrees: ROTATION_270
  * 
  * @author Matteo Ciman
  * @version 0.1

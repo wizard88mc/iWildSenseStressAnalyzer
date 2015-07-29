@@ -1,6 +1,7 @@
 package iwildsensestressanalyzer.participant;
 
 import iwildsensestressanalyzer.esm.StressSurvey;
+import iwildsensestressanalyzer.useractivity.UserActivityEvent;
 import iwildsensestressanalyzer.userpresenceevent.UserPresenceEvent;
 import java.util.ArrayList;
 
@@ -17,6 +18,7 @@ public class Participant {
     private final String IMEI;
     private ArrayList<StressSurvey> stressSurveyList;
     private ArrayList<UserPresenceEvent> userPresenceEventList;
+    private ArrayList<UserActivityEvent> userActivityEventList;
     
     /**
      * Constructor with the IMEI of the participant

@@ -1,5 +1,6 @@
 package iwildsensestressanalyzer.filereader;
 
+import static iwildsensestressanalyzer.filereader.BasicFileReader.MONTHS;
 import iwildsensestressanalyzer.participant.Participant;
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,19 +11,19 @@ import java.util.ArrayList;
 
 /**
  *
- * It is responsible to read the UserPresenceEvents.csv file and to return
- * all the lines that correspond to an event of the screen 
+ * This class is responsible to read the UserActivity.csv file and to return
+ * all the lines that correspond to the detected activity of a participant
  * 
  * @author Matteo Ciman
  * @version 0.1
  */
-public class UserPresenceEventsReader extends BasicFileReader {
+public class UserActivityReader extends BasicFileReader {
     
-    private static final String USER_PRESENCE_EVENTS_FILE_NAME = "UserPresenceEvents.csv";
+    private static final String USER_ACTIVITY_FILE_NAME = "UserActivity.csv";
     
-    public static ArrayList<String> getAllUserPresenceEventsLines(Participant participant) {
+    public static ArrayList<String> getAllUserActivityEventsLines(Participant participant) {
         
-        ArrayList<String> lines = new ArrayList<String>();
+        ArrayList<String> linesEvents = new ArrayList<String>();
         
         BufferedReader reader;
         
@@ -37,7 +38,7 @@ public class UserPresenceEventsReader extends BasicFileReader {
                     File possibleFile = new File(FOLDER_DATA + FILE_SEPARATOR + 
                             FOLDER_PING_DATA + FILE_SEPARATOR + month + FILE_SEPARATOR 
                             + day + FILE_SEPARATOR + participant.getIMEI() + 
-                            "_" + USER_PRESENCE_EVENTS_FILE_NAME);
+                            "_" + USER_ACTIVITY_FILE_NAME);
                     
                     /**
                      * Checking if file exists to avoid to search for not 
@@ -51,7 +52,7 @@ public class UserPresenceEventsReader extends BasicFileReader {
                         
                         while ((line = reader.readLine()) != null) {
                             
-                            lines.add(line);
+                            linesEvents.add(line);
                         }   
                     }
                 }
@@ -66,7 +67,7 @@ public class UserPresenceEventsReader extends BasicFileReader {
             exc.printStackTrace();
         }
         
-        return lines;
+        return linesEvents;
     }
     
 }
