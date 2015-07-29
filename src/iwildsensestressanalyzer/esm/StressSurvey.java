@@ -39,6 +39,14 @@ public class StressSurvey {
     }
     
     /**
+     * Returns the timestamp when the answer is provided
+     * @return the timestamp
+     */
+    public long getTimestamp() {
+        return this.timestamp;
+    }
+    
+    /**
      * Returns the energy answer
      * @return the energy answer
      */
