@@ -3,6 +3,7 @@ package iwildsensestressanalyzer;
 import iwildsensestressanalyzer.dataanalyzer.SurveyAnalyzer;
 import iwildsensestressanalyzer.filereader.IMEIListReader;
 import iwildsensestressanalyzer.filereader.SurveyQuestionnaireReader;
+import iwildsensestressanalyzer.filereader.UserActivityReader;
 import iwildsensestressanalyzer.filereader.UserPresenceEventsReader;
 import iwildsensestressanalyzer.participant.Participant;
 import java.util.ArrayList;
@@ -64,13 +65,14 @@ public class IWildSenseStressAnalyzer {
              */
             ArrayList<String> userPresenceEventsLines = 
                     UserPresenceEventsReader.getAllUserPresenceEventsLines(newParticipant);
-            
             newParticipant.addUserPresenceEvents(userPresenceEventsLines);
             
             /**
              * Adding the UserActivityEvent events to the participant
              */
-            
+            ArrayList<String> userActivityEventsLines = 
+                    UserActivityReader.getAllUserActivityEventsLines(newParticipant);
+            newParticipant.addUserActivityEvents(userActivityEventsLines);
             
             participantList.add(newParticipant);
         }

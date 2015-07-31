@@ -3,13 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/filereader/UserActivityReader.java</file>
             <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/IWildSenseStressAnalyzer.java</file>
             <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/filereader/BasicFileReader.java</file>
-            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/useractivity/UserActivityEvent.java</file>
             <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/participant/Participant.java</file>
             <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/filereader/SurveyQuestionnaireReader.java</file>
             <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/filereader/UserPresenceEventsReader.java</file>
-            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/userpresenceevent/UserPresenceEvent.java</file>
         </group>
     </open-files>
 </project-private>

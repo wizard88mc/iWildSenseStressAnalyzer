@@ -56,7 +56,7 @@ public class Participant {
      * Creates a set of UserPresenceEvent objects that represents an interaction
      * of the participant with the screen
      * 
-     * @param linesEvents 
+     * @param linesEvents the list of lines recorded with user presence data
      */
     public void addUserPresenceEvents(ArrayList<String> linesEvents) {
         
@@ -64,6 +64,21 @@ public class Participant {
         
         for (String event: linesEvents) {
             userPresenceEventList.add(new UserPresenceEvent(event));
+        }
+    }
+    
+    /**
+     * Creates a set of UserActivityEvent objects that represents the activity
+     * performed by the participant among the day
+     * 
+     * @param linesActivities the list of lines recorded with activity data
+     */
+    public void addUserActivityEvents(ArrayList<String> linesActivities) {
+        
+        userActivityEventList = new ArrayList<UserActivityEvent>();
+        
+        for (String activity: linesActivities) {
+            userActivityEventList.add(new UserActivityEvent(activity));
         }
     }
     
