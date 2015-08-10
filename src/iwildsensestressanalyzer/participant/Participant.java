@@ -1,5 +1,6 @@
 package iwildsensestressanalyzer.participant;
 
+import iwildsensestressanalyzer.activityservservice.ActivityServServiceEvent;
 import iwildsensestressanalyzer.esm.StressSurvey;
 import iwildsensestressanalyzer.useractivity.UserActivityEvent;
 import iwildsensestressanalyzer.userpresenceevent.UserPresenceEvent;
@@ -19,6 +20,7 @@ public class Participant {
     private ArrayList<StressSurvey> stressSurveyList;
     private ArrayList<UserPresenceEvent> userPresenceEventList;
     private ArrayList<UserActivityEvent> userActivityEventList;
+    private ArrayList<ActivityServServiceEvent> activityServServiceEventList;
     
     /**
      * Constructor with the IMEI of the participant
@@ -79,6 +81,21 @@ public class Participant {
         
         for (String activity: linesActivities) {
             userActivityEventList.add(new UserActivityEvent(activity));
+        }
+    }
+    
+    /**
+     * Creates a set of ActivityServServiceEvent objects that represents the 
+     * information about the currently running services 
+     * 
+     * @param linesServServices the list of lines recorded with the service data
+     */
+    public void addActivityServServiceEvents(ArrayList<String> linesServServices) {
+        
+        activityServServiceEventList = new ArrayList<ActivityServServiceEvent>();
+        
+        for (String event: linesServServices) {
+            activityServServiceEventList.add(new ActivityServServiceEvent(event));
         }
     }
     

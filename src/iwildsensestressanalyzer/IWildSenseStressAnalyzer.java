@@ -1,6 +1,7 @@
 package iwildsensestressanalyzer;
 
 import iwildsensestressanalyzer.dataanalyzer.SurveyAnalyzer;
+import iwildsensestressanalyzer.filereader.ActivityServServiceReader;
 import iwildsensestressanalyzer.filereader.IMEIListReader;
 import iwildsensestressanalyzer.filereader.SurveyQuestionnaireReader;
 import iwildsensestressanalyzer.filereader.UserActivityReader;
@@ -73,6 +74,13 @@ public class IWildSenseStressAnalyzer {
             ArrayList<String> userActivityEventsLines = 
                     UserActivityReader.getAllUserActivityEventsLines(newParticipant);
             newParticipant.addUserActivityEvents(userActivityEventsLines);
+            
+            /**
+             * Adding the ActivityServServiceEvent events to the participant
+             */
+            ArrayList<String> activityServServiceEventsLines = 
+                    ActivityServServiceReader.getAllActivityServServiceEventsLines(newParticipant);
+            newParticipant.addActivityServServiceEvents(activityServServiceEventsLines);
             
             participantList.add(newParticipant);
         }
