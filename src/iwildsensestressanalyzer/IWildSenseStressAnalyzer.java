@@ -1,7 +1,6 @@
 package iwildsensestressanalyzer;
 
 import iwildsensestressanalyzer.dataanalyzer.SurveyAnalyzer;
-import iwildsensestressanalyzer.filereader.ActivityServServiceReader;
 import iwildsensestressanalyzer.filereader.IMEIListReader;
 import iwildsensestressanalyzer.filereader.SurveyQuestionnaireReader;
 import iwildsensestressanalyzer.filereader.UserActivityReader;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
  * Manages all the steps necessary to analyze data about the 4 weeks experiment
  * 
  * @author Matteo Ciman
- * @version 0.1
+ * @version 1.1
  */
 public class IWildSenseStressAnalyzer {
 

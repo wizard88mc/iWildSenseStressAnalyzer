@@ -12,15 +12,15 @@ import java.util.ArrayList;
  * to the answers provided to the surveys and questionnaires
  * 
  * @author Matteo Ciman
- * @version 0.1
+ * @version 1.1
  */
 public class Participant {
     
     private final String IMEI;
     private ArrayList<StressSurvey> stressSurveyList;
-    private ArrayList<UserPresenceEvent> userPresenceEventList;
-    private ArrayList<UserActivityEvent> userActivityEventList;
-    private ArrayList<ActivityServServiceEvent> activityServServiceEventList;
+    private ArrayList<UserPresenceEvent> userPresenceEventsList;
+    private ArrayList<UserActivityEvent> userActivityEventsList;
+    private ArrayList<ActivityServServiceEvent> activityServServiceEventsList;
     
     /**
      * Constructor with the IMEI of the participant
@@ -62,10 +62,10 @@ public class Participant {
      */
     public void addUserPresenceEvents(ArrayList<String> linesEvents) {
         
-        userPresenceEventList = new ArrayList<UserPresenceEvent>();
+        userPresenceEventsList = new ArrayList<UserPresenceEvent>();
         
         for (String event: linesEvents) {
-            userPresenceEventList.add(new UserPresenceEvent(event));
+            userPresenceEventsList.add(new UserPresenceEvent(event));
         }
     }
     
@@ -77,10 +77,10 @@ public class Participant {
      */
     public void addUserActivityEvents(ArrayList<String> linesActivities) {
         
-        userActivityEventList = new ArrayList<UserActivityEvent>();
+        userActivityEventsList = new ArrayList<UserActivityEvent>();
         
         for (String activity: linesActivities) {
-            userActivityEventList.add(new UserActivityEvent(activity));
+            userActivityEventsList.add(new UserActivityEvent(activity));
         }
     }
     
@@ -92,10 +92,10 @@ public class Participant {
      */
     public void addActivityServServiceEvents(ArrayList<String> linesServServices) {
         
-        activityServServiceEventList = new ArrayList<ActivityServServiceEvent>();
+        activityServServiceEventsList = new ArrayList<ActivityServServiceEvent>();
         
         for (String event: linesServServices) {
-            activityServServiceEventList.add(new ActivityServServiceEvent(event));
+            activityServServiceEventsList.add(new ActivityServServiceEvent(event));
         }
     }
     
@@ -110,11 +110,20 @@ public class Participant {
     
     /**
      * Returns the number of answers provided to the Surveys
-     * @return 
+     * @return the number of answers provided to the Surveys
      */
     public int getSurveyAnswersCount() {
         
         return this.stressSurveyList.size();
+    }
+    
+    /**
+     * Returns all the UserPresenceEvents of the Participant
+     * @return the list of UserPresenceEvent
+     */
+    public ArrayList<UserPresenceEvent> getUserPresenceEventsList() {
+        
+        return this.userPresenceEventsList;
     }
     
 }

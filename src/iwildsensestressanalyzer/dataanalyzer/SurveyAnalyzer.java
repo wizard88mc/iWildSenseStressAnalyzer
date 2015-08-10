@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * answers with respect to Energy, Valence and Stress
  * 
  * @author Matteo Ciman
- * @version 0.1 First draft of the class
+ * @version 1.0 
  */
 public class SurveyAnalyzer {
     
