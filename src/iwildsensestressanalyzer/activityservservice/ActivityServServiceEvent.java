@@ -36,6 +36,35 @@ public class ActivityServServiceEvent {
     
     public ActivityServServiceEvent(String line) {
         
+        /**
+         * Since if the state of a service is more than one there is a comma (,)
+         * that separates these states, it is necessary to change that comma
+         * in something different to avoid any kind of problems when splitting
+         * the line entry
+         */
+        if (line.contains("\"")) {
+            /**
+             * First find the location on the string of the first and the second
+             * (last) occurrence of the "
+             */
+            int indexFirstLocation = line.indexOf("\""),
+                    indexLastLocation = line.lastIndexOf("\"");
+            
+            /**
+             * Need to divide the line into three pieces:
+             * 1) before the state array
+             * 2) the state array with commas
+             * 3) after the state array
+             */
+            String firstPart = line.substring(0, indexFirstLocation),
+                    secondPart = line.substring(indexFirstLocation, indexLastLocation),
+                    thirdPart = line.substring(indexLastLocation);
+            
+            secondPart = secondPart.replace(",", "-");
+            
+            line = firstPart.concat(secondPart).concat(thirdPart);
+        }
+        
         String[] elements = line.split(",");
         /**
          * [0]: timestamp
