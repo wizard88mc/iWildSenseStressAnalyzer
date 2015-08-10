@@ -38,6 +38,8 @@ public class IWildSenseStressAnalyzer {
         
         for (String imei: listImei) {
             
+            System.out.println("Acquiring data for participant: " + imei);
+            
             /**
              * Creating a new Participant
              */
@@ -78,9 +80,9 @@ public class IWildSenseStressAnalyzer {
             /**
              * Adding the ActivityServServiceEvent events to the participant
              */
-            ArrayList<String> activityServServiceEventsLines = 
+            /*ArrayList<String> activityServServiceEventsLines = 
                     ActivityServServiceReader.getAllActivityServServiceEventsLines(newParticipant);
-            newParticipant.addActivityServServiceEvents(activityServServiceEventsLines);
+            newParticipant.addActivityServServiceEvents(activityServServiceEventsLines);*/
             
             participantList.add(newParticipant);
         }

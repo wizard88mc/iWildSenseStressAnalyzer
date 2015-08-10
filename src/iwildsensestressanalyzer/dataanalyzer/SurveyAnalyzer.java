@@ -2,6 +2,7 @@ package iwildsensestressanalyzer.dataanalyzer;
 
 import iwildsensestressanalyzer.esm.StressSurvey;
 import iwildsensestressanalyzer.participant.Participant;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -103,13 +104,19 @@ public class SurveyAnalyzer {
         /**
          * Printing results
          */
-        System.out.println("Average survey answers provided: " + average);
-        System.out.println("Standard deviation: " + standardDeviation);
-        System.out.println("Percentage answer = 1: " + percentageOne);
-        System.out.println("Percentage answer = 2: " + percentageTwo);
-        System.out.println("Percentage answer = 3: " + percentageThree);
-        System.out.println("Percentage answer = 4: " + percentageFour);
-        System.out.println("Percentage answer = 5: " + percentageFive);
+        DecimalFormat format = new DecimalFormat("#.##");
+        System.out.println("Average survey answers provided: " + format.format(average));
+        System.out.println("Standard deviation: " + format.format(standardDeviation));
+        System.out.println("Percentage answer = 1: " + format.format(percentageOne) + 
+                " (" + counterOne + "/" + totalAnswers + ")");
+        System.out.println("Percentage answer = 2: " + format.format(percentageTwo) + 
+                " (" + counterTwo + "/" + totalAnswers + ")");
+        System.out.println("Percentage answer = 3: " + format.format(percentageThree) + 
+                " (" + counterThree + "/" + totalAnswers + ")");
+        System.out.println("Percentage answer = 4: " + format.format(percentageFour) + 
+                " (" + counterFour + "/" + totalAnswers + ")");
+        System.out.println("Percentage answer = 5: " + format.format(percentageFive) + 
+                " (" + counterFive + "/" + totalAnswers + ")");
     }
     
 }
