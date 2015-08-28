@@ -1,8 +1,12 @@
 package iwildsensestressanalyzer.participant;
 
 import iwildsensestressanalyzer.activityservservice.ActivityServServiceEvent;
+import iwildsensestressanalyzer.applicationsused.ApplicationsUsedEvent;
+import iwildsensestressanalyzer.dataanalyzer.SurveyDataWrapper;
 import iwildsensestressanalyzer.esm.StressSurvey;
+import iwildsensestressanalyzer.touches.TouchesBufferedEvent;
 import iwildsensestressanalyzer.useractivity.UserActivityEvent;
+import iwildsensestressanalyzer.userpresenceevent.UserPresenceAdvancedEventsWrapper;
 import iwildsensestressanalyzer.userpresenceevent.UserPresenceEvent;
 import java.util.ArrayList;
 
@@ -19,8 +23,16 @@ public class Participant {
     private final String IMEI;
     private ArrayList<StressSurvey> stressSurveyList;
     private ArrayList<UserPresenceEvent> userPresenceEventsList;
+    private ArrayList<TouchesBufferedEvent> touchesBufferedEventsList;
     private ArrayList<UserActivityEvent> userActivityEventsList;
+    private ArrayList<ApplicationsUsedEvent> applicationsUsedEventsList;
     private ArrayList<ActivityServServiceEvent> activityServServiceEventsList;
+    
+    private UserPresenceAdvancedEventsWrapper userPresenceAdvancedEventsWrapper;
+    
+    private SurveyDataWrapper[] surveyDataWrappers = {new SurveyDataWrapper(1), 
+        new SurveyDataWrapper(2), new SurveyDataWrapper(3), new SurveyDataWrapper(4), 
+        new SurveyDataWrapper(5)};
     
     /**
      * Constructor with the IMEI of the participant
@@ -67,6 +79,16 @@ public class Participant {
         for (String event: linesEvents) {
             userPresenceEventsList.add(new UserPresenceEvent(event));
         }
+        
+        /**
+         * With all the basic events SCREEN ON/OFF/PRESENT/ROTATION, we can
+         * create the AdvancedEvents, i.e. ScreenOnOff or UnlockedScreen 
+         * that will be considered for future analysis
+         */
+        userPresenceAdvancedEventsWrapper = 
+                new UserPresenceAdvancedEventsWrapper(userPresenceEventsList);
+        
+        
     }
     
     /**
@@ -100,6 +122,51 @@ public class Participant {
     }
     
     /**
+     * Calls private methods of the Participant class to add to each Survey
+     * of the participant the events that happened during the time validity
+     * of the survey
+     */
+    public void addUserEventsToSurveys() {
+        
+        addUserPresenceEventsToSurveys();
+        addUserActivityEventsToSurveys();
+    }
+    
+    /**
+     * For each StressSurvey answered by the participant, we search for the
+     * correct UserPresenceEvent objects that are associated with that Survey
+     */
+    private void addUserPresenceEventsToSurveys() {
+        
+        for (StressSurvey survey: stressSurveyList) {
+            survey.addScreenEvents(userPresenceAdvancedEventsWrapper);
+        }
+    }
+    
+    /**
+     * For each StressSurvey answered by the participant, we search the correct
+     * UserActivityEvent objects that are associated with that Survey
+     */
+    private void addUserActivityEventsToSurveys() {
+        
+        for (StressSurvey survey: stressSurveyList) {
+            survey.addUserActivityEvents(userActivityEventsList);
+        }
+    }
+    
+    /**
+     * Takes all the events created for the participant and divides them among 
+     * survey wrappers depending on the value of the perceived stress of the 
+     * user
+     */
+    public void spreadEventsAmongSurveyDataWrapper() {
+        
+        for (SurveyDataWrapper dataWrapper: surveyDataWrappers) {
+            dataWrapper.createScreenEventAnalyzer(stressSurveyList);
+        }
+    }
+    
+    /**
      * Returns the StressSurvey provided by the Participant
      * @return the ArrayList of StressSurvey answers
      */
@@ -126,4 +193,12 @@ public class Participant {
         return this.userPresenceEventsList;
     }
     
+    /**
+     * Returns the SurveyDataWrappers used to store data related for each value
+     * of the 
+     * @return 
+     */
+    public SurveyDataWrapper[] getSurveyDataWrappers() {
+        return this.surveyDataWrappers;
+    }
 }

@@ -1,5 +1,6 @@
 package iwildsensestressanalyzer.activityservservice;
 
+import iwildsensestressanalyzer.event.Event;
 import java.util.ArrayList;
 
 /**
@@ -10,7 +11,7 @@ import java.util.ArrayList;
  * @author Matteo Ciman
  * @version 0.1
  */
-public class ActivityServServiceEvent {
+public class ActivityServServiceEvent extends Event {
    
     public static enum State {
         STARTED, FOREGROUND, PERSISTENT, SYSTEM
@@ -21,7 +22,6 @@ public class ActivityServServiceEvent {
             PERSISTENT = "PERSISTENT",
             SYSTEM = "SYSTEM";
     
-    private final long timestamp; // timestamp of the event
     private final String service; // Name of the service (Java class name)
     private final String parentProcess; // Name of the process that started the service
     private final String UID; // userID of the application the service belongs to.
@@ -106,14 +106,6 @@ public class ActivityServServiceEvent {
         clientCount = Integer.valueOf(elements[9]);
         crashCount = Integer.valueOf(elements[10]);
         lastActive = Long.valueOf(elements[11]);
-    }
-    
-    /**
-     * Returns the timestamp the event is collected
-     * @return the timestamp of the event
-     */
-    public long getTimestamp() {
-        return this.timestamp;
     }
     
     /**

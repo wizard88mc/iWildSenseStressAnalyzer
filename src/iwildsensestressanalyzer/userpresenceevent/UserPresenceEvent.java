@@ -1,5 +1,7 @@
 package iwildsensestressanalyzer.userpresenceevent;
 
+import iwildsensestressanalyzer.event.Event;
+
 /**
  *
  * This class represents and event on the screen, that could be
@@ -14,9 +16,9 @@ package iwildsensestressanalyzer.userpresenceevent;
  * @author Matteo Ciman
  * @version 0.1
  */
-public class UserPresenceEvent {
+public class UserPresenceEvent extends Event {
     
-    private static enum Event {
+    private static enum ScreenEvent {
         ON, OFF, PRESENT, ROTATION_0, ROTATION_90, ROTATION_180, ROTATION_270
     }
     
@@ -28,8 +30,7 @@ public class UserPresenceEvent {
             ROTATION_180 = "ROTATION_180", 
             ROTATION_270 = "ROTATION_270";
     
-    private final long timestamp;
-    private final Event event;
+    private final ScreenEvent event;
     
     public UserPresenceEvent(String line) {
         
@@ -41,25 +42,25 @@ public class UserPresenceEvent {
         timestamp = Long.valueOf(elements[0]);
         
         if (elements[1].equals(ON)) {
-            event = Event.ON;
+            event = ScreenEvent.ON;
         }
         else if (elements[1].equals(OFF)) {
-            event = Event.OFF;
+            event = ScreenEvent.OFF;
         }
         else if (elements[1].equals(PRESENT)) {
-            event = Event.PRESENT;
+            event = ScreenEvent.PRESENT;
         }
         else if (elements[1].equals(ROTATION_0)) {
-            event = Event.ROTATION_0;
+            event = ScreenEvent.ROTATION_0;
         }
         else if (elements[1].equals(ROTATION_90)) {
-            event = Event.ROTATION_90;
+            event = ScreenEvent.ROTATION_90;
         }
         else if (elements[1].equals(ROTATION_180)) {
-            event = Event.ROTATION_180;
+            event = ScreenEvent.ROTATION_180;
         }
         else if (elements[1].equals(ROTATION_270)) {
-            event = Event.ROTATION_270;
+            event = ScreenEvent.ROTATION_270;
         }
         else {
             event = null;
@@ -67,19 +68,11 @@ public class UserPresenceEvent {
     }
     
     /**
-     * Returns the timestamp of the event
-     * @return the timestamp
-     */
-    public long getTimestamp() {
-        return this.timestamp;
-    }
-    
-    /**
      * Returns if the event is a screen ON event
      * @return true if is ON event
      */
     public boolean isON() {
-        return event == Event.ON;
+        return event == ScreenEvent.ON;
     }
     
     /**
@@ -87,7 +80,7 @@ public class UserPresenceEvent {
      * @return true if is OFF event
      */
     public boolean isOFF() {
-        return event == Event.OFF;
+        return event == ScreenEvent.OFF;
     }
     
     /**
@@ -95,7 +88,7 @@ public class UserPresenceEvent {
      * @return true if is PRESENT event
      */
     public boolean isPRESENT() {
-        return event == Event.PRESENT;
+        return event == ScreenEvent.PRESENT;
     }
     
     /**
@@ -103,7 +96,7 @@ public class UserPresenceEvent {
      * @return true if is ROTATION_0 event
      */
     public boolean isROTATION_0() {
-        return event == Event.ROTATION_0;
+        return event == ScreenEvent.ROTATION_0;
     }
     
     /**
@@ -111,7 +104,7 @@ public class UserPresenceEvent {
      * @return true if is ROTATION_90 event
      */
     public boolean isROTATION_90() {
-        return event == Event.ROTATION_90;
+        return event == ScreenEvent.ROTATION_90;
     }
     
     /**
@@ -119,7 +112,7 @@ public class UserPresenceEvent {
      * @return true if is ROTATION_180 event
      */
     public boolean isROTATION_180() {
-        return event == Event.ROTATION_180;
+        return event == ScreenEvent.ROTATION_180;
     }
     
     /**
@@ -127,7 +120,7 @@ public class UserPresenceEvent {
      * @return true if is ROTATION_270 event
      */
     public boolean isROTATION_270() {
-        return event == Event.ROTATION_270;
+        return event == ScreenEvent.ROTATION_270;
     }
     
 }

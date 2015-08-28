@@ -11,11 +11,22 @@ import java.util.ArrayList;
  */
 public class UnlockedScreen extends ScreenOnOff {
 
-    protected ArrayList<UserPresenceEvent> userEventsDuringOnOff;
+    protected UserPresenceEvent present;
+    protected ArrayList<UserPresenceEvent> userEventsDuringOnOff; // can be null
     
-    public UnlockedScreen(UserPresenceEvent on, UserPresenceEvent off, 
+    public UnlockedScreen(UserPresenceEvent on, UserPresenceEvent off,
+            UserPresenceEvent present,
             ArrayList<UserPresenceEvent> eventsDuringOnOff) {
         
         super(on, off); this.userEventsDuringOnOff = eventsDuringOnOff;
+        this.present = present;
+    }
+    
+    /**
+     * Returns the time necessary to the user to unlock the screen
+     * @return time to unlock the screen
+     */
+    public long getUnlockTime() {
+        return this.present.getTimestamp() - this.onEvent.getTimestamp();
     }
 }

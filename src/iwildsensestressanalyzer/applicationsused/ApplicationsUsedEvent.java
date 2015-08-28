@@ -1,11 +1,13 @@
 package iwildsensestressanalyzer.applicationsused;
 
+import iwildsensestressanalyzer.event.Event;
+
 /**
  *
  * @author Matteo Ciman
  * @version 0.1
  */
-public class ApplicationsUsedEvent {
+public class ApplicationsUsedEvent extends Event {
     
     private static enum Importance {
         FOREGROUND, 
@@ -23,7 +25,6 @@ public class ApplicationsUsedEvent {
             SERVICE = "SERVICE",
             EMPTY = "EMPTY";
     
-    private final long timestamp;
     private final String app; // App name (Java package name)
     private final String UID; // UID assigned to the app at installation time
     private final String PID; // PID (process ID) of the main process of the app
@@ -72,14 +73,6 @@ public class ApplicationsUsedEvent {
         else  {
             importance = null;
         }
-    }
-    
-    /**
-     * Returns the timestamp of the 
-     * @return the timestamp
-     */
-    public long getTimestamp() {
-        return this.timestamp;
     }
     
     /**

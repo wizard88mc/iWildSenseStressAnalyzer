@@ -1,5 +1,7 @@
 package iwildsensestressanalyzer.useractivity;
 
+import iwildsensestressanalyzer.event.Event;
+
 /**
  *
  * This class describes the current activity of the user. It is sampled every 
@@ -8,9 +10,9 @@ package iwildsensestressanalyzer.useractivity;
  * @author Matteo Ciman
  * @version 0.1
  */
-public class UserActivityEvent {
+public class UserActivityEvent extends Event {
     
-    private static enum Activity {
+    protected static enum Activity {
         IN_VEHICLE, // The device is in a vehicle, like a car 
         ON_BICYCLE, // The device is on bicycle
         ON_FOOT, // The device is on a user who is walking or running
@@ -29,8 +31,7 @@ public class UserActivityEvent {
             TILTING = "TILTING",
             UNKNOWN = "UNKNOWN",
             WALKING = "WALKING"; 
-    
-    private final long timestamp;
+
     private final Activity activity;
     
     /**
@@ -72,14 +73,6 @@ public class UserActivityEvent {
             activity = Activity.UNKNOWN;
             System.out.println("** Error in UserActivityEvent: not recognized string **");
         }
-    }
-    
-    /**
-     * Returns the timestamp of the event
-     * @return the timestamp
-     */
-    public long getTimestamp() {
-        return this.timestamp;
     }
     
     /**
@@ -144,6 +137,14 @@ public class UserActivityEvent {
      */
     public boolean isWALKING() {
         return activity == Activity.WALKING;
+    }
+    
+    /**
+     * Returns the activity of the event
+     * @return the activity of the event
+     */
+    public Activity getActivity() {
+        return this.activity;
     }
     
 }

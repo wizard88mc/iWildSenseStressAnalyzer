@@ -83,6 +83,11 @@ public class IWildSenseStressAnalyzer {
                     ActivityServServiceReader.getAllActivityServServiceEventsLines(newParticipant);
             newParticipant.addActivityServServiceEvents(activityServServiceEventsLines);*/
             
+            /**
+             * Making association between survey time validity and events
+             */
+            newParticipant.addUserEventsToSurveys();
+            
             participantList.add(newParticipant);
         }
         
@@ -91,7 +96,7 @@ public class IWildSenseStressAnalyzer {
          */
         SurveyAnalyzer.analyzeSurveysAnswers(participantList);
         
-        
+    
         
     }
     
