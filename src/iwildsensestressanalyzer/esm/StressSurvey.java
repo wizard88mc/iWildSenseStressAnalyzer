@@ -2,6 +2,8 @@ package iwildsensestressanalyzer.esm;
 
 import iwildsensestressanalyzer.useractivity.UserActivityAnalyzer;
 import iwildsensestressanalyzer.useractivity.UserActivityEvent;
+import iwildsensestressanalyzer.userpresenceevent.ScreenOnOff;
+import iwildsensestressanalyzer.userpresenceevent.UnlockedScreen;
 import iwildsensestressanalyzer.userpresenceevent.UserPresenceAdvancedEventsWrapper;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -90,7 +92,26 @@ public class StressSurvey {
      */
     public void addScreenEvents(UserPresenceAdvancedEventsWrapper eventsWrapper) {
         
-        this.userPresenceAdvancedEventsWrapper = eventsWrapper;
+        ArrayList<ScreenOnOff> screenOnOffEvents = new ArrayList<ScreenOnOff>();
+        ArrayList<UnlockedScreen> unlockedScreenEvents = new ArrayList<UnlockedScreen>();
+        
+        for (ScreenOnOff screenEvent: eventsWrapper.getScreenOnOffEvents()) {
+            
+            if (isEventStartedInsideSurveyValidityTime(this.timestamp, 
+                    screenEvent.getOnTimestamp())) {
+                screenOnOffEvents.add(screenEvent);
+            }
+        }
+        
+        for (UnlockedScreen screenEvent: eventsWrapper.getUnlockedScreenEvents()) {
+            
+            if (isEventStartedInsideSurveyValidityTime(this.timestamp, screenEvent.getOnTimestamp())) {
+                unlockedScreenEvents.add(screenEvent);
+            }
+        }
+        
+        eventsWrapper = new UserPresenceAdvancedEventsWrapper(screenOnOffEvents, 
+                unlockedScreenEvents);
     }
     
     /**

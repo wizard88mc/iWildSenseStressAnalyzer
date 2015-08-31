@@ -1,5 +1,6 @@
 package iwildsensestressanalyzer;
 
+import iwildsensestressanalyzer.dataanalyzer.ScreenEventsAnalyzer;
 import iwildsensestressanalyzer.dataanalyzer.SurveyAnalyzer;
 import iwildsensestressanalyzer.filereader.IMEIListReader;
 import iwildsensestressanalyzer.filereader.SurveyQuestionnaireReader;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
  * @version 1.1
  */
 public class IWildSenseStressAnalyzer {
+    
+    public static final boolean DEBUG = false;
 
     /**
      * @param args the command line arguments
@@ -88,6 +91,8 @@ public class IWildSenseStressAnalyzer {
              */
             newParticipant.addUserEventsToSurveys();
             
+            newParticipant.spreadEventsAmongSurveyDataWrapper();
+            
             participantList.add(newParticipant);
         }
         
@@ -96,8 +101,7 @@ public class IWildSenseStressAnalyzer {
          */
         SurveyAnalyzer.analyzeSurveysAnswers(participantList);
         
-    
-        
+        ScreenEventsAnalyzer.analyzeScreenDataForEachParticipant(participantList);
     }
     
 }

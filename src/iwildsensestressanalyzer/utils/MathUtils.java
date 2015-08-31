@@ -46,67 +46,104 @@ public class MathUtils {
      * @param values a list of Long values to normalize
      * @param newMinValue the new min value possible for all values
      * @param newMaxValue the new max value possible for all value
+     * @return a list of normalized data in double precision if there is at 
+     * least one value in the original list, otherwise an empty list or null 
+     * (depending on the original set of data)
      */
-    public static void normalizeData(ArrayList<Long> values, Long newMinValue,
+    public static ArrayList<Double> normalizeData(ArrayList<Long> values, Long newMinValue,
             Long newMaxValue) {
         
-        Long minValue = Long.MAX_VALUE, maxValue = Long.MIN_VALUE;
-        
-        for (Long value: values) {
-            if (minValue > value) {
-                minValue = value;
+        if (values != null && !values.isEmpty()) {
+            Long minValue = Long.MAX_VALUE, maxValue = Long.MIN_VALUE;
+
+            for (Long value: values) {
+                if (minValue > value) {
+                    minValue = value;
+                }
+                if (maxValue < value) {
+                    maxValue = value;
+                }
             }
-            if (maxValue < value) {
-                maxValue = value;
+
+            /**
+             * Creating the new list of values with normalized data in double 
+             * precision
+             */
+            ArrayList<Double> norm = new ArrayList<Double>();
+            for (Long value: values) {
+
+                norm.add(((double)(value - minValue) / (double)(maxValue - minValue)) 
+                        * (double) (newMaxValue - newMinValue) + (double)newMinValue);
             }
-        }
-        
-        /**
-         * Replacing old value with normalized values between newMinvalue and 
-         * newMaxValue
-         */
-        for (int i = 0; i < values.size(); i++) {
             
-            Long value = values.get(i);
-            values.set(i, ((value - minValue) / (maxValue - minValue)) * (newMaxValue - newMinValue) 
-                + newMinValue);
+            return norm;
+        }
+        else {
+            if (values == null) {
+                return null;
+            }
+            else {
+                return new ArrayList<Double>();
+            }
         }
     }
     
     /**
-     * Normalizes an ArrayList<ArrayList<Long>> values with new values 
+     * Normalizes an ArrayList of a list of Long values with new values 
      * in the new range [newMinValue, newMaxValue]
      * @param values the set of values to normalize
      * @param newMinValue the new min value that the values can have
      * @param newMaxValue the new max value the values can have
+     * @return set of normalized data in double precision
      */
-    public static void normalizeSetData(ArrayList<ArrayList<Long>> values, 
+    public static ArrayList<ArrayList<Double>> normalizeSetData(ArrayList<ArrayList<Long>> values, 
             Long newMinValue, Long newMaxValue) {
         
         Long minValue = Long.MAX_VALUE, maxValue = Long.MIN_VALUE;
-        
+
         for (ArrayList<Long> subValues: values) {
-            for (Long value: subValues) {
-                if (value < minValue) {
-                    minValue = value;
-                }
-                if (value > maxValue) {
-                    maxValue = value;
+
+            if (subValues != null && !subValues.isEmpty()) {
+                for (Long value: subValues) {
+                    if (value < minValue) {
+                        minValue = value;
+                    }
+                    if (value > maxValue) {
+                        maxValue = value;
+                    }
                 }
             }
         }
-        
+
         /**
          * Normalizing data between newMinValue and newMaxValue
          */
+        ArrayList<ArrayList<Double>> norm = new ArrayList<ArrayList<Double>>();
+        
         for (ArrayList<Long> subValues: values) {
-            for (int i = 0; i < subValues.size(); i++) {
+            
+            /**
+             * Some list of values can be null depending on the answers provided
+             * by the participant
+             */
+            if (subValues != null && !subValues.isEmpty()) {
                 
-                Long value = subValues.get(i);
-                subValues.set(i, ((value - minValue) / (maxValue - minValue)) * (newMaxValue - newMinValue) 
-                + newMinValue);
+                ArrayList<Double> sublist = new ArrayList<Double>();
+                
+                for (int i = 0; i < subValues.size(); i++) {
+
+                    Long value = subValues.get(i);
+                    sublist.add(((double) (value - minValue) / (double) (maxValue - minValue)) 
+                            * (double) (newMaxValue - newMinValue) + newMinValue);
+                }
+                norm.add(sublist);
+            }
+            else {
+                norm.add(null);
             }
         }
+        
+        return norm;
     }
     
     /**
@@ -117,11 +154,36 @@ public class MathUtils {
      */
     public static double[] convertArrayLongToArrayDouble(ArrayList<Long> values) {
         
-        double[] converted = new double[values.size()];
-        for (int i = 0; i < values.size(); i++) {   
-            converted[i] = Double.valueOf(values.get(i));
+        if (values != null) {
+            double[] converted = new double[values.size()];
+            for (int i = 0; i < values.size(); i++) {   
+                converted[i] = Double.valueOf(values.get(i));
+            }
+
+            return converted;
+        }
+        else {
+            return null;
+        }
+    }
+    
+    /**
+     * Converts an ArrayList of double to an array of double
+     * @param values a list of Double values to convert
+     * @return 
+     */
+    public static double[] convertToArrayDouble(ArrayList<Double> values) {
+        
+        if (values != null) {
+            double[] converted = new double[values.size()];
+            for (int i = 0; i < values.size(); i++) {
+                converted[i] = values.get(i);
+            }
+            return converted;
+        }
+        else {
+            return null;
         }
         
-        return converted;
     }
 }

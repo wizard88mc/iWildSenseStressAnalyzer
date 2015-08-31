@@ -87,8 +87,6 @@ public class Participant {
          */
         userPresenceAdvancedEventsWrapper = 
                 new UserPresenceAdvancedEventsWrapper(userPresenceEventsList);
-        
-        
     }
     
     /**
@@ -139,7 +137,7 @@ public class Participant {
     private void addUserPresenceEventsToSurveys() {
         
         for (StressSurvey survey: stressSurveyList) {
-            survey.addScreenEvents(userPresenceAdvancedEventsWrapper);
+            survey.addScreenEvents();
         }
     }
     

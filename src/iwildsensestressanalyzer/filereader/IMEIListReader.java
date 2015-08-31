@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class IMEIListReader extends BasicFileReader {
 
-    private static final String FILE = "imeis.csv";
+    private static final String FILE = "imeis copy.csv";
     
     /**
      * Retrieves the list of IMEI of the participants of the study
@@ -41,7 +41,9 @@ public class IMEIListReader extends BasicFileReader {
              */
             while ((line = reader.readLine()) != null) {
                 
-                imeis.add(line);
+                if (!line.contains("//")) { // removing participant
+                    imeis.add(line);
+                }
             }
             
         }

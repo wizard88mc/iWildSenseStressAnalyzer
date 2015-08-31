@@ -1,6 +1,6 @@
 package iwildsensestressanalyzer.userpresenceevent;
 
-import iwildsensestressanalyzer.participant.Participant;
+import iwildsensestressanalyzer.IWildSenseStressAnalyzer;
 import java.util.ArrayList;
 
 /**
@@ -34,7 +34,8 @@ public class UserPresenceAdvancedEventsWrapper {
             
             if (userPresenceEventsList.get(index).isON()) {
                 
-                if (userPresenceEventsList.get(index + 1).isOFF()) {
+                if (index < userPresenceEventsList.size() && 
+                        userPresenceEventsList.get(index + 1).isOFF()) {
                     
                     /**
                      * In this case is a ScreenOnOff event without any 
@@ -49,7 +50,8 @@ public class UserPresenceAdvancedEventsWrapper {
                      */
                     index += 2;
                 }
-                else if (userPresenceEventsList.get(index + 1).isPRESENT()) {
+                else if (index + 1 < userPresenceEventsList.size() && 
+                        userPresenceEventsList.get(index + 1).isPRESENT()) {
                     
                     /**
                      * In this case there is an ON, followed by a PRESENT
@@ -60,10 +62,12 @@ public class UserPresenceAdvancedEventsWrapper {
                             presentEvent = userPresenceEventsList.get(index + 1);
                     
                     int startIndexForSomethingElse = index + 2;
-                    while (userPresenceEventsList.get(index).isROTATION_0() || 
+                    index = startIndexForSomethingElse;
+                    while (index < userPresenceEventsList.size() && 
+                            (userPresenceEventsList.get(index).isROTATION_0() || 
                             userPresenceEventsList.get(index).isROTATION_90() || 
                             userPresenceEventsList.get(index).isROTATION_180() || 
-                            userPresenceEventsList.get(index).isROTATION_270()) {
+                            userPresenceEventsList.get(index).isROTATION_270())) {
                         
                         index++;
                     }
@@ -74,13 +78,16 @@ public class UserPresenceAdvancedEventsWrapper {
                      */
                     ArrayList<UserPresenceEvent> rotationEvents = null;
                     
-                    if (index != startIndexForSomethingElse) {
-                        rotationEvents = (ArrayList<UserPresenceEvent>)
-                            userPresenceEventsList.subList(startIndexForSomethingElse, index);
+                    if (index < userPresenceEventsList.size() && 
+                            index != startIndexForSomethingElse) {
+                        rotationEvents = new ArrayList<UserPresenceEvent>(
+                            userPresenceEventsList.subList(startIndexForSomethingElse, index));
                     }
                     
                     UserPresenceEvent offEvent = null;
-                    if (userPresenceEventsList.get(index).isOFF()) {
+                    if (index < userPresenceEventsList.size() &&
+                            userPresenceEventsList.get(index).isOFF()) {
+                        
                         offEvent = userPresenceEventsList.get(index);
                     }
                     
@@ -89,6 +96,11 @@ public class UserPresenceAdvancedEventsWrapper {
                     
                     unlockedScreenEvents.add(unlockedScreen);
                     
+                    if (offEvent != null) {
+                        index++;
+                    }
+                }
+                else {
                     index++;
                 }
             }
@@ -101,6 +113,24 @@ public class UserPresenceAdvancedEventsWrapper {
                 index++;
             }
         }
+        
+        if (IWildSenseStressAnalyzer.DEBUG) {
+            System.out.println("UserPresenceAdvancedEventsWrapper object created");
+        }
+    }
+    
+    /**
+     * Class constructor used to build an object that will wrap all the events
+     * that belongs to a particular Survey. Simply add the list of events 
+     * already defined as the ones that belongs to the wrapper
+     * @param screenOnOffEvents a list of ScreenOnOff events
+     * @param unlockedScreenEvents a list of UnlockedScreen events
+     */
+    public UserPresenceAdvancedEventsWrapper(ArrayList<ScreenOnOff> screenOnOffEvents, 
+            ArrayList<UnlockedScreen> unlockedScreenEvents) {
+        
+        this.screenOnOffEvents = screenOnOffEvents;
+        this.unlockedScreenEvents = unlockedScreenEvents;
     }
     
     /**
