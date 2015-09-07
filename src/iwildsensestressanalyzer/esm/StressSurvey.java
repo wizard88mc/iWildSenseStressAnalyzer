@@ -1,6 +1,6 @@
 package iwildsensestressanalyzer.esm;
 
-import iwildsensestressanalyzer.useractivity.UserActivityAnalyzer;
+import iwildsensestressanalyzer.useractivity.UserActivityFeaturesExtractor;
 import iwildsensestressanalyzer.useractivity.UserActivityEvent;
 import iwildsensestressanalyzer.userpresenceevent.ScreenOnOff;
 import iwildsensestressanalyzer.userpresenceevent.UnlockedScreen;
@@ -26,7 +26,7 @@ public class StressSurvey {
     private final int stress;
     
     private UserPresenceAdvancedEventsWrapper userPresenceAdvancedEventsWrapper;
-    private UserActivityAnalyzer userActivityAnalyzer;
+    private UserActivityFeaturesExtractor userActivityAnalyzer;
     
     public StressSurvey(String lineWithAnswer) {
         
@@ -97,7 +97,7 @@ public class StressSurvey {
         
         for (ScreenOnOff screenEvent: eventsWrapper.getScreenOnOffEvents()) {
             
-            if (isEventStartedInsideSurveyValidityTime(this.timestamp, 
+            if (isEventInsideSurveyTiming(this.timestamp, 
                     screenEvent.getOnTimestamp())) {
                 screenOnOffEvents.add(screenEvent);
             }
@@ -105,12 +105,13 @@ public class StressSurvey {
         
         for (UnlockedScreen screenEvent: eventsWrapper.getUnlockedScreenEvents()) {
             
-            if (isEventStartedInsideSurveyValidityTime(this.timestamp, screenEvent.getOnTimestamp())) {
+            if (isEventInsideSurveyTiming(this.timestamp, 
+                    screenEvent.getOnTimestamp())) {
                 unlockedScreenEvents.add(screenEvent);
             }
         }
         
-        eventsWrapper = new UserPresenceAdvancedEventsWrapper(screenOnOffEvents, 
+        this.userPresenceAdvancedEventsWrapper = new UserPresenceAdvancedEventsWrapper(screenOnOffEvents, 
                 unlockedScreenEvents);
     }
     
@@ -122,7 +123,7 @@ public class StressSurvey {
      */
     public void addUserActivityEvents(ArrayList<UserActivityEvent> events) {
         
-        userActivityAnalyzer = new UserActivityAnalyzer(this, events);
+        userActivityAnalyzer = new UserActivityFeaturesExtractor(this, events);
     }
     
     /**

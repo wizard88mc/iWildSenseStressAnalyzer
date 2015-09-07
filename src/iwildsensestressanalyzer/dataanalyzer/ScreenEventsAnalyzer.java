@@ -27,7 +27,8 @@ public class ScreenEventsAnalyzer {
                     participant.getSurveyDataWrappers();
             
             workWithOnOffDurationForOnOffScreenEvents(surveyDataWrappers);
-            
+            workWithOnOffDurationForUnlockedScreenEvents(surveyDataWrappers);
+            workWithUnlockTimeForUnlockedScreenEvents(surveyDataWrappers);
         }
         
     }
@@ -44,7 +45,7 @@ public class ScreenEventsAnalyzer {
         
         for (SurveyDataWrapper wrapper: surveyDataWrappers) {
             
-            listValues.add(wrapper.getScreenEventsAnalyzer().getAllOnOffDurationForOnOffEvents());
+            listValues.add(wrapper.getScreenEventsFeaturesExtractor().getAllOnOffDurationForOnOffEvents());
         }
         
         /**
@@ -70,6 +71,77 @@ public class ScreenEventsAnalyzer {
     }
     
     /**
+     * Works with On-Off duration of UnlockedScreen events to calculate p-values
+     * using t-test between all the answers of the surveys
+     * @param surveyDataWrappers the survey and the related data to use
+     */
+    private static void workWithOnOffDurationForUnlockedScreenEvents(SurveyDataWrapper[] 
+            surveyDataWrappers) {
+        
+        ArrayList<ArrayList<Long>> listValues = new ArrayList<ArrayList<Long>>();
+        
+        for (SurveyDataWrapper wrapper: surveyDataWrappers) {
+            
+            listValues.add(wrapper.getScreenEventsFeaturesExtractor().getAllOnOffDurationForUnlockScreenEvents());
+        }
+        
+        /**
+         * Normalizing data and after statistical analysis with t-test and print
+         * p-value in a confusion matrix between all the values
+         */
+        ArrayList<ArrayList<Double>> normalizedDoubleValues = 
+                MathUtils.normalizeSetData(listValues, 0L, 1L);
+        
+        System.out.println();
+        System.out.println("*** On Off duration for UnlockedScreen events ***");
+        
+        /**
+         * Converting data to an array of double for the TTest library
+         */
+        ArrayList<double[]> valuesForTTest = new ArrayList<double[]>();
+        for (ArrayList<Double> values: normalizedDoubleValues) {
+            valuesForTTest.add(MathUtils.convertToArrayDouble(values));
+        }
+        
+        printTTestResults(valuesForTTest);
+    }
+    
+    /**
+     * Work with UnlockTime duration for UnlockedScreen events to calculate p-values
+     * using t-test between all the answers of the surveys
+     * @param surveyDataWrappers 
+     */
+    private static void workWithUnlockTimeForUnlockedScreenEvents(SurveyDataWrapper[]
+            surveyDataWrappers) {
+        
+        ArrayList<ArrayList<Long>> listvalues = new ArrayList<ArrayList<Long>>();
+        
+        for (SurveyDataWrapper wrapper: surveyDataWrappers) {
+            listvalues.add(wrapper.getScreenEventsFeaturesExtractor().getAllUnlockTimeForUnlockedScreenEvents());
+        }
+        
+        /**
+         * Normalizing data and after statistical analysis with t-test and print
+         * p-value in a confusion matrix between all the values
+         */
+        ArrayList<ArrayList<Double>> normalizedDoubleValues = 
+                MathUtils.normalizeSetData(listvalues, 0L, 1L);
+        
+        System.out.println();
+        System.out.println("*** Unlock Time duration for UnlockedScreen events ***");
+        
+        /**
+         * Converting data to an array of double for the TTest library
+         */
+        ArrayList<double[]> valuesForTTest = new ArrayList<double[]>();
+        for (ArrayList<Double> values: normalizedDoubleValues) {
+            valuesForTTest.add(MathUtils.convertToArrayDouble(values));
+        }
+        
+        printTTestResults(valuesForTTest);
+    }
+    
+    /**
      * Prints the confusion matrix between all the stress states 
      * @param valuesForTTest a list of array of double with the values for the
      * t-test
@@ -77,6 +149,7 @@ public class ScreenEventsAnalyzer {
     private static void printTTestResults(ArrayList<double[]> valuesForTTest) {
         
         System.out.println("   |   1   |   2   |   3   |   4   |   5   |");
+        System.out.println("--------------------------------------------");
         for (int i = 0; i < valuesForTTest.size(); i++) {
             
             String outputString = "";
@@ -84,11 +157,11 @@ public class ScreenEventsAnalyzer {
             for (int j = 0; j < valuesForTTest.size(); j++) {
              
                 if (j == 0) {
-                    outputString += " " + (j +  1) + " |"; 
+                    outputString += " " + (i + 1) + " |" + "  NaN  |"; 
                 }
                 else {
                     if (j <= i) {
-                        outputString += "  ---  ";
+                        outputString += "  NaN  |";
                     }
                     else {
                         /**
@@ -104,13 +177,18 @@ public class ScreenEventsAnalyzer {
                                 valuesForTTest.get(i).length != 0 && 
                                 valuesForTTest.get(j).length != 0) {
                             
-                            double tTest = new TTest().tTest(valuesForTTest.get(i), 
+                            try {
+                                double tTest = new TTest().tTest(valuesForTTest.get(i), 
                                     valuesForTTest.get(j));
-
-                            outputString += MathUtils.decimalFormat.format(tTest) + "|";
+                            
+                                outputString += MathUtils.decimalFormat.format(tTest) + "|";
+                            }
+                            catch(Exception exc) {
+                                outputString += "  ---  |";
+                            }
                         }
                         else {
-                            outputString += "  ---  ";
+                            outputString += "  ---  |";
                         }
                     }
                 }

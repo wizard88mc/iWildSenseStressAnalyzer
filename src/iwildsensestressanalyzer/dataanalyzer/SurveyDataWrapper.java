@@ -1,6 +1,7 @@
 package iwildsensestressanalyzer.dataanalyzer;
 
 import iwildsensestressanalyzer.esm.StressSurvey;
+import iwildsensestressanalyzer.useractivity.UserActivityFeaturesExtractor;
 import iwildsensestressanalyzer.userpresenceevent.ScreenEventsFeaturesExtractor;
 import iwildsensestressanalyzer.userpresenceevent.ScreenOnOff;
 import iwildsensestressanalyzer.userpresenceevent.UnlockedScreen;
@@ -17,7 +18,8 @@ import java.util.ArrayList;
 public class SurveyDataWrapper {
     
     private final int surveyStressValue;
-    private ScreenEventsFeaturesExtractor screenEventAnalyzer;
+    private ScreenEventsFeaturesExtractor screenEventsFeaturesExtractor;
+    private UserActivityFeaturesExtractor userActivityFeaturesExtractor;
     
     public SurveyDataWrapper(int surveyStressValue) {
         this.surveyStressValue = surveyStressValue;
@@ -29,7 +31,7 @@ public class SurveyDataWrapper {
      * screen events related to the correct stress value
      * @param surveys all the surveys answered by the participant
      */
-    public void createScreenEventAnalyzer(ArrayList<StressSurvey> surveys) {
+    public void createScreenEventsFeaturesExtractor(ArrayList<StressSurvey> surveys) {
         
         ArrayList<ScreenOnOff> screenOnOffList = new ArrayList<ScreenOnOff>(); 
         ArrayList<UnlockedScreen> unlockedScreenList = 
@@ -47,15 +49,21 @@ public class SurveyDataWrapper {
             }
         }
         
-        screenEventAnalyzer = new ScreenEventsFeaturesExtractor(screenOnOffList, 
+        screenEventsFeaturesExtractor = new ScreenEventsFeaturesExtractor(screenOnOffList, 
                 unlockedScreenList);
+    }
+    
+    public void createUserActivityAnalyzer(ArrayList<StressSurvey> surveys) {
+        
+        
+        
     }
     
     /**
      * Returns the Screen Events analyzer
      * @return the ScreenEventsAnalyzer object for the stress survey value
      */
-    public ScreenEventsFeaturesExtractor getScreenEventsAnalyzer() {
-        return this.screenEventAnalyzer;
+    public ScreenEventsFeaturesExtractor getScreenEventsFeaturesExtractor() {
+        return this.screenEventsFeaturesExtractor;
     }
 }

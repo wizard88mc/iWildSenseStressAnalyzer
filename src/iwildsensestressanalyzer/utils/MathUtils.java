@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class MathUtils {
     
-    public static final DecimalFormat decimalFormat = new DecimalFormat("#.#####");
+    public static final DecimalFormat decimalFormat = new DecimalFormat("0.00000");
     
     /**
      * Calculates average, variance and standard deviation of a set of Long values

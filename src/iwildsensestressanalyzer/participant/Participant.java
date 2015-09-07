@@ -137,7 +137,7 @@ public class Participant {
     private void addUserPresenceEventsToSurveys() {
         
         for (StressSurvey survey: stressSurveyList) {
-            survey.addScreenEvents();
+            survey.addScreenEvents(userPresenceAdvancedEventsWrapper);
         }
     }
     
@@ -160,7 +160,7 @@ public class Participant {
     public void spreadEventsAmongSurveyDataWrapper() {
         
         for (SurveyDataWrapper dataWrapper: surveyDataWrappers) {
-            dataWrapper.createScreenEventAnalyzer(stressSurveyList);
+            dataWrapper.createScreenEventsFeaturesExtractor(stressSurveyList);
         }
     }
     

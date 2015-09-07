@@ -12,27 +12,27 @@ import java.util.HashMap;
  * @author Matteo Ciman
  * @version 0.1
  */
-public class UserActivityAnalyzer {
+public class UserActivityFeaturesExtractor {
 
-    private ArrayList<UserActivityEvent> userActivityEvents;
-    private static final HashMap<UserActivityEvent.Activity, Integer> activityPoints = 
-            new HashMap<UserActivityEvent.Activity, Integer>();
+    private final ArrayList<UserActivityEvent> userActivityEvents;
+    private static final HashMap<UserActivityEvent.Activity, Double> activityPoints = 
+            new HashMap<UserActivityEvent.Activity, Double>();
     
     /**
      * Initializing the HasMap assigning 
      */
     static {
-        activityPoints.put(UserActivityEvent.Activity.IN_VEHICLE, 0);
-        activityPoints.put(UserActivityEvent.Activity.ON_BICYCLE, 2);
-        activityPoints.put(UserActivityEvent.Activity.ON_FOOT, 3);
-        activityPoints.put(UserActivityEvent.Activity.RUNNING, 4);
-        activityPoints.put(UserActivityEvent.Activity.STILL, 0);
-        activityPoints.put(UserActivityEvent.Activity.TILTING, 0);
-        activityPoints.put(UserActivityEvent.Activity.UNKNOWN, 0);
-        activityPoints.put(UserActivityEvent.Activity.WALKING, 3);
+        activityPoints.put(UserActivityEvent.Activity.IN_VEHICLE, 0.0);
+        activityPoints.put(UserActivityEvent.Activity.ON_BICYCLE, 0.5);
+        activityPoints.put(UserActivityEvent.Activity.ON_FOOT, 0.75);
+        activityPoints.put(UserActivityEvent.Activity.RUNNING, 1.0);
+        activityPoints.put(UserActivityEvent.Activity.STILL, 0.0);
+        activityPoints.put(UserActivityEvent.Activity.TILTING, 0.0);
+        activityPoints.put(UserActivityEvent.Activity.UNKNOWN, 0.0);
+        activityPoints.put(UserActivityEvent.Activity.WALKING, 0.75);
     }
     
-    public UserActivityAnalyzer(ArrayList<UserActivityEvent> userActivityEvents) {
+    public UserActivityFeaturesExtractor(ArrayList<UserActivityEvent> userActivityEvents) {
         this.userActivityEvents = userActivityEvents;
     }
     
@@ -43,7 +43,7 @@ public class UserActivityAnalyzer {
      * @param survey the StressSurvey we are considering
      * @param events a UserActivityEvent list with the events to consider 
      */
-    public UserActivityAnalyzer(StressSurvey survey, 
+    public UserActivityFeaturesExtractor(StressSurvey survey, 
             ArrayList<UserActivityEvent> events) {
         
         userActivityEvents = new ArrayList<UserActivityEvent>();
@@ -71,6 +71,26 @@ public class UserActivityAnalyzer {
         }
         
         return sum;
+    }
+    
+    /**
+     * Provides a weighted and more intelligent evaluation of the activity 
+     * performed giving a percentage evaluation
+     * @return 
+     */
+    public double calculatePercentageOfWorkload() {
+        
+        double weightedSum = 0; int counter = 0;
+        
+        for (UserActivityEvent event: userActivityEvents) {
+            
+            if (!event.isUNKNOWN()) {
+                weightedSum += activityPoints.get(event.getActivity());
+                counter++;
+            }
+        }
+
+        return weightedSum / (double) counter;
     }
     
     /**
