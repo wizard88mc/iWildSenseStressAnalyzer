@@ -1,5 +1,8 @@
 package iwildsensestressanalyzer.userpresenceevent;
 
+import iwildsensestressanalyzer.touches.TouchesBufferedEvent;
+import java.util.Calendar;
+
 /**
  *
  * This class represent an event when the screen is turned on and off (but not 
@@ -40,5 +43,4 @@ public class ScreenOnOff {
             return -1;
         }
     }
-    
 }

@@ -1,6 +1,7 @@
 package iwildsensestressanalyzer.userpresenceevent;
 
 import iwildsensestressanalyzer.IWildSenseStressAnalyzer;
+import iwildsensestressanalyzer.touches.TouchesBufferedEvent;
 import java.util.ArrayList;
 
 /**
@@ -147,5 +148,24 @@ public class UserPresenceAdvancedEventsWrapper {
      */
     public ArrayList<UnlockedScreen> getUnlockedScreenEvents() {
         return this.unlockedScreenEvents;
+    }
+    
+    /**
+     * Adds a TouchesBufferedEvent to the UnlockedScreenEvent for 
+     * @param events 
+     */
+    public void addTouchesBufferedEvent(ArrayList<TouchesBufferedEvent> events) {
+        
+        for (TouchesBufferedEvent event: events) {
+            
+            boolean found = false;
+            for (int i = 0; i < unlockedScreenEvents.size() && !found; i++) {
+                
+                if (unlockedScreenEvents.get(i).isOtherEventInsideScreenEvent(event.getTimestamp())) {
+                    unlockedScreenEvents.get(i).addTouchesBufferedEvent(event);
+                    found = true;
+                }
+            }
+        }
     }
 }

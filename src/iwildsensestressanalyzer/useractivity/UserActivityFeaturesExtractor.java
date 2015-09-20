@@ -15,6 +15,7 @@ import java.util.HashMap;
 public class UserActivityFeaturesExtractor {
 
     private final ArrayList<UserActivityEvent> userActivityEvents;
+    private final int numberOfUnknownEvents;
     private static final HashMap<UserActivityEvent.Activity, Double> activityPoints = 
             new HashMap<UserActivityEvent.Activity, Double>();
     
@@ -34,6 +35,7 @@ public class UserActivityFeaturesExtractor {
     
     public UserActivityFeaturesExtractor(ArrayList<UserActivityEvent> userActivityEvents) {
         this.userActivityEvents = userActivityEvents;
+        numberOfUnknownEvents = countNumberOfUnknownEvents();
     }
     
     /**
@@ -55,6 +57,7 @@ public class UserActivityFeaturesExtractor {
                 userActivityEvents.add(event);
             }
         }
+        numberOfUnknownEvents = countNumberOfUnknownEvents();
     }
     
     /**
@@ -62,9 +65,9 @@ public class UserActivityFeaturesExtractor {
      * during the validity of the survey
      * @return a sum of the points of the activities
      */
-    public int calculatePointsSumForActivities() {
+    public double calculatePointsSumOfActivities() {
         
-        int sum = 0;
+        double sum = 0;
         
         for (UserActivityEvent event: userActivityEvents) {
             sum += activityPoints.get(event.getActivity());
@@ -100,16 +103,22 @@ public class UserActivityFeaturesExtractor {
      */
     public double calculateInfluenceOfWalkingActivityOnTotal() {
         
-        int sum = calculatePointsSumForActivities();
-        int sumForWalking = 0;
+        double sum = calculatePointsSumOfActivities();
+        double sumForWalking = 0.0;
                 
         for (UserActivityEvent event: userActivityEvents) {
-            if (event.isWALKING()) {
+            if (event.isON_FOOT()) {
                 sumForWalking += activityPoints.get(event.getActivity());
             }
         }
         
-        return ((double) sumForWalking / (double) sum) * 100;
+        double finalResult = sumForWalking / sum * 100;
+        
+        if (Double.isNaN(finalResult) || Double.isInfinite(finalResult)) {
+            finalResult = 0.0;
+        }
+        
+        return finalResult;
     }
     
     /**
@@ -119,8 +128,8 @@ public class UserActivityFeaturesExtractor {
      */
     public double calculateInfluenceOfRunningActivityOnTotal() {
         
-        int sum = calculatePointsSumForActivities();
-        int sumForRunning = 0;
+        double sum = calculatePointsSumOfActivities();
+        double sumForRunning = 0;
                 
         for (UserActivityEvent event: userActivityEvents) {
             if (event.isRUNNING()) {
@@ -128,16 +137,69 @@ public class UserActivityFeaturesExtractor {
             }
         }
         
-        return ((double) sumForRunning / (double) sum) * 100;
+        double finalResult = (sumForRunning / sum) * 100;
+        
+        if (Double.isNaN(finalResult) || Double.isInfinite(finalResult)) {
+            finalResult = 0.0;
+        }
+        
+        return finalResult;
+    }
+    
+    /**
+     * Calculates the percentage of influence of on bicycle activity on the 
+     * total points collected with all the activities
+     * @return the percentage of influence of the bicycle activity
+     */
+    public double calculateInfluenceOfOnBicycleActivityOnTotal() {
+        
+        double sum = calculatePointsSumOfActivities();
+        double sumForBicycle = 0.0;
+        
+        for (UserActivityEvent event: userActivityEvents) {
+            if (event.isON_BICYCLE()) {
+                sumForBicycle += activityPoints.get(event.getActivity());
+            }
+        }
+        
+        double finalResult = sumForBicycle / sum * 100;
+        
+        if (Double.isNaN(finalResult) || Double.isInfinite(finalResult)) {
+            finalResult = 0.0;
+        }
+        return finalResult;
+    }
+    
+    /**
+     * Calculates the percentage of IN_VEHICLE events 
+     * @return the percentage of IN_VEHICLE events among all the events
+     */
+    public double calculatePercentageOfInVehicleEvents() {
+        
+        double total = 0;
+        
+        for (UserActivityEvent event: userActivityEvents) {
+            if (event.isIN_VEHICLE()) {
+                total++;
+            }
+        }
+        
+        double finalResult = total / 
+                (double)(userActivityEvents.size() - numberOfUnknownEvents);
+        
+        if (Double.isInfinite(finalResult) || Double.isNaN(finalResult)) {
+            finalResult = 0.0;
+        }
+        return finalResult;
     }
     
     /**
      * Counts the number of TILTING events 
      * @return an integer representing the total number of TILTING events
      */
-    public int calculateNumberOfTiltingEvents() {
+    public double calculatePercentageOfTiltingEvents() {
         
-        int total = 0;
+        double total = 0;
         
         for (UserActivityEvent event: userActivityEvents) {
             if (event.isTILTING()) {
@@ -145,6 +207,29 @@ public class UserActivityFeaturesExtractor {
             }
         }
         
+        double finalResult = total / 
+                (double)(userActivityEvents.size() - numberOfUnknownEvents);
+        
+        if (Double.isInfinite(finalResult) || Double.isNaN(finalResult)) {
+            finalResult = 0.0;
+        }
+        
+        return finalResult;
+    }
+    
+    /**
+     * Counts the number of UNKNOWN events among all the registered events
+     * @return the number of UNKNOWN events
+     */
+    private int countNumberOfUnknownEvents() {
+        
+        int total = 0;
+        
+        for (UserActivityEvent event: userActivityEvents) {
+            if (event.isUNKNOWN()) {
+                total++;
+            }
+        }
         return total;
     }
 }

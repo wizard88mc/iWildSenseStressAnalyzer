@@ -2,6 +2,7 @@ package iwildsensestressanalyzer.utils;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  *
@@ -105,14 +106,18 @@ public class MathUtils {
 
             if (subValues != null && !subValues.isEmpty()) {
                 for (Long value: subValues) {
-                    if (value < minValue) {
+                    if (value <= minValue) {
                         minValue = value;
                     }
-                    if (value > maxValue) {
+                    if (value >= maxValue) {
                         maxValue = value;
                     }
                 }
             }
+        }
+        
+        if (maxValue == Long.MIN_VALUE) {
+            maxValue = 0L;
         }
 
         /**
@@ -135,6 +140,77 @@ public class MathUtils {
                     Long value = subValues.get(i);
                     sublist.add(((double) (value - minValue) / (double) (maxValue - minValue)) 
                             * (double) (newMaxValue - newMinValue) + newMinValue);
+                }
+                norm.add(sublist);
+            }
+            else {
+                norm.add(null);
+            }
+        }
+        
+        return norm;
+    }
+    
+    /**
+     * Normalize a set of data formatted with double precision
+     * @param values the set of double values 
+     * @param newMinValue
+     * @param newMaxValue
+     * @return 
+     */
+    public static ArrayList<ArrayList<Double>> normalizeSetOfDoubleData(ArrayList<ArrayList<Double>> values, 
+            Double newMinValue, Double newMaxValue) {
+        
+        ArrayList<ArrayList<Double>> norm = new ArrayList<ArrayList<Double>>();
+        Double minValue = Double.MAX_VALUE, maxValue = Double.MIN_VALUE;
+        
+        for (ArrayList<Double> subValues: values) {
+
+            if (subValues != null && !subValues.isEmpty()) {
+                for (Double value: subValues) {
+                    if (value <= minValue) {
+                        minValue = value;
+                    }
+                    if (value >= maxValue) {
+                        maxValue = value;
+                    }
+                }
+            }
+        }
+
+        /**
+         * Normalizing data between newMinValue and newMaxValue
+         */
+        
+        if (maxValue == Double.MIN_VALUE) {
+            maxValue = 0.0;
+        }
+        
+        for (ArrayList<Double> subValues: values) {
+            
+            /**
+             * Some list of values can be null depending on the answers provided
+             * by the participant
+             */
+            if (subValues != null && !subValues.isEmpty()) {
+                
+                ArrayList<Double> sublist = new ArrayList<Double>();
+                
+                for (int i = 0; i < subValues.size(); i++) {
+
+                    Double value = subValues.get(i);
+                    
+                    double newValue = ((double) (value - minValue) / (double) (maxValue - minValue)) 
+                            * (double) (newMaxValue - newMinValue) + newMinValue;
+                    
+                    if (Double.isNaN(newValue)) {
+                        newValue = 0.0;
+                    }
+                    if (Double.isInfinite(newValue)) {
+                        newValue = 1.0;
+                    }
+                    
+                    sublist.add(newValue);
                 }
                 norm.add(sublist);
             }

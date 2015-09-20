@@ -2,11 +2,15 @@ package iwildsensestressanalyzer;
 
 import iwildsensestressanalyzer.dataanalyzer.ScreenEventsAnalyzer;
 import iwildsensestressanalyzer.dataanalyzer.SurveyAnalyzer;
+import iwildsensestressanalyzer.dataanalyzer.TouchesBufferedAnalyzer;
+import iwildsensestressanalyzer.dataanalyzer.UserActivityAnalyzer;
 import iwildsensestressanalyzer.filereader.IMEIListReader;
 import iwildsensestressanalyzer.filereader.SurveyQuestionnaireReader;
+import iwildsensestressanalyzer.filereader.TouchesBufferedReader;
 import iwildsensestressanalyzer.filereader.UserActivityReader;
 import iwildsensestressanalyzer.filereader.UserPresenceEventsReader;
 import iwildsensestressanalyzer.participant.Participant;
+import iwildsensestressanalyzer.touches.TouchesBufferedEvent;
 import java.util.ArrayList;
 
 /**
@@ -87,11 +91,25 @@ public class IWildSenseStressAnalyzer {
             newParticipant.addActivityServServiceEvents(activityServServiceEventsLines);*/
             
             /**
+             * Retrieving the TouchesBuffered events
+             */
+            ArrayList<String> touchesBufferedEventsLines = 
+                    TouchesBufferedReader.getAllTouchesBufferedEventsLines(newParticipant);
+            
+            
+            /**
              * Making association between survey time validity and events
              */
             newParticipant.addUserEventsToSurveys();
             
             newParticipant.spreadEventsAmongSurveyDataWrapper();
+            
+            /**
+             * Adding TouchesBufferedEvent events to the UnlockedScreen 
+             * events
+             */
+            newParticipant.addTouchesBufferedEventsToUnlockedScreen(
+                    TouchesBufferedEvent.createListOfTouchesBufferedEvents(touchesBufferedEventsLines));
             
             participantList.add(newParticipant);
         }
@@ -101,7 +119,15 @@ public class IWildSenseStressAnalyzer {
          */
         SurveyAnalyzer.analyzeSurveysAnswers(participantList);
         
-        ScreenEventsAnalyzer.analyzeScreenDataForEachParticipant(participantList);
+        //ScreenEventsAnalyzer.analyzeScreenDataForEachParticipant(participantList, false);
+        //UserActivityAnalyzer.analyzeUserActivityDataForEachParticipant(participantList, false);
+        TouchesBufferedAnalyzer.analyzeTouchesBufferedDataForEachParticipant(participantList, false);
+        
+        //ScreenEventsAnalyzer.analyzeScreenDataForEachParticipant(participantList, true);
+        //UserActivityAnalyzer.analyzeUserActivityDataForEachParticipant(participantList, true);
+        TouchesBufferedAnalyzer.analyzeTouchesBufferedDataForEachParticipant(participantList, true);
+        
+        
     }
     
 }

@@ -1,0 +1,26 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package iwildsensestressanalyzer.filereader;
+
+import iwildsensestressanalyzer.participant.Participant;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Matteo
+ */
+public class TouchesBufferedReader extends AllFilesReader {
+    
+    private static final String TOUCHES_BUFFERED_FILE_NAME = "TouchesBuffered.csv";
+    
+    public static ArrayList<String> getAllTouchesBufferedEventsLines(Participant 
+            participant) {
+        
+        return retrieveAllLines(TOUCHES_BUFFERED_FILE_NAME, participant);
+        
+    }
+    
+}

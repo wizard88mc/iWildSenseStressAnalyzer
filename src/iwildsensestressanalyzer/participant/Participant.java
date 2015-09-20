@@ -30,9 +30,12 @@ public class Participant {
     
     private UserPresenceAdvancedEventsWrapper userPresenceAdvancedEventsWrapper;
     
-    private SurveyDataWrapper[] surveyDataWrappers = {new SurveyDataWrapper(1), 
-        new SurveyDataWrapper(2), new SurveyDataWrapper(3), new SurveyDataWrapper(4), 
-        new SurveyDataWrapper(5)};
+    private SurveyDataWrapper[] surveyDataWrappers = {new SurveyDataWrapper(1, false), 
+        new SurveyDataWrapper(2, false), new SurveyDataWrapper(3, false), new SurveyDataWrapper(4, false), 
+        new SurveyDataWrapper(5, false)};
+    
+    private SurveyDataWrapper[] easyDataWrappers = {new SurveyDataWrapper(1, true), 
+        new SurveyDataWrapper(3, true), new SurveyDataWrapper(5, true)};
     
     /**
      * Constructor with the IMEI of the participant
@@ -161,6 +164,24 @@ public class Participant {
         
         for (SurveyDataWrapper dataWrapper: surveyDataWrappers) {
             dataWrapper.createScreenEventsFeaturesExtractor(stressSurveyList);
+            dataWrapper.createUserActivityFeaturesExtractor(stressSurveyList);
+            dataWrapper.createTouchesBufferedFeatureExtractor();
+        }
+        
+        for (SurveyDataWrapper dataWrapper: easyDataWrappers) {
+            dataWrapper.createScreenEventsFeaturesExtractor(stressSurveyList);
+            dataWrapper.createUserActivityFeaturesExtractor(stressSurveyList);
+            dataWrapper.createTouchesBufferedFeatureExtractor();
+        }
+    }
+    
+    /**
+     * Adds the TouchesBuffered events to the set of Screen events
+     * @param events a list of TouchesBufferedEvent events
+     */
+    public void addTouchesBufferedEventsToUnlockedScreen(ArrayList<TouchesBufferedEvent> events) {
+        for (StressSurvey survey: stressSurveyList) {
+            survey.addTouchesBufferedEvent(events);
         }
     }
     
@@ -198,5 +219,14 @@ public class Participant {
      */
     public SurveyDataWrapper[] getSurveyDataWrappers() {
         return this.surveyDataWrappers;
+    }
+    
+    /**
+     * Returns the easy version of the SurveyDataWrappers used to store data 
+     * combining together relaxed (1 and 2), normal (3) and stressed (4 and 5)
+     * @return 
+     */
+    public SurveyDataWrapper[] getEasySurveyDataWrappers() {
+        return this.easyDataWrappers;
     }
 }

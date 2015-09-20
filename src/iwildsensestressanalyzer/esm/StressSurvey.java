@@ -1,5 +1,6 @@
 package iwildsensestressanalyzer.esm;
 
+import iwildsensestressanalyzer.touches.TouchesBufferedEvent;
 import iwildsensestressanalyzer.useractivity.UserActivityFeaturesExtractor;
 import iwildsensestressanalyzer.useractivity.UserActivityEvent;
 import iwildsensestressanalyzer.userpresenceevent.ScreenOnOff;
@@ -26,7 +27,13 @@ public class StressSurvey {
     private final int stress;
     
     private UserPresenceAdvancedEventsWrapper userPresenceAdvancedEventsWrapper;
-    private UserActivityFeaturesExtractor userActivityAnalyzer;
+    /**
+     * One UserActivityFeaturesExtractor different for each survey since we need
+     * different values for every survey and not combine together all the values
+     * (we have evaluations of time intervals, not value that can be used 
+     * together)
+     */
+    private UserActivityFeaturesExtractor userActivityFeaturesExtractor; 
     
     public StressSurvey(String lineWithAnswer) {
         
@@ -49,6 +56,14 @@ public class StressSurvey {
         valence = Integer.valueOf(elementsSurvey[0]);
         energy = Integer.valueOf(elementsSurvey[1]);
         stress = Integer.valueOf(elementsSurvey[2]);
+    }
+    
+    /**
+     * Adds the TouchesBufferedEvent to the UnlockedScreen events
+     * @param events the list of TouchesBufferedEvent recorded
+     */
+    public void addTouchesBufferedEvent(ArrayList<TouchesBufferedEvent> events) {
+        userPresenceAdvancedEventsWrapper.addTouchesBufferedEvent(events);
     }
     
     /**
@@ -123,7 +138,15 @@ public class StressSurvey {
      */
     public void addUserActivityEvents(ArrayList<UserActivityEvent> events) {
         
-        userActivityAnalyzer = new UserActivityFeaturesExtractor(this, events);
+        ArrayList<UserActivityEvent> correctEvents = new ArrayList<UserActivityEvent>();
+        
+        for (UserActivityEvent event: events) {
+            if (isEventInsideSurveyTiming(this.timestamp, event.getTimestamp())) {
+                correctEvents.add(event);
+            }
+        }
+        
+        userActivityFeaturesExtractor = new UserActivityFeaturesExtractor(correctEvents);
     }
     
     /**
@@ -132,6 +155,14 @@ public class StressSurvey {
      */
     public UserPresenceAdvancedEventsWrapper getUserPresenceAdvancedEventsWrapper() {
         return this.userPresenceAdvancedEventsWrapper;
+    }
+    
+    /**
+     * Returns the UserActivityEvents wrapper
+     * @return the UserActivityEventsWrapper object 
+     */
+    public UserActivityFeaturesExtractor getUserActivityFeaturesExtractor() {
+        return this.userActivityFeaturesExtractor;
     }
     
     /**

@@ -3,17 +3,16 @@ package iwildsensestressanalyzer.dataanalyzer;
 import iwildsensestressanalyzer.participant.Participant;
 import iwildsensestressanalyzer.utils.MathUtils;
 import java.util.ArrayList;
-import org.apache.commons.math3.stat.inference.TTest;
 
 /**
  *
  * @author Matteo Ciman
  * @version 0.1
  */
-public class ScreenEventsAnalyzer {
+public class ScreenEventsAnalyzer extends EventsAnalyzer {
     
     public static void analyzeScreenDataForEachParticipant(ArrayList<Participant> 
-            participants) {
+            participants, boolean easyJob, boolean useAllTogether) {
         
         /**
          * Iterating over all the features provided by the 
@@ -23,13 +22,33 @@ public class ScreenEventsAnalyzer {
         
         for (Participant participant: participants) {
             
-            SurveyDataWrapper[] surveyDataWrappers = 
-                    participant.getSurveyDataWrappers();
+            SurveyDataWrapper[] surveyDataWrappers; 
+            if (!easyJob) { 
+                surveyDataWrappers = participant.getSurveyDataWrappers();
+            }
+            else {
+                surveyDataWrappers = participant.getEasySurveyDataWrappers();
+            }
             
-            workWithOnOffDurationForOnOffScreenEvents(surveyDataWrappers);
-            workWithOnOffDurationForUnlockedScreenEvents(surveyDataWrappers);
-            workWithUnlockTimeForUnlockedScreenEvents(surveyDataWrappers);
+            workWithOnOffDurationForOnOffScreenEvents(surveyDataWrappers, easyJob);
+            workWithOnOffDurationForUnlockedScreenEvents(surveyDataWrappers, easyJob);
+            workWithUnlockTimeForUnlockedScreenEvents(surveyDataWrappers, easyJob);
         }
+        
+        /**
+         * TODO
+         * put together all the data from all the participants and try to work
+         * with that
+         */
+        /*if (useAllTogether) {
+            SurveyDataWrapper[] surveyDataWrappers = null;
+            if (easyJob) {
+                surveyDataWrappers
+            }
+            else {
+                
+            }
+        }*/
         
     }
     
@@ -39,7 +58,7 @@ public class ScreenEventsAnalyzer {
      * @param surveyDataWrappers the survey and the related data to use
      */
     private static void workWithOnOffDurationForOnOffScreenEvents(SurveyDataWrapper[] 
-            surveyDataWrappers) {
+            surveyDataWrappers, boolean easyJob) {
     
         ArrayList<ArrayList<Long>> listValues = new ArrayList<ArrayList<Long>>();
         
@@ -56,18 +75,10 @@ public class ScreenEventsAnalyzer {
         ArrayList<ArrayList<Double>> normalizedDoubleValues = 
                 MathUtils.normalizeSetData(listValues, 0L, 1L);
         
+        System.out.println();
         System.out.println("*** On Off Duration for OnOffScreen Events ***");
         
-        /**
-         * Converting data to an array of double for the TTest library
-         */
-        ArrayList<double[]> valuesForTTest = new ArrayList<double[]>();
-        for (ArrayList<Double> values: normalizedDoubleValues) {
-            valuesForTTest.add(MathUtils.convertToArrayDouble(values));
-        }
-        
-        printTTestResults(valuesForTTest);
-        
+        printTTestResults(normalizedDoubleValues, easyJob);
     }
     
     /**
@@ -76,7 +87,7 @@ public class ScreenEventsAnalyzer {
      * @param surveyDataWrappers the survey and the related data to use
      */
     private static void workWithOnOffDurationForUnlockedScreenEvents(SurveyDataWrapper[] 
-            surveyDataWrappers) {
+            surveyDataWrappers, boolean easyJob) {
         
         ArrayList<ArrayList<Long>> listValues = new ArrayList<ArrayList<Long>>();
         
@@ -95,15 +106,7 @@ public class ScreenEventsAnalyzer {
         System.out.println();
         System.out.println("*** On Off duration for UnlockedScreen events ***");
         
-        /**
-         * Converting data to an array of double for the TTest library
-         */
-        ArrayList<double[]> valuesForTTest = new ArrayList<double[]>();
-        for (ArrayList<Double> values: normalizedDoubleValues) {
-            valuesForTTest.add(MathUtils.convertToArrayDouble(values));
-        }
-        
-        printTTestResults(valuesForTTest);
+        printTTestResults(normalizedDoubleValues, easyJob);
     }
     
     /**
@@ -112,7 +115,7 @@ public class ScreenEventsAnalyzer {
      * @param surveyDataWrappers 
      */
     private static void workWithUnlockTimeForUnlockedScreenEvents(SurveyDataWrapper[]
-            surveyDataWrappers) {
+            surveyDataWrappers, boolean easyJob) {
         
         ArrayList<ArrayList<Long>> listvalues = new ArrayList<ArrayList<Long>>();
         
@@ -130,71 +133,6 @@ public class ScreenEventsAnalyzer {
         System.out.println();
         System.out.println("*** Unlock Time duration for UnlockedScreen events ***");
         
-        /**
-         * Converting data to an array of double for the TTest library
-         */
-        ArrayList<double[]> valuesForTTest = new ArrayList<double[]>();
-        for (ArrayList<Double> values: normalizedDoubleValues) {
-            valuesForTTest.add(MathUtils.convertToArrayDouble(values));
-        }
-        
-        printTTestResults(valuesForTTest);
+        printTTestResults(normalizedDoubleValues, easyJob);
     }
-    
-    /**
-     * Prints the confusion matrix between all the stress states 
-     * @param valuesForTTest a list of array of double with the values for the
-     * t-test
-     */
-    private static void printTTestResults(ArrayList<double[]> valuesForTTest) {
-        
-        System.out.println("   |   1   |   2   |   3   |   4   |   5   |");
-        System.out.println("--------------------------------------------");
-        for (int i = 0; i < valuesForTTest.size(); i++) {
-            
-            String outputString = "";
-            
-            for (int j = 0; j < valuesForTTest.size(); j++) {
-             
-                if (j == 0) {
-                    outputString += " " + (i + 1) + " |" + "  NaN  |"; 
-                }
-                else {
-                    if (j <= i) {
-                        outputString += "  NaN  |";
-                    }
-                    else {
-                        /**
-                         * This is the only case we have to perform TTest
-                         */
-                        
-                        /**
-                         * First check if both data list has at least one value, 
-                         * otherwise no test can be performed
-                         */
-                        if (valuesForTTest.get(i) != null && 
-                                valuesForTTest.get(j) != null &&
-                                valuesForTTest.get(i).length != 0 && 
-                                valuesForTTest.get(j).length != 0) {
-                            
-                            try {
-                                double tTest = new TTest().tTest(valuesForTTest.get(i), 
-                                    valuesForTTest.get(j));
-                            
-                                outputString += MathUtils.decimalFormat.format(tTest) + "|";
-                            }
-                            catch(Exception exc) {
-                                outputString += "  ---  |";
-                            }
-                        }
-                        else {
-                            outputString += "  ---  |";
-                        }
-                    }
-                }
-            }
-            System.out.println(outputString);
-        }
-    }
-    
 }

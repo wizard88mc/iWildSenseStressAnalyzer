@@ -200,5 +200,11 @@ public class ScreenEventsFeaturesExtractor {
         return this.unlockedScreenEvents.size();
     }
     
-    
+    /**
+     * Returns the UnlockedScreen events
+     * @return the UnlockedScreen events
+     */
+    public ArrayList<UnlockedScreen> getUnlockedScreenEvents() {
+        return this.unlockedScreenEvents;
+    }
 }
