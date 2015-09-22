@@ -63,6 +63,8 @@ public class AllFilesReader extends BasicFileReader {
                         }   
                     }
                 }
+                String lastLine = linesEvents.get(linesEvents.size() - 1);
+                lastLine += ",LAST_OF_DAY";
             }
         }
         catch(FileNotFoundException exc) {

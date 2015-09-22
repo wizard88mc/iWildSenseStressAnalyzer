@@ -29,7 +29,9 @@ public class TouchesBufferedFeaturesExtractor {
         ArrayList<Double> values = new ArrayList<Double>();
         
         for (UnlockedScreen event: unlockedScreenEvents) {
-            values.add(Double.valueOf(event.getTouchesBufferedEvent().getCounter()));
+            if (event.getTouchesBufferedEvent() != null) {
+                values.add(Double.valueOf(event.getTouchesBufferedEvent().getCounter()));
+            }
         }
         
         return values;
@@ -45,7 +47,9 @@ public class TouchesBufferedFeaturesExtractor {
         ArrayList<Double> values = new ArrayList<Double>();
         
         for (UnlockedScreen event: unlockedScreenEvents) {
-            values.add(event.getTouchesBufferedEvent().getMinInterval());
+            if (event.getTouchesBufferedEvent() != null) {
+                values.add(event.getTouchesBufferedEvent().getMinInterval());
+            }
         }
         
         return values;
@@ -61,7 +65,9 @@ public class TouchesBufferedFeaturesExtractor {
         ArrayList<Double> values = new ArrayList<Double>();
         
         for (UnlockedScreen event: unlockedScreenEvents) {
-            values.add(event.getTouchesBufferedEvent().getMaxInterval());
+            if (event.getTouchesBufferedEvent() != null) {
+                values.add(event.getTouchesBufferedEvent().getMaxInterval());
+            }
         }
         
         return values;
@@ -76,7 +82,9 @@ public class TouchesBufferedFeaturesExtractor {
         ArrayList<Double> values = new ArrayList<Double>();
         
         for (UnlockedScreen event: unlockedScreenEvents) {
-            values.add(event.getTouchesBufferedEvent().getRange());
+            if (event.getTouchesBufferedEvent() != null) {
+                values.add(event.getTouchesBufferedEvent().getRange());
+            }
         }
         
         return values;
@@ -92,7 +100,9 @@ public class TouchesBufferedFeaturesExtractor {
         ArrayList<Double> values = new ArrayList<Double>();
         
         for (UnlockedScreen event: unlockedScreenEvents) {
-            values.add(event.getTouchesBufferedEvent().getMean());
+            if (event.getTouchesBufferedEvent() != null) {
+                values.add(event.getTouchesBufferedEvent().getMean());
+            }
         }
         
         return values;
@@ -107,7 +117,9 @@ public class TouchesBufferedFeaturesExtractor {
         ArrayList<Double> values = new ArrayList<Double>();
         
         for (UnlockedScreen event: unlockedScreenEvents) {
-            values.add(event.getTouchesBufferedEvent().getMedian());
+            if (event.getTouchesBufferedEvent() != null) {
+                values.add(event.getTouchesBufferedEvent().getMedian());
+            }
         }
         
         return values;
@@ -122,7 +134,9 @@ public class TouchesBufferedFeaturesExtractor {
         ArrayList<Double> values = new ArrayList<Double>();
         
         for (UnlockedScreen event: unlockedScreenEvents) {
-            values.add(event.getTouchesBufferedEvent().getVariance());
+            if (event.getTouchesBufferedEvent() != null) {
+                values.add(event.getTouchesBufferedEvent().getVariance());
+            }
         }
         
         return values;
@@ -138,7 +152,9 @@ public class TouchesBufferedFeaturesExtractor {
         ArrayList<Double> values = new ArrayList<Double>();
         
         for (UnlockedScreen event: unlockedScreenEvents) {
-            values.add(event.getTouchesBufferedEvent().getStandardDeviation());
+            if (event.getTouchesBufferedEvent() != null) {
+                values.add(event.getTouchesBufferedEvent().getStandardDeviation());
+            }
         }
         
         return values;
@@ -153,7 +169,9 @@ public class TouchesBufferedFeaturesExtractor {
         ArrayList<Double> values = new ArrayList<Double>();
         
         for (UnlockedScreen event: unlockedScreenEvents) {
-            values.add(event.getTouchesBufferedEvent().getSessionDuration());
+            if (event.getTouchesBufferedEvent() != null) {
+                values.add(event.getTouchesBufferedEvent().getSessionDuration());
+            }
         }
         
         return values;

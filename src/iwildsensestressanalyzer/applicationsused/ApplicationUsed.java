@@ -1,0 +1,126 @@
+package iwildsensestressanalyzer.applicationsused;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Matteo Ciman
+ */
+public class ApplicationUsed {
+    
+    private final ArrayList<ApplicationsUsedEvent> applicationsUsedEvents;
+    private long timestampEndActivity = 0;
+    
+    
+    public ApplicationUsed(ArrayList<ApplicationsUsedEvent> applicationsUsedEvents) {
+        this.applicationsUsedEvents = applicationsUsedEvents;
+    }
+    
+    /**
+     * Sets the end timestamp of the ApplicationUsed
+     * @param timestampEndActivity the end timestamp
+     */
+    public void setTimestampEndActivity(long timestampEndActivity) {
+        this.timestampEndActivity = timestampEndActivity;
+    }
+    
+    /**
+     * Returns if the current timestamp of end activity is already set or not
+     * @return true if the end timestamp is already set, false otherwise
+     */
+    public boolean isTimestampEndActivityAlreadySet() {
+        return this.timestampEndActivity != 0;
+    }
+    
+    /**
+     * Returns the App name of the ApplicationUsed
+     * @return 
+     */
+    public String getAppName() {
+        return applicationsUsedEvents.get(0).getApp();
+    }
+    
+    /**
+     * Creates a list of ApplicationUsed object wrapping together the same 
+     * application together
+     * @param applicationsUsedEvent
+     * @return 
+     */
+    public static ArrayList<ApplicationUsed> createListOfApplicationsUsed(ArrayList<ApplicationsUsedEvent> applicationsUsedEvent) {
+        
+        ArrayList<ApplicationUsed> applicationsUsed = new ArrayList<ApplicationUsed>();
+        boolean startWithNewApplicationUsed = true; String currentAppName = "";
+        
+        ArrayList<ApplicationsUsedEvent> currentListApplicationsUsedEvent = null;
+        
+        for (int i = 0; i < applicationsUsedEvent.size(); ) {
+            
+            if (startWithNewApplicationUsed) {
+                
+                currentListApplicationsUsedEvent = 
+                        new ArrayList<ApplicationsUsedEvent>();
+                
+                currentListApplicationsUsedEvent.add(applicationsUsedEvent.get(i));
+                
+                currentAppName = applicationsUsedEvent.get(i).getApp();
+                startWithNewApplicationUsed = false;
+                
+                i++;
+            }
+            else {
+                
+                /**
+                 * Checking if it is the last event of the day or not
+                 */
+                if (!applicationsUsedEvent.get(i).isLastDay()) {
+                
+                    /**
+                     * The current application is the same, just adding the 
+                     * current ApplicationsUsedEvent to the list of the 
+                     * current event
+                     */
+                    if (applicationsUsedEvent.get(i).getApp().equals(currentAppName)) {
+                        // continue with the old one, just add
+                        currentListApplicationsUsedEvent.add(applicationsUsedEvent.get(i));
+                        i++;
+                    }
+                    else {
+                        /**
+                         * There is a new ApplicationsUsedEvent, I create the 
+                         * ApplicationUsed object with the current list of 
+                         * ApplicationsUsedEvents and restart to create another one
+                         */
+                        ApplicationUsed applicationUsed = new ApplicationUsed(currentListApplicationsUsedEvent);
+
+                        applicationUsed.setTimestampEndActivity(applicationsUsedEvent.get(i).getTimestamp());
+
+                        applicationsUsed.add(applicationUsed);
+                        /**
+                         * Resetting elements
+                         */
+                        startWithNewApplicationUsed = true;
+                        currentAppName = "";
+                        currentListApplicationsUsedEvent = null;
+                    }
+                }
+                else {
+                    /**
+                     * This is the last element of the day, meaning I have to 
+                     * close the current list of applications used events
+                     */
+                    ApplicationUsed applicationUsed = new ApplicationUsed(currentListApplicationsUsedEvent);
+                    applicationUsed.setTimestampEndActivity(applicationsUsedEvent.get(i).getTimestamp());
+                    applicationsUsed.add(applicationUsed);
+                    
+                    startWithNewApplicationUsed = true;
+                    currentAppName = ""; currentListApplicationsUsedEvent = null;
+                    i++;
+                }
+            }
+        }
+        
+        
+        return applicationsUsed;
+    }
+    
+}

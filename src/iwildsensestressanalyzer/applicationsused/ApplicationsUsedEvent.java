@@ -1,6 +1,7 @@
 package iwildsensestressanalyzer.applicationsused;
 
 import iwildsensestressanalyzer.event.Event;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,6 +19,10 @@ public class ApplicationsUsedEvent extends Event {
         EMPTY
     };
     
+    private static enum Category {
+        
+    }
+    
     private static final String FOREGROUND = "FOREGROUND", 
             VISIBLE  = "VISIBLE", 
             PERCEPTIBLE = "PERCEPTIBLE",
@@ -30,6 +35,7 @@ public class ApplicationsUsedEvent extends Event {
     private final String PID; // PID (process ID) of the main process of the app
     private final boolean hasInternetAccess; // true if the app has internet access
     private final Importance importance; // new state of the app
+    private boolean lastOfDay = false;
     
     public ApplicationsUsedEvent(String line) {
         
@@ -73,6 +79,10 @@ public class ApplicationsUsedEvent extends Event {
         else  {
             importance = null;
         }
+    }
+    
+    public void setLastOfDay() {
+        this.lastOfDay = true;
     }
     
     /**
@@ -154,6 +164,14 @@ public class ApplicationsUsedEvent extends Event {
      */
     public boolean isEMPTY() {
         return this.importance == Importance.EMPTY;
+    }
+    
+    /**
+     * Returns if the current event is the last recorded event of the day
+     * @return 
+     */
+    public boolean isLastDay() {
+        return this.lastOfDay;
     }
     
 }

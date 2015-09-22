@@ -4,6 +4,7 @@ import iwildsensestressanalyzer.dataanalyzer.ScreenEventsAnalyzer;
 import iwildsensestressanalyzer.dataanalyzer.SurveyAnalyzer;
 import iwildsensestressanalyzer.dataanalyzer.TouchesBufferedAnalyzer;
 import iwildsensestressanalyzer.dataanalyzer.UserActivityAnalyzer;
+import iwildsensestressanalyzer.filereader.ApplicationsUsedReader;
 import iwildsensestressanalyzer.filereader.IMEIListReader;
 import iwildsensestressanalyzer.filereader.SurveyQuestionnaireReader;
 import iwildsensestressanalyzer.filereader.TouchesBufferedReader;
@@ -91,10 +92,11 @@ public class IWildSenseStressAnalyzer {
             newParticipant.addActivityServServiceEvents(activityServServiceEventsLines);*/
             
             /**
-             * Retrieving the TouchesBuffered events
+             * Retrieving the ApplicationUsed lines 
              */
-            ArrayList<String> touchesBufferedEventsLines = 
-                    TouchesBufferedReader.getAllTouchesBufferedEventsLines(newParticipant);
+            ArrayList<String> applicationUsedEventsLines = 
+                    ApplicationsUsedReader.getAllApplicationsUsedEventsLines(newParticipant);
+            
             
             
             /**
@@ -102,7 +104,11 @@ public class IWildSenseStressAnalyzer {
              */
             newParticipant.addUserEventsToSurveys();
             
-            newParticipant.spreadEventsAmongSurveyDataWrapper();
+            /**
+             * Retrieving the TouchesBuffered events
+             */
+            ArrayList<String> touchesBufferedEventsLines = 
+                    TouchesBufferedReader.getAllTouchesBufferedEventsLines(newParticipant);
             
             /**
              * Adding TouchesBufferedEvent events to the UnlockedScreen 
@@ -110,6 +116,8 @@ public class IWildSenseStressAnalyzer {
              */
             newParticipant.addTouchesBufferedEventsToUnlockedScreen(
                     TouchesBufferedEvent.createListOfTouchesBufferedEvents(touchesBufferedEventsLines));
+            
+            newParticipant.spreadEventsAmongSurveyDataWrapper();
             
             participantList.add(newParticipant);
         }
