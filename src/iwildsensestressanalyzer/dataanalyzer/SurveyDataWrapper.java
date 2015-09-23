@@ -1,5 +1,6 @@
 package iwildsensestressanalyzer.dataanalyzer;
 
+import iwildsensestressanalyzer.applicationsused.ApplicationUsedFeaturesExtractor;
 import iwildsensestressanalyzer.esm.StressSurvey;
 import iwildsensestressanalyzer.touches.TouchesBufferedFeaturesExtractor;
 import iwildsensestressanalyzer.useractivity.UserActivityFeaturesExtractor;
@@ -24,6 +25,7 @@ public class SurveyDataWrapper {
     private ScreenEventsFeaturesExtractor screenEventsFeaturesExtractor = null;
     private UserActivityFeaturesExtractorsListWrapper userActivityFeaturesExtractorsListWrapper = null;
     private TouchesBufferedFeaturesExtractor touchesBufferedFeaturesExtractor = null;
+    private ApplicationUsedFeaturesExtractor applicationUsedFeaturesExtractor = null;
     
     public SurveyDataWrapper(int surveyStressValue, boolean easy) {
         this.surveyStressValue = surveyStressValue;
@@ -93,7 +95,7 @@ public class SurveyDataWrapper {
     }
     
     /**
-     * Returns the Screen Events analyzer
+     * Returns the Screen Events features extractor
      * @return the ScreenEventsAnalyzer object for the stress survey value
      */
     public ScreenEventsFeaturesExtractor getScreenEventsFeaturesExtractor() {
@@ -110,8 +112,20 @@ public class SurveyDataWrapper {
         return this.userActivityFeaturesExtractorsListWrapper;
     }
     
+    /**
+     * Returns the Touches Buffered features extractor
+     * @return the TouchesBufferedFeaturesExtractor object
+     */
     public TouchesBufferedFeaturesExtractor getTouchesBufferedFeaturesExtractor() {
         return this.touchesBufferedFeaturesExtractor;
+    }
+    
+    /**
+     * Returns the ApplicationUsed features extractor
+     * @return the ApplicationUsedFeaturesExtractor
+     */
+    public ApplicationUsedFeaturesExtractor getApplicationUsedFeaturesExtractor() {
+        return this.applicationUsedFeaturesExtractor;
     }
     
     /**

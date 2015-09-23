@@ -1,5 +1,6 @@
 package iwildsensestressanalyzer;
 
+import iwildsensestressanalyzer.applicationsused.ApplicationsUsedEvent;
 import iwildsensestressanalyzer.dataanalyzer.ScreenEventsAnalyzer;
 import iwildsensestressanalyzer.dataanalyzer.SurveyAnalyzer;
 import iwildsensestressanalyzer.dataanalyzer.TouchesBufferedAnalyzer;
@@ -97,6 +98,7 @@ public class IWildSenseStressAnalyzer {
             ArrayList<String> applicationUsedEventsLines = 
                     ApplicationsUsedReader.getAllApplicationsUsedEventsLines(newParticipant);
             
+            newParticipant.addApplicationsUsedEvents(applicationUsedEventsLines);
             
             
             /**

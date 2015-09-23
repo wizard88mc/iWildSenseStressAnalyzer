@@ -1,6 +1,7 @@
 package iwildsensestressanalyzer.applicationsused;
 
 import iwildsensestressanalyzer.event.Event;
+import iwildsensestressanalyzer.filereader.AllFilesReader;
 import java.util.ArrayList;
 
 /**
@@ -18,10 +19,6 @@ public class ApplicationsUsedEvent extends Event {
         SERVICE, 
         EMPTY
     };
-    
-    private static enum Category {
-        
-    }
     
     private static final String FOREGROUND = "FOREGROUND", 
             VISIBLE  = "VISIBLE", 
@@ -78,6 +75,13 @@ public class ApplicationsUsedEvent extends Event {
         }
         else  {
             importance = null;
+        }
+        
+        /**
+         * Checking if the current event is the last one of the day
+         */
+        if (line.contains(AllFilesReader.LAST_LINE_MARKER)) {
+            lastOfDay = true;
         }
     }
     
@@ -173,5 +177,4 @@ public class ApplicationsUsedEvent extends Event {
     public boolean isLastDay() {
         return this.lastOfDay;
     }
-    
 }

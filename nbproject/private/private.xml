@@ -3,14 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/touches/TouchesBufferedEvent.java</file>
-            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/dataanalyzer/TouchesBufferedAnalyzer.java</file>
+            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/participant/Participant.java</file>
+            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/applicationsused/ApplicationUsedFeaturesExtractor.java</file>
+            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/dataanalyzer/ApplicationUsedAnalyzer.java</file>
+            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/applicationsused/ApplicationUsed.java</file>
+            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/applicationsused/CategorizeApps.java</file>
+            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/useractivity/UserActivityFeaturesExtractor.java</file>
             <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/IWildSenseStressAnalyzer.java</file>
             <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/esm/StressSurvey.java</file>
-            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/participant/Participant.java</file>
+            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/filereader/AllFilesReader.java</file>
             <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/dataanalyzer/SurveyDataWrapper.java</file>
-            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/userpresenceevent/UnlockedScreen.java</file>
-            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/touches/TouchesBufferedFeaturesExtractor.java</file>
+            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/applicationsused/ApplicationsUsedEvent.java</file>
+            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/dataanalyzer/UserActivityAnalyzer.java</file>
+            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/dataanalyzer/EventsAnalyzer.java</file>
         </group>
     </open-files>
 </project-private>

@@ -108,6 +108,20 @@ public class Participant {
     }
     
     /**
+     * Creates a set of ApplicationsUsedEvent objects that represents 
+     * interaction with applications
+     * @param lines the list of lines recorded
+     */
+    public void addApplicationsUsedEvents(ArrayList<String> lines) {
+        
+        applicationsUsedEventsList = new ArrayList<ApplicationsUsedEvent>();
+        
+        for (String line: lines) {
+            applicationsUsedEventsList.add(new ApplicationsUsedEvent(line));
+        }
+    }
+    
+    /**
      * Creates a set of ActivityServServiceEvent objects that represents the 
      * information about the currently running services 
      * 
@@ -131,6 +145,7 @@ public class Participant {
         
         addUserPresenceEventsToSurveys();
         addUserActivityEventsToSurveys();
+        addApplicationsUsedToSurveys();
     }
     
     /**
@@ -152,6 +167,17 @@ public class Participant {
         
         for (StressSurvey survey: stressSurveyList) {
             survey.addUserActivityEvents(userActivityEventsList);
+        }
+    }
+    
+    /**
+     * For each StressSurvey answered by the participant, we search for the 
+     * correct ApplicationsUsedEvent valid during the survey
+     */
+    private void addApplicationsUsedToSurveys() {
+        
+        for (StressSurvey survey: stressSurveyList) {
+            survey.addAppliactionUsedList(applicationsUsedEventsList);
         }
     }
     

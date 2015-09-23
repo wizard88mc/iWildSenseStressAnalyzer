@@ -19,6 +19,8 @@ import java.util.ArrayList;
  */
 public class AllFilesReader extends BasicFileReader {
     
+    public static final String LAST_LINE_MARKER = ",LAST_OF_DAY";
+    
     /**
      * Retrieves all the lines of a specific output file for a participant
      * for all the days of the experiment
@@ -64,7 +66,7 @@ public class AllFilesReader extends BasicFileReader {
                     }
                 }
                 String lastLine = linesEvents.get(linesEvents.size() - 1);
-                lastLine += ",LAST_OF_DAY";
+                lastLine += LAST_LINE_MARKER;
             }
         }
         catch(FileNotFoundException exc) {

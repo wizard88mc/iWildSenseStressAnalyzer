@@ -1,5 +1,7 @@
 package iwildsensestressanalyzer.esm;
 
+import iwildsensestressanalyzer.applicationsused.ApplicationUsed;
+import iwildsensestressanalyzer.applicationsused.ApplicationsUsedEvent;
 import iwildsensestressanalyzer.touches.TouchesBufferedEvent;
 import iwildsensestressanalyzer.useractivity.UserActivityFeaturesExtractor;
 import iwildsensestressanalyzer.useractivity.UserActivityEvent;
@@ -34,6 +36,8 @@ public class StressSurvey {
      * together)
      */
     private UserActivityFeaturesExtractor userActivityFeaturesExtractor; 
+    
+    private ArrayList<ApplicationUsed> listApplicationUsed;
     
     public StressSurvey(String lineWithAnswer) {
         
@@ -147,6 +151,27 @@ public class StressSurvey {
         }
         
         userActivityFeaturesExtractor = new UserActivityFeaturesExtractor(correctEvents);
+    }
+    
+    /**
+     * Creates a list of Used application only with the ApplicationsUsedEvent
+     * that belongs to the survey
+     * @param listOfEvents list of ApplicationsUsedEvent
+     */
+    public void addAppliactionUsedList(ArrayList<ApplicationsUsedEvent> listOfEvents) {
+        
+        ArrayList<ApplicationsUsedEvent> listOfValidEvents = 
+                new ArrayList<ApplicationsUsedEvent>();
+        
+        for (ApplicationsUsedEvent event: listOfEvents) {
+            
+            if (StressSurvey.isEventInsideSurveyTiming(timestamp, event.getTimestamp())) {
+                
+                listOfValidEvents.add(event);
+            }
+        }
+        
+        listApplicationUsed = ApplicationUsed.createListOfApplicationsUsed(listOfValidEvents);
     }
     
     /**

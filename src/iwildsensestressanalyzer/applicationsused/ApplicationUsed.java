@@ -3,17 +3,19 @@ package iwildsensestressanalyzer.applicationsused;
 import java.util.ArrayList;
 
 /**
- *
+ * This class holds a sequence of consecutive ApplicationsUsedEvent of the 
+ * same application
  * @author Matteo Ciman
  */
 public class ApplicationUsed {
     
     private final ArrayList<ApplicationsUsedEvent> applicationsUsedEvents;
     private long timestampEndActivity = 0;
-    
+    private String category;
     
     public ApplicationUsed(ArrayList<ApplicationsUsedEvent> applicationsUsedEvents) {
         this.applicationsUsedEvents = applicationsUsedEvents;
+        category = CategorizeApps.categorizeApp(this.applicationsUsedEvents.get(0).getApp());
     }
     
     /**
@@ -38,6 +40,22 @@ public class ApplicationUsed {
      */
     public String getAppName() {
         return applicationsUsedEvents.get(0).getApp();
+    }
+    
+    /**
+     * Returns the Category of the ApplicationsUsedEvent
+     * @return the category of the application
+     */
+    public String getAppCategory() {
+        return this.category;
+    }
+    
+    /**
+     * Returns the size of the List of ApplicationsUsedEvent
+     * @return the number of the ApplicationsUsedEvent stored
+     */
+    public int getNumberOfApplicationsUsedEventList() {
+        return this.applicationsUsedEvents.size();
     }
     
     /**
@@ -118,7 +136,6 @@ public class ApplicationUsed {
                 }
             }
         }
-        
         
         return applicationsUsed;
     }
