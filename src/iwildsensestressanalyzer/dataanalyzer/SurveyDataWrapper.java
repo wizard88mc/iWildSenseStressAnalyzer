@@ -1,6 +1,7 @@
 package iwildsensestressanalyzer.dataanalyzer;
 
 import iwildsensestressanalyzer.applicationsused.ApplicationUsedFeaturesExtractor;
+import iwildsensestressanalyzer.applicationsused.ApplicationUsedFeaturesExtractorListWrapper;
 import iwildsensestressanalyzer.esm.StressSurvey;
 import iwildsensestressanalyzer.touches.TouchesBufferedFeaturesExtractor;
 import iwildsensestressanalyzer.useractivity.UserActivityFeaturesExtractor;
@@ -25,7 +26,7 @@ public class SurveyDataWrapper {
     private ScreenEventsFeaturesExtractor screenEventsFeaturesExtractor = null;
     private UserActivityFeaturesExtractorsListWrapper userActivityFeaturesExtractorsListWrapper = null;
     private TouchesBufferedFeaturesExtractor touchesBufferedFeaturesExtractor = null;
-    private ApplicationUsedFeaturesExtractor applicationUsedFeaturesExtractor = null;
+    private ApplicationUsedFeaturesExtractorListWrapper applicationUsedFeaturesExtractorListWrapper = null;
     
     public SurveyDataWrapper(int surveyStressValue, boolean easy) {
         this.surveyStressValue = surveyStressValue;
@@ -61,7 +62,7 @@ public class SurveyDataWrapper {
     }
     
     /**
-     * Takes all the surveys that have stress vale equal to the stress value of 
+     * Takes all the surveys that have stress value equal to the stress value of 
      * the SurveyDataWrapper and creates the UserActivityEventsFeaturesExtractor
      * using only events related to the correct stress value
      * @param surveys all the surveys answered by the participant
@@ -84,6 +85,29 @@ public class SurveyDataWrapper {
     }
     
     /**
+     * Takes all the surveys that have stress value equal to the stress value of
+     * the SuveryDataWrapper and creates the ApplicationUsedFeaturesExtractor
+     * using only events related to the correct stress level
+     * @param surveys all the surveys answered by the participant
+     */
+    public void createApplicationUsedFeaturesExtractor(ArrayList<StressSurvey> surveys) {
+        
+        ArrayList<ApplicationUsedFeaturesExtractor> applicationUsedFeaturesExtractor = 
+                new ArrayList<ApplicationUsedFeaturesExtractor>();
+        
+        for (StressSurvey survey: surveys) {
+            
+            if (checkIfCorrectForTheDataWrapper(survey.getStress())) {
+                
+                applicationUsedFeaturesExtractor.add(survey.getApplicationUsedFeaturesExtractor());
+            }
+        }
+        
+        applicationUsedFeaturesExtractorListWrapper = 
+                new ApplicationUsedFeaturesExtractorListWrapper(applicationUsedFeaturesExtractor);
+    }
+    
+    /**
      * Creates the TouchesBufferedFeatureExtractor object using the UnlockedScreen
      * events stored in the ScreenEventsFeaturesExtractor
      */
@@ -91,7 +115,6 @@ public class SurveyDataWrapper {
         
         this.touchesBufferedFeaturesExtractor = 
                 new TouchesBufferedFeaturesExtractor(screenEventsFeaturesExtractor.getUnlockedScreenEvents());
-        
     }
     
     /**
@@ -121,11 +144,11 @@ public class SurveyDataWrapper {
     }
     
     /**
-     * Returns the ApplicationUsed features extractor
-     * @return the ApplicationUsedFeaturesExtractor
+     * Returns the ApplicationUsed features extractor list wrapper
+     * @return the ApplicationUsedFeaturesExtractorListWrapper
      */
-    public ApplicationUsedFeaturesExtractor getApplicationUsedFeaturesExtractor() {
-        return this.applicationUsedFeaturesExtractor;
+    public ApplicationUsedFeaturesExtractorListWrapper getApplicationUsedFeaturesExtractorListWrapper() {
+        return this.applicationUsedFeaturesExtractorListWrapper;
     }
     
     /**

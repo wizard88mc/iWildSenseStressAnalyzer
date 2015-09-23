@@ -11,7 +11,7 @@ public class ApplicationUsed {
     
     private final ArrayList<ApplicationsUsedEvent> applicationsUsedEvents;
     private long timestampEndActivity = 0;
-    private String category;
+    private final String category;
     
     public ApplicationUsed(ArrayList<ApplicationsUsedEvent> applicationsUsedEvents) {
         this.applicationsUsedEvents = applicationsUsedEvents;

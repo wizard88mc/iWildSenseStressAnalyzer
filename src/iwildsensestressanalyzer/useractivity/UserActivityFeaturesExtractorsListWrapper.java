@@ -11,7 +11,8 @@ public class UserActivityFeaturesExtractorsListWrapper {
     
     private final ArrayList<UserActivityFeaturesExtractor> userActivityFeaturesExtractorList;
     
-    public UserActivityFeaturesExtractorsListWrapper(ArrayList<UserActivityFeaturesExtractor> userActivityFeaturesExtractorList) {
+    public UserActivityFeaturesExtractorsListWrapper(ArrayList<UserActivityFeaturesExtractor> 
+            userActivityFeaturesExtractorList) {
         
         this.userActivityFeaturesExtractorList = userActivityFeaturesExtractorList;
     }

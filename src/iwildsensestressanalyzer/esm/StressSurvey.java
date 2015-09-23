@@ -1,6 +1,7 @@
 package iwildsensestressanalyzer.esm;
 
 import iwildsensestressanalyzer.applicationsused.ApplicationUsed;
+import iwildsensestressanalyzer.applicationsused.ApplicationUsedFeaturesExtractor;
 import iwildsensestressanalyzer.applicationsused.ApplicationsUsedEvent;
 import iwildsensestressanalyzer.touches.TouchesBufferedEvent;
 import iwildsensestressanalyzer.useractivity.UserActivityFeaturesExtractor;
@@ -37,7 +38,7 @@ public class StressSurvey {
      */
     private UserActivityFeaturesExtractor userActivityFeaturesExtractor; 
     
-    private ArrayList<ApplicationUsed> listApplicationUsed;
+    private ApplicationUsedFeaturesExtractor applicationUsedFeaturesExtractor;
     
     public StressSurvey(String lineWithAnswer) {
         
@@ -154,8 +155,8 @@ public class StressSurvey {
     }
     
     /**
-     * Creates a list of Used application only with the ApplicationsUsedEvent
-     * that belongs to the survey
+     * Creates a a features extractor with the ApplicationsUsedEvent valid
+     * for the particular survey
      * @param listOfEvents list of ApplicationsUsedEvent
      */
     public void addAppliactionUsedList(ArrayList<ApplicationsUsedEvent> listOfEvents) {
@@ -171,7 +172,10 @@ public class StressSurvey {
             }
         }
         
-        listApplicationUsed = ApplicationUsed.createListOfApplicationsUsed(listOfValidEvents);
+        applicationUsedFeaturesExtractor =  
+                new ApplicationUsedFeaturesExtractor(
+                        ApplicationUsed.createListOfApplicationsUsed(
+                                listOfValidEvents));
     }
     
     /**
@@ -188,6 +192,10 @@ public class StressSurvey {
      */
     public UserActivityFeaturesExtractor getUserActivityFeaturesExtractor() {
         return this.userActivityFeaturesExtractor;
+    }
+    
+    public ApplicationUsedFeaturesExtractor getApplicationUsedFeaturesExtractor() {
+        return this.applicationUsedFeaturesExtractor;
     }
     
     /**

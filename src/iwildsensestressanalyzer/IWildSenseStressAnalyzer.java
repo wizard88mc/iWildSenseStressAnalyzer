@@ -1,10 +1,7 @@
 package iwildsensestressanalyzer;
 
-import iwildsensestressanalyzer.applicationsused.ApplicationsUsedEvent;
-import iwildsensestressanalyzer.dataanalyzer.ScreenEventsAnalyzer;
+import iwildsensestressanalyzer.dataanalyzer.ApplicationUsedAnalyzer;
 import iwildsensestressanalyzer.dataanalyzer.SurveyAnalyzer;
-import iwildsensestressanalyzer.dataanalyzer.TouchesBufferedAnalyzer;
-import iwildsensestressanalyzer.dataanalyzer.UserActivityAnalyzer;
 import iwildsensestressanalyzer.filereader.ApplicationsUsedReader;
 import iwildsensestressanalyzer.filereader.IMEIListReader;
 import iwildsensestressanalyzer.filereader.SurveyQuestionnaireReader;
@@ -131,12 +128,13 @@ public class IWildSenseStressAnalyzer {
         
         //ScreenEventsAnalyzer.analyzeScreenDataForEachParticipant(participantList, false);
         //UserActivityAnalyzer.analyzeUserActivityDataForEachParticipant(participantList, false);
-        TouchesBufferedAnalyzer.analyzeTouchesBufferedDataForEachParticipant(participantList, false);
+        //TouchesBufferedAnalyzer.analyzeTouchesBufferedDataForEachParticipant(participantList, false);
+        ApplicationUsedAnalyzer.analyzeDataOfApplicationUsedForEachParticipant(participantList, false);
         
         //ScreenEventsAnalyzer.analyzeScreenDataForEachParticipant(participantList, true);
         //UserActivityAnalyzer.analyzeUserActivityDataForEachParticipant(participantList, true);
-        TouchesBufferedAnalyzer.analyzeTouchesBufferedDataForEachParticipant(participantList, true);
-        
+        //TouchesBufferedAnalyzer.analyzeTouchesBufferedDataForEachParticipant(participantList, true);
+        ApplicationUsedAnalyzer.analyzeDataOfApplicationUsedForEachParticipant(participantList, true);
         
     }
     

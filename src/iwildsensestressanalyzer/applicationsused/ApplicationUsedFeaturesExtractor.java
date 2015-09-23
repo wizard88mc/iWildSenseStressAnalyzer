@@ -4,11 +4,22 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Matteo
+ * Class responsible to extract features from the ApplicationUsed objects
+ * FEATURES EXTRACTED
+ * 
+ * 0.1 - Influence of a particular application category on the total application
+ *       used
+ * 
+ * @author Matteo Ciman
+ * @version 0.1
  */
 public class ApplicationUsedFeaturesExtractor {
  
-    private ArrayList<ApplicationUsed> applicationUsedList;
+    private final ArrayList<ApplicationUsed> applicationUsedList;
+    
+    public ApplicationUsedFeaturesExtractor(ArrayList<ApplicationUsed> applicationUsedList) {
+        this.applicationUsedList = applicationUsedList;
+    }
     
     /**
      * Calculate the influence of a particular Application Category over the 
@@ -22,9 +33,12 @@ public class ApplicationUsedFeaturesExtractor {
         
         for (ApplicationUsed applicationUsed: applicationUsedList) {
             
-            totalEvents += applicationUsed.getNumberOfApplicationsUsedEventList();
+            if (applicationUsed.getAppCategory() != null) {
+                totalEvents += applicationUsed.getNumberOfApplicationsUsedEventList();
+            }
             
-            if (applicationUsed.getAppCategory().equals(appCategory)) {
+            if (applicationUsed.getAppCategory() != null && 
+                    applicationUsed.getAppCategory().equals(appCategory)) {
                 targetEvents += applicationUsed.getNumberOfApplicationsUsedEventList();
             }
         }

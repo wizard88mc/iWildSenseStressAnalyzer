@@ -6,6 +6,7 @@
 package iwildsensestressanalyzer.dataanalyzer;
 
 import iwildsensestressanalyzer.participant.Participant;
+import iwildsensestressanalyzer.utils.MathUtils;
 import java.util.ArrayList;
 
 /**
@@ -42,16 +43,20 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
         
         for (String appCategory: allAppCategories) {
             
+            System.out.println();
+            System.out.println("*** Influence of " + appCategory + " application category ***");
+            
             ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
                 
             for (SurveyDataWrapper wrapper: wrappers) {
-                listValues.add(wrapper.getApplicationUsedFeaturesExtractor().calculateInfluenceOfAppCategory(appCategory));
+                listValues.add(wrapper.getApplicationUsedFeaturesExtractorListWrapper().getAllInfluenceOfAppCategory(appCategory));
             }    
+            
+            ArrayList<ArrayList<Double>> normalizedValues = 
+                    MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
                 
-                
-                
+            printTTestResults(normalizedValues, easyJob);
         }
-        
     }
     
     /**

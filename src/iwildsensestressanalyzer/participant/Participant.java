@@ -192,12 +192,14 @@ public class Participant {
             dataWrapper.createScreenEventsFeaturesExtractor(stressSurveyList);
             dataWrapper.createUserActivityFeaturesExtractor(stressSurveyList);
             dataWrapper.createTouchesBufferedFeatureExtractor();
+            dataWrapper.createApplicationUsedFeaturesExtractor(stressSurveyList);
         }
         
         for (SurveyDataWrapper dataWrapper: easyDataWrappers) {
             dataWrapper.createScreenEventsFeaturesExtractor(stressSurveyList);
             dataWrapper.createUserActivityFeaturesExtractor(stressSurveyList);
             dataWrapper.createTouchesBufferedFeatureExtractor();
+            dataWrapper.createApplicationUsedFeaturesExtractor(stressSurveyList);
         }
     }
     

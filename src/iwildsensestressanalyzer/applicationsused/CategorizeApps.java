@@ -5,6 +5,7 @@
  */
 package iwildsensestressanalyzer.applicationsused;
 
+import iwildsensestressanalyzer.IWildSenseStressAnalyzer;
 import iwildsensestressanalyzer.dataanalyzer.ApplicationUsedAnalyzer;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -74,7 +75,9 @@ public class CategorizeApps {
                 /**
                  * The interesting String  
                 */
-                System.out.println(category);
+                if (IWildSenseStressAnalyzer.DEBUG) {
+                    System.out.println(category);
+                }
                 appAlreadyCategorized.put(applicationName, category);
                 ApplicationUsedAnalyzer.addCategory(category);
                 return category;
