@@ -8,7 +8,8 @@ import java.util.ArrayList;
  */
 public class ApplicationUsedFeaturesExtractorListWrapper {
     
-    private ArrayList<ApplicationUsedFeaturesExtractor> applicationUsedFeaturesExtractorList;
+    private final ArrayList<ApplicationUsedFeaturesExtractor> 
+            applicationUsedFeaturesExtractorList;
     
     public ApplicationUsedFeaturesExtractorListWrapper(ArrayList<ApplicationUsedFeaturesExtractor> 
             applicationUsedFeaturesExtractorList) {
@@ -35,4 +36,22 @@ public class ApplicationUsedFeaturesExtractorListWrapper {
         return listValues;
     }
     
+    /**
+     * Creates a list of influence of the considered application category 
+     * over all the features extractor in terms of timing duration
+     * @param appCategory the category we are currently considering
+     * @return a list of influences of the application category in terms of 
+     * timing duration
+     */
+    public ArrayList<Double> getAllTimingInfluenceOfAppCategory(String appCategory) {
+        
+        ArrayList<Double> listValues = new ArrayList<Double>();
+        
+        for (ApplicationUsedFeaturesExtractor appFeaturesExtractor: 
+                applicationUsedFeaturesExtractorList) {
+            listValues.add(appFeaturesExtractor.calculateTimingInfluenceOfAppCategory(appCategory));
+        }
+        
+        return listValues;
+    }
 }

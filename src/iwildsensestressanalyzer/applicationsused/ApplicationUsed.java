@@ -59,6 +59,29 @@ public class ApplicationUsed {
     }
     
     /**
+     * Returns the total duration of the ApplicationUsed considering the 
+     * starting time of the first one and the end time that could be the 
+     * timestamp end activity or the timestamp of the last one activity 
+     * (it is clearly an approximation)
+     * @return the duration of the ApplicationUsed in terms of milliseconds 
+     */
+    public Double getTotalDurationOfApplicationUsed() {
+        if (isTimestampEndActivityAlreadySet()) {
+            return Double.valueOf(this.timestampEndActivity) - 
+                    this.applicationsUsedEvents.get(0).getTimestamp();
+        }
+        else {
+            if (this.applicationsUsedEvents.size() > 1) {
+                return Double.valueOf(this.applicationsUsedEvents.get(applicationsUsedEvents.size() - 1).getTimestamp() 
+                    - this.applicationsUsedEvents.get(0).getTimestamp());
+            }
+            else {
+                return 0.0;
+            }
+        }
+    }
+    
+    /**
      * Creates a list of ApplicationUsed object wrapping together the same 
      * application together
      * @param applicationsUsedEvent

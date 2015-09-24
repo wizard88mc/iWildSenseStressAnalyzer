@@ -75,9 +75,6 @@ public class CategorizeApps {
                 /**
                  * The interesting String  
                 */
-                if (IWildSenseStressAnalyzer.DEBUG) {
-                    System.out.println(category);
-                }
                 appAlreadyCategorized.put(applicationName, category);
                 ApplicationUsedAnalyzer.addCategory(category);
                 return category;

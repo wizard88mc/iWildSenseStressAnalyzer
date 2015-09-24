@@ -56,6 +56,7 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
      * Works with On-Off duration of OnOffScreen events to calculate p-value
      * using t test between all the answers of the surveys
      * @param surveyDataWrappers the survey and the related data to use
+     * @param easyJob true if we are working with the easy test, false otherwise
      */
     private static void workWithOnOffDurationForOnOffScreenEvents(SurveyDataWrapper[] 
             surveyDataWrappers, boolean easyJob) {
