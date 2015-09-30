@@ -1,6 +1,7 @@
 package iwildsensestressanalyzer.userpresenceevent;
 
 import iwildsensestressanalyzer.IWildSenseStressAnalyzer;
+import iwildsensestressanalyzer.light.UserPresenceLightEvent;
 import iwildsensestressanalyzer.touches.TouchesBufferedEvent;
 import java.util.ArrayList;
 
@@ -163,6 +164,34 @@ public class UserPresenceAdvancedEventsWrapper {
                 
                 if (unlockedScreenEvents.get(i).isOtherEventInsideScreenEvent(event.getTimestamp())) {
                     unlockedScreenEvents.get(i).addTouchesBufferedEvent(event);
+                    found = true;
+                }
+            }
+        }
+    }
+    
+    /**
+     * Adds a UserPresenceLightEvent to the screen events, that could be a 
+     * ScreenOnOff or an UnlockedScreenEvent
+     * @param events the UserPresenceLight event to add
+     */
+    public void addUserPresenceLightEvent(ArrayList<UserPresenceLightEvent> events) {
+        
+        for (UserPresenceLightEvent event: events) {
+            
+            boolean found = false;
+            for (int i = 0; i < screenOnOffEvents.size() && !found; i++) {
+                
+                if (screenOnOffEvents.get(i).isOtherEventInsideScreenEvent(event.getTimestamp())) {
+                    screenOnOffEvents.get(i).setUserPresenceLightEvent(event);
+                    found = true;
+                }
+            }
+            
+            for (int i = 0; i < unlockedScreenEvents.size() && !found; i++) {
+                
+                if (unlockedScreenEvents.get(i).isOtherEventInsideScreenEvent(event.getTimestamp())) {
+                    unlockedScreenEvents.get(i).setUserPresenceLightEvent(event);
                     found = true;
                 }
             }

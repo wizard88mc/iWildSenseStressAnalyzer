@@ -1,5 +1,6 @@
 package iwildsensestressanalyzer.userpresenceevent;
 
+import iwildsensestressanalyzer.dataanalyzer.FeaturesExtractor;
 import iwildsensestressanalyzer.esm.StressSurvey;
 import iwildsensestressanalyzer.utils.MathUtils;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
  * @author Matteo Ciman
  * @version 0.1
  */
-public class ScreenEventsFeaturesExtractor {
+public class ScreenEventsFeaturesExtractor extends FeaturesExtractor {
     
     private final ArrayList<ScreenOnOff> screenOnOffEvents;
     private final ArrayList<UnlockedScreen> unlockedScreenEvents;
@@ -64,36 +65,18 @@ public class ScreenEventsFeaturesExtractor {
     }
     
     /**
-     * Calculate statistic information about the time of on/off when the user
-     * turns the screen on and off without unlocking it
-     * @return [average, variance, standard deviation] if more than zero values, 
-     * [-1] otherwise
-     */
-    public Long[] calculateStatisticOnOffDurationForScreenOnOffEvents() {
-        
-        ArrayList<Long> values = getAllOnOffDurationForOnOffEvents();
-        
-        if (values != null) {
-            return MathUtils.calculateStatisticInformation(values);
-        }
-        else {
-            return null;
-        }
-    }
-    
-    /**
      * Returns a list of all the on/off duration for the OnOffScreen events
      * @return a list of on-off duration if there is at least one ScreenOnOff event,
      * null otherwise
      */
-    public ArrayList<Long> getAllOnOffDurationForOnOffEvents() {
+    public ArrayList<Double> getAllOnOffDurationForOnOffEvents() {
         
         if (!screenOnOffEvents.isEmpty()) {
             
-            ArrayList<Long> values = new ArrayList<Long>();
+            ArrayList<Double> values = new ArrayList<Double>();
             
             for (ScreenOnOff event: screenOnOffEvents) {
-                values.add(event.getOnOffDuration());
+                values.add((double) event.getOnOffDuration());
             }
             
             return values;
@@ -101,18 +84,17 @@ public class ScreenEventsFeaturesExtractor {
         else {
             return null;
         }
-        
     }
     
     /**
-     * Calculates statistic information about the time of on/off when the user
-     * uses the phone, e.g. usage session duration
+     * Calculate statistic information about the time of on/off when the user
+     * turns the screen on and off without unlocking it
      * @return [average, variance, standard deviation] if more than zero values, 
      * [-1] otherwise
      */
-    public Long[] calculateStatisticOnOffDurationForUnlockScreenEvents() {
+    public Double[] calculateStatisticOnOffDurationForScreenOnOffEvents() {
         
-        ArrayList<Long> values = getAllOnOffDurationForUnlockScreenEvents();
+        ArrayList<Double> values = getAllOnOffDurationForOnOffEvents();
         
         if (values != null) {
             return MathUtils.calculateStatisticInformation(values);
@@ -127,14 +109,54 @@ public class ScreenEventsFeaturesExtractor {
      * @return a list of on-off duration if there is at least one UnlockScreen
      * event, null otherwise
      */
-    public ArrayList<Long> getAllOnOffDurationForUnlockScreenEvents() {
+    public ArrayList<Double> getAllOnOffDurationForUnlockScreenEvents() {
         
         if (!unlockedScreenEvents.isEmpty()) {
             
-            ArrayList<Long> values = new ArrayList<Long>();
+            ArrayList<Double> values = new ArrayList<Double>();
             
             for (UnlockedScreen event: unlockedScreenEvents) {
-                values.add(event.getOnOffDuration());
+                values.add((double) event.getOnOffDuration());
+            }
+            
+            return values;
+        }
+        else {
+            return null;
+        }
+    }
+    
+    /**
+     * Calculates statistic information about the time of on/off when the user
+     * uses the phone, e.g. usage session duration
+     * @return [average, variance, standard deviation] if more than zero values, 
+     * [-1] otherwise
+     */
+    public Double[] calculateStatisticOnOffDurationForUnlockScreenEvents() {
+        
+        ArrayList<Double> values = getAllOnOffDurationForUnlockScreenEvents();
+        
+        if (values != null) {
+            return MathUtils.calculateStatisticInformation(values);
+        }
+        else {
+            return null;
+        }
+    }
+    
+    /**
+     * Returns a list of all the unlock time of the UnlockedScreen events
+     * @return a list of unlock time if there is at least one UnlockedScreen event,
+     * null otherwise
+     */
+    public ArrayList<Double> getAllUnlockTimeForUnlockedScreenEvents() {
+        
+        if (!unlockedScreenEvents.isEmpty()) {
+            
+            ArrayList<Double> values = new ArrayList<Double>();
+            
+            for (UnlockedScreen event: unlockedScreenEvents) {
+                values.add((double) event.getUnlockTime());
             }
             
             return values;
@@ -150,34 +172,12 @@ public class ScreenEventsFeaturesExtractor {
      * @return [average, variance, standard deviation] if more than zero values, 
      * [-1] otherwise
      */
-    public Long[] calculateStatisticUnlockTimeForUnlockedScreenEvents() {
+    public Double[] calculateStatisticUnlockTimeForUnlockedScreenEvents() {
         
-        ArrayList<Long> values = getAllUnlockTimeForUnlockedScreenEvents();
+        ArrayList<Double> values = getAllUnlockTimeForUnlockedScreenEvents();
         
         if (values != null) {
             return MathUtils.calculateStatisticInformation(values);
-        }
-        else {
-            return null;
-        }
-    }
-    
-    /**
-     * Returns a list of all the unlock time of the UnlockedScreen events
-     * @return a list of unlock time if there is at least one UnlockedScreen event,
-     * null otherwise
-     */
-    public ArrayList<Long> getAllUnlockTimeForUnlockedScreenEvents() {
-        
-        if (!unlockedScreenEvents.isEmpty()) {
-            
-            ArrayList<Long> values = new ArrayList<Long>();
-            
-            for (UnlockedScreen event: unlockedScreenEvents) {
-                values.add(event.getUnlockTime());
-            }
-            
-            return values;
         }
         else {
             return null;
@@ -198,6 +198,14 @@ public class ScreenEventsFeaturesExtractor {
      */
     public int getNumberOfUnlockedScreen() {
         return this.unlockedScreenEvents.size();
+    }
+    
+    /**
+     * Returns the ScreenOnOff events
+     * @return the ScreenOnOff events
+     */
+    public ArrayList<ScreenOnOff> getScreenOnOffEvents() {
+        return this.screenOnOffEvents;
     }
     
     /**

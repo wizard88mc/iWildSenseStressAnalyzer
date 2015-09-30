@@ -20,36 +20,32 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
          * of the perceived stress from users
          */
         
-        for (Participant participant: participants) {
-            
-            SurveyDataWrapper[] surveyDataWrappers; 
-            if (!easyJob) { 
-                surveyDataWrappers = participant.getSurveyDataWrappers();
+        if (!useAllTogether) {
+            for (Participant participant: participants) {
+
+                SurveyDataWrapper[] surveyDataWrappers; 
+                if (!easyJob) { 
+                    surveyDataWrappers = participant.getSurveyDataWrappers();
+                }
+                else {
+                    surveyDataWrappers = participant.getEasySurveyDataWrappers();
+                }
+
+                workWithOnOffDurationForOnOffScreenEvents(surveyDataWrappers, easyJob);
+                workWithOnOffDurationForUnlockedScreenEvents(surveyDataWrappers, easyJob);
+                workWithUnlockTimeForUnlockedScreenEvents(surveyDataWrappers, easyJob);
             }
-            else {
-                surveyDataWrappers = participant.getEasySurveyDataWrappers();
-            }
-            
-            workWithOnOffDurationForOnOffScreenEvents(surveyDataWrappers, easyJob);
-            workWithOnOffDurationForUnlockedScreenEvents(surveyDataWrappers, easyJob);
-            workWithUnlockTimeForUnlockedScreenEvents(surveyDataWrappers, easyJob);
         }
         
-        /**
-         * TODO
-         * put together all the data from all the participants and try to work
-         * with that
-         */
-        /*if (useAllTogether) {
-            SurveyDataWrapper[] surveyDataWrappers = null;
-            if (easyJob) {
-                surveyDataWrappers
-            }
-            else {
-                
-            }
-        }*/
-        
+        if (useAllTogether) {
+            
+            ArrayList<ArrayList<SurveyDataWrapper>> allSurveyDataWrappers = 
+                    prepareDataWrappersForAllParticipants(participants, easyJob);
+            
+            workWithOnOffDurationForOnOffScreenEventsForAllParticipants(allSurveyDataWrappers, easyJob);
+            workWithOnOffDurationForUnlockedScreenEventsForAllParticipants(allSurveyDataWrappers, easyJob);
+            workWithUnlockTimeForUnlockedScreenEventsForAllParticipants(allSurveyDataWrappers, easyJob);
+        }
     }
     
     /**
@@ -61,7 +57,7 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
     private static void workWithOnOffDurationForOnOffScreenEvents(SurveyDataWrapper[] 
             surveyDataWrappers, boolean easyJob) {
     
-        ArrayList<ArrayList<Long>> listValues = new ArrayList<ArrayList<Long>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
         
         for (SurveyDataWrapper wrapper: surveyDataWrappers) {
             
@@ -74,13 +70,47 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
          */
         
         ArrayList<ArrayList<Double>> normalizedDoubleValues = 
-                MathUtils.normalizeSetData(listValues, 0L, 1L);
+                MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
         
         System.out.println();
         System.out.println("*** On Off Duration for OnOffScreen Events ***");
         
         printTTestResults(normalizedDoubleValues, easyJob);
     }
+    
+    /**
+     * Works with On-Off duration of OnOff Screen events using data from all the
+     * participants 
+     * @param listWrappers a list of all the wrappers for all the participants
+     * @param easyJob true if it is the easy test, false otherwise
+     */
+    private static void workWithOnOffDurationForOnOffScreenEventsForAllParticipants
+            (ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, boolean easyJob) {
+                
+            ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+            
+            for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
+
+                ArrayList<Double> singleListValues = new ArrayList<Double>();
+                
+                for (SurveyDataWrapper wrapper: wrappers) {
+                    Double[] singleValue = wrapper.getScreenEventsFeaturesExtractor().calculateStatisticOnOffDurationForScreenOnOffEvents();
+                    if (singleValue != null && singleValue[0] != -1) {
+                        singleListValues.add(singleValue[0]);
+                    }
+                }
+                
+                listValues.add(singleListValues);
+            }
+                
+            System.out.println();
+            System.out.println("*** GLOBAL ANALYSIS: On Off Duration for OnOffScreen Events ***");
+            
+            ArrayList<ArrayList<Double>> normalizedValues = 
+                    MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
+            
+            printTTestResults(normalizedValues, easyJob);
+        }
     
     /**
      * Works with On-Off duration of UnlockedScreen events to calculate p-values
@@ -90,7 +120,7 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
     private static void workWithOnOffDurationForUnlockedScreenEvents(SurveyDataWrapper[] 
             surveyDataWrappers, boolean easyJob) {
         
-        ArrayList<ArrayList<Long>> listValues = new ArrayList<ArrayList<Long>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
         
         for (SurveyDataWrapper wrapper: surveyDataWrappers) {
             
@@ -102,12 +132,47 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
          * p-value in a confusion matrix between all the values
          */
         ArrayList<ArrayList<Double>> normalizedDoubleValues = 
-                MathUtils.normalizeSetData(listValues, 0L, 1L);
+                MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
         
         System.out.println();
         System.out.println("*** On Off duration for UnlockedScreen events ***");
         
         printTTestResults(normalizedDoubleValues, easyJob);
+    }
+    
+    /**
+     * Works with On-Off duration of UnlockedScreen events using data from all the
+     * participants 
+     * @param listWrappers a list of all the wrappers for all the participants
+     * @param easyJob true if it is the easy test, false otherwise
+     */
+    private static void workWithOnOffDurationForUnlockedScreenEventsForAllParticipants
+            (ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, boolean easyJob) {
+                
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+
+        for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
+
+            ArrayList<Double> singleListValues = new ArrayList<Double>();
+
+            for (SurveyDataWrapper wrapper: wrappers) {
+                Double[] singleValue = wrapper.getScreenEventsFeaturesExtractor().calculateStatisticOnOffDurationForUnlockScreenEvents();
+                if (singleValue != null && singleValue[0] != -1) {
+                    singleListValues.add(singleValue[0]);
+                }
+            }
+
+            listValues.add(singleListValues);
+        }
+
+        System.out.println();
+        System.out.println("*** GLOBAL ANALYSIS: On Off Duration for " + 
+                "UnlockScreen Events ***");
+
+        ArrayList<ArrayList<Double>> normalizedValues = 
+                MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
+
+        printTTestResults(normalizedValues, easyJob);
     }
     
     /**
@@ -118,7 +183,7 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
     private static void workWithUnlockTimeForUnlockedScreenEvents(SurveyDataWrapper[]
             surveyDataWrappers, boolean easyJob) {
         
-        ArrayList<ArrayList<Long>> listvalues = new ArrayList<ArrayList<Long>>();
+        ArrayList<ArrayList<Double>> listvalues = new ArrayList<ArrayList<Double>>();
         
         for (SurveyDataWrapper wrapper: surveyDataWrappers) {
             listvalues.add(wrapper.getScreenEventsFeaturesExtractor().getAllUnlockTimeForUnlockedScreenEvents());
@@ -129,11 +194,46 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
          * p-value in a confusion matrix between all the values
          */
         ArrayList<ArrayList<Double>> normalizedDoubleValues = 
-                MathUtils.normalizeSetData(listvalues, 0L, 1L);
+                MathUtils.normalizeSetOfDoubleData(listvalues, 0.0, 1.0);
         
         System.out.println();
         System.out.println("*** Unlock Time duration for UnlockedScreen events ***");
         
         printTTestResults(normalizedDoubleValues, easyJob);
     }
+    
+    /**
+     * Works with Unlock time of UnlockedScreen events using data from all the
+     * participants 
+     * @param listWrappers a list of all the wrappers for all the participants
+     * @param easyJob true if it is the easy test, false otherwise
+     */
+    private static void workWithUnlockTimeForUnlockedScreenEventsForAllParticipants
+            (ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, boolean easyJob) {
+                
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+
+        for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
+
+            ArrayList<Double> singleListValues = new ArrayList<Double>();
+
+            for (SurveyDataWrapper wrapper: wrappers) {
+                Double[] singleValue = wrapper.getScreenEventsFeaturesExtractor().calculateStatisticUnlockTimeForUnlockedScreenEvents();
+                if (singleValue != null && singleValue[0] != -1) {
+                    singleListValues.add(singleValue[0]);
+                }
+            }
+
+            listValues.add(singleListValues);
+        }
+
+        System.out.println();
+        System.out.println("*** GLOBAL ANALYSIS: Unlock Time for " + 
+                "UnlockScreen Events ***");
+
+        ArrayList<ArrayList<Double>> normalizedValues = 
+                MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
+
+        printTTestResults(normalizedValues, easyJob);
+    }   
 }

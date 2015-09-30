@@ -3,6 +3,7 @@ package iwildsensestressanalyzer.dataanalyzer;
 import iwildsensestressanalyzer.applicationsused.ApplicationUsedFeaturesExtractor;
 import iwildsensestressanalyzer.applicationsused.ApplicationUsedFeaturesExtractorListWrapper;
 import iwildsensestressanalyzer.esm.StressSurvey;
+import iwildsensestressanalyzer.light.UserPresenceLightFeaturesExtractor;
 import iwildsensestressanalyzer.touches.TouchesBufferedFeaturesExtractor;
 import iwildsensestressanalyzer.useractivity.UserActivityFeaturesExtractor;
 import iwildsensestressanalyzer.useractivity.UserActivityFeaturesExtractorsListWrapper;
@@ -27,6 +28,7 @@ public class SurveyDataWrapper {
     private UserActivityFeaturesExtractorsListWrapper userActivityFeaturesExtractorsListWrapper = null;
     private TouchesBufferedFeaturesExtractor touchesBufferedFeaturesExtractor = null;
     private ApplicationUsedFeaturesExtractorListWrapper applicationUsedFeaturesExtractorListWrapper = null;
+    private UserPresenceLightFeaturesExtractor userPresenceLightFeaturesExtractor = null;
     
     public SurveyDataWrapper(int surveyStressValue, boolean easy) {
         this.surveyStressValue = surveyStressValue;
@@ -108,13 +110,26 @@ public class SurveyDataWrapper {
     }
     
     /**
-     * Creates the TouchesBufferedFeatureExtractor object using the UnlockedScreen
+     * Creates the TouchesBufferedFeaturesExtractor object using the UnlockedScreen
      * events stored in the ScreenEventsFeaturesExtractor
      */
-    public void createTouchesBufferedFeatureExtractor() {
+    public void createTouchesBufferedFeaturesExtractor() {
         
         this.touchesBufferedFeaturesExtractor = 
                 new TouchesBufferedFeaturesExtractor(screenEventsFeaturesExtractor.getUnlockedScreenEvents());
+    }
+    
+    /**
+     * Creates the UserPresenceLightFeaturesExtractor object using the 
+     * ScreenOnOff and the UnlockedScreen events stored in the ScreenEventsFeaturesExtractor
+     */
+    public void createUserPresenceLightFeaturesExtractor() {
+        
+        this.userPresenceLightFeaturesExtractor = 
+                new UserPresenceLightFeaturesExtractor(
+                        screenEventsFeaturesExtractor.getScreenOnOffEvents(), 
+                        screenEventsFeaturesExtractor.getUnlockedScreenEvents());
+        
     }
     
     /**
@@ -149,6 +164,14 @@ public class SurveyDataWrapper {
      */
     public ApplicationUsedFeaturesExtractorListWrapper getApplicationUsedFeaturesExtractorListWrapper() {
         return this.applicationUsedFeaturesExtractorListWrapper;
+    }
+    
+    /**
+     * Returns the UserPresenceLight Features extractor
+     * @return the UserPresencelightFeaturesExtractor
+     */
+    public UserPresenceLightFeaturesExtractor getUserPresenceLightFeaturesExtractor() {
+        return this.userPresenceLightFeaturesExtractor;
     }
     
     /**

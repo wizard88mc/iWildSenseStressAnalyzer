@@ -1,5 +1,6 @@
 package iwildsensestressanalyzer.dataanalyzer;
 
+import iwildsensestressanalyzer.participant.Participant;
 import iwildsensestressanalyzer.utils.MathUtils;
 import java.util.ArrayList;
 import org.apache.commons.math3.stat.inference.TTest;
@@ -12,6 +13,49 @@ import org.apache.commons.math3.stat.inference.TTest;
  * @version 0.1
  */
 public class EventsAnalyzer {
+    
+    /**
+     * Creates the list of SurveyDataWrapper from all the participants that 
+     * will be used to analyze data all together
+     * @param participants the list of participants
+     * @param easyJob true if considering the easy task, false otherwise
+     * @return A list of list of SurveyDataWrapper, one SurveyDataWrapper for
+     * each participant
+     */
+    protected static ArrayList<ArrayList<SurveyDataWrapper>> prepareDataWrappersForAllParticipants(
+        ArrayList<Participant> participants, boolean easyJob) {
+        
+        ArrayList<ArrayList<SurveyDataWrapper>> allSurveyDataWrappers =
+            new ArrayList<ArrayList<SurveyDataWrapper>>();
+            
+        if (!easyJob) {    
+            for(int i = 0; i < participants.get(0).getSurveyDataWrappers().length; i++) {
+                allSurveyDataWrappers.add(new ArrayList<SurveyDataWrapper>());
+            }
+
+            for(Participant participant: participants) {
+                SurveyDataWrapper[] wrappers = participant.getSurveyDataWrappers();
+                for (int i = 0; i < wrappers.length; i++) {
+                    allSurveyDataWrappers.get(i).add(wrappers[i]);
+                }
+            }
+
+        }
+        else {
+            for (int i = 0; i < participants.get(0).getEasySurveyDataWrappers().length; i++) {
+                allSurveyDataWrappers.add(new ArrayList<SurveyDataWrapper>());
+            }
+
+            for (Participant participant: participants) {
+                SurveyDataWrapper[] wrappers = participant.getEasySurveyDataWrappers();
+                for (int i = 0; i < wrappers.length; i++) {
+                    allSurveyDataWrappers.get(i).add(wrappers[i]);
+                }
+            }
+        }
+        
+        return allSurveyDataWrappers;
+    }
     
     /**
      * Prints the confusion matrix between all the stress states 

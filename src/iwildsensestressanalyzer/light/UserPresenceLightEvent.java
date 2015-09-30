@@ -1,6 +1,7 @@
 package iwildsensestressanalyzer.light;
 
 import iwildsensestressanalyzer.event.Event;
+import java.util.ArrayList;
 
 /**
  *
@@ -28,7 +29,30 @@ public class UserPresenceLightEvent extends Event {
         this.light = Double.valueOf(elements[2]);
     }
     
+    /**
+     * Returns the light value related to the event
+     * @return light value as double
+     */
     public double getLightValue() {
         return this.light;
+    }
+    
+    /**
+     * Creates a list of UserPresenceLightEvent stanrting from the list of lines
+     * recorded
+     * @param lines the list of lines with the recorded event
+     * @return a list of UserPresenceLightEvent objects
+     */
+    public static ArrayList<UserPresenceLightEvent> 
+        createListOfUserPresenceLightEvents(ArrayList<String> lines) {
+        
+        ArrayList<UserPresenceLightEvent> events = 
+                new ArrayList<UserPresenceLightEvent>();
+
+        for (String line: lines) {
+            events.add(new UserPresenceLightEvent(line));
+        }
+            
+        return events;
     }
 }

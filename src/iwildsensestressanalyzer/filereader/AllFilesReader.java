@@ -65,8 +65,11 @@ public class AllFilesReader extends BasicFileReader {
                         }   
                     }
                 }
-                String lastLine = linesEvents.get(linesEvents.size() - 1);
-                lastLine += LAST_LINE_MARKER;
+                if (!linesEvents.isEmpty()) {
+                    String lastLine = linesEvents.get(linesEvents.size() - 1);
+                    lastLine += LAST_LINE_MARKER;
+                    linesEvents.set(linesEvents.size() - 1, lastLine);
+                }
             }
         }
         catch(FileNotFoundException exc) {

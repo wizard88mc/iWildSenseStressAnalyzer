@@ -21,23 +21,23 @@ public class MathUtils {
      * @param values the set of values
      * @return [0]: average, [1]: variance, [2]: standard deviation
      */
-    public static Long[] calculateStatisticInformation(ArrayList<Long> values) {
+    public static Double[] calculateStatisticInformation(ArrayList<Double> values) {
         
-        long average = 0, variance = 0, standardDeviation = 0;
+        double average = 0, variance = 0, standardDeviation = 0;
         
-        for (Long value: values) {
+        for (Double value: values) {
             average += value;
         }
         average /= values.size();
         
-        for (Long value: values) {
+        for (Double value: values) {
             variance += Math.pow(average - value, 2);
         }
         variance /= values.size();
         
-        standardDeviation = (long) Math.sqrt(variance);
+        standardDeviation = Math.sqrt(variance);
         
-        Long[] results = {average, variance, standardDeviation};
+        Double[] results = {average, variance, standardDeviation};
         return results;
     }
     

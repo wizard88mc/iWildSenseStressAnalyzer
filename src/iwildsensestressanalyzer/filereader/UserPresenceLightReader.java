@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class UserPresenceLightReader extends AllFilesReader {
     
     private static final String USER_PRESENCE_LIGHT_FILE_NAME = 
-            "_UserPresenceLight.csv";
+            "UserPresenceLight.csv";
     
     /**
      * Retrieves all the lines from the corresponding file related to the 

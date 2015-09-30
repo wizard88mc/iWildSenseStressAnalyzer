@@ -1,5 +1,6 @@
 package iwildsensestressanalyzer.applicationsused;
 
+import iwildsensestressanalyzer.utils.MathUtils;
 import java.util.ArrayList;
 
 /**
@@ -37,6 +38,25 @@ public class ApplicationUsedFeaturesExtractorListWrapper {
     }
     
     /**
+     * Calculate statistics information about the influence of an app category
+     * over all the categories
+     * @param appCategory the name of the app category
+     * @return [average, variance, standard deviation] if more than zero values, 
+     * [-1] otherwise, null if no values available
+     */
+    public Double[] calculateStatisticsInfluenceOfAppCategory(String appCategory) {
+        
+        ArrayList<Double> listValues = getAllInfluenceOfAppCategory(appCategory);
+        
+        if (listValues != null) {
+            return MathUtils.calculateStatisticInformation(listValues);
+        }
+        else {
+            return null;
+        }
+    }
+    
+    /**
      * Creates a list of influence of the considered application category 
      * over all the features extractor in terms of timing duration
      * @param appCategory the category we are currently considering
@@ -53,5 +73,24 @@ public class ApplicationUsedFeaturesExtractorListWrapper {
         }
         
         return listValues;
+    }
+    
+    /**
+     * Calculate statistics information about the timing influence of an app category
+     * over all the categories
+     * @param appCategory the name of the app category
+     * @return [average, variance, standard deviation] if more than zero values, 
+     * [-1] otherwise, null if no values available
+     */
+    public Double[] calculateStatisticsOfTimingInfluenceOfAppCategory(String appCategory) {
+        
+        ArrayList<Double> listValues = getAllTimingInfluenceOfAppCategory(appCategory);
+        
+        if (listValues != null) {
+            return MathUtils.calculateStatisticInformation(listValues);
+        }
+        else {
+            return null;
+        }
     }
 }

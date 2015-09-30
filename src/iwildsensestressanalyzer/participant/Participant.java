@@ -4,6 +4,7 @@ import iwildsensestressanalyzer.activityservservice.ActivityServServiceEvent;
 import iwildsensestressanalyzer.applicationsused.ApplicationsUsedEvent;
 import iwildsensestressanalyzer.dataanalyzer.SurveyDataWrapper;
 import iwildsensestressanalyzer.esm.StressSurvey;
+import iwildsensestressanalyzer.light.UserPresenceLightEvent;
 import iwildsensestressanalyzer.touches.TouchesBufferedEvent;
 import iwildsensestressanalyzer.useractivity.UserActivityEvent;
 import iwildsensestressanalyzer.userpresenceevent.UserPresenceAdvancedEventsWrapper;
@@ -191,15 +192,17 @@ public class Participant {
         for (SurveyDataWrapper dataWrapper: surveyDataWrappers) {
             dataWrapper.createScreenEventsFeaturesExtractor(stressSurveyList);
             dataWrapper.createUserActivityFeaturesExtractor(stressSurveyList);
-            dataWrapper.createTouchesBufferedFeatureExtractor();
+            dataWrapper.createTouchesBufferedFeaturesExtractor();
             dataWrapper.createApplicationUsedFeaturesExtractor(stressSurveyList);
+            dataWrapper.createUserPresenceLightFeaturesExtractor();
         }
         
         for (SurveyDataWrapper dataWrapper: easyDataWrappers) {
             dataWrapper.createScreenEventsFeaturesExtractor(stressSurveyList);
             dataWrapper.createUserActivityFeaturesExtractor(stressSurveyList);
-            dataWrapper.createTouchesBufferedFeatureExtractor();
+            dataWrapper.createTouchesBufferedFeaturesExtractor();
             dataWrapper.createApplicationUsedFeaturesExtractor(stressSurveyList);
+            dataWrapper.createUserPresenceLightFeaturesExtractor();
         }
     }
     
@@ -210,6 +213,16 @@ public class Participant {
     public void addTouchesBufferedEventsToUnlockedScreen(ArrayList<TouchesBufferedEvent> events) {
         for (StressSurvey survey: stressSurveyList) {
             survey.addTouchesBufferedEvent(events);
+        }
+    }
+    
+    /**
+     * Adds the UserPresenceLight events to the set of Screen events
+     * @param events a list of UserPresenceLight events
+     */
+    public void addUserPresenceLightEvents(ArrayList<UserPresenceLightEvent> events) {
+        for (StressSurvey survey: stressSurveyList) {
+            survey.addUserPresenceLightEvent(events);
         }
     }
     

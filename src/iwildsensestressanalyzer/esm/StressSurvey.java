@@ -3,6 +3,7 @@ package iwildsensestressanalyzer.esm;
 import iwildsensestressanalyzer.applicationsused.ApplicationUsed;
 import iwildsensestressanalyzer.applicationsused.ApplicationUsedFeaturesExtractor;
 import iwildsensestressanalyzer.applicationsused.ApplicationsUsedEvent;
+import iwildsensestressanalyzer.light.UserPresenceLightEvent;
 import iwildsensestressanalyzer.touches.TouchesBufferedEvent;
 import iwildsensestressanalyzer.useractivity.UserActivityFeaturesExtractor;
 import iwildsensestressanalyzer.useractivity.UserActivityEvent;
@@ -69,6 +70,15 @@ public class StressSurvey {
      */
     public void addTouchesBufferedEvent(ArrayList<TouchesBufferedEvent> events) {
         userPresenceAdvancedEventsWrapper.addTouchesBufferedEvent(events);
+    }
+    
+    /**
+     * Adds the UserPresenceLightEvent to the Screen events (both ScreenOnOff 
+     * or UnlockedScreen)
+     * @param events the list of UserPresenceLightEvent recorded
+     */
+    public void addUserPresenceLightEvent(ArrayList<UserPresenceLightEvent> events) {
+        userPresenceAdvancedEventsWrapper.addUserPresenceLightEvent(events);
     }
     
     /**
