@@ -3,22 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/light/UserPresenceLightFeaturesExtractor.java</file>
-            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/userpresenceevent/ScreenOnOff.java</file>
-            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/userpresenceevent/UserPresenceAdvancedEventsWrapper.java</file>
-            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/dataanalyzer/FeaturesExtractor.java</file>
-            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/participant/Participant.java</file>
-            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/dataanalyzer/ApplicationUsedAnalyzer.java</file>
-            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/userpresenceevent/ScreenEventsFeaturesExtractor.java</file>
-            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/dataanalyzer/UserPresenceLightAnalyzer.java</file>
-            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/touches/TouchesBufferedFeaturesExtractor.java</file>
-            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/dataanalyzer/ScreenEventsAnalyzer.java</file>
-            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/IWildSenseStressAnalyzer.java</file>
             <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/dataanalyzer/SurveyDataWrapper.java</file>
-            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/light/UserPresenceLightEvent.java</file>
-            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/filereader/UserPresenceLightReader.java</file>
-            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/utils/MathUtils.java</file>
-            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/dataanalyzer/EventsAnalyzer.java</file>
+            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/dataanalyzer/ScreenEventsAnalyzer.java</file>
+            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/applicationsused/ApplicationUsedFeaturesExtractorListWrapper.java</file>
+            <file>file:/Users/Matteo/Documents/NetBeansProjects/iWildSenseStressAnalyzer/src/iwildsensestressanalyzer/IWildSenseStressAnalyzer.java</file>
         </group>
     </open-files>
 </project-private>

@@ -33,7 +33,12 @@ public class MathUtils {
         for (Double value: values) {
             variance += Math.pow(average - value, 2);
         }
-        variance /= values.size();
+        if (values.size() > 1) {
+            variance /= values.size();
+        }
+        else {
+            variance = 0;
+        }
         
         standardDeviation = Math.sqrt(variance);
         
