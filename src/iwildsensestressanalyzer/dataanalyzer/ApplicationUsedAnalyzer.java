@@ -2,7 +2,6 @@ package iwildsensestressanalyzer.dataanalyzer;
 
 import iwildsensestressanalyzer.IWildSenseStressAnalyzer;
 import iwildsensestressanalyzer.participant.Participant;
-import iwildsensestressanalyzer.utils.MathUtils;
 import java.util.ArrayList;
 
 /**
@@ -16,8 +15,9 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
     
     private static final ArrayList<String> allAppCategories = new ArrayList<String>();
     
-    public static void analyzeDataOfApplicationUsedForEachParticipant(ArrayList<Participant> participants, 
-            boolean easyJob, boolean useAllTogether) {
+    public static void analyzeDataOfApplicationUsedForEachParticipant(
+            ArrayList<Participant> participants, boolean easyJob, 
+            boolean useAllTogether) {
         
         if (!useAllTogether) {
             for (Participant participant: participants) {
@@ -39,8 +39,8 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
             ArrayList<ArrayList<SurveyDataWrapper>> allSurveyDataWrappers = 
                     prepareDataWrappersForAllParticipants(participants, easyJob);
             
-            workWithAppCategoryFrequencyForAllParticipants(allSurveyDataWrappers, easyJob);
-            workWithAppCategoryTimingForAllParticipants(allSurveyDataWrappers, easyJob);
+            workWithAppCategoryFrequencyOfAllParticipants(allSurveyDataWrappers, easyJob);
+            workWithAppCategoryTimingOfAllParticipants(allSurveyDataWrappers, easyJob);
         }
     }
     
@@ -55,20 +55,17 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
         
         for (String appCategory: allAppCategories) {
             
-            System.out.println();
-            System.out.println("*** Influence of " + appCategory + " application" + 
+            printTitleMessage("*** Influence of " + appCategory + " application" + 
                     " category ***");
             
             ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
                 
             for (SurveyDataWrapper wrapper: wrappers) {
-                listValues.add(wrapper.getApplicationUsedFeaturesExtractorListWrapper().getAllInfluenceOfAppCategory(appCategory));
-            }    
-            
-            ArrayList<ArrayList<Double>> normalizedValues = 
-                    MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
+                listValues.add(wrapper.getApplicationUsedFeaturesExtractorListWrapper()
+                        .getAllInfluenceOfAppCategory(appCategory));
+            }
                 
-            printTTestResults(normalizedValues, easyJob);
+            printTTestResults(listValues, easyJob);
         }
     }
     
@@ -77,10 +74,14 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
      * @param listWrappers
      * @param easyJob 
      */
-    private static void workWithAppCategoryFrequencyForAllParticipants(
+    private static void workWithAppCategoryFrequencyOfAllParticipants(
             ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, boolean easyJob) {
         
         for (String appCategory: allAppCategories) {
+            
+            printTitleMessage("*** GLOBAL ANALYSIS: Influence of " + appCategory 
+                + " application category ***");
+            
             ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
 
             for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
@@ -99,14 +100,7 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
                 listValues.add(singleValues);
             }
             
-            System.out.println();
-            System.out.println("*** GLOBAL ANALYSIS: Influence of " + appCategory 
-                + " application category ***");
-            
-            ArrayList<ArrayList<Double>> normalizedValues = 
-                    MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
-            
-            printTTestResults(normalizedValues, easyJob);
+            printTTestResults(listValues, easyJob);
         }
     }
     
@@ -121,8 +115,7 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
         
         for (String appCategory: allAppCategories) {
             
-            System.out.println();
-            System.out.println("*** Timing influence of " + appCategory +
+            printTitleMessage("*** Timing influence of " + appCategory +
                     " application category ***");
             
             ArrayList<ArrayList<Double>> listValues = 
@@ -133,10 +126,7 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
                         .getAllTimingInfluenceOfAppCategory(appCategory));
             }
             
-            ArrayList<ArrayList<Double>> normalizedValues = 
-                    MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
-            
-            printTTestResults(normalizedValues, easyJob);
+            printTTestResults(listValues, easyJob);
         }
     }
     
@@ -145,10 +135,14 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
      * @param listWrappers
      * @param easyJob 
      */
-    private static void workWithAppCategoryTimingForAllParticipants(
+    private static void workWithAppCategoryTimingOfAllParticipants(
             ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, boolean easyJob) {
         
         for (String appCategory: allAppCategories) {
+            
+            printTitleMessage("*** GLOBAL ANALYSIS: Timing influence of " + 
+                    appCategory + " application category ***");
+            
             ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
 
             for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
@@ -167,14 +161,7 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
                 listValues.add(singleValues);
             }
             
-            System.out.println();
-            System.out.println("*** GLOBAL ANALYSIS: Timing influence of " + appCategory 
-                + " application category ***");
-            
-            ArrayList<ArrayList<Double>> normalizedValues = 
-                    MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
-            
-            printTTestResults(normalizedValues, easyJob);
+            printTTestResults(listValues, easyJob);
         }
     }
     

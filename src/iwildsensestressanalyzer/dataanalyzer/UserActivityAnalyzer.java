@@ -43,20 +43,17 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
     private static void workWithPointsSumOfActivities(SurveyDataWrapper[] 
             surveyDataWrappers, boolean easyJob) {
         
+        printTitleMessage("*** Sum of the points collected with activities ***");
+        
         ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
         
         for (SurveyDataWrapper surveyDataWrapper: surveyDataWrappers) {
             
-            listValues.add(surveyDataWrapper.getUserActivityFeaturesExtractorsListWrapper().getAllPointsSumOfActivities());
+            listValues.add(surveyDataWrapper.getUserActivityFeaturesExtractorsListWrapper()
+                    .getAllPointsSumOfActivities());
         }
         
-        ArrayList<ArrayList<Double>> normalizedValues = 
-                MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
-        
-        System.out.println();
-        System.out.println("*** Sum of the points collected with activities ***");
-        
-        printTTestResults(normalizedValues, easyJob);   
+        printTTestResults(listValues, easyJob);   
     }
     
     /**
@@ -67,20 +64,17 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
     private static void workWithPercentageOfWorkload(SurveyDataWrapper[] 
             surveyDataWrappers, boolean easyJob) {
         
+        printTitleMessage("*** Percentage of working load ***");
+        
         ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
         
         for (SurveyDataWrapper wrapper: surveyDataWrappers) {
             
-            listValues.add(wrapper.getUserActivityFeaturesExtractorsListWrapper().getAllPercentageOfWorkload());
+            listValues.add(wrapper.getUserActivityFeaturesExtractorsListWrapper()
+                    .getAllPercentageOfWorkload());
         }
         
-        ArrayList<ArrayList<Double>> normalizedValues = 
-                MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
-        
-        System.out.println();
-        System.out.println("*** Percentage of working load ***");
-        
-        printTTestResults(normalizedValues, easyJob);
+        printTTestResults(listValues, easyJob);
     }
     
     /**
@@ -91,19 +85,16 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
     private static void workWithInfluenceOfWalkingActivityOnTotal(SurveyDataWrapper[] 
             surveyDataWrappers, boolean easyJob) {
         
+        printTitleMessage("*** Influence of Walking Activity on Total ***");
+        
         ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
         
         for (SurveyDataWrapper wrapper: surveyDataWrappers) {
-            listValues.add(wrapper.getUserActivityFeaturesExtractorsListWrapper().getAllInfluenceOfWalkingActivityOnTotal());
+            listValues.add(wrapper.getUserActivityFeaturesExtractorsListWrapper()
+                    .getAllInfluenceOfWalkingActivityOnTotal());
         }
         
-        ArrayList<ArrayList<Double>> normalizedValues = 
-                MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
-        
-        System.out.println();
-        System.out.println("*** Influence of Walking Activity on Total ***");
-        
-        printTTestResults(normalizedValues, easyJob);
+        printTTestResults(listValues, easyJob);
     }
     
     /**
@@ -114,19 +105,15 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
     private static void workWithInfluenceOfRunningActivityOnTotal(SurveyDataWrapper[] 
             surveyDataWrappers, boolean easyJob) {
         
+        printTitleMessage("*** Influence of Running Activity on Total ***");
+        
         ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
         
         for (SurveyDataWrapper wrapper: surveyDataWrappers) {
             listValues.add(wrapper.getUserActivityFeaturesExtractorsListWrapper().getAllInfluenceOfRunningActivityOnTotal());
         }
         
-        ArrayList<ArrayList<Double>> normalizedValues = 
-                MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
-        
-        System.out.println();
-        System.out.println("*** Influence of Running Activity on Total ***");
-        
-        printTTestResults(normalizedValues, easyJob);
+        printTTestResults(listValues, easyJob);
     }
     
     /**
@@ -137,19 +124,15 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
     private static void workWithInfluenceOfOnBicycleOnTotal(SurveyDataWrapper[]
             surveyDataWrappers, boolean easyJob) {
         
+        printTitleMessage("*** Influence of On Bicycle activity on Total ***");
+        
         ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
         
         for (SurveyDataWrapper wrapper: surveyDataWrappers) {
             listValues.add(wrapper.getUserActivityFeaturesExtractorsListWrapper().getAllInfluenceOfOnBicycleActivityOnTotal());
         }
         
-        ArrayList<ArrayList<Double>> normalizedValues = 
-                MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
-        
-        System.out.println();
-        System.out.println("*** Influence of On Bicycle activity on Total ***");
-        
-        printTTestResults(normalizedValues, easyJob);
+        printTTestResults(listValues, easyJob);
     }
     
     /**
@@ -160,19 +143,15 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
     private static void workWithPercentageOfTiltingEvents(SurveyDataWrapper[]
             surveyDataWrappers, boolean easyJob) {
         
+        printTitleMessage("*** Percentage of Titlting events ***");
+        
         ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
         
         for (SurveyDataWrapper wrapper: surveyDataWrappers) {
             listValues.add(wrapper.getUserActivityFeaturesExtractorsListWrapper().getAllPercentagesOfTiltingEvents());
         }
         
-        ArrayList<ArrayList<Double>> normalizedValues = 
-                MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
-        
-        System.out.println();
-        System.out.println("*** Percentage of Titlting events ***");
-        
-        printTTestResults(normalizedValues, easyJob);
+        printTTestResults(listValues, easyJob);
     }
     
     /**
@@ -183,18 +162,14 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
     private static void workWithPercentageOfInVehicleEvents(SurveyDataWrapper[] 
             surveyDataWrappers, boolean easyJob) {
         
+        printTitleMessage("*** Percentage of IN_VEHICLE events ***");
+        
         ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
         
         for (SurveyDataWrapper wrapper: surveyDataWrappers) {
             listValues.add(wrapper.getUserActivityFeaturesExtractorsListWrapper().getAllPercentagesOfInVehicleEvents());
         }
         
-        ArrayList<ArrayList<Double>> normalizedValues = 
-                MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
-        
-        System.out.println();
-        System.out.println("*** Percentage of IN_VEHICLE events ***");
-        
-        printTTestResults(normalizedValues, easyJob);
+        printTTestResults(listValues, easyJob);
     }
 }

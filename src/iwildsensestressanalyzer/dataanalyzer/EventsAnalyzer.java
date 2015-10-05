@@ -59,12 +59,15 @@ public class EventsAnalyzer {
     
     /**
      * Prints the confusion matrix between all the stress states 
-     * @param normalizedValues a list of array of double with the values for the
+     * @param listValues a list of array of double with the values for the
      * t-test
      * @param easyJob
      */
-    protected static void printTTestResults(ArrayList<ArrayList<Double>> normalizedValues, 
+    protected static void printTTestResults(ArrayList<ArrayList<Double>> listValues, 
             boolean easyJob) {
+        
+        ArrayList<ArrayList<Double>> normalizedValues = 
+                MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
         
         /**
          * Converting data to an array of double for the TTest library
@@ -132,4 +135,13 @@ public class EventsAnalyzer {
         }
     }
     
+    /**
+     * Prints the title message when printing results
+     * @param message 
+     */
+    public static void printTitleMessage(String message) {
+        
+        System.out.println();
+        System.out.println(message);
+    }
 }

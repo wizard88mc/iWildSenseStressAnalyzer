@@ -17,27 +17,42 @@ import java.util.ArrayList;
 public class TouchesBufferedAnalyzer extends EventsAnalyzer {
     
     public static void analyzeTouchesBufferedDataForEachParticipant(
-            ArrayList<Participant> participants, boolean easyJob) {
+            ArrayList<Participant> participants, boolean easyJob, 
+            boolean useAllTogether) {
         
-        for (Participant participant: participants) {
-            
-            SurveyDataWrapper[] wrappers;
-            if (!easyJob) {
-                wrappers = participant.getSurveyDataWrappers();
-            } 
-            else {
-                wrappers = participant.getEasySurveyDataWrappers();
+        if (!useAllTogether) {
+            for (Participant participant: participants) {
+
+                SurveyDataWrapper[] wrappers;
+                if (!easyJob) {
+                    wrappers = participant.getSurveyDataWrappers();
+                } 
+                else {
+                    wrappers = participant.getEasySurveyDataWrappers();
+                }
+
+                workWithCounter(wrappers, easyJob);
+                workWithMinInterval(wrappers, easyJob);
+                workWithMaxInterval(wrappers, easyJob);
+                workWithRange(wrappers, easyJob);
+                workWithMedian(wrappers, easyJob);
+                workWithVariance(wrappers, easyJob);
+                workWithStandardDeviation(wrappers, easyJob);
+                workWithSessionDuration(wrappers, easyJob);
             }
+        }
+        else {
+            ArrayList<ArrayList<SurveyDataWrapper>> allSurveyDataWrappers = 
+                    prepareDataWrappersForAllParticipants(participants, easyJob);
             
-            workWithCounter(wrappers, easyJob);
-            workWithMinInterval(wrappers, easyJob);
-            workWithMaxInterval(wrappers, easyJob);
-            workWithRange(wrappers, easyJob);
-            workWithMedian(wrappers, easyJob);
-            workWithVariance(wrappers, easyJob);
-            workWithStandardDeviation(wrappers, easyJob);
-            workWithSessionDuration(wrappers, easyJob);
-            
+            workWithCounterValuesOfAllParticipants(allSurveyDataWrappers, easyJob);
+            workWithMinIntervalValuesOfAllParticipants(allSurveyDataWrappers, easyJob);
+            workWithMaxIntervalValuesOfAllParticipants(allSurveyDataWrappers, easyJob);
+            workWithRangeValuesOfAllParticipants(allSurveyDataWrappers, easyJob);
+            workWithMedianValuesOfAllParticipants(allSurveyDataWrappers, easyJob);
+            workWithVarianceValuesOfAllParticipants(allSurveyDataWrappers, easyJob);
+            workWithStandardDeviationValuesOfAllParticipants(allSurveyDataWrappers, easyJob);
+            workWithSessionDurationValuesOfAllParticipants(allSurveyDataWrappers, easyJob);
         }
     }
     
@@ -47,23 +62,51 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
      * @param wrappers the surveys wrappers
      * @param easyJob true if it is the easy test, false otherwise
      */
-    public static void workWithCounter(SurveyDataWrapper[] wrappers, 
+    private static void workWithCounter(SurveyDataWrapper[] wrappers, 
             boolean easyJob) {
         
-        System.out.println();
-        System.out.println("*** Number of touches during usage session ***");
+        printTitleMessage("*** Number of touches during usage session ***");
         
         ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
         
         for (SurveyDataWrapper wrapper: wrappers) {
             
-            listValues.add(wrapper.getTouchesBufferedFeaturesExtractor().getAllCounters());
+            listValues.add(wrapper.getTouchesBufferedFeaturesExtractor()
+                    .getAllCounters());
         }
         
-        ArrayList<ArrayList<Double>> normalizedValues = 
-                MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
+        printTTestResults(listValues, easyJob);
+    }
+    
+    /**
+     * Analyzes data of counter values for all participants
+     * @param listWrappers list of wrappers for all participants
+     * @param easyJob true if it is the easy test, false otherwise
+     */
+    private static void workWithCounterValuesOfAllParticipants(
+            ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, boolean easyJob) {
         
-        printTTestResults(normalizedValues, easyJob);
+        printTitleMessage("*** GLOBAL ANALYSIS: Number of touches during usage" + 
+                " session ***");
+        
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        
+        for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
+            
+            ArrayList<Double> singleValues = new ArrayList<Double>();
+            
+            for (SurveyDataWrapper wrapper: wrappers) {
+                Double[] values = wrapper.getTouchesBufferedFeaturesExtractor()
+                        .calculateStatisticsCounterValues();
+                if (values != null && values[0] != -1) {
+                    singleValues.add(values[0]);
+                }
+            }
+            
+            listValues.add(singleValues);
+        }
+        
+        printTTestResults(listValues, easyJob);
     }
     
     /**
@@ -72,11 +115,10 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
      * @param wrappers the surveys wrappers
      * @param easyJob ture if it is the easy test, false otherwise
      */
-    public static void workWithMinInterval(SurveyDataWrapper[] wrappers, 
+    private static void workWithMinInterval(SurveyDataWrapper[] wrappers, 
             boolean easyJob) {
         
-        System.out.println();
-        System.out.println("*** Minimum touch interval between two consecutive" + 
+        printTitleMessage("*** Minimum touch interval between two consecutive" + 
                 " touches ***");
         
         ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
@@ -85,10 +127,38 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
             listValues.add(wrapper.getTouchesBufferedFeaturesExtractor().getAllMinIntervals());
         }
         
-        ArrayList<ArrayList<Double>> normalizedValues = 
-                MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
+        printTTestResults(listValues, easyJob);
+    }
+    
+    /**
+     * Analyzes data of minimum touch interval combining together data of all 
+     * the participants
+     * @param listWrappers list of wrappers for all participants
+     * @param easyJob true if it is the easy test, false otherwise
+     */
+    private static void workWithMinIntervalValuesOfAllParticipants(
+        ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, boolean easyJob) {
         
-        printTTestResults(normalizedValues, easyJob);
+        printTitleMessage("*** GLOBAL ANALYSIS: Minimum touch interval between" + 
+                " two consecutive touches");
+        
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        
+        for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
+            
+            ArrayList<Double> singleValues = new ArrayList<Double>();
+            for (SurveyDataWrapper wrapper: wrappers) {
+                Double[] values = wrapper.getTouchesBufferedFeaturesExtractor()
+                        .calculateStatisticsMinIntervalValues();
+                
+                if (values != null && values[0] != -1) {
+                    singleValues.add(values[0]);
+                }
+            }
+            listValues.add(singleValues);
+        }
+        
+        printTTestResults(listValues, easyJob);
     }
     
     /**
@@ -97,11 +167,10 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
      * @param wrappers the survey wrappers
      * @param easyJob true if it is the easy test, false otherwise
      */
-    public static void workWithMaxInterval(SurveyDataWrapper[] wrappers, 
+    private static void workWithMaxInterval(SurveyDataWrapper[] wrappers, 
             boolean easyJob) {
         
-        System.out.println();
-        System.out.println("*** Maximum touch interval between two consecutive" + 
+        printTitleMessage("*** Maximum touch interval between two consecutive" + 
                 " touches ***");
         
         ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
@@ -117,15 +186,46 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
     }
     
     /**
+     * Analyzes data of maximum touch interval combining together data of all
+     * the participants
+     * @param listWrappers list of wrappers for all participants
+     * @param easyJob true if it is the easy test, false otherwise
+     */
+    private static void workWithMaxIntervalValuesOfAllParticipants(
+        ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, boolean easyJob) {
+        
+        printTitleMessage("*** GLOBAL ANALYSIS: Maximum touch interval " + 
+                "between two consecutive touches ***");
+        
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        
+        for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
+            
+            ArrayList<Double> singleValue = new ArrayList<Double>();
+            
+            for (SurveyDataWrapper wrapper: wrappers) {
+                Double[] values = wrapper.getTouchesBufferedFeaturesExtractor()
+                        .calculateStatisticsMaxIntervalValues();
+                
+                if (values != null && values[0] != -1) {
+                    singleValue.add(values[0]);
+                }
+            }
+            listValues.add(singleValue);
+        }
+        
+        printTTestResults(listValues, easyJob);
+    }
+    
+    /**
      * Works with the range of touch intervals (max - min interval)
      * @param wrappers the survey wrappers
      * @param easyJob true if it the easy test, false otherwise
      */
-    public static void workWithRange(SurveyDataWrapper[] wrappers, 
+    private static void workWithRange(SurveyDataWrapper[] wrappers, 
             boolean easyJob) {
         
-        System.out.println();
-        System.out.println("*** Range of touch intervals ***");
+        printTitleMessage("*** Range of touch intervals ***");
         
         ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
         
@@ -140,38 +240,92 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
     }
     
     /**
+     * Analyzes data about range of touch intervals combining together data
+     * of all the participants
+     * @param listWrappers list of wrappers of all the participants
+     * @param easyJob if it is the easy test, false otherwise
+     */
+    private static void workWithRangeValuesOfAllParticipants(
+        ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, boolean easyJob) {
+        
+        printTitleMessage("*** GLOBAL ANALYSIS: Range values of touch intervals ***");
+        
+        ArrayList<ArrayList<Double>> listvalues = new ArrayList<ArrayList<Double>>();
+        
+        for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
+            
+            ArrayList<Double> singleValues = new ArrayList<Double>();
+            for (SurveyDataWrapper wrapper: wrappers) {
+                Double[] values = wrapper.getTouchesBufferedFeaturesExtractor()
+                        .calculateStatisticsRangeValues();
+                
+                if (values != null && values[0] != -1) {
+                    singleValues.add(values[0]);
+                }
+            }
+            listvalues.add(singleValues);
+        }
+        printTTestResults(listvalues, easyJob);
+    }
+    
+    /**
      * Works with the mean of touch intervals
      * @param wrappers the survey wrappers
      * @param easyJob true if it the easy test, false otherwise
      */
-    public static void workWithMean(SurveyDataWrapper[] wrappers, 
+    private static void workWithMean(SurveyDataWrapper[] wrappers, 
             boolean easyJob) {
         
-        System.out.println();
-        System.out.println("*** Mean of touch intervals ***");
+        printTitleMessage("*** Mean of touch intervals ***");
         
         ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
         
         for (SurveyDataWrapper wrapper: wrappers) {
-            listValues.add(wrapper.getTouchesBufferedFeaturesExtractor().getAllMeansOfTouchIntervals());
+            listValues.add(wrapper.getTouchesBufferedFeaturesExtractor()
+                    .getAllMeansOfTouchIntervals());
         }
         
-        ArrayList<ArrayList<Double>> normalizedValues = 
-                MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
+        printTTestResults(listValues, easyJob);
+    }
+    
+    /**
+     * Analyzes data about mean of touch intervals combining together data of 
+     * all the participants
+     * @param listWrappers list of wrappers of all the participants
+     * @param easyJob if it is the easy test, false otherwise
+     */
+    private static void workWithMeanValuesOfAllParticipants(
+        ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, boolean easyJob) {
         
-        printTTestResults(normalizedValues, easyJob);
-    }    
+        printTitleMessage("*** GLOBAL ANALYSIS: Mean of touch intervals ***");
+        
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        
+        for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
+            ArrayList<Double> singleValues = new ArrayList<Double>();
+            
+            for (SurveyDataWrapper wrapper: wrappers) {
+                Double[] values = wrapper.getTouchesBufferedFeaturesExtractor()
+                        .calculateStatisticsMeanValues();
+                
+                if (values != null && values[0] != -1) {
+                    singleValues.add(values[0]);
+                }
+            }
+            listValues.add(singleValues);
+        }
+        printTTestResults(listValues, easyJob);
+    }
     
     /**
      * Works with the median of touch intervals
      * @param wrappers the survey wrappers
      * @param easyJob true if it is the easy test, false otherwise
      */
-    public static void workWithMedian(SurveyDataWrapper[] wrappers, 
+    private static void workWithMedian(SurveyDataWrapper[] wrappers, 
             boolean easyJob) {
         
-        System.out.println();
-        System.out.println("*** Median of touch intervals ***");
+        printTitleMessage("*** Median of touch intervals ***");
         
         ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
         
@@ -179,10 +333,35 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
             listValues.add(wrapper.getTouchesBufferedFeaturesExtractor().getAllMediansOfTouchIntervals());
         }
         
-        ArrayList<ArrayList<Double>> normalizedValues = 
-                MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
+        printTTestResults(listValues, easyJob);
+    }
+    
+    /**
+     * Analyzes data about median of touch intervals combining together data
+     * of all the participants
+     * @param listWrappers list of wrappers of all the participants
+     * @param easyJob true if it is the easy test, false otherwise
+     */
+    private static void workWithMedianValuesOfAllParticipants(
+        ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, boolean easyJob) {
         
-        printTTestResults(normalizedValues, easyJob);
+        printTitleMessage("*** GLOBAL ANALYSIS: Median of touch intervals ***");
+        
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        
+        for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
+            ArrayList<Double> singleValues = new ArrayList<Double>();
+            for (SurveyDataWrapper wrapper: wrappers) {
+                Double[] values = wrapper.getTouchesBufferedFeaturesExtractor()
+                        .calculateStatisticsMedianValues();
+                
+                if (values != null && values[0] != -1) {
+                    singleValues.add(values[0]);
+                }
+            }
+            listValues.add(singleValues);
+        }
+        printTTestResults(listValues, easyJob);
     }
     
     /**
@@ -190,11 +369,10 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
      * @param wrappers the survey wrappers
      * @param easyJob true if it is the easy test, false otherwise
      */
-    public static void workWithVariance(SurveyDataWrapper[] wrappers, 
+    private static void workWithVariance(SurveyDataWrapper[] wrappers, 
             boolean easyJob) {
         
-        System.out.println();
-        System.out.println("*** Variance of touch intervals ***");
+        printTitleMessage("*** Variance of touch intervals ***");
         
         ArrayList<ArrayList<Double>> listValues = 
                 new ArrayList<ArrayList<Double>>();
@@ -203,10 +381,34 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
             listValues.add(wrapper.getTouchesBufferedFeaturesExtractor().getAllVariancesOfTouchIntervals());
         }
         
-        ArrayList<ArrayList<Double>> normalizedValues = 
-                MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
+        printTTestResults(listValues, easyJob);
+    }
+    
+    /**
+     * Analyzes data about the variance of touch intervals combining together
+     * data of all the participants
+     * @param listWrappers list of wrappers of all the participants
+     * @param easyJob true if it is the easy test, false otherwise
+     */
+    private static void workWithVarianceValuesOfAllParticipants(
+        ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, boolean easyJob) {
         
-        printTTestResults(normalizedValues, easyJob);
+        printTitleMessage("*** GLOBAL ANALYSIS: Variance of touch intervals ***");
+        
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        
+        for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
+            ArrayList<Double> singleValues = new ArrayList<Double>();
+            for (SurveyDataWrapper wrapper: wrappers) {
+                Double [] values = wrapper.getTouchesBufferedFeaturesExtractor()
+                        .calculateStatisticsVarianceValues();
+                if (values != null && values[0] != -1) {
+                    singleValues.add(values[0]);
+                }
+            }
+            listValues.add(singleValues);
+        }
+        printTTestResults(listValues, easyJob);
     }
     
     /**
@@ -214,23 +416,48 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
      * @param wrappers the survey wrappers
      * @param easyJob true if it is the easy test, false otherwise
      */
-    public static void workWithStandardDeviation(SurveyDataWrapper[] wrappers, 
+    private static void workWithStandardDeviation(SurveyDataWrapper[] wrappers, 
             boolean easyJob) {
         
-        System.out.println();
-        System.out.println("*** Standard deviation of touch intervals ***");
+        printTitleMessage("*** Standard deviation of touch intervals ***");
         
         ArrayList<ArrayList<Double>> listValues = 
                 new ArrayList<ArrayList<Double>>();
         
         for (SurveyDataWrapper wrapper: wrappers) {
-            listValues.add(wrapper.getTouchesBufferedFeaturesExtractor().getAllStandardDeviationsOfTouchIntervals());
+            listValues.add(wrapper.getTouchesBufferedFeaturesExtractor()
+                    .getAllStandardDeviationsOfTouchIntervals());
         }
         
-        ArrayList<ArrayList<Double>> normalizedValues = 
-                MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
+        printTTestResults(listValues, easyJob);
+    }
+    
+    /**
+     * Analyzes data about the standard deviation of touch intervals combining
+     * together data of all the participants
+     * @param listWrappers list of wrappers of all the participants
+     * @param easyJob true if it is the easy test, false otherwise
+     */
+    private static void workWithStandardDeviationValuesOfAllParticipants(
+        ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, boolean easyJob) {
         
-        printTTestResults(normalizedValues, easyJob);
+        printTitleMessage("*** GLOBAL ANALYSIS: Standard deviation of touch " + 
+                "intervals ***");
+        
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        
+        for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
+            ArrayList<Double> singleValues = new ArrayList<Double>();
+            for (SurveyDataWrapper wrapper: wrappers) {
+                Double[] values = wrapper.getTouchesBufferedFeaturesExtractor()
+                        .calculateStatisticsStandardDeviationValues();
+                if (values != null && values[0] != -1) {
+                    singleValues.add(values[0]);
+                }
+            }
+            listValues.add(singleValues);
+        }
+        printTTestResults(listValues, easyJob);
     }
     
     /**
@@ -238,11 +465,10 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
      * @param wrappers the survey wrappers
      * @param easyJob true if it is the easy test, false otherwise
      */
-    public static void workWithSessionDuration(SurveyDataWrapper[] wrappers, 
+    private static void workWithSessionDuration(SurveyDataWrapper[] wrappers, 
             boolean easyJob) {
         
-        System.out.println();
-        System.out.println("*** Duration of the usage session ***");
+        printTitleMessage("*** Duration of the usage session ***");
         
         ArrayList<ArrayList<Double>> listValues = 
                 new ArrayList<ArrayList<Double>>();
@@ -250,10 +476,33 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
         for (SurveyDataWrapper wrapper: wrappers) {
             listValues.add(wrapper.getTouchesBufferedFeaturesExtractor().getAllSessionDurationsOfTouchIntervals());
         }
-        
-        ArrayList<ArrayList<Double>> normalizedValues = 
-                MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
      
-        printTTestResults(normalizedValues, easyJob);
+        printTTestResults(listValues, easyJob);
+    }
+    
+    /**
+     * Analyzes data about the session duration of usage session combining
+     * together data of all the participants
+     * @param listWrappers list of wrappers of all the participants
+     * @param easyJob true if it is the easy test, false otherwise
+     */
+    private static void workWithSessionDurationValuesOfAllParticipants(
+        ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, boolean easyJob) {
+        
+        printTitleMessage("*** GLOBAL ANALYSIS: Duration of the usage session ***");
+        
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
+            ArrayList<Double> singleValues = new ArrayList<Double>();
+            for (SurveyDataWrapper wrapper: wrappers) {
+                Double[] values = wrapper.getTouchesBufferedFeaturesExtractor()
+                        .calculateStatisticsSessionDurationValues();
+                if (values != null && values[0] != -1) {
+                    singleValues.add(values[0]);
+                }
+            }
+            listValues.add(singleValues);
+        }
+        printTTestResults(listValues, easyJob);
     }
 }

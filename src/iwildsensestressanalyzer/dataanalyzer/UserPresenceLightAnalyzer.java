@@ -16,20 +16,20 @@ public class UserPresenceLightAnalyzer extends EventsAnalyzer {
             boolean useAllTogether) {
         
         if (!useAllTogether) {
-        for (Participant participant: participants) {
-            
-            SurveyDataWrapper[] wrappers;
-            if (!easyJob) {
-                wrappers = participant.getSurveyDataWrappers();
+            for (Participant participant: participants) {
+
+                SurveyDataWrapper[] wrappers;
+                if (!easyJob) {
+                    wrappers = participant.getSurveyDataWrappers();
+                }
+                else {
+                    wrappers = participant.getEasySurveyDataWrappers();
+                }
+
+                workWithLightValuesOfScreenOnOffEvents(wrappers, easyJob);
+                workWithLightValuesOfUnlockedScreenEvents(wrappers, easyJob);
+                workWithLightValuesForAllScreenEvents(wrappers, easyJob);
             }
-            else {
-                wrappers = participant.getEasySurveyDataWrappers();
-            }
-            
-            workWithLightValuesOfScreenOnOffEvents(wrappers, easyJob);
-            workWithLightValuesOfUnlockedScreenEvents(wrappers, easyJob);
-            workWithLightValuesForAllScreenEvents(wrappers, easyJob);
-        }
         }
         else {
             ArrayList<ArrayList<SurveyDataWrapper>> allSurveyDataWrappers = 
