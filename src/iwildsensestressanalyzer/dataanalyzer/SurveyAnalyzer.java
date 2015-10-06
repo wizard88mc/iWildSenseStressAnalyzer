@@ -17,8 +17,13 @@ import java.util.ArrayList;
  */
 public class SurveyAnalyzer {
     
+    private static final int ANSWERS_THRESHOLD = 10;
     
-    public static void analyzeSurveysAnswers(ArrayList<Participant> participants) {
+    private static double average = 0.0;
+    private static double variance = 0.0;
+    private static double standardDeviation = 0.0;
+    
+    public static void calculateStatisticsAnswers(ArrayList<Participant> participants) {
         
         int answersCounter = 0;
         int counterOne = 0, counterTwo = 0, counterThree = 0, counterFour = 0, 
@@ -60,23 +65,22 @@ public class SurveyAnalyzer {
             
         }
         
-        double average = (double)answersCounter / (double)participants.size();
+        average = (double)answersCounter / (double)participants.size();
         
         /**
          * Calculating the standard deviation of the mean number of provided
          * answers
          */
-        double standardDeviation = 0;
         
         for (Participant participant: participants) {
             
-            standardDeviation += 
+            variance += 
                     Math.pow(participant.getSurveyAnswersCount() - average, 2);
         }
         
-        standardDeviation /= participants.size();
+        variance /= participants.size();
         
-        standardDeviation = Math.sqrt(standardDeviation);
+        standardDeviation = Math.sqrt(variance);
         
         /**
          * Calculating percentage of stress answers
@@ -117,6 +121,67 @@ public class SurveyAnalyzer {
                 " (" + counterFour + "/" + totalAnswers + ")");
         System.out.println("Percentage answer = 5: " + format.format(percentageFive) + 
                 " (" + counterFive + "/" + totalAnswers + ")");
+    }
+    
+    /**
+     * Counts the number of participants that have a number of answers provided 
+     * to the surveys higher (or lower) with respect to the average number of 
+     * answers and the threshold
+     * @param participants 
+     */
+    public static void printAnalysisParticipantsParticipation(ArrayList<Participant> participants) {
+        int higherThanAverage = 0, lowerThanAverage = 0, 
+                higherThanThreshold = 0, lowerThanThreshold = 0;
+        
+        for (Participant participant: participants) {
+            if (participant.getSurveyAnswersCount() >= average) {
+                higherThanAverage++;
+            }
+            else {
+                lowerThanAverage++;
+            }
+            
+            if (participant.getSurveyAnswersCount() >= ANSWERS_THRESHOLD) {
+                higherThanThreshold++;
+            }
+            else {
+                lowerThanThreshold++;
+            }
+        }
+        
+        System.out.println();
+        System.out.println("Number of participants with number of answers higher"
+                + " than the average: " + higherThanAverage);
+        System.out.println("Number of participants with number of answers lower"
+                + " than the average: " + lowerThanAverage);
+        System.out.println("Number of participants with number of answers higher"
+                + " than the threshold: " + higherThanThreshold);
+        System.out.println("Number of participants with number of answers lower"
+                + " than the threshold: " + lowerThanThreshold);
+    }
+    
+    /**
+     * Returns the average of the answers provided
+     * @return the average of the answers provided
+     */
+    public static double getAverage() {
+        return average;
+    }
+    
+    /**
+     * Returns the variance of the number of answers provided
+     * @return the variance of the answers provided
+     */
+    public static double getVariance() {
+        return variance;
+    }
+    
+    /**
+     * Returns the standard deviation of the number of answers provided
+     * @return the standard deviation of answers provided
+     */
+    public static double getStandardDeviation() {
+        return standardDeviation;
     }
     
 }

@@ -3,6 +3,8 @@ package iwildsensestressanalyzer;
 import iwildsensestressanalyzer.dataanalyzer.ApplicationUsedAnalyzer;
 import iwildsensestressanalyzer.dataanalyzer.ScreenEventsAnalyzer;
 import iwildsensestressanalyzer.dataanalyzer.SurveyAnalyzer;
+import iwildsensestressanalyzer.dataanalyzer.TouchesBufferedAnalyzer;
+import iwildsensestressanalyzer.dataanalyzer.UserActivityAnalyzer;
 import iwildsensestressanalyzer.dataanalyzer.UserPresenceLightAnalyzer;
 import iwildsensestressanalyzer.filereader.ApplicationsUsedReader;
 import iwildsensestressanalyzer.filereader.IMEIListReader;
@@ -175,19 +177,48 @@ public class IWildSenseStressAnalyzer {
         /**
          * Step 3: Printing statistics about the surveys
          */
-        SurveyAnalyzer.analyzeSurveysAnswers(participantList);
+        SurveyAnalyzer.calculateStatisticsAnswers(participantList);
         
-        ScreenEventsAnalyzer.analyzeScreenDataForEachParticipant(participantList, false, true);
-        //UserActivityAnalyzer.analyzeUserActivityDataForEachParticipant(participantList, false);
-        //TouchesBufferedAnalyzer.analyzeTouchesBufferedDataForEachParticipant(participantList, false);
-        //ApplicationUsedAnalyzer.analyzeDataOfApplicationUsedForEachParticipant(participantList, false);
-        //UserPresenceLightAnalyzer.analyzeUserPresenceLightDataForEachParticipant(participantList, false);
+        /**
+         * Analyzing answers provided, to understand how many participants 
+         * have the number of answers higher than the average
+         */
+        SurveyAnalyzer.printAnalysisParticipantsParticipation(participantList);
         
-        ScreenEventsAnalyzer.analyzeScreenDataForEachParticipant(participantList, true, true);
-        //UserActivityAnalyzer.analyzeUserActivityDataForEachParticipant(participantList, true);
-        //TouchesBufferedAnalyzer.analyzeTouchesBufferedDataForEachParticipant(participantList, true);
-        //ApplicationUsedAnalyzer.analyzeDataOfApplicationUsedForEachParticipant(participantList, true);
-        //UserPresenceLightAnalyzer.analyzeUserPresenceLightDataForEachParticipant(participantList, true);
+        /**
+         * First Step: all features, difficult task, participants divided
+         * Second Step: all features, difficult task, participants together
+         * Third Step: all features, easy task, participants divided
+         * Fourth Step: all features, easy task, participants together
+         */
+        
+        performAnalysis(participantList, false, false);
+        performAnalysis(participantList, false, true);
+        performAnalysis(participantList, true, false);
+        performAnalysis(participantList, true, true);
     }
     
+    /**
+     * Calls all the methods of the different analyzer to perform the data
+     * analysis
+     * @param participantsList the list of the participants
+     * @param easyTask true if it is the easy analysis, false otherwise
+     * @param allTogether true if combine together data of all participants, 
+     * false otherwise
+     */
+    private static void performAnalysis(ArrayList<Participant> participantsList, 
+            boolean easyTask, boolean allTogether) {
+        
+        ScreenEventsAnalyzer.analyzeScreenDataForEachParticipant(participantsList, 
+                easyTask, allTogether);
+        UserActivityAnalyzer.analyzeUserActivityDataForEachParticipant(participantsList, 
+                easyTask, allTogether);
+        TouchesBufferedAnalyzer.analyzeTouchesBufferedDataForEachParticipant(participantsList, 
+                easyTask, allTogether);
+        ApplicationUsedAnalyzer.analyzeDataOfApplicationUsedForEachParticipant(participantsList, 
+                easyTask, allTogether);
+        UserPresenceLightAnalyzer.analyzeUserPresenceLightDataForEachParticipant(participantsList, 
+                easyTask, allTogether);
+        
+    }
 }

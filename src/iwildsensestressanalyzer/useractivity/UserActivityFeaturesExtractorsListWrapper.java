@@ -1,5 +1,6 @@
 package iwildsensestressanalyzer.useractivity;
 
+import iwildsensestressanalyzer.utils.MathUtils;
 import java.util.ArrayList;
 
 /**
@@ -34,6 +35,22 @@ public class UserActivityFeaturesExtractorsListWrapper {
     }
     
     /**
+     * Calculates statistics information about the Points sum of activities
+     * @return [average, variance, standard_deviation] if more than one value, 
+     * null otherwise
+     */
+    public Double[] calculateStatisticsPointsSumOfActivities() {
+        
+        ArrayList<Double> listValues = getAllPointsSumOfActivities();
+        if (listValues != null && !listValues.isEmpty()) {
+            return MathUtils.calculateStatisticInformation(listValues);
+        }
+        else {
+            return null;
+        }   
+    }
+    
+    /**
      * Creates a list with all the Percentages of workload from all the 
      * features extractor
      * @return a list of percentages of workload
@@ -47,6 +64,23 @@ public class UserActivityFeaturesExtractorsListWrapper {
         }
         
         return listValues;
+    }
+    
+    /**
+     * Calculates statistics information about the percentage of workload
+     * @return [average, variance,  standard_deviation] if more than zero values, 
+     * null otherwise
+     */
+    public Double[] calculateStatisticsPercentageOfWorkload() {
+        
+        ArrayList<Double> values = getAllPercentageOfWorkload();
+        if (values != null && !values.isEmpty()) {
+            return MathUtils.calculateStatisticInformation(values);
+        }
+        else {
+            return null;
+        }
+        
     }
     
     /**
@@ -66,6 +100,23 @@ public class UserActivityFeaturesExtractorsListWrapper {
     }
     
     /**
+     * Calculates statistics information about the influence of walking 
+     * activity on the total
+     * @return [average, variance, standard_deviation] if more than zero values, 
+     * null otherwise
+     */
+    public Double[] calculateStatisticsInfluenceOfWalkingActivityOnTotal() {
+        
+        ArrayList<Double> values = getAllInfluenceOfWalkingActivityOnTotal();
+        if (values != null && !values.isEmpty()) {
+            return MathUtils.calculateStatisticInformation(values);
+        }
+        else {
+            return null;
+        }
+    }
+    
+    /**
      * Creates a list with all the influences of the running activity on the
      * total activity performed
      * @return a list of influences of the running activity on the total
@@ -79,6 +130,24 @@ public class UserActivityFeaturesExtractorsListWrapper {
         }
         
         return listValues;
+    }
+    
+    /**
+     * Calculates statistics information about the influence of running 
+     * activity on the total activity performed
+     * @return [average, variance, standard_deviation] if more than zero values,
+     * null otherwise
+     */
+    public Double[] calculateStatisticsInfluenceOfRunningActivityOnTotal() {
+        
+        ArrayList<Double> values = getAllInfluenceOfRunningActivityOnTotal();
+        if (values != null && !values.isEmpty()) {
+            return MathUtils.calculateStatisticInformation(values);
+        }
+        else {
+            return null;
+        }
+        
     }
     
     /**
@@ -98,6 +167,24 @@ public class UserActivityFeaturesExtractorsListWrapper {
     }
     
     /**
+     * Calculates statistics information about the influence of bycicle activity
+     * on the total activity performed
+     * @return [average, variance, standard_deviation] if more than zero values, 
+     * null otherwise
+     */
+    public Double[] calculateStatisticsInfluenceOfBicycleActivityOnTotal() {
+        
+        ArrayList<Double> values = getAllInfluenceOfOnBicycleActivityOnTotal();
+       if (values != null && !values.isEmpty()) {
+           return MathUtils.calculateStatisticInformation(values);
+       }
+       else {
+           return null;
+       }
+        
+    }
+    
+    /**
      * Creates a list with all the percentages of TILTING events on the
      * recognized activities
      * @return 
@@ -114,6 +201,23 @@ public class UserActivityFeaturesExtractorsListWrapper {
     }
     
     /**
+     * Calculates statistics information about the percentage of titlting events
+     * on the recognized activities
+     * @return [average, variance, standard_deviation] if more than zero values,
+     * null otherwise
+     */
+    public Double[] calculateStatisticsPercentageOfTiltingEvents() {
+        
+        ArrayList<Double> values = getAllPercentagesOfTiltingEvents();
+        if (values != null && !values.isEmpty()) {
+            return MathUtils.calculateStatisticInformation(values);
+        }
+        else {
+            return null;
+        }
+    }
+    
+    /**
      * Creates a list with all the percentages of IN_VEHICLE events on the 
      * recognized activities
      * @return 
@@ -127,6 +231,23 @@ public class UserActivityFeaturesExtractorsListWrapper {
         }
         
         return listValues;
+    }
+    
+    /**
+     * Calculates statistics information about the percentage of in_vehicle 
+     * events on the recognized activities
+     * @return [average, variance, standard_deviation] if more than zero values, 
+     * null otherwise
+     */
+    public Double[] calculateStatisticsPercentageOfInVehicleEvents() {
+        
+        ArrayList<Double> values = getAllPercentagesOfInVehicleEvents();
+        if (values != null && !values.isEmpty()) {
+            return MathUtils.calculateStatisticInformation(values);
+        }
+        else {
+            return null;
+        }
     }
     
     /**
