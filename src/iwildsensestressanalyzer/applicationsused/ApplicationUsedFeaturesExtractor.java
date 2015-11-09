@@ -72,7 +72,6 @@ public class ApplicationUsedFeaturesExtractor {
         }
         
         return appTiming / totalTiming;
-        
     }
     
 }

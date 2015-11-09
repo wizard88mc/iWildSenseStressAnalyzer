@@ -27,7 +27,8 @@ import java.util.ArrayList;
  */
 public class IWildSenseStressAnalyzer {
     
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
+    public static final boolean COMPELTE_ANALYSIS = false;
 
     /**
      * @param args the command line arguments
@@ -46,10 +47,11 @@ public class IWildSenseStressAnalyzer {
          * all the answers and his/her behavior
          */
         ArrayList<Participant> participantList = new ArrayList<Participant>();
-        
+        int counter = 1;
         for (String imei: listImei) {
             
-            System.out.println("Acquiring data for participant: " + imei);
+            System.out.println("Acquiring data for participant (" + counter + 
+                    "/" + listImei.size() + "): " + imei);
             
             /**
              * Creating a new Participant
@@ -70,108 +72,115 @@ public class IWildSenseStressAnalyzer {
              */
             newParticipant.addSurveyAnswers(surveyAnswers);
             
-            /**
-             * Adding the answers to the Questionnaire 
-             */
-            
-            if (DEBUG) {
-                System.out.println("DEBUG: Adding the UserPresenceEvent events to the "+ 
-                        "participant");
-            }
-            /**
-             * Adding the UserPresenceEvent events to the participant
-             */
-            ArrayList<String> userPresenceEventsLines = 
+            if (COMPELTE_ANALYSIS) {
+                ArrayList<String> userPresenceEventsLines = 
                     UserPresenceEventsReader.getAllUserPresenceEventsLines(newParticipant);
-            newParticipant.addUserPresenceEvents(userPresenceEventsLines);
+                newParticipant.addUserPresenceEvents(userPresenceEventsLines);
             
-            if (DEBUG) {
-                System.out.println("DEBUG: Adding the UserActivityEvent events " + 
-                        "to the participant");
-            }
-            /**
-             * Adding the UserActivityEvent events to the participant
-             */
-            ArrayList<String> userActivityEventsLines = 
+                if (DEBUG) {
+                    System.out.println("DEBUG: Adding the UserPresenceEvent events to the "+ 
+                        "participant");
+                }
+                /**
+                 * Adding the UserPresenceEvent events to the participant
+                 */
+
+                if (DEBUG) {
+                    System.out.println("DEBUG: Adding the UserActivityEvent events " + 
+                            "to the participant");
+                }
+                /**
+                 * Adding the UserActivityEvent events to the participant
+                 */
+            
+                ArrayList<String> userActivityEventsLines = 
                     UserActivityReader.getAllUserActivityEventsLines(newParticipant);
-            newParticipant.addUserActivityEvents(userActivityEventsLines);
+                newParticipant.addUserActivityEvents(userActivityEventsLines);
             
-            if (DEBUG) {
-                System.out.println("DEBUG: Retrieving Light lines");
-            }
-            /**
-             * Retrieving Light lines 
-             */
-            ArrayList<String> userPresenceLightEventsLines = 
+            
+                if (DEBUG) {
+                    System.out.println("DEBUG: Retrieving Light lines");
+                }
+                /**
+                 * Retrieving Light lines 
+                 */
+            
+                ArrayList<String> userPresenceLightEventsLines = 
                     UserPresenceLightReader.getALlUserPresenceLightEventsLines(newParticipant);
             
-            /**
-             * Adding the ActivityServServiceEvent events to the participant
-             */
-            /*ArrayList<String> activityServServiceEventsLines = 
-                    ActivityServServiceReader.getAllActivityServServiceEventsLines(newParticipant);
-            newParticipant.addActivityServServiceEvents(activityServServiceEventsLines);*/
             
-            if (DEBUG) {
-                System.out.println("DEBUG: Retrieving ApplicationUsed lines");
-            }
-            /**
-             * Retrieving the ApplicationUsed lines 
-             */
-            ArrayList<String> applicationUsedEventsLines = 
+                /**
+                 * Adding the ActivityServServiceEvent events to the participant
+                 */
+                /*ArrayList<String> activityServServiceEventsLines = 
+                        ActivityServServiceReader.getAllActivityServServiceEventsLines(newParticipant);
+                newParticipant.addActivityServServiceEvents(activityServServiceEventsLines);*/
+
+                if (DEBUG) {
+                    System.out.println("DEBUG: Retrieving ApplicationUsed lines");
+                }
+                /**
+                 * Retrieving the ApplicationUsed lines 
+                 */
+            
+                ArrayList<String> applicationUsedEventsLines = 
                     ApplicationsUsedReader.getAllApplicationsUsedEventsLines(newParticipant);
+                
+                if (DEBUG) {
+                    System.out.println("DEBUG: Adding ApplicationUsed Events");
+                }
+                
+                newParticipant.addApplicationsUsedEvents(applicationUsedEventsLines);
             
-            if (DEBUG) {
-                System.out.println("DEBUG: Adding ApplicationUsed Events");
+                if (DEBUG) {
+                    System.out.println("DEBUG: Making association between survey " + 
+                            "time validity and events");
+                }
+                /**
+                 * Making association between survey time validity and events
+                 */
+            
+                newParticipant.addUserEventsToSurveys();
+            
+
+                if (DEBUG) {
+                    System.out.println("DEBUG: Retrieving TouchesBuffered events");
+                }
+                /**
+                 * Retrieving the TouchesBuffered events
+                 */
+                ArrayList<String> touchesBufferedEventsLines = 
+                        TouchesBufferedReader.getAllTouchesBufferedEventsLines(newParticipant);
+
+                if (DEBUG) {
+                    System.out.println("DEBUG: Adding TouchesBufferedEvent events " + 
+                            "to the UnlockedScreen events");
+                }
+                /**
+                 * Adding TouchesBufferedEvent events to the UnlockedScreen 
+                 * events
+                 */
+                newParticipant.addTouchesBufferedEventsToUnlockedScreen(
+                        TouchesBufferedEvent.createListOfTouchesBufferedEvents(touchesBufferedEventsLines));
+
+                if (DEBUG) {
+                    System.out.println("DEBUG: Adding UserPresenceLightEvent " + 
+                            "to the Screen events");
+                }
+                /**
+                 * Adding UserPresenceLightEvent events to the Screen events
+                 */
+                newParticipant.addUserPresenceLightEvents(UserPresenceLightEvent.
+                        createListOfUserPresenceLightEvents(userPresenceLightEventsLines));
+
+                if (DEBUG) {
+                    System.out.println("DEBUG: Spreading events among survey data wrapper");
+                }
+                newParticipant.spreadEventsAmongSurveyDataWrapper();
             }
-            newParticipant.addApplicationsUsedEvents(applicationUsedEventsLines);
-            
-            
-            if (DEBUG) {
-                System.out.println("DEBUG: Making association between survey " + 
-                        "time validity and events");
-            }
-            /**
-             * Making association between survey time validity and events
-             */
-            newParticipant.addUserEventsToSurveys();
-            
-            if (DEBUG) {
-                System.out.println("DEBUG: Retrieving TouchesBuffered events");
-            }
-            /**
-             * Retrieving the TouchesBuffered events
-             */
-            ArrayList<String> touchesBufferedEventsLines = 
-                    TouchesBufferedReader.getAllTouchesBufferedEventsLines(newParticipant);
-            
-            if (DEBUG) {
-                System.out.println("DEBUG: Adding TouchesBufferedEvent events " + 
-                        "to the UnlockedScreen events");
-            }
-            /**
-             * Adding TouchesBufferedEvent events to the UnlockedScreen 
-             * events
-             */
-            newParticipant.addTouchesBufferedEventsToUnlockedScreen(
-                    TouchesBufferedEvent.createListOfTouchesBufferedEvents(touchesBufferedEventsLines));
-            
-            if (DEBUG) {
-                System.out.println("DEBUG: Adding UserPresenceLightEvent " + 
-                        "to the Screen events");
-            }
-            /**
-             * Adding UserPresenceLightEvent events to the Screen events
-             */
-            newParticipant.addUserPresenceLightEvents(UserPresenceLightEvent.
-                    createListOfUserPresenceLightEvents(userPresenceLightEventsLines));
-            
-            if (DEBUG) {
-                System.out.println("DEBUG: Spreading events among survey data wrapper");
-            }
-            newParticipant.spreadEventsAmongSurveyDataWrapper();
             
             participantList.add(newParticipant);
+            counter++;
         }
         
         /**
@@ -192,10 +201,10 @@ public class IWildSenseStressAnalyzer {
          * Fourth Step: all features, easy task, participants together
          */
         
-        performAnalysis(participantList, false, false);
+        /*performAnalysis(participantList, false, false);
         performAnalysis(participantList, false, true);
         performAnalysis(participantList, true, false);
-        performAnalysis(participantList, true, true);
+        performAnalysis(participantList, true, true);*/
     }
     
     /**

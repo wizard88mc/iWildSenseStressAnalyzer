@@ -107,7 +107,7 @@ public class UserActivityFeaturesExtractor {
         double sumForWalking = 0.0;
                 
         for (UserActivityEvent event: userActivityEvents) {
-            if (event.isON_FOOT()) {
+            if (event.isON_FOOT() || event.isWALKING()) {
                 sumForWalking += activityPoints.get(event.getActivity());
             }
         }

@@ -39,10 +39,33 @@ public class CategorizeApps {
         appAlreadyCategorized.put("com.google.android.browser", "Browser");
         appAlreadyCategorized.put("com.android.settings", "Settings");
         appAlreadyCategorized.put("com.google.android.gallery3d", "Media & Video");
+        appAlreadyCategorized.put("com.google.android.dialer", "Communication");
+        appAlreadyCategorized.put("pct.droid", "Entertainment");
+        appAlreadyCategorized.put("com.google.android.contacts", "Contacts");
+        appAlreadyCategorized.put("com.jayapps.mtube", "Media & Video");
+        appAlreadyCategorized.put("com.android.calculator2", "Tools");
+        appAlreadyCategorized.put("com.swisscom.tvguide", "Media & Video");
+        appAlreadyCategorized.put("ch.orange.android", "Communication");
+        appAlreadyCategorized.put("com.cyanogenmod.trebuchet", "Launcher");
+        appAlreadyCategorized.put("com.android.dialer", "Communication");
+        appAlreadyCategorized.put("com.tfsapps.playtube2", "Media & Video");
+        appAlreadyCategorized.put("com.android.documentsui", "Productivity");
+        appAlreadyCategorized.put("fr.amazon.mShop.android", "Shopping");
+        appAlreadyCategorized.put("ch.neoos.doodle", "Productivity");
+        appAlreadyCategorized.put("com.sjbstudio.the15minutemealsrecipes", "Lifestyle");
+        appAlreadyCategorized.put("com.android.packageinstaller", "Tools");
+        appAlreadyCategorized.put("com.handcent.nextsms", "Communication");
+        appAlreadyCategorized.put("com.tripadvisor.android.apps.cityguide.london", "Travel & Local");
+        appAlreadyCategorized.put("com.android.htmlviewer", "Tools");
         
         appNotRelevant.add("com.android.systemui");
         appNotRelevant.add("ch.unige.ping");
         appNotRelevant.add("com.android.vending");
+        appNotRelevant.add("is.unige.ch.myapplication");
+        appNotRelevant.add("com.android.shell");
+        appNotRelevant.add("com.cyanogenmod.lockclock");
+        appNotRelevant.add("com.example.roulezjeuneve");
+        appNotRelevant.add("com.android.captiveportallogin");
     }
     
     private final static String HTML_PAGE = "https://play.google.com/store/apps/details?id=";
