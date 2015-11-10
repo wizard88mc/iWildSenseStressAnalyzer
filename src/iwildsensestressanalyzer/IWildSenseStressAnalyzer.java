@@ -195,6 +195,46 @@ public class IWildSenseStressAnalyzer {
         SurveyAnalyzer.printAnalysisParticipantsParticipation(participantList);
         
         /**
+         * Calculating statistics for participants with more than one answer
+         * per day
+         */
+        System.out.println();
+        System.out.println("*** Removing participants with 0 answers "
+                + "provided ***");
+        SurveyAnalyzer.calculateStatisticsAnswers(SurveyAnalyzer.
+                getListParticipantsWithMoreThanZeroAnswers(participantList));
+        
+        /**
+         * Calculating statistics for participants with more than our
+         * threshold answers number
+         */
+        System.out.println();
+        System.out.println("*** Keeping only participants with answers higher than "
+                + "our arbitrary threshold ***");
+        SurveyAnalyzer.calculateStatisticsAnswers(SurveyAnalyzer.
+                getListParticipantsOverArbitraryThreshold(participantList));
+        
+        /**
+         * Calculating statistics for participants with more than one per 
+         * day answer
+         */
+        System.out.println();
+        System.out.println("*** Keeping participants with more than one survey "
+                + "answer per day ***");
+        SurveyAnalyzer.calculateStatisticsAnswers(SurveyAnalyzer.
+                getListParticipantsOverOnePerDayAnswer(participantList));
+        
+        /**
+         * Calculating statistics for participants with more answers than the
+         * initial average
+         */
+        System.out.println();
+        System.out.println("*** Keeping participants with number of answers "
+                + "higher than the initial average ***");
+        SurveyAnalyzer.calculateStatisticsAnswers(SurveyAnalyzer.
+                getListParticipantsOverInitialAverage(participantList));
+        
+        /**
          * First Step: all features, difficult task, participants divided
          * Second Step: all features, difficult task, participants together
          * Third Step: all features, easy task, participants divided

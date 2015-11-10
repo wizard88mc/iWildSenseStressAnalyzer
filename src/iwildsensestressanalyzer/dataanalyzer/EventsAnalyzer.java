@@ -61,9 +61,10 @@ public class EventsAnalyzer {
      * Prints the confusion matrix between all the stress states 
      * @param listValues a list of array of double with the values for the
      * t-test
-     * @param easyJob
+     * @param easyJob false if using all the 5-likert scale, false otherwise
+     * @return list of passed or not passed test for each test
      */
-    protected static void printTTestResults(ArrayList<ArrayList<Double>> listValues, 
+    protected static ArrayList<Boolean> printTTestResults(ArrayList<ArrayList<Double>> listValues, 
             boolean easyJob) {
         
         ArrayList<ArrayList<Double>> normalizedValues = 
@@ -76,6 +77,8 @@ public class EventsAnalyzer {
         for (ArrayList<Double> values: normalizedValues) {
             valuesForTTest.add(MathUtils.convertToArrayDouble(values));
         }
+        
+        ArrayList<Boolean> testPassed = new ArrayList<Boolean>();
         
         if (!easyJob) {
             System.out.println("   |   1   |   2   |   3   |   4   |   5   |");
@@ -120,19 +123,92 @@ public class EventsAnalyzer {
                                 }
                             
                                 outputString += MathUtils.decimalFormat.format(tTest) + "|";
+                                
+                                if (tTest <= 0.05) {
+                                    testPassed.add(true);
+                                }
+                                else {
+                                    testPassed.add(false);
+                                }
                             }
                             catch(Exception exc) {
                                 outputString += "  ---  |";
+                                testPassed.add(false);
                             }
                         }
                         else {
                             outputString += "  ---  |";
+                            testPassed.add(false);
                         }
                     }
                 }
             }
             System.out.println(outputString);
         }
+        
+        return testPassed;
+    }
+    
+    /**
+     * Prints the percentage of success of a particular feature
+     * @param values the values of success to print
+     * @param easyJob true is it is the easy test, false otherwise
+     */
+    protected static void printTTestPercentagesOfSuccess(ArrayList<Double> values, 
+            boolean easyJob) {
+        
+        int numRowsAndColumns;
+        
+        if (!easyJob) {
+            System.out.println("   |   1   |   2   |   3   |   4   |   5   |");
+            numRowsAndColumns = 5;
+        }
+        else {
+            System.out.println("   |   1   |   2   |   3   |");
+            numRowsAndColumns = 3;
+        }
+        System.out.println("--------------------------------------------");
+        
+        int counterForValues = 0;
+        for (int i = 0; i < numRowsAndColumns; i++) {
+            
+            String outputString = "";
+            
+            for (int j = 0; j < numRowsAndColumns; j++) {
+             
+                if (j == 0) {
+                    outputString += " " + (i + 1) + " |" + "  ---  |"; 
+                }
+                else {
+                    if (j <= i) {
+                        outputString += "  ---  |";
+                    }
+                    else {
+                        /**
+                         * This is the only case we have to perform TTest
+                         */
+                        
+                        /**
+                         * First check if both data list has at least one value, 
+                         * otherwise no test can be performed
+                         */
+                            
+                        outputString += MathUtils.decimalFormat.format(values.get(counterForValues)) + "|";        
+                        
+                        counterForValues++;
+                    }
+                }
+            }
+            System.out.println(outputString);
+        }
+    }
+    
+    protected static void performStepsForPrintingPercentageOfSuccess(ArrayList<Double> values, 
+            int numberOfParticipants, boolean easyob, String titleMessage) {
+        
+        printTitleMessage(titleMessage);
+        calculatePercentages(values, numberOfParticipants);
+        printTTestPercentagesOfSuccess(values, easyob);
     }
     
     /**
@@ -143,5 +219,46 @@ public class EventsAnalyzer {
         
         System.out.println();
         System.out.println(message);
+    }
+    
+    /**
+     * Called for every participant, it takes the results of the t-test for 
+     * each one of the possible combination of stress values and increases the
+     * counter for the ones that passed the test
+     * @param resultsContainer the list of combinations with the number of 
+     * overall passed values
+     * @param tTestResults a list of t-test results 
+     */
+    protected static void addTTestResultsToFinalContainer(ArrayList<Double> resultsContainer, 
+            ArrayList<Boolean> tTestResults) {
+        
+        if (resultsContainer.isEmpty()) {
+            for (Boolean result: tTestResults) {
+                resultsContainer.add(0.0);
+            }
+        }
+        
+        for (int index = 0; index < resultsContainer.size(); index++) {
+            
+            Double currentValue = resultsContainer.get(index);
+            if (tTestResults.get(index)) {
+                resultsContainer.set(index, currentValue + 1);
+            }
+        }
+    }
+    
+    /**
+     * Calculates the percentage of checks that passed the t test
+     * @param results the final results of 
+     * @param numberParticipants the total number of participants
+     */
+    protected static void calculatePercentages(ArrayList<Double> results, 
+            int numberParticipants) {
+        
+        for (int index = 0; index < results.size(); index++) {
+            
+            Double value = results.get(index);
+            results.set(index, value / (double) numberParticipants);
+        }
     }
 }

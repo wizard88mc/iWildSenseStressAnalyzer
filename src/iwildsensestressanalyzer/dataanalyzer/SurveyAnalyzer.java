@@ -18,13 +18,15 @@ import java.util.ArrayList;
 public class SurveyAnalyzer {
     
     private static final int ANSWERS_THRESHOLD = 10;
+    private static final int ANSWERS_ONE_PER_DAY = 28;
     
-    private static double average = 0.0;
-    private static double variance = 0.0;
-    private static double standardDeviation = 0.0;
+    private static double initialAverage = 0.0;
+    private static double initialVariance = 0.0;
+    private static double initialStandardDeviation = 0.0;
     
     public static void calculateStatisticsAnswers(ArrayList<Participant> participants) {
         
+        double average = 0.0, variance = 0.0, standardDeviation = 0.0;
         int answersCounter = 0;
         int counterOne = 0, counterTwo = 0, counterThree = 0, counterFour = 0, 
                 counterFive = 0;
@@ -121,6 +123,11 @@ public class SurveyAnalyzer {
                 " (" + counterFour + "/" + totalAnswers + ")");
         System.out.println("Percentage answer = 5: " + format.format(percentageFive) + 
                 " (" + counterFive + "/" + totalAnswers + ")");
+        
+        if (initialAverage == 0.0) {
+            initialAverage = average; initialVariance = variance;
+            initialStandardDeviation = standardDeviation;
+        }
     }
     
     /**
@@ -134,7 +141,7 @@ public class SurveyAnalyzer {
                 higherThanThreshold = 0, lowerThanThreshold = 0;
         
         for (Participant participant: participants) {
-            if (participant.getSurveyAnswersCount() >= average) {
+            if (participant.getSurveyAnswersCount() >= initialAverage) {
                 higherThanAverage++;
             }
             else {
@@ -165,7 +172,7 @@ public class SurveyAnalyzer {
      * @return the average of the answers provided
      */
     public static double getAverage() {
-        return average;
+        return initialAverage;
     }
     
     /**
@@ -173,7 +180,7 @@ public class SurveyAnalyzer {
      * @return the variance of the answers provided
      */
     public static double getVariance() {
-        return variance;
+        return initialVariance;
     }
     
     /**
@@ -181,7 +188,82 @@ public class SurveyAnalyzer {
      * @return the standard deviation of answers provided
      */
     public static double getStandardDeviation() {
-        return standardDeviation;
+        return initialStandardDeviation;
     }
     
+    /**
+     * Creates a new list of participants with answers provided higher than the 
+     * threshold
+     * @param participantList the original list of participants
+     * @param threshold the minimum number of answers
+     * @return a new list only with participants with a number of answers higher
+     * than the threshold
+     */
+    private static ArrayList<Participant> removeParticipants(ArrayList<Participant> participantList, 
+            int threshold) {
+        
+        ArrayList<Participant> newList = (ArrayList<Participant>)participantList.clone();
+        
+        for (int index = 0; index < newList.size(); ) {
+            
+            if (newList.get(index).getSurveyAnswersCount() <= threshold) {
+                newList.remove(index);
+            }
+            else {
+                index++;
+            }
+        }
+        
+        return newList;
+        
+    }
+    
+    /**
+     * Returns a list of participants that answered at lest 0 survey
+     * @param participantsList the original list of participants
+     * @return a new list with participants with more than 0 survey answers
+     */
+    public static ArrayList<Participant> getListParticipantsWithMoreThanZeroAnswers(
+            ArrayList<Participant> participantsList) {
+        
+        return removeParticipants(participantsList, 0);
+    }
+    
+    /**
+     * Returns a list of participants that answered at least a number of surveys
+     * higher than the arbitrary threshold
+     * @param participantsList the original list of participants
+     * @return a new list with participants that answered a number of surveys 
+     * more than our threshold
+     */
+    public static ArrayList<Participant> getListParticipantsOverArbitraryThreshold(
+            ArrayList<Participant> participantsList) {
+        
+        return removeParticipants(participantsList, ANSWERS_THRESHOLD);
+    }
+    
+    /**
+     * Returns a list of participants that answered more than one time per day
+     * @param participantsList the original list of participants
+     * @return a new list with only participants that answered more than one
+     * time per day
+     */
+    public static ArrayList<Participant> getListParticipantsOverOnePerDayAnswer(
+            ArrayList<Participant> participantsList) {
+        
+        return removeParticipants(participantsList, ANSWERS_ONE_PER_DAY);
+    }
+    
+    /**
+     * Returns a list of participants that provided a number of answers more 
+     * than then the initial average of survey answers
+     * @param participantsList the original list of participants
+     * @return a new list with only participants that provided more than the 
+     * average number of survey answers
+     */
+    public static ArrayList<Participant> getListParticipantsOverInitialAverage(
+            ArrayList<Participant> participantsList) {
+        
+        return removeParticipants(participantsList, (int) initialAverage);
+    }
 }
