@@ -87,7 +87,8 @@ public class ApplicationUsed {
      * @param applicationsUsedEvent
      * @return 
      */
-    public static ArrayList<ApplicationUsed> createListOfApplicationsUsed(ArrayList<ApplicationsUsedEvent> applicationsUsedEvent) {
+    public static ArrayList<ApplicationUsed> createListOfApplicationsUsed(
+            ArrayList<ApplicationsUsedEvent> applicationsUsedEvent) {
         
         ArrayList<ApplicationUsed> applicationsUsed = new ArrayList<ApplicationUsed>();
         boolean startWithNewApplicationUsed = true; String currentAppName = "";

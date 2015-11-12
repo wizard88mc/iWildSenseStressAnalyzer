@@ -1,7 +1,6 @@
 package iwildsensestressanalyzer.dataanalyzer;
 
 import iwildsensestressanalyzer.participant.Participant;
-import iwildsensestressanalyzer.utils.MathUtils;
 import java.util.ArrayList;
 
 /**
@@ -13,6 +12,8 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
     
     public static void analyzeScreenDataForEachParticipant(ArrayList<Participant> 
             participants, boolean easyJob, boolean useAllTogether) {
+        
+        printTitleMessage("*** ANALYZING SCREEN FEATURES ***");
         
         /**
          * Iterating over all the features provided by the 
@@ -28,6 +29,9 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
                     new ArrayList<Double>();
             
             for (Participant participant: participants) {
+                
+                printTitleMessage("*** Participant " + participant.getIMEI() + 
+                        " ***");
 
                 SurveyDataWrapper[] surveyDataWrappers; 
                 if (!easyJob) { 
@@ -51,23 +55,29 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
                         returnedResults);
             }
             
+            /**
+             * Analyzing percentage of success of On-Off duration for 
+             * ScreenOnOff events feature
+             */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForOnOffDurationForOnOffScreenEvennts, 
                     participants.size(), easyJob, "*** Percentage of success for"
                             + " On-Off Duration for ScreenOnOff events ***");
             
-            printTitleMessage("*** Percentage of success for On-Off Duration for"
-                    + " UnlockedScreen events ***");
-            calculatePercentages(tTestPassedForOnOffDurationForUnlockedScreenEvents, 
-                    participants.size());
-            printTTestPercentagesOfSuccess(tTestPassedForOnOffDurationForUnlockedScreenEvents, 
-                    easyJob);
-            
-            printTitleMessage("*** Percentage of success for Unlock Time for "
-                    + "UnlockedScreen events ***");
-            calculatePercentages(tTestPassedForUnlockTimeForUnlockedScreenEvents, 
-                    participants.size());
-            printTTestPercentagesOfSuccess(tTestPassedForUnlockTimeForUnlockedScreenEvents, 
-                    easyJob);
+            /**
+             * Analyzing percentage of success of On-Off duration for 
+             * UnlockedScreen events feature
+             */
+            performStepsForPrintingPercentageOfSuccess(tTestPassedForOnOffDurationForUnlockedScreenEvents, 
+                    participants.size(), easyJob, "*** Percentage of success for"
+                            + " On-Off Duration for UnlockedScreen events ***");
+           
+           /**
+            * Analyzing percentage of success of Unlock Time for 
+            * UnlockedScreen events feature
+            */
+            performStepsForPrintingPercentageOfSuccess(tTestPassedForUnlockTimeForUnlockedScreenEvents, 
+                    participants.size(), easyJob, "*** Percentage of success for"
+                            + " Unlock Time for UnlockedScreen events ***");
         }
         
         if (useAllTogether) {

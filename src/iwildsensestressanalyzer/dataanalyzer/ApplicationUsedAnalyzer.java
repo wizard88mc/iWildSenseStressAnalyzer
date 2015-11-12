@@ -13,11 +13,15 @@ import java.util.ArrayList;
  */
 public class ApplicationUsedAnalyzer extends EventsAnalyzer {
     
+    public static final Boolean DEBUG_APP_CATEGORY = false;
+    
     private static final ArrayList<String> allAppCategories = new ArrayList<String>();
     
     public static void analyzeDataOfApplicationUsedForEachParticipant(
             ArrayList<Participant> participants, boolean easyJob, 
             boolean useAllTogether) {
+        
+        printTitleMessage("*** ANALYZING APPLICATIONS USED FEATURES ***");
         
         if (!useAllTogether) {
             
@@ -29,6 +33,9 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
                             new ArrayList<Double>();
             
                 for (Participant participant: participants) {
+                    
+                    printTitleMessage("*** Participant " + participant.getIMEI() + 
+                        " ***");
 
                     SurveyDataWrapper[] wrappers;
                     if (!easyJob) {
@@ -50,19 +57,23 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
                             results);
                 }
                 
-                printTitleMessage("*** Percentage of success of influence of "
-                    + appCategory + " application category ***");
-                calculatePercentages(tTestPassedForAppCategoryFrequency, 
-                        participants.size());
-                printTTestPercentagesOfSuccess(tTestPassedForAppCategoryFrequency, 
-                        easyJob);
+                /**
+                 * Analyzing percentage of success of a particular application
+                 * category
+                 */
+                performStepsForPrintingPercentageOfSuccess(tTestPassedForAppCategoryFrequency, 
+                        participants.size(), easyJob, "*** Percentage of success"
+                                + " of influence of " + appCategory + 
+                                " application category ***");
                 
-                printTitleMessage("*** Percentage of success of timing influence"
-                        + " of " + appCategory + " application category ***");
-                calculatePercentages(tTestPassedForAppCategoryTimingInfluence, 
-                        participants.size());
-                printTTestPercentagesOfSuccess(tTestPassedForAppCategoryTimingInfluence, 
-                        easyJob);
+                /**
+                 * Analyzing percentage of success of the timing influence 
+                 * of a particular application category
+                 */
+                performStepsForPrintingPercentageOfSuccess(tTestPassedForAppCategoryTimingInfluence, 
+                        participants.size(), easyJob, "*** Percentage of success"
+                                + " of timing influence of " + appCategory + 
+                                " application category ***");
             }
         }
         else {
@@ -202,7 +213,7 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
     public static void addCategory(String appCategory) {
         
         if (!allAppCategories.contains(appCategory)) {
-            if (IWildSenseStressAnalyzer.DEBUG) {
+            if (DEBUG_APP_CATEGORY) {
                 System.out.println(appCategory);
             }
             allAppCategories.add(appCategory);

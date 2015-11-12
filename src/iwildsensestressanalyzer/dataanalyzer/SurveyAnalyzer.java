@@ -1,5 +1,6 @@
 package iwildsensestressanalyzer.dataanalyzer;
 
+import iwildsensestressanalyzer.IWildSenseStressAnalyzer;
 import iwildsensestressanalyzer.esm.StressSurvey;
 import iwildsensestressanalyzer.participant.Participant;
 import java.text.DecimalFormat;
@@ -99,30 +100,53 @@ public class SurveyAnalyzer {
          * Printing number of surveys for each participant (maybe to remove the 
          * ones with number of answers lower of a particular value??)
          */
-        System.out.println("Total participants: " + participants.size());
-        System.out.println("*** PRINTING IMEI: # OF ANSWERS ***");
+        IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance("Total participants: " + participants.size());
+        IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance("*** PRINTING IMEI: # OF ANSWERS ***");
         for (Participant participant: participants) {
-            System.out.println("Participant " + participant.getIMEI() + 
+            IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance("Participant " + participant.getIMEI() + 
                     ": " + participant.getSurveyAnswersCount());
         }
         
-        System.out.println();
+        IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance(null);
         /**
          * Printing results
          */
         DecimalFormat format = new DecimalFormat("#.##");
-        System.out.println("Average survey answers provided: " + format.format(average));
-        System.out.println("Standard deviation: " + format.format(standardDeviation));
-        System.out.println("Percentage answer = 1: " + format.format(percentageOne) + 
-                " (" + counterOne + "/" + totalAnswers + ")");
-        System.out.println("Percentage answer = 2: " + format.format(percentageTwo) + 
-                " (" + counterTwo + "/" + totalAnswers + ")");
-        System.out.println("Percentage answer = 3: " + format.format(percentageThree) + 
-                " (" + counterThree + "/" + totalAnswers + ")");
-        System.out.println("Percentage answer = 4: " + format.format(percentageFour) + 
-                " (" + counterFour + "/" + totalAnswers + ")");
-        System.out.println("Percentage answer = 5: " + format.format(percentageFive) + 
-                " (" + counterFive + "/" + totalAnswers + ")");
+        IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance("Average survey answers provided: " 
+                        + format.format(average));
+        IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance("Standard deviation: " + 
+                        format.format(standardDeviation));
+        
+        IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance("Percentage answer = 1: " + 
+                        format.format(percentageOne) + " (" + counterOne + "/" + 
+                        totalAnswers + ")");
+        
+        IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance("Percentage answer = 2: " + 
+                        format.format(percentageTwo) + " (" + counterTwo + "/" + 
+                        totalAnswers + ")");
+        
+        IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance("Percentage answer = 3: " + 
+                        format.format(percentageThree) + " (" + counterThree + "/" 
+                        + totalAnswers + ")");
+        
+        IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance("Percentage answer = 4: " + 
+                        format.format(percentageFour) + " (" + counterFour + "/" 
+                        + totalAnswers + ")");
+        
+        IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance("Percentage answer = 5: " + 
+                        format.format(percentageFive) + " (" + counterFive + "/" 
+                        + totalAnswers + ")");
         
         if (initialAverage == 0.0) {
             initialAverage = average; initialVariance = variance;
@@ -156,15 +180,24 @@ public class SurveyAnalyzer {
             }
         }
         
-        System.out.println();
-        System.out.println("Number of participants with number of answers higher"
+        IWildSenseStressAnalyzer.outputWriter.writeOutputStatisticalSignificance(null);
+        IWildSenseStressAnalyzer.outputWriter.writeOutputStatisticalSignificance(
+                "Number of participants with number of answers higher"
                 + " than the average: " + higherThanAverage);
-        System.out.println("Number of participants with number of answers lower"
-                + " than the average: " + lowerThanAverage);
-        System.out.println("Number of participants with number of answers higher"
-                + " than the threshold: " + higherThanThreshold);
-        System.out.println("Number of participants with number of answers lower"
-                + " than the threshold: " + lowerThanThreshold);
+        IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance("Number of participants with"
+                        + " number of answers lower than the average: " 
+                        + lowerThanAverage);
+        
+        IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance("Number of participants with"
+                        + " number of answers higher than the threshold: " 
+                        + higherThanThreshold);
+        
+        IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance("Number of participants with"
+                        + " number of answers lower than the threshold: " 
+                        + lowerThanThreshold);
     }
     
     /**

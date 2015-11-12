@@ -20,8 +20,24 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
             ArrayList<Participant> participants, boolean easyJob, 
             boolean useAllTogether) {
         
+        printTitleMessage("*** ANALYZING TOUCHES BUFFERED FEATURES ***");
+        
         if (!useAllTogether) {
+            
+            ArrayList<Double> tTestPassedForCounter = new ArrayList<Double>(), 
+                    tTestPassedForMinInterval = new ArrayList<Double>(), 
+                    tTestPassedForMaxInterval = new ArrayList<Double>(),
+                    tTestPassedForRange = new ArrayList<Double>(),
+                    tTestPassedForMean = new ArrayList<Double>(),
+                    tTestPassedForMedian = new ArrayList<Double>(), 
+                    tTestPassedForVariance = new ArrayList<Double>(), 
+                    tTestPassedForStandardDeviation = new ArrayList<Double>(),
+                    tTestPassedForSessionDuration = new ArrayList<Double>();
+            
             for (Participant participant: participants) {
+                
+                printTitleMessage("*** Participant " + participant.getIMEI() +
+                        " ***");
 
                 SurveyDataWrapper[] wrappers;
                 if (!easyJob) {
@@ -31,15 +47,109 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
                     wrappers = participant.getEasySurveyDataWrappers();
                 }
 
-                workWithCounter(wrappers, easyJob);
-                workWithMinInterval(wrappers, easyJob);
-                workWithMaxInterval(wrappers, easyJob);
-                workWithRange(wrappers, easyJob);
-                workWithMedian(wrappers, easyJob);
-                workWithVariance(wrappers, easyJob);
-                workWithStandardDeviation(wrappers, easyJob);
-                workWithSessionDuration(wrappers, easyJob);
+                ArrayList<Boolean> returnedResults = workWithCounter(wrappers, 
+                        easyJob);
+                addTTestResultsToFinalContainer(tTestPassedForCounter, 
+                        returnedResults);
+                
+                returnedResults = workWithMinInterval(wrappers, easyJob);
+                addTTestResultsToFinalContainer(tTestPassedForMinInterval, 
+                        returnedResults);
+                
+                returnedResults = workWithMaxInterval(wrappers, easyJob);
+                addTTestResultsToFinalContainer(tTestPassedForMaxInterval, 
+                        returnedResults);
+                
+                returnedResults = workWithRange(wrappers, easyJob);
+                addTTestResultsToFinalContainer(tTestPassedForRange, 
+                        returnedResults);
+                
+                returnedResults = workWithMean(wrappers, easyJob);
+                addTTestResultsToFinalContainer(tTestPassedForMean, 
+                        returnedResults);
+                
+                returnedResults = workWithMedian(wrappers, easyJob);
+                addTTestResultsToFinalContainer(tTestPassedForMedian, 
+                        returnedResults);
+                
+                returnedResults = workWithVariance(wrappers, easyJob);
+                addTTestResultsToFinalContainer(tTestPassedForVariance, 
+                        returnedResults);
+                
+                returnedResults = workWithStandardDeviation(wrappers, easyJob);
+                addTTestResultsToFinalContainer(tTestPassedForStandardDeviation, 
+                        returnedResults);
+                
+                returnedResults = workWithSessionDuration(wrappers, easyJob);
+                addTTestResultsToFinalContainer(tTestPassedForSessionDuration, 
+                        returnedResults);
             }
+            
+            /**
+             * Analyzing percentage of success of the counter feature
+             */
+            performStepsForPrintingPercentageOfSuccess(tTestPassedForCounter, 
+                    participants.size(), easyJob, "*** Percentage of success of "
+                            + "number of touches during usage session ***");
+            
+            /**
+             * Analyzing percentage of success of the min_interval feature
+             */
+            performStepsForPrintingPercentageOfSuccess(tTestPassedForMinInterval, 
+                    participants.size(), easyJob, "*** Percentage of success of "
+                            + "minimum touch interval between two consecutive"
+                            + " touches ***");
+            
+            /**
+             * Analyzing percentage of success of the max_interval feature
+             */
+            performStepsForPrintingPercentageOfSuccess(tTestPassedForMaxInterval, 
+                    participants.size(), easyJob, "*** Percentage of success of "
+                            + "maximum touch interval between two consecutive"
+                            + " touches ***");
+            
+            /**
+             * Analyzing percentage of success of the range feature
+             */
+            performStepsForPrintingPercentageOfSuccess(tTestPassedForRange, 
+                    participants.size(), easyJob, "*** Percentage of success of"
+                            + " range of touch intervals ***");
+            
+            /**
+             * Analyzing percentage of success of mean feature
+             */
+            performStepsForPrintingPercentageOfSuccess(tTestPassedForMean, 
+                    participants.size(), easyJob, "*** Percentage of success of"
+                            + " mean of touch intervals");
+            
+            /**
+             * Analyzing percentage of success of median feature
+             */
+            performStepsForPrintingPercentageOfSuccess(tTestPassedForMedian, 
+                    participants.size(), easyJob, "*** Percentage of success of"
+                            + " median of touch intervals");
+            
+            /**
+             * Analyzing percentage of success of variance feature
+             */
+            performStepsForPrintingPercentageOfSuccess(tTestPassedForVariance, 
+                    participants.size(), easyJob, "*** Percentage of success of"
+                            + " variance of touch intervals");
+            
+            /**
+             * Analyzing percentage of success of standard_deviation feature
+             */
+            performStepsForPrintingPercentageOfSuccess(tTestPassedForStandardDeviation, 
+                    participants.size(), easyJob, "*** Percentage of success "
+                            + "standard deviation of touch intervals ***");
+
+            /**
+             * Analyzing percentage of success of session_duration feature
+             */
+            performStepsForPrintingPercentageOfSuccess(tTestPassedForSessionDuration, 
+                    participants.size(), easyJob, "*** Percentage of success of"
+                            + " duration of the usage session ***");
+
         }
         else {
             ArrayList<ArrayList<SurveyDataWrapper>> allSurveyDataWrappers = 
@@ -62,7 +172,7 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
      * @param wrappers the surveys wrappers
      * @param easyJob true if it is the easy test, false otherwise
      */
-    private static void workWithCounter(SurveyDataWrapper[] wrappers, 
+    private static ArrayList<Boolean> workWithCounter(SurveyDataWrapper[] wrappers, 
             boolean easyJob) {
         
         printTitleMessage("*** Number of touches during usage session ***");
@@ -75,7 +185,7 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
                     .getAllCounters());
         }
         
-        printTTestResults(listValues, easyJob);
+        return printTTestResults(listValues, easyJob);
     }
     
     /**
@@ -115,7 +225,7 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
      * @param wrappers the surveys wrappers
      * @param easyJob ture if it is the easy test, false otherwise
      */
-    private static void workWithMinInterval(SurveyDataWrapper[] wrappers, 
+    private static ArrayList<Boolean> workWithMinInterval(SurveyDataWrapper[] wrappers, 
             boolean easyJob) {
         
         printTitleMessage("*** Minimum touch interval between two consecutive" + 
@@ -127,7 +237,7 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
             listValues.add(wrapper.getTouchesBufferedFeaturesExtractor().getAllMinIntervals());
         }
         
-        printTTestResults(listValues, easyJob);
+        return printTTestResults(listValues, easyJob);
     }
     
     /**
@@ -167,7 +277,7 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
      * @param wrappers the survey wrappers
      * @param easyJob true if it is the easy test, false otherwise
      */
-    private static void workWithMaxInterval(SurveyDataWrapper[] wrappers, 
+    private static ArrayList<Boolean> workWithMaxInterval(SurveyDataWrapper[] wrappers, 
             boolean easyJob) {
         
         printTitleMessage("*** Maximum touch interval between two consecutive" + 
@@ -182,7 +292,7 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
         ArrayList<ArrayList<Double>> normalizedValues = 
                 MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
         
-        printTTestResults(normalizedValues, easyJob);
+        return printTTestResults(normalizedValues, easyJob);
     }
     
     /**
@@ -222,7 +332,7 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
      * @param wrappers the survey wrappers
      * @param easyJob true if it the easy test, false otherwise
      */
-    private static void workWithRange(SurveyDataWrapper[] wrappers, 
+    private static ArrayList<Boolean> workWithRange(SurveyDataWrapper[] wrappers, 
             boolean easyJob) {
         
         printTitleMessage("*** Range of touch intervals ***");
@@ -236,7 +346,7 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
         ArrayList<ArrayList<Double>> normalizedValues = 
                 MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
         
-        printTTestResults(normalizedValues, easyJob);
+        return printTTestResults(normalizedValues, easyJob);
     }
     
     /**
@@ -273,7 +383,7 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
      * @param wrappers the survey wrappers
      * @param easyJob true if it the easy test, false otherwise
      */
-    private static void workWithMean(SurveyDataWrapper[] wrappers, 
+    private static ArrayList<Boolean> workWithMean(SurveyDataWrapper[] wrappers, 
             boolean easyJob) {
         
         printTitleMessage("*** Mean of touch intervals ***");
@@ -285,7 +395,7 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
                     .getAllMeansOfTouchIntervals());
         }
         
-        printTTestResults(listValues, easyJob);
+        return printTTestResults(listValues, easyJob);
     }
     
     /**
@@ -322,7 +432,7 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
      * @param wrappers the survey wrappers
      * @param easyJob true if it is the easy test, false otherwise
      */
-    private static void workWithMedian(SurveyDataWrapper[] wrappers, 
+    private static ArrayList<Boolean> workWithMedian(SurveyDataWrapper[] wrappers, 
             boolean easyJob) {
         
         printTitleMessage("*** Median of touch intervals ***");
@@ -333,7 +443,7 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
             listValues.add(wrapper.getTouchesBufferedFeaturesExtractor().getAllMediansOfTouchIntervals());
         }
         
-        printTTestResults(listValues, easyJob);
+        return printTTestResults(listValues, easyJob);
     }
     
     /**
@@ -369,7 +479,7 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
      * @param wrappers the survey wrappers
      * @param easyJob true if it is the easy test, false otherwise
      */
-    private static void workWithVariance(SurveyDataWrapper[] wrappers, 
+    private static ArrayList<Boolean> workWithVariance(SurveyDataWrapper[] wrappers, 
             boolean easyJob) {
         
         printTitleMessage("*** Variance of touch intervals ***");
@@ -381,7 +491,7 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
             listValues.add(wrapper.getTouchesBufferedFeaturesExtractor().getAllVariancesOfTouchIntervals());
         }
         
-        printTTestResults(listValues, easyJob);
+        return printTTestResults(listValues, easyJob);
     }
     
     /**
@@ -416,7 +526,7 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
      * @param wrappers the survey wrappers
      * @param easyJob true if it is the easy test, false otherwise
      */
-    private static void workWithStandardDeviation(SurveyDataWrapper[] wrappers, 
+    private static ArrayList<Boolean> workWithStandardDeviation(SurveyDataWrapper[] wrappers, 
             boolean easyJob) {
         
         printTitleMessage("*** Standard deviation of touch intervals ***");
@@ -429,7 +539,7 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
                     .getAllStandardDeviationsOfTouchIntervals());
         }
         
-        printTTestResults(listValues, easyJob);
+        return printTTestResults(listValues, easyJob);
     }
     
     /**
@@ -465,7 +575,7 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
      * @param wrappers the survey wrappers
      * @param easyJob true if it is the easy test, false otherwise
      */
-    private static void workWithSessionDuration(SurveyDataWrapper[] wrappers, 
+    private static ArrayList<Boolean> workWithSessionDuration(SurveyDataWrapper[] wrappers, 
             boolean easyJob) {
         
         printTitleMessage("*** Duration of the usage session ***");
@@ -477,7 +587,7 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
             listValues.add(wrapper.getTouchesBufferedFeaturesExtractor().getAllSessionDurationsOfTouchIntervals());
         }
      
-        printTTestResults(listValues, easyJob);
+        return printTTestResults(listValues, easyJob);
     }
     
     /**

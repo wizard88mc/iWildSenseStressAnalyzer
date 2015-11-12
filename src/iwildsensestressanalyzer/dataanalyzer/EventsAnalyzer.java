@@ -1,5 +1,6 @@
 package iwildsensestressanalyzer.dataanalyzer;
 
+import iwildsensestressanalyzer.IWildSenseStressAnalyzer;
 import iwildsensestressanalyzer.participant.Participant;
 import iwildsensestressanalyzer.utils.MathUtils;
 import java.util.ArrayList;
@@ -81,12 +82,16 @@ public class EventsAnalyzer {
         ArrayList<Boolean> testPassed = new ArrayList<Boolean>();
         
         if (!easyJob) {
-            System.out.println("   |   1   |   2   |   3   |   4   |   5   |");
+            IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance("   |   1   |   2   |   3   |   4   |   5   |");
         }
         else {
-            System.out.println("   |   1   |   2   |   3   |");
+            IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance("   |   1   |   2   |   3   |");
         }
-        System.out.println("--------------------------------------------");
+        IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance("--------------------------------------------");
+        
         for (int i = 0; i < valuesForTTest.size(); i++) {
             
             String outputString = "";
@@ -94,11 +99,11 @@ public class EventsAnalyzer {
             for (int j = 0; j < valuesForTTest.size(); j++) {
              
                 if (j == 0) {
-                    outputString += " " + (i + 1) + " |" + "  NaN  |"; 
+                    outputString += " " + (i + 1) + " |" + " ----- |"; 
                 }
                 else {
                     if (j <= i) {
-                        outputString += "  NaN  |";
+                        outputString += " ----- |";
                     }
                     else {
                         /**
@@ -132,18 +137,19 @@ public class EventsAnalyzer {
                                 }
                             }
                             catch(Exception exc) {
-                                outputString += "  ---  |";
+                                outputString += " ----- |";
                                 testPassed.add(false);
                             }
                         }
                         else {
-                            outputString += "  ---  |";
+                            outputString += " ----- |";
                             testPassed.add(false);
                         }
                     }
                 }
             }
-            System.out.println(outputString);
+            IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance(outputString);
         }
         
         return testPassed;
@@ -160,14 +166,17 @@ public class EventsAnalyzer {
         int numRowsAndColumns;
         
         if (!easyJob) {
-            System.out.println("   |   1   |   2   |   3   |   4   |   5   |");
+            IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance("   |   1   |   2   |   3   |   4   |   5   |");
             numRowsAndColumns = 5;
         }
         else {
-            System.out.println("   |   1   |   2   |   3   |");
+            IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance("   |   1   |   2   |   3   |");
             numRowsAndColumns = 3;
         }
-        System.out.println("--------------------------------------------");
+        IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance("--------------------------------------------");
         
         int counterForValues = 0;
         for (int i = 0; i < numRowsAndColumns; i++) {
@@ -177,11 +186,11 @@ public class EventsAnalyzer {
             for (int j = 0; j < numRowsAndColumns; j++) {
              
                 if (j == 0) {
-                    outputString += " " + (i + 1) + " |" + "  ---  |"; 
+                    outputString += " " + (i + 1) + " |" + " - |"; 
                 }
                 else {
                     if (j <= i) {
-                        outputString += "  ---  |";
+                        outputString += " - |";
                     }
                     else {
                         /**
@@ -193,22 +202,31 @@ public class EventsAnalyzer {
                          * otherwise no test can be performed
                          */
                             
-                        outputString += MathUtils.decimalFormat.format(values.get(counterForValues)) + "|";        
+                        outputString += MathUtils.formatSuccess.format(values.get(counterForValues)) + "%|";        
                         
                         counterForValues++;
                     }
                 }
             }
-            System.out.println(outputString);
+            IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance(outputString);
         }
     }
     
+    /**
+     * Performs all the steps necessary to calculate and print the percentage
+     * of success of a particular feature
+     * @param values the set of values of tests passed
+     * @param numberOfParticipants the number of participants
+     * @param easyJob true if using only three values, false for five values
+     * @param titleMessage the message to write
+     */
     protected static void performStepsForPrintingPercentageOfSuccess(ArrayList<Double> values, 
-            int numberOfParticipants, boolean easyob, String titleMessage) {
+            int numberOfParticipants, boolean easyJob, String titleMessage) {
         
         printTitleMessage(titleMessage);
         calculatePercentages(values, numberOfParticipants);
-        printTTestPercentagesOfSuccess(values, easyob);
+        printTTestPercentagesOfSuccess(values, easyJob);
     }
     
     /**
@@ -217,8 +235,10 @@ public class EventsAnalyzer {
      */
     public static void printTitleMessage(String message) {
         
-        System.out.println();
-        System.out.println(message);
+        IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance(null);
+        IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance(message);
     }
     
     /**
@@ -258,7 +278,7 @@ public class EventsAnalyzer {
         for (int index = 0; index < results.size(); index++) {
             
             Double value = results.get(index);
-            results.set(index, value / (double) numberParticipants);
+            results.set(index, (value / (double) numberParticipants) * 100);
         }
     }
 }

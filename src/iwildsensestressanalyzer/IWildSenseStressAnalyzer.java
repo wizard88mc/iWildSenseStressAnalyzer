@@ -13,6 +13,7 @@ import iwildsensestressanalyzer.filereader.TouchesBufferedReader;
 import iwildsensestressanalyzer.filereader.UserActivityReader;
 import iwildsensestressanalyzer.filereader.UserPresenceEventsReader;
 import iwildsensestressanalyzer.filereader.UserPresenceLightReader;
+import iwildsensestressanalyzer.filewriter.OutputWriter;
 import iwildsensestressanalyzer.light.UserPresenceLightEvent;
 import iwildsensestressanalyzer.participant.Participant;
 import iwildsensestressanalyzer.touches.TouchesBufferedEvent;
@@ -27,8 +28,9 @@ import java.util.ArrayList;
  */
 public class IWildSenseStressAnalyzer {
     
-    public static final boolean DEBUG = false;
-    public static final boolean COMPELTE_ANALYSIS = false;
+    public static final boolean DEBUG = true;
+    public static final boolean COMPELTE_ANALYSIS = true;
+    public static final OutputWriter outputWriter = new OutputWriter();
 
     /**
      * @param args the command line arguments
@@ -241,10 +243,10 @@ public class IWildSenseStressAnalyzer {
          * Fourth Step: all features, easy task, participants together
          */
         
-        /*performAnalysis(participantList, false, false);
+        performAnalysis(participantList, false, false);
         performAnalysis(participantList, false, true);
         performAnalysis(participantList, true, false);
-        performAnalysis(participantList, true, true);*/
+        performAnalysis(participantList, true, true);
     }
     
     /**

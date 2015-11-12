@@ -15,6 +15,7 @@ import java.util.Collection;
 public class MathUtils {
     
     public static final DecimalFormat decimalFormat = new DecimalFormat("0.00000");
+    public static final DecimalFormat formatSuccess = new DecimalFormat("00");
     
     /**
      * Calculates average, variance and standard deviation of a set of Long values
