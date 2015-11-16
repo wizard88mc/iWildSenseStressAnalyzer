@@ -13,8 +13,29 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
     public static void analyzeUserActivityDataForEachParticipant(ArrayList<Participant>
             participants, boolean easyJob, boolean allTogether) {
         
+        printTitleMessage("*** ANALYZING USER ACTIVITY FEATUERS ***");
+        
         if (!allTogether) {
+            
+            ArrayList<Double> tTestPassedForPointsSumOfActivities = 
+                        new ArrayList<Double>(), 
+                    tTestPassedForPercentageOfWorkload = 
+                        new ArrayList<Double>(),
+                    tTestPassedForInfluenceOfWalkingActivityOnTotal = 
+                        new ArrayList<Double>(),
+                    tTestPassedForInfluenceOfRunningActivityOnTotal = 
+                        new ArrayList<Double>(), 
+                    tTestPassedForInfluenceOfOnBicycleOnTotal = 
+                        new ArrayList<Double>(), 
+                    tTestPassedForPercentageOfTiltingEvents = 
+                        new ArrayList<Double>(), 
+                    tTestPassedForPercentageOfInVehicleEvents = 
+                        new ArrayList<Double>();
+            
             for (Participant participant: participants) {
+                
+                printTitleMessage("*** Participant " + participant.getIMEI() + 
+                        " ***");
 
                 SurveyDataWrapper[] wrappers;
                 if (!easyJob) {
@@ -24,14 +45,98 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
                     wrappers = participant.getEasySurveyDataWrappers();
                 }
 
-                workWithPointsSumOfActivities(wrappers, easyJob);
-                workWithPercentageOfWorkload(wrappers, easyJob);
-                workWithInfluenceOfWalkingActivityOnTotal(wrappers, easyJob);
-                workWithInfluenceOfRunningActivityOnTotal(wrappers, easyJob);
-                workWithInfluenceOfOnBicycleOnTotal(wrappers, easyJob);
-                workWithPercentageOfTiltingEvents(wrappers, easyJob);
-                workWithPercentageOfInVehicleEvents(wrappers, easyJob);
+                ArrayList<Boolean> returnedResults = 
+                        workWithPointsSumOfActivities(wrappers, easyJob);
+                addTTestResultsToFinalContainer(tTestPassedForPointsSumOfActivities, 
+                        returnedResults);
+                
+                returnedResults = workWithPercentageOfWorkload(wrappers, easyJob);
+                addTTestResultsToFinalContainer(tTestPassedForPercentageOfWorkload, 
+                        returnedResults);
+                
+                returnedResults = 
+                        workWithInfluenceOfWalkingActivityOnTotal(wrappers, easyJob);
+                addTTestResultsToFinalContainer(tTestPassedForInfluenceOfWalkingActivityOnTotal, 
+                        returnedResults);
+                
+                returnedResults = 
+                        workWithInfluenceOfRunningActivityOnTotal(wrappers, easyJob);
+                addTTestResultsToFinalContainer(tTestPassedForInfluenceOfRunningActivityOnTotal, 
+                        returnedResults);
+                
+                returnedResults = 
+                        workWithInfluenceOfOnBicycleOnTotal(wrappers, easyJob);
+                addTTestResultsToFinalContainer(tTestPassedForInfluenceOfOnBicycleOnTotal, 
+                        returnedResults);
+                
+                returnedResults = 
+                        workWithPercentageOfTiltingEvents(wrappers, easyJob);
+                addTTestResultsToFinalContainer(tTestPassedForPercentageOfTiltingEvents, returnedResults);
+                
+                returnedResults = workWithPercentageOfInVehicleEvents(wrappers, easyJob);
+                addTTestResultsToFinalContainer(tTestPassedForPercentageOfInVehicleEvents, returnedResults);
             }
+            
+            /**
+             * Analyzing percentage of success of sum of the points collected
+             * with activities feature
+             */
+            performStepsForPrintingPercentageOfSuccess(tTestPassedForPointsSumOfActivities, 
+                    participants.size(), easyJob, "*** Percentage of success "
+                            + "for Sum of the points collected with activities "
+                            + "feature ***");
+            
+            /**
+             * Analyzing percentage of success of percentage of workload feature
+             */
+            performStepsForPrintingPercentageOfSuccess(tTestPassedForPercentageOfWorkload, 
+                    participants.size(), easyJob, "*** Percentage of success of"
+                            + " percentage of workload feature ***");
+            
+            /**
+             * Analyzing percentage of success of influence of WALKING activity
+             * on total feature
+             */
+            performStepsForPrintingPercentageOfSuccess(tTestPassedForInfluenceOfWalkingActivityOnTotal, 
+                    participants.size(), easyJob, "*** Percentage of success of "
+                            + "influence of WALKING activity on total "
+                            + "feature ***");
+            
+            /**
+             * Analyzing percentage of success of influence of RUNNING activity
+             * on total feature
+             */
+            performStepsForPrintingPercentageOfSuccess(tTestPassedForInfluenceOfRunningActivityOnTotal, 
+                    participants.size(), easyJob, "*** Percentage of success of"
+                            + " influence of RUNNING activity on total feature"
+                            + " ***");
+            
+            /**
+             * Analyzing percentage of success of influence of on bicycle 
+             * activity on total feature
+             */
+            performStepsForPrintingPercentageOfSuccess(tTestPassedForInfluenceOfOnBicycleOnTotal, 
+                    participants.size(), easyJob, "*** Percentage of success of "
+                            + "Influence of ON_BICYCLE activity on total "
+                            + "activity performed feature ***");
+            
+            /**
+             * Analyzing percentage of success of percentage of tilting events
+             * on total feature
+             */
+            performStepsForPrintingPercentageOfSuccess(tTestPassedForPercentageOfTiltingEvents, 
+                    participants.size(), easyJob, "*** Percentage of success of"
+                            + " Percentage of tilting events feature ***");
+            
+            
+            /**
+             * Analyzing percentage of success percentage of IN_VEHICLE events
+             * on total feature
+             */
+            performStepsForPrintingPercentageOfSuccess(tTestPassedForPercentageOfInVehicleEvents, 
+                    participants.size(), easyJob, "*** Percentage of success of"
+                            + " Percentage of IN_VEHICLE events feature ***");
+            
         }
         else {
             ArrayList<ArrayList<SurveyDataWrapper>> listWrappers = 
@@ -52,8 +157,9 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
      * the time validity of the survey
      * @param surveyDataWrappers the data wrappers
      * @param easyJob true if it easy the easy task, false otherwise
+     * @return a list of passed/not passed test
      */
-    private static void workWithPointsSumOfActivities(SurveyDataWrapper[] 
+    private static ArrayList<Boolean> workWithPointsSumOfActivities(SurveyDataWrapper[] 
             surveyDataWrappers, boolean easyJob) {
         
         printTitleMessage("*** Sum of the points collected with activities ***");
@@ -66,7 +172,7 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
                     .getAllPointsSumOfActivities());
         }
         
-        printTTestResults(listValues, easyJob);   
+        return printTTestResults(listValues, easyJob);   
     }
     
     /**
@@ -104,8 +210,9 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
      * survey validity
      * @param surveyDataWrappers the data wrappers
      * @param easyJob true if it easy the easy task, false otherwise
+     * @return a list of passed/not passed tests
      */
-    private static void workWithPercentageOfWorkload(SurveyDataWrapper[] 
+    private static ArrayList<Boolean> workWithPercentageOfWorkload(SurveyDataWrapper[] 
             surveyDataWrappers, boolean easyJob) {
         
         printTitleMessage("*** Percentage of workload ***");
@@ -118,7 +225,7 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
                     .getAllPercentageOfWorkload());
         }
         
-        printTTestResults(listValues, easyJob);
+        return printTTestResults(listValues, easyJob);
     }
     
     /**
@@ -150,8 +257,9 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
      * Works with the influence of the walking activity on the total activities
      * performed
      * @param surveyDataWrappers the data wrappers
+     * @return a list of passed/not passed test
      */
-    private static void workWithInfluenceOfWalkingActivityOnTotal(SurveyDataWrapper[] 
+    private static ArrayList<Boolean> workWithInfluenceOfWalkingActivityOnTotal(SurveyDataWrapper[] 
             surveyDataWrappers, boolean easyJob) {
         
         printTitleMessage("*** Influence of Walking Activity on Total ***");
@@ -163,7 +271,7 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
                     .getAllInfluenceOfWalkingActivityOnTotal());
         }
         
-        printTTestResults(listValues, easyJob);
+        return printTTestResults(listValues, easyJob);
     }
     
     /**
@@ -198,8 +306,9 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
      * performed
      * @param surveyDataWrappers the data wrappers
      * @param easyJob true if it easy the easy task, false otherwise
+     * @return a list of passed/not passed tests
      */
-    private static void workWithInfluenceOfRunningActivityOnTotal(SurveyDataWrapper[] 
+    private static ArrayList<Boolean> workWithInfluenceOfRunningActivityOnTotal(SurveyDataWrapper[] 
             surveyDataWrappers, boolean easyJob) {
         
         printTitleMessage("*** Influence of Running Activity on Total ***");
@@ -211,7 +320,7 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
                     .getAllInfluenceOfRunningActivityOnTotal());
         }
         
-        printTTestResults(listValues, easyJob);
+        return printTTestResults(listValues, easyJob);
     }
     
     /**
@@ -246,8 +355,9 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
      * performed activities
      * @param surveyDataWrappers the data wrappers
      * @param easyJob true if it easy the easy task, false otherwise
+     * @return a list of passed/not passed tests results
      */
-    private static void workWithInfluenceOfOnBicycleOnTotal(SurveyDataWrapper[]
+    private static ArrayList<Boolean> workWithInfluenceOfOnBicycleOnTotal(SurveyDataWrapper[]
             surveyDataWrappers, boolean easyJob) {
         
         printTitleMessage("*** Influence of On Bicycle activity on Total ***");
@@ -259,7 +369,7 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
                     .getAllInfluenceOfOnBicycleActivityOnTotal());
         }
         
-        printTTestResults(listValues, easyJob);
+        return printTTestResults(listValues, easyJob);
     }
     
     /**
@@ -293,8 +403,9 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
      * performed activities
      * @param surveyDataWrappers the data wrappers
      * @param easyJob true if it easy the easy task, false otherwise
+     * @return a list of passed/not passed tests
      */
-    private static void workWithPercentageOfTiltingEvents(SurveyDataWrapper[]
+    private static ArrayList<Boolean> workWithPercentageOfTiltingEvents(SurveyDataWrapper[]
             surveyDataWrappers, boolean easyJob) {
         
         printTitleMessage("*** Percentage of Titlting events ***");
@@ -306,7 +417,7 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
                     .getAllPercentagesOfTiltingEvents());
         }
         
-        printTTestResults(listValues, easyJob);
+        return printTTestResults(listValues, easyJob);
     }
     
     /**
@@ -339,8 +450,9 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
      * Works with the percentage of IN_VEHICLE events on the total number of 
      * performed activities
      * @param surveyDataWrappers 
+     * @return a list of passed/not passed tests results
      */
-    private static void workWithPercentageOfInVehicleEvents(SurveyDataWrapper[] 
+    private static ArrayList<Boolean> workWithPercentageOfInVehicleEvents(SurveyDataWrapper[] 
             surveyDataWrappers, boolean easyJob) {
         
         printTitleMessage("*** Percentage of IN_VEHICLE events ***");
@@ -352,7 +464,7 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
                     .getAllPercentagesOfInVehicleEvents());
         }
         
-        printTTestResults(listValues, easyJob);
+        return printTTestResults(listValues, easyJob);
     }
     
     /**

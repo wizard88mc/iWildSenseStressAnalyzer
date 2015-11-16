@@ -167,12 +167,12 @@ public class EventsAnalyzer {
         
         if (!easyJob) {
             IWildSenseStressAnalyzer.outputWriter
-                .writeOutputStatisticalSignificance("   |   1   |   2   |   3   |   4   |   5   |");
+                .writeOutputStatisticalSignificance("   | 1 | 2 | 3 | 4 | 5 |");
             numRowsAndColumns = 5;
         }
         else {
             IWildSenseStressAnalyzer.outputWriter
-                .writeOutputStatisticalSignificance("   |   1   |   2   |   3   |");
+                .writeOutputStatisticalSignificance("   | 1 | 2 | 3 |");
             numRowsAndColumns = 3;
         }
         IWildSenseStressAnalyzer.outputWriter

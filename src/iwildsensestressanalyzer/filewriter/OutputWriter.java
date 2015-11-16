@@ -1,8 +1,10 @@
 package iwildsensestressanalyzer.filewriter;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * This class is responsible to write the output of the analysis on the correct
@@ -12,11 +14,12 @@ import java.io.PrintWriter;
  */
 public class OutputWriter {
     
-    private static final String fileNameStatisticalSignificance = "output " 
-            + File.separator + "statistical_significance.txt";
+    private static final String fileNameStatisticalSignificance = "data" + 
+            File.separator + "output" + File.separator + 
+            "statistical_significance.txt";
     
     private File outputFileStatisticalSignificance;
-    private PrintWriter writerOutputFileStatisticalSignificance = null;
+    private BufferedWriter writerOutputFileStatisticalSignificance = null;
  
     public OutputWriter() {
         
@@ -26,11 +29,15 @@ public class OutputWriter {
         
         try {
             writerOutputFileStatisticalSignificance = 
-                new PrintWriter(outputFileStatisticalSignificance);
+                new BufferedWriter(new FileWriter(outputFileStatisticalSignificance));
         
         }
         catch(FileNotFoundException exc) {
             System.out.println("Unable to create file at OutputWriter");
+            exc.printStackTrace();
+        }
+        catch(IOException exc) {
+            System.out.println("IOException in OutputWriter");
             exc.printStackTrace();
         }
     }
@@ -42,6 +49,34 @@ public class OutputWriter {
      */
     public void writeOutputStatisticalSignificance(String line) {
         
-        writerOutputFileStatisticalSignificance.println(line);
+        try {
+            if (line != null) {
+                writerOutputFileStatisticalSignificance.write(line);
+                writerOutputFileStatisticalSignificance.newLine();
+            }
+            else {
+                writerOutputFileStatisticalSignificance.newLine();
+            }
+            
+            writerOutputFileStatisticalSignificance.flush();
+        }
+        catch(IOException exc) {
+            System.out.println("IOException in writing StatisticalSignificance"
+                    + " file");
+            exc.printStackTrace();
+        }
+    }
+    
+    public void closeFiles() {
+        
+        try {
+        writerOutputFileStatisticalSignificance.flush();
+        writerOutputFileStatisticalSignificance.close();
+        }
+        catch(IOException exc) {
+            System.out.println("IOException in closing file Statistical "
+                    + "Significance");
+            exc.printStackTrace();
+        }
     }
 }

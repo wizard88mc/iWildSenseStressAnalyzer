@@ -1,6 +1,7 @@
 package iwildsensestressanalyzer;
 
 import iwildsensestressanalyzer.dataanalyzer.ApplicationUsedAnalyzer;
+import iwildsensestressanalyzer.dataanalyzer.EventsAnalyzer;
 import iwildsensestressanalyzer.dataanalyzer.ScreenEventsAnalyzer;
 import iwildsensestressanalyzer.dataanalyzer.SurveyAnalyzer;
 import iwildsensestressanalyzer.dataanalyzer.TouchesBufferedAnalyzer;
@@ -196,6 +197,8 @@ public class IWildSenseStressAnalyzer {
          */
         SurveyAnalyzer.printAnalysisParticipantsParticipation(participantList);
         
+        performAnalysisSteps(participantList);
+        
         /**
          * Calculating statistics for participants with more than one answer
          * per day
@@ -203,18 +206,36 @@ public class IWildSenseStressAnalyzer {
         System.out.println();
         System.out.println("*** Removing participants with 0 answers "
                 + "provided ***");
-        SurveyAnalyzer.calculateStatisticsAnswers(SurveyAnalyzer.
-                getListParticipantsWithMoreThanZeroAnswers(participantList));
+        EventsAnalyzer.printTitleMessage(null);
+        EventsAnalyzer.printTitleMessage("*** Removing participants with 0 answers "
+                + "provided ***");
+        
+        ArrayList<Participant> participantsListWithMoreThanZeroAnswers = 
+                SurveyAnalyzer.
+                getListParticipantsWithMoreThanZeroAnswers(participantList);
+        
+        SurveyAnalyzer.calculateStatisticsAnswers(participantsListWithMoreThanZeroAnswers);
+        
+        performAnalysisSteps(participantsListWithMoreThanZeroAnswers);
         
         /**
          * Calculating statistics for participants with more than our
          * threshold answers number
          */
         System.out.println();
-        System.out.println("*** Keeping only participants with answers higher than "
-                + "our arbitrary threshold ***");
-        SurveyAnalyzer.calculateStatisticsAnswers(SurveyAnalyzer.
-                getListParticipantsOverArbitraryThreshold(participantList));
+        System.out.println("*** Keeping only participants with "
+                + "answers higher than our arbitrary threshold ***");
+        EventsAnalyzer.printTitleMessage(null);
+        EventsAnalyzer.printTitleMessage("*** Keeping only participants with "
+                + "answers higher than our arbitrary threshold ***");
+        
+        ArrayList<Participant> participantsListWithMoreThanThresholdAnswers = 
+                SurveyAnalyzer.
+                getListParticipantsOverArbitraryThreshold(participantList);
+        
+        SurveyAnalyzer.calculateStatisticsAnswers(participantsListWithMoreThanThresholdAnswers);
+        
+        performAnalysisSteps(participantsListWithMoreThanThresholdAnswers);
         
         /**
          * Calculating statistics for participants with more than one per 
@@ -223,8 +244,17 @@ public class IWildSenseStressAnalyzer {
         System.out.println();
         System.out.println("*** Keeping participants with more than one survey "
                 + "answer per day ***");
-        SurveyAnalyzer.calculateStatisticsAnswers(SurveyAnalyzer.
-                getListParticipantsOverOnePerDayAnswer(participantList));
+        EventsAnalyzer.printTitleMessage(null);
+        EventsAnalyzer.printTitleMessage("*** Keeping participants with more "
+                + "than one survey answer per day ***");
+        
+        ArrayList<Participant> participantsListWithMoreThanOneAnswerPerDay =
+                SurveyAnalyzer.
+                getListParticipantsOverOnePerDayAnswer(participantList);
+        
+        SurveyAnalyzer.calculateStatisticsAnswers(participantsListWithMoreThanOneAnswerPerDay);
+        
+        performAnalysisSteps(participantsListWithMoreThanOneAnswerPerDay);
         
         /**
          * Calculating statistics for participants with more answers than the
@@ -233,8 +263,21 @@ public class IWildSenseStressAnalyzer {
         System.out.println();
         System.out.println("*** Keeping participants with number of answers "
                 + "higher than the initial average ***");
-        SurveyAnalyzer.calculateStatisticsAnswers(SurveyAnalyzer.
-                getListParticipantsOverInitialAverage(participantList));
+        EventsAnalyzer.printTitleMessage(null);
+        EventsAnalyzer.printTitleMessage("*** Keeping participants with number"
+                + " of answers higher than the initial average ***");
+        
+        ArrayList<Participant> participantsListWithMoreThanAverageAnswers = 
+                SurveyAnalyzer.
+                getListParticipantsOverInitialAverage(participantList);
+        
+        SurveyAnalyzer.calculateStatisticsAnswers(participantsListWithMoreThanAverageAnswers);
+        
+        performAnalysisSteps(participantsListWithMoreThanAverageAnswers);
+        
+    }
+    
+    private static void performAnalysisSteps(ArrayList<Participant> participantsList) {
         
         /**
          * First Step: all features, difficult task, participants divided
@@ -243,10 +286,11 @@ public class IWildSenseStressAnalyzer {
          * Fourth Step: all features, easy task, participants together
          */
         
-        performAnalysis(participantList, false, false);
-        performAnalysis(participantList, false, true);
-        performAnalysis(participantList, true, false);
-        performAnalysis(participantList, true, true);
+        performAnalysis(participantsList, false, false);
+        performAnalysis(participantsList, false, true);
+        performAnalysis(participantsList, true, false);
+        performAnalysis(participantsList, true, true);
+        
     }
     
     /**
