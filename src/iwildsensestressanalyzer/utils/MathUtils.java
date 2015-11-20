@@ -57,18 +57,20 @@ public class MathUtils {
      * least one value in the original list, otherwise an empty list or null 
      * (depending on the original set of data)
      */
-    public static ArrayList<Double> normalizeData(ArrayList<Long> values, Long newMinValue,
-            Long newMaxValue) {
+    public static ArrayList<Double> normalizeData(ArrayList<Double> values, 
+            Double newMinValue, Double newMaxValue) {
         
         if (values != null && !values.isEmpty()) {
-            Long minValue = Long.MAX_VALUE, maxValue = Long.MIN_VALUE;
+            Double minValue = Double.MAX_VALUE, maxValue = Double.MIN_VALUE;
 
-            for (Long value: values) {
-                if (minValue > value) {
-                    minValue = value;
-                }
-                if (maxValue < value) {
-                    maxValue = value;
+            for (Double value: values) {
+                if (value != null) {
+                    if (minValue > value) {
+                        minValue = value;
+                    }
+                    if (maxValue < value) {
+                        maxValue = value;
+                    }
                 }
             }
 
@@ -77,10 +79,16 @@ public class MathUtils {
              * precision
              */
             ArrayList<Double> norm = new ArrayList<Double>();
-            for (Long value: values) {
+            for (Double value: values) {
+                
+                if (value != null) {
 
-                norm.add(((double)(value - minValue) / (double)(maxValue - minValue)) 
-                        * (double) (newMaxValue - newMinValue) + (double)newMinValue);
+                    norm.add(((value - minValue) / (maxValue - minValue)) 
+                            * (newMaxValue - newMinValue) + newMinValue);
+                }
+                else {
+                    norm.add(null);
+                }
             }
             
             return norm;
@@ -265,7 +273,31 @@ public class MathUtils {
         }
         else {
             return null;
+        }       
+    }
+    
+    /**
+     * Takes a list of features as Double values and converts to a list of 
+     * string for weka files, replacing null values with ? 
+     * @param features the set of features
+     * @return a set of string for weka file
+     */
+    public static ArrayList<String> convertFeaturesToASetOfString(
+            ArrayList<Double> features) {
+        
+        ArrayList<String> stringFeatures = new ArrayList<String>();
+        
+        for (Double feature: features) {
+            
+            if (feature != null) {
+                stringFeatures.add(decimalFormat.format(feature));
+            }
+            else {
+                stringFeatures.add("?");
+            }
+            
         }
         
+        return stringFeatures;
     }
 }

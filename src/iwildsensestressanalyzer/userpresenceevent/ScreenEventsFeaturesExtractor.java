@@ -31,39 +31,6 @@ public class ScreenEventsFeaturesExtractor extends FeaturesExtractor {
         this.unlockedScreenEvents = unlockedScreenEvents;
     }
     
-    public ScreenEventsFeaturesExtractor(StressSurvey survey, 
-            UserPresenceAdvancedEventsWrapper wrapper) {
-        
-        screenOnOffEvents = new ArrayList<ScreenOnOff>();
-        unlockedScreenEvents = new ArrayList<UnlockedScreen>();
-        
-        /**
-         * Add to the screenOnOffEvents list all the ScreenOnOff events that 
-         * started inside the validity time of the survey
-         */
-        for (ScreenOnOff screenOnOff: wrapper.getScreenOnOffEvents()) {
-            
-            if (StressSurvey.isEventStartedInsideSurveyValidityTime(
-                    survey.getTimestamp(), screenOnOff.getOnTimestamp())) {
-                
-                screenOnOffEvents.add(screenOnOff);
-            }
-        }
-        
-        /**
-         * Add to the unlockedScreenEvents list all the UnlockedScreen events 
-         * that started inside the validity time of the survey
-         */
-        for (UnlockedScreen unlockedScreen: wrapper.getUnlockedScreenEvents()) {
-            
-            if (StressSurvey.isEventStartedInsideSurveyValidityTime(
-                    survey.getTimestamp(), unlockedScreen.getOnTimestamp())) {
-                
-                unlockedScreenEvents.add(unlockedScreen);
-            }
-        }
-    }
-    
     /**
      * Returns a list of all the on/off duration for the OnOffScreen events
      * @return a list of on-off duration if there is at least one ScreenOnOff event,
@@ -90,7 +57,7 @@ public class ScreenEventsFeaturesExtractor extends FeaturesExtractor {
      * Calculate statistic information about the time of on/off when the user
      * turns the screen on and off without unlocking it
      * @return [average, variance, standard deviation] if more than zero values, 
-     * [-1] otherwise
+     * null otherwise
      */
     public Double[] calculateStatisticOnOffDurationForScreenOnOffEvents() {
         
