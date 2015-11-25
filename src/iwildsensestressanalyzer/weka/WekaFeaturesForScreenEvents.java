@@ -2,7 +2,6 @@ package iwildsensestressanalyzer.weka;
 
 import iwildsensestressanalyzer.esm.StressSurvey;
 import iwildsensestressanalyzer.userpresenceevent.ScreenEventsFeaturesExtractor;
-import iwildsensestressanalyzer.utils.MathUtils;
 import java.util.ArrayList;
 
 /**
@@ -24,10 +23,13 @@ public class WekaFeaturesForScreenEvents extends WekaFeaturesCreator {
      *    - average
      *    - standard deviation
      */
-    public static final String[] featuresNames = {"AVG_OnOffForScreenOnOff", 
-        "STD_OnOffForScreenOnOff", "AVG_OnOffForUnlockedScreen", 
-        "STD_OnOffForUnlockedScreen", "AVG_UnlockTimeForUnlockedScreen", 
-        "STD_UnlockTimeForUnlockedScreen"};
+    public static final String[] featuresNames = {
+        "ScreenEvents_AVG_OnOffForScreenOnOff", 
+        "ScreenEvents_STD_OnOffForScreenOnOff", 
+        "ScreenEvents_AVG_OnOffForUnlockedScreen", 
+        "ScreenEvents_STD_OnOffForUnlockedScreen", 
+        "ScreenEvents_AVG_UnlockTimeForUnlockedScreen", 
+        "ScreenEvents_STD_UnlockTimeForUnlockedScreen"};
     
     /**
      * Creates a list of features for the ScreenEvent objects
@@ -56,6 +58,6 @@ public class WekaFeaturesForScreenEvents extends WekaFeaturesCreator {
         addCalculatedFeatures(features, statisticsOnOffDurationUnlockedScreenEvents);
         addCalculatedFeatures(features, statisticsUnlockTimeForUnlockedScreenEvents);
 
-        return MathUtils.normalizeData(features, 0.0, 1.0);
+        return features;
     }
 }

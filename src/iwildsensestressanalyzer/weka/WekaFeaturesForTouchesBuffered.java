@@ -12,6 +12,47 @@ import java.util.ArrayList;
  */
 public class WekaFeaturesForTouchesBuffered extends WekaFeaturesCreator {
     
+    /**
+     * CALCULATED FEATURES
+     * - Counter (# of touches)
+     *     - average
+     *     - standard deviation
+     * - Min interval (between two consecutive touches)
+     *     - average
+     *     - standard deviation
+     * - Max interval (between two consecutive touches)
+     *     - average
+     *     - standard deviation
+     * - Range (min - max interval)
+     *     - average
+     *     - standard deviation
+     * - Mean 
+     *     - average
+     *     - standard deviation
+     * - Median
+     *     - average
+     *     - standard deviation
+     * - Variance
+     *     - average
+     *     - standard deviation
+     * - Standard Deviation
+     *     - average
+     *     - standard deviation
+     * - Session Duration
+     *     - average
+     *     - standard deviation
+     */
+    public static final String[] featuresName = {"TouchesBuffered_AVG_Counter", 
+        "TouchesBuffered_STD_Counter", "TouchesBuffered_AVG_MinInterval", 
+        "TouchesBuffered_STD_MinInterval", "TouchesBuffered_AVG_MaxInterval", 
+        "TouchesBuffered_STD_MaxInterval", "TouchesBuffered_AVG_Range", 
+        "TouchesBuffered_STD_Range", "TouchesBuffered_AVG_Mean", 
+        "TouchesBuffered_STD_Mean", "TouchesBuffered_AVG_Median", 
+        "TouchesBuffered_STD_Median", "TouchesBuffered_AVG_Variance", 
+        "TouchesBuffered_STD_Variance", "TouchesBuffered_AVG_StandardDeviation", 
+        "TouchesBuffered_STD_StandardDeviation", "TouchesBuffered_AVG_SessionDuration", 
+        "TouchesBuffered_STD_SessionDuration"};
+    
     public static ArrayList<Double> getFeaturesForTouchesBufferedEvents(
             StressSurvey survey) {
         
@@ -42,6 +83,6 @@ public class WekaFeaturesForTouchesBuffered extends WekaFeaturesCreator {
         addCalculatedFeatures(features, statisticsStandardDeviationValues);
         addCalculatedFeatures(features, statisticsSessionDurationValues);
         
-        return MathUtils.normalizeData(features, 0.0, 1.0);
+        return features;
     }
 }

@@ -2,7 +2,6 @@ package iwildsensestressanalyzer.weka;
 
 import iwildsensestressanalyzer.esm.StressSurvey;
 import iwildsensestressanalyzer.light.UserPresenceLightFeaturesExtractor;
-import iwildsensestressanalyzer.utils.MathUtils;
 import java.util.ArrayList;
 
 /**
@@ -25,17 +24,20 @@ public class WekaFeaturesForUserPresenceLight extends WekaFeaturesCreator {
      *    - standard deviation
      */
     
-    public static final String[] featuresName = {"AVG_LightValuesScreenOnOff", 
-        "STD_LightValuesScreenOnOff", "AVG_LightValuesUnlockedScreen", 
-        "STD_LightValuesUnlockedScreen", "AVG_LightValuesAllScreenEvents", 
-        "STD_LightValuesAllScreenEvents"};
+    public static final String[] featuresName = {
+        "UserPresenceLight_AVG_LightValuesScreenOnOff", 
+        "UserPresenceLight_STD_LightValuesScreenOnOff", 
+        "UserPresenceLight_AVG_LightValuesUnlockedScreen", 
+        "UserPresenceLight_STD_LightValuesUnlockedScreen", 
+        "UserPresenceLight_AVG_LightValuesAllScreenEvents", 
+        "UserPresenceLight_STD_LightValuesAllScreenEvents"};
     
     /*
      * Creates a list of features with light values of screen events
      * @param survey the survey to consider
      * @return a list of features for the Light events
      */
-    public ArrayList<Double> getFeaturesForUserPresenceLightEvent(
+    public static ArrayList<Double> getFeaturesForUserPresenceLightEvent(
             StressSurvey survey) {
         
         ArrayList<Double> features = new ArrayList<Double>();
@@ -58,6 +60,6 @@ public class WekaFeaturesForUserPresenceLight extends WekaFeaturesCreator {
         addCalculatedFeatures(features, statisticsLightValuesForUnlockedScreenEvents);
         addCalculatedFeatures(features, statisticsLightValuesForAllScreenEvents);
         
-        return MathUtils.normalizeData(features, 0.0, 1.0);
+        return features;
     }
 }

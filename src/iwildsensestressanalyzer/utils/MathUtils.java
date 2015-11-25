@@ -111,7 +111,7 @@ public class MathUtils {
      * @param newMaxValue the new max value the values can have
      * @return set of normalized data in double precision
      */
-    public static ArrayList<ArrayList<Double>> normalizeSetData(ArrayList<ArrayList<Long>> values, 
+    public static ArrayList<ArrayList<Double>> normalizeSetOfLongData(ArrayList<ArrayList<Long>> values, 
             Long newMinValue, Long newMaxValue) {
         
         Long minValue = Long.MAX_VALUE, maxValue = Long.MIN_VALUE;
@@ -182,11 +182,13 @@ public class MathUtils {
 
             if (subValues != null && !subValues.isEmpty()) {
                 for (Double value: subValues) {
-                    if (value <= minValue) {
-                        minValue = value;
-                    }
-                    if (value >= maxValue) {
-                        maxValue = value;
+                    if (value != null) {
+                        if (value <= minValue) {
+                            minValue = value;
+                        }
+                        if (value >= maxValue) {
+                            maxValue = value;
+                        }
                     }
                 }
             }
@@ -198,6 +200,9 @@ public class MathUtils {
         
         if (maxValue == Double.MIN_VALUE) {
             maxValue = 0.0;
+        }
+        if (minValue == Double.MAX_VALUE) {
+            minValue = 0.0;
         }
         
         for (ArrayList<Double> subValues: values) {
@@ -214,17 +219,22 @@ public class MathUtils {
 
                     Double value = subValues.get(i);
                     
-                    double newValue = ((double) (value - minValue) / (double) (maxValue - minValue)) 
+                    if (value != null) {
+                        double newValue = ((double) (value - minValue) / (double) (maxValue - minValue)) 
                             * (double) (newMaxValue - newMinValue) + newMinValue;
                     
-                    if (Double.isNaN(newValue)) {
-                        newValue = 0.0;
-                    }
-                    if (Double.isInfinite(newValue)) {
-                        newValue = 1.0;
-                    }
+                        if (Double.isNaN(newValue)) {
+                            newValue = 0.0;
+                        }
+                        if (Double.isInfinite(newValue)) {
+                            newValue = 1.0;
+                        }
                     
-                    sublist.add(newValue);
+                        sublist.add(newValue);
+                    }
+                    else {
+                        sublist.add(null);
+                    }
                 }
                 norm.add(sublist);
             }
@@ -295,7 +305,6 @@ public class MathUtils {
             else {
                 stringFeatures.add("?");
             }
-            
         }
         
         return stringFeatures;

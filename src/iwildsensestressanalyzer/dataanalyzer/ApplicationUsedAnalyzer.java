@@ -220,4 +220,12 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
         }
     }
     
+    /**
+     * Returns the list of categories of the apps
+     * @return a list of different app categories
+     */
+    public static ArrayList<String> getAllAppCategories() {
+        return allAppCategories;
+    }
+    
 }

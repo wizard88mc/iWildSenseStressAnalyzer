@@ -5,7 +5,6 @@
  */
 package iwildsensestressanalyzer.applicationsused;
 
-import iwildsensestressanalyzer.IWildSenseStressAnalyzer;
 import iwildsensestressanalyzer.dataanalyzer.ApplicationUsedAnalyzer;
 import java.io.BufferedReader;
 import java.io.IOException;

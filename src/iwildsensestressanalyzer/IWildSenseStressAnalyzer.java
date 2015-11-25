@@ -14,10 +14,11 @@ import iwildsensestressanalyzer.filereader.TouchesBufferedReader;
 import iwildsensestressanalyzer.filereader.UserActivityReader;
 import iwildsensestressanalyzer.filereader.UserPresenceEventsReader;
 import iwildsensestressanalyzer.filereader.UserPresenceLightReader;
-import iwildsensestressanalyzer.filewriter.OutputWriter;
+import iwildsensestressanalyzer.filewriter.StatisticalSignificanceOutputWriter;
 import iwildsensestressanalyzer.light.UserPresenceLightEvent;
 import iwildsensestressanalyzer.participant.Participant;
 import iwildsensestressanalyzer.touches.TouchesBufferedEvent;
+import iwildsensestressanalyzer.weka.WekaAnalyzer;
 import java.util.ArrayList;
 
 /**
@@ -31,7 +32,7 @@ public class IWildSenseStressAnalyzer {
     
     public static final boolean DEBUG = true;
     public static final boolean COMPELTE_ANALYSIS = true;
-    public static final OutputWriter outputWriter = new OutputWriter();
+    public static final StatisticalSignificanceOutputWriter outputWriter = new StatisticalSignificanceOutputWriter();
 
     /**
      * @param args the command line arguments
@@ -275,6 +276,14 @@ public class IWildSenseStressAnalyzer {
         
         performAnalysisSteps(participantsListWithMoreThanAverageAnswers);
         
+        outputWriter.closeFile();
+        
+        /**
+         * Now starting working with Weka files for classification
+         */
+        System.out.println("*** Creating weka files for classification task ***");
+        WekaAnalyzer.workWithClassificationProblem(participantsListWithMoreThanOneAnswerPerDay);
+        
     }
     
     private static void performAnalysisSteps(ArrayList<Participant> participantsList) {
@@ -290,7 +299,6 @@ public class IWildSenseStressAnalyzer {
         performAnalysis(participantsList, false, true);
         performAnalysis(participantsList, true, false);
         performAnalysis(participantsList, true, true);
-        
     }
     
     /**
