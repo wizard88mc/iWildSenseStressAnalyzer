@@ -33,13 +33,21 @@ public class IWildSenseStressAnalyzer {
     public static final boolean DEBUG = true;
     public static final boolean COMPELTE_ANALYSIS = true;
     public static final StatisticalSignificanceOutputWriter outputWriter = new StatisticalSignificanceOutputWriter();
+    
+    private static final String TITLE_PARTICIPANTS_ZERO_ANSERS = "*** Removing"
+                + " participants with 0 answers provided ***", 
+            TITLE_MORE_THRESHOLD = "*** Keeping only participants with answers"
+                + " higher than our arbitrary threshold ***", 
+            TITLE_MORE_ONE_SURVEY_PER_DAY = "*** Keeping participants with more"
+                + " than one survey answer per day ***", 
+            TITLE_MORE_THAN_INITIAL_AVERAGE = "*** Keeping participants with"
+                + " number of answers higher than the initial average ***";
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        
+
         /**
          * Step 1: collect all the IMEI of the participants that will be used
          * to retrieve the files
@@ -205,11 +213,9 @@ public class IWildSenseStressAnalyzer {
          * per day
          */
         System.out.println();
-        System.out.println("*** Removing participants with 0 answers "
-                + "provided ***");
+        System.out.println(TITLE_PARTICIPANTS_ZERO_ANSERS);
         EventsAnalyzer.printTitleMessage(null);
-        EventsAnalyzer.printTitleMessage("*** Removing participants with 0 answers "
-                + "provided ***");
+        EventsAnalyzer.printTitleMessage(TITLE_PARTICIPANTS_ZERO_ANSERS);
         
         ArrayList<Participant> participantsListWithMoreThanZeroAnswers = 
                 SurveyAnalyzer.
@@ -224,11 +230,9 @@ public class IWildSenseStressAnalyzer {
          * threshold answers number
          */
         System.out.println();
-        System.out.println("*** Keeping only participants with "
-                + "answers higher than our arbitrary threshold ***");
+        System.out.println(TITLE_MORE_THRESHOLD);
         EventsAnalyzer.printTitleMessage(null);
-        EventsAnalyzer.printTitleMessage("*** Keeping only participants with "
-                + "answers higher than our arbitrary threshold ***");
+        EventsAnalyzer.printTitleMessage(TITLE_MORE_THRESHOLD);
         
         ArrayList<Participant> participantsListWithMoreThanThresholdAnswers = 
                 SurveyAnalyzer.
@@ -243,11 +247,9 @@ public class IWildSenseStressAnalyzer {
          * day answer
          */
         System.out.println();
-        System.out.println("*** Keeping participants with more than one survey "
-                + "answer per day ***");
+        System.out.println(TITLE_MORE_ONE_SURVEY_PER_DAY);
         EventsAnalyzer.printTitleMessage(null);
-        EventsAnalyzer.printTitleMessage("*** Keeping participants with more "
-                + "than one survey answer per day ***");
+        EventsAnalyzer.printTitleMessage(TITLE_MORE_ONE_SURVEY_PER_DAY);
         
         ArrayList<Participant> participantsListWithMoreThanOneAnswerPerDay =
                 SurveyAnalyzer.
@@ -262,11 +264,9 @@ public class IWildSenseStressAnalyzer {
          * initial average
          */
         System.out.println();
-        System.out.println("*** Keeping participants with number of answers "
-                + "higher than the initial average ***");
+        System.out.println(TITLE_MORE_THAN_INITIAL_AVERAGE);
         EventsAnalyzer.printTitleMessage(null);
-        EventsAnalyzer.printTitleMessage("*** Keeping participants with number"
-                + " of answers higher than the initial average ***");
+        EventsAnalyzer.printTitleMessage(TITLE_MORE_THAN_INITIAL_AVERAGE);
         
         ArrayList<Participant> participantsListWithMoreThanAverageAnswers = 
                 SurveyAnalyzer.
@@ -282,7 +282,25 @@ public class IWildSenseStressAnalyzer {
          * Now starting working with Weka files for classification
          */
         System.out.println("*** Creating weka files for classification task ***");
-        WekaAnalyzer.workWithClassificationProblem(participantsListWithMoreThanOneAnswerPerDay);
+        System.out.println("*** Classification task with participants with more"
+                + " than 0 answers ***");
+        WekaAnalyzer.workWithClassificationProblem(participantsListWithMoreThanZeroAnswers, 
+                TITLE_PARTICIPANTS_ZERO_ANSERS);
+        
+        System.out.println("*** Classification task with participants with"
+                + " answers more than the arbitrary threshold ***");
+        WekaAnalyzer.workWithClassificationProblem(participantsListWithMoreThanThresholdAnswers, 
+                TITLE_MORE_THRESHOLD);
+        
+        System.out.println("*** Classification task with participants with more"
+                + " than one answer per day ***");
+        WekaAnalyzer.workWithClassificationProblem(participantsListWithMoreThanOneAnswerPerDay, 
+                TITLE_MORE_ONE_SURVEY_PER_DAY);
+        
+        System.out.println("*** Classification task with participant with more"
+                + " answers than the initial average ***");
+        WekaAnalyzer.workWithClassificationProblem(participantsListWithMoreThanAverageAnswers, 
+                TITLE_MORE_THAN_INITIAL_AVERAGE);
         
     }
     

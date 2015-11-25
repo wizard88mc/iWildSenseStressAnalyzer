@@ -28,7 +28,7 @@ public class WekaAnalyzer {
     public static ArrayList<File> listCreatedFiles = null;
     
     public static void workWithClassificationProblem(ArrayList<Participant> 
-            participants) {
+            participants, String initialMessage) {
         
         /**
          * For Application used we need to create features only once all the 
@@ -142,15 +142,17 @@ public class WekaAnalyzer {
         
         listCreatedFiles.addAll(writerForAllParticipants.getOutputFiles());
         
-        performWekaClassificationTask();
+        performWekaClassificationTask(initialMessage);
     }
     
     /**
      * Performs Classification
      */
-    private static void performWekaClassificationTask() {
+    private static void performWekaClassificationTask(String initialMessage) {
         
         WekaEvaluationOutputWriter outputWriter = new WekaEvaluationOutputWriter();
+        
+        outputWriter.writeOnOutputFile(initialMessage);
         
         for (File file: listCreatedFiles) {
             
