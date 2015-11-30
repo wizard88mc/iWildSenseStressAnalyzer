@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class StatisticalSignificanceOutputWriter extends OutputFileWriter {
     
-    private static final String fileNameStatisticalSignificance = outputFolder +
+    private static final String OUTPUT_FILE_NAME = BASE_OUTPUT_FOLDER +
             "Statistical Significance" + File.separator + 
             "statistical_significance.txt";
     
@@ -24,7 +24,7 @@ public class StatisticalSignificanceOutputWriter extends OutputFileWriter {
     public StatisticalSignificanceOutputWriter() {
         
         outputFileStatisticalSignificance = 
-                new File(fileNameStatisticalSignificance);
+                new File(OUTPUT_FILE_NAME);
         outputFileStatisticalSignificance.getParentFile().mkdirs();
         
         try {
@@ -67,6 +67,9 @@ public class StatisticalSignificanceOutputWriter extends OutputFileWriter {
         }
     }
     
+    /**
+     * Closes the output file flushing the buffer
+     */
     public void closeFile() {
         
         try {

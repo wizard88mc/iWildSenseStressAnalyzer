@@ -1,0 +1,32 @@
+*** Keeping only participants with answers higher than our arbitrary threshold ***
+data/output/Classification/351565052265664/StressClassification351565052265664EASY.arff
+ZeroR Classification
+Average Accuracy: 0.96667
+Error rate: 0.03333
+Micro-Precision: 0.95000 Micro-Recall: 0.95000 Micro-Fscore: 0.95000
+Macro-Precision: � Macro-Recall: 0.33333 Macro-Fscore: �
+TREE Classification
+Average Accuracy: 0.96667
+Error rate: 0.03333
+Micro-Precision: 0.95000 Micro-Recall: 0.95000 Micro-Fscore: 0.95000
+Macro-Precision: � Macro-Recall: 0.33333 Macro-Fscore: �
+0-kNN Classification
+Average Accuracy: 0.95833
+Error rate: 0.04167
+Micro-Precision: 0.93750 Micro-Recall: 0.93750 Micro-Fscore: 0.93750
+Macro-Precision: 0.32051 Macro-Recall: 0.32895 Macro-Fscore: 0.32468
+1-kNN Classification
+Average Accuracy: 0.95833
+Error rate: 0.04167
+Micro-Precision: 0.93750 Micro-Recall: 0.93750 Micro-Fscore: 0.93750
+Macro-Precision: 0.32051 Macro-Recall: 0.32895 Macro-Fscore: 0.32468
+2-kNN Classification
+Average Accuracy: 0.95833
+Error rate: 0.04167
+Micro-Precision: 0.93750 Micro-Recall: 0.93750 Micro-Fscore: 0.93750
+Macro-Precision: 0.32051 Macro-Recall: 0.32895 Macro-Fscore: 0.32468
+Multilayer Perceptron Classification
+Average Accuracy: 0.92500
+Error rate: 0.07500
+Micro-Precision: 0.88750 Micro-Recall: 0.88750 Micro-Fscore: 0.88750
+Macro-Precision: 0.31556 Macro-Recall: 0.31140 Macro-Fscore: 0.31347

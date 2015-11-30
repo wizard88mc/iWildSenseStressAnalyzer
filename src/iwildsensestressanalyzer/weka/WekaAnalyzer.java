@@ -12,8 +12,8 @@ import weka.classifiers.Evaluation;
 import weka.classifiers.bayes.BayesNet;
 import weka.classifiers.functions.LibSVM;
 import weka.classifiers.functions.MultilayerPerceptron;
-import weka.classifiers.functions.VotedPerceptron;
 import weka.classifiers.lazy.IBk;
+import weka.classifiers.rules.ZeroR;
 import weka.classifiers.trees.J48;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
@@ -25,10 +25,10 @@ import weka.core.converters.ConverterUtils.DataSource;
  */
 public class WekaAnalyzer {
     
-    public static ArrayList<File> listCreatedFiles = null;
+    public static ArrayList<File> listCreatedFiles = new ArrayList<File>();
     
     public static void workWithClassificationProblem(ArrayList<Participant> 
-            participants, String initialMessage) {
+            participants, String initialMessage, String subfolderName) {
         
         /**
          * For Application used we need to create features only once all the 
@@ -45,7 +45,8 @@ public class WekaAnalyzer {
                 
         for (Participant participant: participants) {
             
-            ARFFWekaWriter output = new ARFFWekaWriter(participant.getIMEI());
+            ARFFWekaWriter output = new ARFFWekaWriter(participant.getIMEI(), 
+                    subfolderName);
             
             ArrayList<ArrayList<Double>> featuresForApplicationUsed = new ArrayList<ArrayList<Double>>(), 
                     featuresForTouchesBuffered = new ArrayList<ArrayList<Double>>(), 
@@ -123,7 +124,8 @@ public class WekaAnalyzer {
         /**
          * Writing output file for all participants
          */
-        ARFFWekaWriter writerForAllParticipants = new ARFFWekaWriter("_ALL");
+        ARFFWekaWriter writerForAllParticipants = new ARFFWekaWriter("_ALL", 
+                subfolderName);
         
         for (int i = 0; i < surveyAnswersForAllParticipants.size(); i++) {
             
@@ -142,15 +144,17 @@ public class WekaAnalyzer {
         
         listCreatedFiles.addAll(writerForAllParticipants.getOutputFiles());
         
-        performWekaClassificationTask(initialMessage);
+        performWekaClassificationTask(initialMessage, subfolderName);
     }
     
     /**
      * Performs Classification
      */
-    private static void performWekaClassificationTask(String initialMessage) {
+    private static void performWekaClassificationTask(String initialMessage, 
+            String subfolder) {
         
-        WekaEvaluationOutputWriter outputWriter = new WekaEvaluationOutputWriter();
+        WekaEvaluationOutputWriter outputWriter = 
+                new WekaEvaluationOutputWriter(subfolder);
         
         outputWriter.writeOnOutputFile(initialMessage);
         
@@ -169,6 +173,17 @@ public class WekaAnalyzer {
                     outputWriter.writeOnOutputFile(file.getPath());
                     
                     boolean easyTask = file.getName().contains("EASY");
+                    
+                    /**
+                     * ZeroR baseline classification test
+                     */
+                    ZeroR zeroR = new ZeroR();
+                    zeroR.buildClassifier(data);
+                    Evaluation zeroREval = new Evaluation(data);
+                    zeroREval.crossValidateModel(zeroR, data, 10, new Random(10));
+                    
+                    outputWriter.writeOnOutputFile("ZeroR Classification");
+                    outputWriter.writeOnOutputFile(evaluateClassificationPerformances(zeroREval, easyTask));
                     
                     /**
                      * Tree classification test
@@ -204,6 +219,7 @@ public class WekaAnalyzer {
                         svm.setOptions(weka.core.Utils.splitOptions("-S 1 -K 2 "
                                 + "-D 5 -G 0.0 -R 0.0 -N 0.5 -M 40 -C 2.0 "
                                 + "-E 0.001 -P 0.1 -Z -seed 1"));
+                        svm.setDoNotReplaceMissingValues(true);
                         svm.buildClassifier(data);
                         Evaluation svmEval = new Evaluation(data);
                         svmEval.crossValidateModel(svm, data, 10, new Random(10));
@@ -228,14 +244,14 @@ public class WekaAnalyzer {
                     /**
                      * Voted Perceptron evaluation
                      */
-                    VotedPerceptron votedPerceptron = new VotedPerceptron();
+                    /*VotedPerceptron votedPerceptron = new VotedPerceptron();
                     votedPerceptron.setOptions(weka.core.Utils.splitOptions("-I 10 -E 1.0 -S 2 -M 10000"));
                     votedPerceptron.buildClassifier(data);
                     Evaluation votedPEval = new Evaluation(data);
                     votedPEval.crossValidateModel(votedPerceptron, data, 10, new Random(10));
 					
                     outputWriter.writeOnOutputFile("Voted Perceptron Classification");
-                    outputWriter.writeOnOutputFile(evaluateClassificationPerformances(votedPEval, easyTask));
+                    outputWriter.writeOnOutputFile(evaluateClassificationPerformances(votedPEval, easyTask));*/
                     
                     /**
                      * Bayesan Network evaluation
@@ -257,9 +273,8 @@ public class WekaAnalyzer {
                 System.out.println("Exception in performWekaClassificationTask");
                 exc.printStackTrace();
             }
-            
-            outputWriter.closeFile();
         }
+        outputWriter.closeFile();
     }
     
     /**

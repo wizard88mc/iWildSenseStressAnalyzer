@@ -13,7 +13,7 @@ import java.io.File;
  */
 public class OutputFileWriter {
     
-    protected static final String outputFolder = "data" + 
+    protected static final String BASE_OUTPUT_FOLDER = "data" + 
             File.separator + "output" + File.separator;
     
 }

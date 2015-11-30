@@ -13,18 +13,20 @@ import java.io.IOException;
  */
 public class WekaEvaluationOutputWriter extends OutputFileWriter {
     
-    private static String outputFileName = outputFolder + "Classification" + 
-            File.separator + "output_classification.txt";
+    private static final String OUTPUT_FOLDER = BASE_OUTPUT_FOLDER + "Classification" + 
+            File.separator;
+    private static final String OUTPUT_FILE_NAME = "output_classification.txt";
     
     private File outputFile = null;
     
     private BufferedWriter outputWriter = null;
     
-    public WekaEvaluationOutputWriter() {
+    public WekaEvaluationOutputWriter(String subfolder) {
         
         try {
             
-            outputFile = new File(outputFileName);
+            outputFile = new File(OUTPUT_FOLDER + subfolder + File.separator + 
+                    OUTPUT_FILE_NAME);
             outputFile.getParentFile().mkdirs();
             
             outputWriter = new BufferedWriter(new FileWriter(outputFile));

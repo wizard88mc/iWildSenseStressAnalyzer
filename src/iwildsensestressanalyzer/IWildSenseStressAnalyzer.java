@@ -285,22 +285,22 @@ public class IWildSenseStressAnalyzer {
         System.out.println("*** Classification task with participants with more"
                 + " than 0 answers ***");
         WekaAnalyzer.workWithClassificationProblem(participantsListWithMoreThanZeroAnswers, 
-                TITLE_PARTICIPANTS_ZERO_ANSERS);
+                TITLE_PARTICIPANTS_ZERO_ANSERS, "More_Zero_Answers");
         
         System.out.println("*** Classification task with participants with"
                 + " answers more than the arbitrary threshold ***");
         WekaAnalyzer.workWithClassificationProblem(participantsListWithMoreThanThresholdAnswers, 
-                TITLE_MORE_THRESHOLD);
+                TITLE_MORE_THRESHOLD, "More_Than_Threshold");
         
         System.out.println("*** Classification task with participants with more"
                 + " than one answer per day ***");
         WekaAnalyzer.workWithClassificationProblem(participantsListWithMoreThanOneAnswerPerDay, 
-                TITLE_MORE_ONE_SURVEY_PER_DAY);
+                TITLE_MORE_ONE_SURVEY_PER_DAY, "More_Than_OnePerDay");
         
         System.out.println("*** Classification task with participant with more"
                 + " answers than the initial average ***");
         WekaAnalyzer.workWithClassificationProblem(participantsListWithMoreThanAverageAnswers, 
-                TITLE_MORE_THAN_INITIAL_AVERAGE);
+                TITLE_MORE_THAN_INITIAL_AVERAGE, "More_Than_Average");
         
     }
     

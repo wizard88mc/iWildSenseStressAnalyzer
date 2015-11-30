@@ -22,7 +22,7 @@ import java.util.ArrayList;
  */
 public class ARFFWekaWriter extends OutputFileWriter {
     
-    private static final String startingOutputFolder = outputFolder + 
+    private static final String STARTING_OUTPUT_FOLDER = BASE_OUTPUT_FOLDER + 
             "Classification" + File.separator;
     
     private static final String outpufFileName = "StressClassification";
@@ -32,10 +32,10 @@ public class ARFFWekaWriter extends OutputFileWriter {
     private BufferedWriter outputFileWriterEasy = null, 
                 outputFileWriterDifficult = null;
     
-    public ARFFWekaWriter(String participantIMEI) {
+    public ARFFWekaWriter(String participantIMEI, String subfolder) {
         
-        String finalOutputFile = startingOutputFolder + participantIMEI + 
-                File.separator + outpufFileName + participantIMEI;
+        String finalOutputFile = STARTING_OUTPUT_FOLDER + subfolder + File.separator 
+                + participantIMEI + File.separator + outpufFileName + participantIMEI;
         
         try {
             outputFileEasy = new File(finalOutputFile + "EASY.arff");
@@ -170,6 +170,9 @@ public class ARFFWekaWriter extends OutputFileWriter {
         }
     }
    
+    /**
+     * Closes the output files
+     */
     public void closeFiles() {
         
         try {
