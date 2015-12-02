@@ -36,22 +36,31 @@ public class WekaAnalyzer {
          */
         WekaFeaturesForApplicationUsed.createFeaturesName();
         
-        ArrayList<ArrayList<Double>> featuresForApplicationUsedForAllParticipants = new ArrayList<ArrayList<Double>>(), 
-                featuresForTouchesBufferedForAllParticipants = new ArrayList<ArrayList<Double>>(), 
-                featuresForUserActivityForAllParticipants = new ArrayList<ArrayList<Double>>(), 
-                featuresForUserPresenceLightForAllParticipants = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> featuresForApplicationUsedForAllParticipants = 
+                    new ArrayList<ArrayList<Double>>(), 
+                featuresForTouchesBufferedForAllParticipants = 
+                    new ArrayList<ArrayList<Double>>(), 
+                featuresForUserActivityForAllParticipants = 
+                    new ArrayList<ArrayList<Double>>(), 
+                featuresForUserPresenceLightForAllParticipants = 
+                    new ArrayList<ArrayList<Double>>();
         
-        ArrayList<Integer> surveyAnswersForAllParticipants = new ArrayList<Integer>();
+        ArrayList<Integer> surveyAnswersForAllParticipants = 
+            new ArrayList<Integer>();
                 
         for (Participant participant: participants) {
             
             ARFFWekaWriter output = new ARFFWekaWriter(participant.getIMEI(), 
                     subfolderName);
             
-            ArrayList<ArrayList<Double>> featuresForApplicationUsed = new ArrayList<ArrayList<Double>>(), 
-                    featuresForTouchesBuffered = new ArrayList<ArrayList<Double>>(), 
-                    featuresForUserActivity = new ArrayList<ArrayList<Double>>(), 
-                    featuresForUserPresenceLight = new ArrayList<ArrayList<Double>>();
+            ArrayList<ArrayList<Double>> featuresForApplicationUsed = 
+                        new ArrayList<ArrayList<Double>>(), 
+                    featuresForTouchesBuffered = 
+                        new ArrayList<ArrayList<Double>>(), 
+                    featuresForUserActivity = 
+                        new ArrayList<ArrayList<Double>>(), 
+                    featuresForUserPresenceLight = 
+                        new ArrayList<ArrayList<Double>>();
             
             ArrayList<Integer> surveyAnswers = new ArrayList<Integer>();
             

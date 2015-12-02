@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package iwildsensestressanalyzer.applicationsused;
 
 import iwildsensestressanalyzer.dataanalyzer.ApplicationUsedAnalyzer;
@@ -54,8 +49,16 @@ public class CategorizeApps {
         appAlreadyCategorized.put("com.sjbstudio.the15minutemealsrecipes", "Lifestyle");
         appAlreadyCategorized.put("com.android.packageinstaller", "Tools");
         appAlreadyCategorized.put("com.handcent.nextsms", "Communication");
-        appAlreadyCategorized.put("com.tripadvisor.android.apps.cityguide.london", "Travel & Local");
+        appAlreadyCategorized.put("com.tripadvisor.android.apps.cityguide.london", 
+                "Travel & Local");
         appAlreadyCategorized.put("com.android.htmlviewer", "Tools");
+        appAlreadyCategorized.put("com.android.mi.email", "Communication");
+        appAlreadyCategorized.put("com.android.deskclock", "Tools");
+        appAlreadyCategorized.put("com.quickoffice.android", "Productivity");
+        appAlreadyCategorized.put("com.sally.yoga", "Health & Fitness");
+        appAlreadyCategorized.put("com.games.shootbubble", "Puzzle");
+        appAlreadyCategorized.put("com.jwork.wearable.heartratesync", "Health & Fitness");
+        appAlreadyCategorized.put("app.medicalid.free", "Health & Fitness");
         
         appNotRelevant.add("com.android.systemui");
         appNotRelevant.add("ch.unige.ping");

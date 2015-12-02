@@ -1,8 +1,9 @@
 package iwildsensestressanalyzer.utils;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Locale;
 
 /**
  *
@@ -14,7 +15,8 @@ import java.util.Collection;
  */
 public class MathUtils {
     
-    public static final DecimalFormat decimalFormat = new DecimalFormat("0.00000");
+    public static final DecimalFormat decimalFormat = new DecimalFormat("0.00000", 
+            new DecimalFormatSymbols(Locale.US));
     public static final DecimalFormat formatSuccess = new DecimalFormat("00");
     
     /**
