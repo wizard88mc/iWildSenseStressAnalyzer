@@ -187,7 +187,10 @@ public class PerformanceEvaluator {
                     "Precision: " + 
                     MathUtils.decimalFormat.format(evaluation.precision(i)) 
                     + "; Recall: " + 
-                    MathUtils.decimalFormat.format(evaluation.recall(i)) + "}";
+                    MathUtils.decimalFormat.format(evaluation.recall(i)) +  
+                    "; F-Measure: " + 
+                    MathUtils.decimalFormat.format(evaluation.fMeasure(i))
+                    + "}";
             
             result += System.getProperty("line.separator");
         }   

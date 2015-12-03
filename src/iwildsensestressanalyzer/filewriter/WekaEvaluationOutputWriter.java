@@ -57,6 +57,39 @@ public class WekaEvaluationOutputWriter extends OutputFileWriter {
     }
     
     /**
+     * Writes on the output file the number of occurrences for each class
+     * @param occurrences the number of occurrences
+     * @param afterFilter true if data is after the usage of the SMOTE filter, 
+     * false otherwise
+     */
+    public void writeClassesOccurrences(Integer[] occurrences, boolean afterFilter) {
+        
+        String toWrite;
+        if (afterFilter) {
+            toWrite = "Occurrences after SMOTE filter: {";
+        }
+        else {
+            toWrite = "Original occurrences: {";
+        }
+        
+        for (int i = 0; i < occurrences.length; i++) {
+            toWrite += "[" + (i+1) + "] => " + occurrences[i] + "; ";
+        }
+        
+        toWrite += "}";
+        
+        try {
+            outputWriter.write(toWrite);
+            outputWriter.newLine();
+            
+            outputWriter.flush();
+        }
+        catch(IOException exc) {
+            
+        }
+    }
+    
+    /**
      * Closes the BufferedWriter
      */
     public void closeFile() {

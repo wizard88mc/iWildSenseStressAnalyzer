@@ -157,7 +157,7 @@ public class WekaAnalyzer {
         
         listCreatedFiles.addAll(writerForAllParticipants.getOutputFiles());
         
-        performWekaClassificationTask(initialMessage, subfolderName, false);
+        //performWekaClassificationTask(initialMessage, subfolderName, false);
         performWekaClassificationTask(initialMessage, subfolderName, true);
     }
     
@@ -194,6 +194,12 @@ public class WekaAnalyzer {
                      */
                         checkNumberOfIstances(data, easyTask);
                         data = applySMOTEFilterToTrainingData(data, easyTask);
+                        outputWriter.writeClassesOccurrences(countOccurrences(data, easyTask), 
+                                true);
+                    }
+                    else {
+                        outputWriter.writeClassesOccurrences(countOccurrences(data, easyTask), 
+                                false);
                     }
                     /**
                      * ZeroR baseline classification test
@@ -220,7 +226,7 @@ public class WekaAnalyzer {
                     /**
                      * kNN classification test
                      */
-                    for (int k = 0; k < 3; k++) {
+                    for (int k = 2; k < 4; k++) {
                         
                         IBk knn = new IBk(k);
                         knn.setOptions(weka.core.Utils.splitOptions("-W 0 -X -A weka.core.neighboursearch.LinearNNSearch"));
@@ -320,25 +326,15 @@ public class WekaAnalyzer {
         
     }
     
+    /**
+     * Counts the number of instances for each class and duplicates an instance 
+     * if it is the only one for a class
+     * @param instances the set of instances
+     * @param easy true if it is the 3-class problem, false otherwise
+     */
     private static void checkNumberOfIstances(Instances instances, boolean easy) {
         
-        Integer[] classOccurences; 
-        if (!easy) {
-            classOccurences = new Integer[]{0, 0, 0, 0, 0};
-        }
-        else {
-            classOccurences = new Integer[]{0, 0, 0};
-        }
-        
-        for (int i = 0; i < instances.numInstances(); i++) {
-            
-            Attribute classInstance = instances.instance(i)
-                    .attribute(instances.numAttributes() - 1);
-            
-            int classIndex = Integer.valueOf(classInstance.toString()) - 1;
-            
-            classOccurences[classIndex]++;
-        }
+        Integer[] classOccurences = countOccurrences(instances, easy);
         
         for (int i = 0; i < classOccurences.length; i++) {
             
@@ -360,10 +356,10 @@ public class WekaAnalyzer {
         boolean done = false;
         for (int i = 0; i < instances.numInstances() && !done; i++) {
             
-            Attribute instanceClass = instances.instance(i)
-                    .attribute(instances.numAttributes() - 1);
+            int classAttribute = (int) instances.instance(i)
+                    .value(instances.instance(i).classAttribute());
             
-            if (Integer.valueOf(instanceClass.toString()) - 1 == index) {
+            if (classAttribute == index) {
                 //copy this instance
                 Instance newInstance = (Instance) instances.instance(i).copy();
                 instances.add(newInstance);
@@ -380,25 +376,9 @@ public class WekaAnalyzer {
     private static Instances applySMOTEFilterToTrainingData(Instances instances, 
             boolean easy) {
         /**
-         * First of all we count the number of istances for each class
+         * First of all we count the number of instances for each class
          */
-        Integer[] occurrences;
-        if (!easy) {
-            occurrences = new Integer[]{0, 0, 0, 0, 0};
-        }
-        else {
-            occurrences = new Integer[]{0, 0, 0};
-        }
-        
-        for (int i = 0; i < instances.numInstances(); i++) {
-            
-            Attribute classInstance = instances.instance(i)
-                    .attribute(instances.numAttributes() - 1);
-            
-            int classIndex = Integer.valueOf(classInstance.toString()) - 1;
-            
-            occurrences[classIndex]++;
-        }
+        Integer[] occurrences = countOccurrences(instances, easy);
         
         /**
          * Getting the number of max occurrences and the index
@@ -425,7 +405,8 @@ public class WekaAnalyzer {
                         SMOTE filter = new SMOTE();
                         filter.setInputFormat(instances);
 
-                        double percentage = numberOfMaxInstances / occurrences[i];
+                        double percentage = (numberOfMaxInstances - occurrences[i]) * 100 
+                                / occurrences[i];
                         if (percentage > 100) {
                             percentage = 100;
                         }
@@ -441,11 +422,11 @@ public class WekaAnalyzer {
                             filter.setNearestNeighbors(1);
                         }
 
-                        filter.setClassValue(String.valueOf(i));
+                        filter.setClassValue(String.valueOf(i + 1));
                     
                         instances = Filter.useFilter(instances, filter);
                         
-                        occurrences[i] += (occurrences[i] * (int) percentage / 100);
+                        occurrences = countOccurrences(instances, easy);
                     }
                 }
                 catch(Exception exc) {
@@ -456,5 +437,32 @@ public class WekaAnalyzer {
         }
         
         return instances;
+    }
+    
+    /**
+     * Counts the number of occurrences for each class
+     * @param instances the set of instances
+     * @param easy true if 3-class problem, false otherwise
+     * @return an array with the number of occurrences for each class
+     */
+    private static Integer[] countOccurrences(Instances instances, boolean easy) {
+        
+        Integer[] occurrences;
+        if (!easy) {
+            occurrences = new Integer[]{0, 0, 0, 0, 0};
+        }
+        else {
+            occurrences = new Integer[]{0, 0, 0};
+        }
+        
+        for (int i = 0; i < instances.numInstances(); i++) {
+            
+            int classAttributeValue = (int) instances.instance(i)
+                    .value(instances.instance(i).classAttribute());
+            
+            occurrences[classAttributeValue]++;
+        }
+        
+        return occurrences;
     }
 }
