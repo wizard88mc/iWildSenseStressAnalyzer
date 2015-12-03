@@ -15,8 +15,12 @@ import weka.classifiers.functions.MultilayerPerceptron;
 import weka.classifiers.lazy.IBk;
 import weka.classifiers.rules.ZeroR;
 import weka.classifiers.trees.J48;
+import weka.core.Attribute;
+import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
+import weka.filters.Filter;
+import weka.filters.supervised.instance.SMOTE;
 
 /**
  * Works with the classification tasks, creating ARFF files and performing 
@@ -153,14 +157,15 @@ public class WekaAnalyzer {
         
         listCreatedFiles.addAll(writerForAllParticipants.getOutputFiles());
         
-        performWekaClassificationTask(initialMessage, subfolderName);
+        performWekaClassificationTask(initialMessage, subfolderName, false);
+        performWekaClassificationTask(initialMessage, subfolderName, true);
     }
     
     /**
      * Performs Classification
      */
     private static void performWekaClassificationTask(String initialMessage, 
-            String subfolder) {
+            String subfolder, boolean oversampleData) {
         
         WekaEvaluationOutputWriter outputWriter = 
                 new WekaEvaluationOutputWriter(subfolder);
@@ -183,6 +188,13 @@ public class WekaAnalyzer {
                     
                     boolean easyTask = file.getName().contains("EASY");
                     
+                    if (oversampleData) {
+                    /**
+                     * Initial filtering 
+                     */
+                        checkNumberOfIstances(data, easyTask);
+                        data = applySMOTEFilterToTrainingData(data, easyTask);
+                    }
                     /**
                      * ZeroR baseline classification test
                      */
@@ -306,5 +318,143 @@ public class WekaAnalyzer {
         
         return evaluator.evaluatePerformances();
         
+    }
+    
+    private static void checkNumberOfIstances(Instances instances, boolean easy) {
+        
+        Integer[] classOccurences; 
+        if (!easy) {
+            classOccurences = new Integer[]{0, 0, 0, 0, 0};
+        }
+        else {
+            classOccurences = new Integer[]{0, 0, 0};
+        }
+        
+        for (int i = 0; i < instances.numInstances(); i++) {
+            
+            Attribute classInstance = instances.instance(i)
+                    .attribute(instances.numAttributes() - 1);
+            
+            int classIndex = Integer.valueOf(classInstance.toString()) - 1;
+            
+            classOccurences[classIndex]++;
+        }
+        
+        for (int i = 0; i < classOccurences.length; i++) {
+            
+            if (classOccurences[i] == 1) {
+                //duplicate instance
+                duplicateInstance(instances, i);
+            }
+        }
+    }
+    
+    /**
+     * Duplicates a single instance for a class label that has only a single 
+     * instance in its training set
+     * @param instances all the instances
+     * @param index the index of the class that we have to duplicate
+     */
+    private static void duplicateInstance(Instances instances, int index) {
+        
+        boolean done = false;
+        for (int i = 0; i < instances.numInstances() && !done; i++) {
+            
+            Attribute instanceClass = instances.instance(i)
+                    .attribute(instances.numAttributes() - 1);
+            
+            if (Integer.valueOf(instanceClass.toString()) - 1 == index) {
+                //copy this instance
+                Instance newInstance = (Instance) instances.instance(i).copy();
+                instances.add(newInstance);
+                
+                done = true;
+            }
+        }
+    }
+    
+    /**
+     * Applies SMOTE filter to balance unbalance training set
+     * @param instances the set of instances
+     */
+    private static Instances applySMOTEFilterToTrainingData(Instances instances, 
+            boolean easy) {
+        /**
+         * First of all we count the number of istances for each class
+         */
+        Integer[] occurrences;
+        if (!easy) {
+            occurrences = new Integer[]{0, 0, 0, 0, 0};
+        }
+        else {
+            occurrences = new Integer[]{0, 0, 0};
+        }
+        
+        for (int i = 0; i < instances.numInstances(); i++) {
+            
+            Attribute classInstance = instances.instance(i)
+                    .attribute(instances.numAttributes() - 1);
+            
+            int classIndex = Integer.valueOf(classInstance.toString()) - 1;
+            
+            occurrences[classIndex]++;
+        }
+        
+        /**
+         * Getting the number of max occurrences and the index
+         */
+        int numberOfMaxInstances = Integer.MIN_VALUE, indexMaxOccurrences = -1;
+        
+        for (int i = 0; i < occurrences.length; i++) {
+            if (occurrences[i] > numberOfMaxInstances) {
+                numberOfMaxInstances = occurrences[i];
+                indexMaxOccurrences = i;
+            }
+        }
+        
+        /**
+         * Time to apply the SMOTHE filter to all the classes != from the 
+         * one with the highest number of occurrences
+         */
+        for (int i = 0; i < occurrences.length; i++) {
+            
+            if (i != indexMaxOccurrences) {
+             
+                try {
+                    while (Math.abs(occurrences[i] - numberOfMaxInstances) > 10) {
+                        SMOTE filter = new SMOTE();
+                        filter.setInputFormat(instances);
+
+                        double percentage = numberOfMaxInstances / occurrences[i];
+                        if (percentage > 100) {
+                            percentage = 100;
+                        }
+
+                        filter.setPercentage(percentage);
+                        if (occurrences[i] > 10) {
+                            filter.setNearestNeighbors(5);
+                        }
+                        else if (occurrences[i] > 5) {
+                            filter.setNearestNeighbors(2);
+                        }
+                        else if (occurrences[i] <= 5) {
+                            filter.setNearestNeighbors(1);
+                        }
+
+                        filter.setClassValue(String.valueOf(i));
+                    
+                        instances = Filter.useFilter(instances, filter);
+                        
+                        occurrences[i] += (occurrences[i] * (int) percentage / 100);
+                    }
+                }
+                catch(Exception exc) {
+                    System.out.println("Exception in applying SMOTHE filter: " 
+                            + exc.toString());
+                }
+            }
+        }
+        
+        return instances;
     }
 }

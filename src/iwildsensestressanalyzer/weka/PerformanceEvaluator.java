@@ -190,7 +190,7 @@ public class PerformanceEvaluator {
                     MathUtils.decimalFormat.format(evaluation.recall(i)) + "}";
             
             result += System.getProperty("line.separator");
-        }
+        }   
         
         double microPrecision = calculateMicroPrecision(), 
                 microRecall = calculateMicroRecall(), 
