@@ -200,6 +200,19 @@ public class PerformanceEvaluator {
                 macroPrecision = calculateMacroPrecision(), 
                 macroRecall = calculateMacroRecall();
         
+        if (Double.isInfinite(microPrecision) || Double.isNaN(microPrecision)) {
+            microPrecision = 0.0;
+        }
+        if (Double.isInfinite(microRecall) || Double.isNaN(microRecall)) {
+            microRecall = 0.0;
+        }
+        if (Double.isInfinite(macroPrecision) || Double.isNaN(macroPrecision)) {
+            macroPrecision = 0.0;
+        }
+        if (Double.isInfinite(macroRecall) || Double.isNaN(macroRecall)) {
+            macroRecall = 0.0;
+        }
+        
         double microFscore = calculateFscore(1, microPrecision, microRecall), 
                 macroFscore = calculateFscore(1, macroPrecision, macroRecall);
         
