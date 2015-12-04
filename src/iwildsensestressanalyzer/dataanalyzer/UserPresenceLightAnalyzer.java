@@ -18,11 +18,18 @@ public class UserPresenceLightAnalyzer extends EventsAnalyzer {
         if (!useAllTogether) {
             
             ArrayList<Double> tTestPassedForLightValuesOfScreenOnOffEvents = 
-                        new ArrayList<Double>(),
+                        new ArrayList<>(),
                     tTestPassedForLightValuesOfUnlockedScreenEvents = 
-                        new ArrayList<Double>(),
+                        new ArrayList<>(),
                     tTestPassedForLightValuesForAllScreenEvents = 
-                        new ArrayList<Double>();
+                        new ArrayList<>();
+            
+            ArrayList<Integer> validTTestsForLightValuesOfScreenOnOffEvents = 
+                        new ArrayList<>(),
+                    validTTestsForLightValuesOfUnlockedScreenEvents = 
+                        new ArrayList<>(),
+                    validTTestsForLightValuesForAllScreenEvents = 
+                        new ArrayList<>();
             
             for (Participant participant: participants) {
                 
@@ -40,17 +47,20 @@ public class UserPresenceLightAnalyzer extends EventsAnalyzer {
                 ArrayList<Boolean> returnedResults = 
                         workWithLightValuesOfScreenOnOffEvents(wrappers, easyJob);
                 addTTestResultsToFinalContainer(tTestPassedForLightValuesOfScreenOnOffEvents, 
-                        returnedResults);
+                        returnedResults, 
+                        validTTestsForLightValuesOfScreenOnOffEvents);
                 
                 returnedResults = 
                         workWithLightValuesOfUnlockedScreenEvents(wrappers, easyJob);
                 addTTestResultsToFinalContainer(tTestPassedForLightValuesOfUnlockedScreenEvents,
-                        returnedResults);
+                        returnedResults, 
+                        validTTestsForLightValuesOfUnlockedScreenEvents);
                 
                 returnedResults = 
                         workWithLightValuesForAllScreenEvents(wrappers, easyJob);
                 addTTestResultsToFinalContainer(tTestPassedForLightValuesForAllScreenEvents, 
-                        returnedResults);
+                        returnedResults, 
+                        validTTestsForLightValuesForAllScreenEvents);
             }
             
             /**
@@ -58,24 +68,27 @@ public class UserPresenceLightAnalyzer extends EventsAnalyzer {
              * events feature
              */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForLightValuesForAllScreenEvents, 
-                    participants.size(), easyJob, "*** Percentage of success of"
-                            + " Light value for ScreenOnOff events feature ***");
+                    validTTestsForLightValuesOfScreenOnOffEvents, easyJob, 
+                    "*** Percentage of success of Light value for ScreenOnOff"
+                            + " events feature ***");
             
             /**
              * Analyzing percentage of success of Light value for UnlockedScreen
              * events feature
              */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForLightValuesOfUnlockedScreenEvents, 
-                    participants.size(), easyJob, "*** Percentage of success of"
-                            + " Light value for UnlockedScreen events feature ***");
+                    validTTestsForLightValuesOfUnlockedScreenEvents, easyJob, 
+                    "*** Percentage of success of Light value for "
+                            + "UnlockedScreen events feature ***");
             
             /**
              * Analyzing percentage of success of Light value for ALL screen 
              * events feature
              */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForLightValuesForAllScreenEvents, 
-                    participants.size(), easyJob, "*** Percentage of success of"
-                            + " Light value for ALL screen events feature ***");
+                    validTTestsForLightValuesForAllScreenEvents, easyJob, 
+                    "*** Percentage of success of Light value for ALL screen"
+                            + " events feature ***");
             
         }
         else {
@@ -103,10 +116,11 @@ public class UserPresenceLightAnalyzer extends EventsAnalyzer {
         
         printTitleMessage("*** Light value for ScreenOnOff events ***");
         
-        ArrayList<ArrayList<Double>> values = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> values = new ArrayList<>();
         
         for (SurveyDataWrapper wrapper: wrappers) {
-            values.add(wrapper.getUserPresenceLightFeaturesExtractor().getAllLightValuesForScreenOnOffEvents());
+            values.add(wrapper.getUserPresenceLightFeaturesExtractor().
+                    getAllLightValuesForScreenOnOffEvents());
         }
         
         ArrayList<ArrayList<Double>> normalizedValues = 
@@ -128,11 +142,11 @@ public class UserPresenceLightAnalyzer extends EventsAnalyzer {
         printTitleMessage("*** GLOBAL ANALYSIS: Light values for ScreenOnOff" + 
                 " events");
         
-        ArrayList<ArrayList<Double>> listValues = 
-                new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
         
         for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
-            ArrayList<Double> singleValues = new ArrayList<Double>();
+            ArrayList<Double> singleValues = new ArrayList<>();
+            
             for (SurveyDataWrapper wrapper: wrappers) {
                 
                 Double[] values = wrapper.getUserPresenceLightFeaturesExtractor()
@@ -164,15 +178,15 @@ public class UserPresenceLightAnalyzer extends EventsAnalyzer {
         
         printTitleMessage("*** Light value for UnlockedScreen events ***");
         
-        ArrayList<ArrayList<Double>> values = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> values = new ArrayList<>();
         
         for (SurveyDataWrapper wrapper: wrappers) {
             values.add(wrapper.getUserPresenceLightFeaturesExtractor()
                     .getAllLightValuesForUnlockedScreenEvents());
         }
         
-        return printTTestResults(MathUtils.normalizeSetOfDoubleData(values, 0.0, 1.0), 
-                easyJob);
+        return printTTestResults(MathUtils.normalizeSetOfDoubleData(values, 
+                0.0, 1.0), easyJob);
     }
     
     /**
@@ -188,11 +202,11 @@ public class UserPresenceLightAnalyzer extends EventsAnalyzer {
         printTitleMessage("*** GLOBAL ANALYSIS: Light values for UnlockedScreen" + 
                 " events");
         
-        ArrayList<ArrayList<Double>> listValues = 
-                new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
         
         for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
-            ArrayList<Double> singleValues = new ArrayList<Double>();
+            ArrayList<Double> singleValues = new ArrayList<>();
+            
             for (SurveyDataWrapper wrapper: wrappers) {
                 
                 Double[] values = wrapper.getUserPresenceLightFeaturesExtractor()
@@ -202,7 +216,6 @@ public class UserPresenceLightAnalyzer extends EventsAnalyzer {
                     singleValues.add(values[0]);
                 }
             }
-            
             listValues.add(singleValues);
         }
         
@@ -224,15 +237,15 @@ public class UserPresenceLightAnalyzer extends EventsAnalyzer {
         
         printTitleMessage("*** Light value for ALL screen events ***");
         
-        ArrayList<ArrayList<Double>> values = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> values = new ArrayList<>();
         
         for (SurveyDataWrapper wrapper: wrappers) {
             values.add(wrapper.getUserPresenceLightFeaturesExtractor()
                     .getAllLightValuesForAllScreenEvents());
         }
         
-        return printTTestResults(MathUtils.normalizeSetOfDoubleData(values, 0.0, 1.0), 
-                easyJob);
+        return printTTestResults(MathUtils.normalizeSetOfDoubleData(values, 
+                0.0, 1.0), easyJob);
     }
     
     /**
@@ -248,11 +261,11 @@ public class UserPresenceLightAnalyzer extends EventsAnalyzer {
         printTitleMessage("*** GLOBAL ANALYSIS: Light values for ALL Screen" + 
                 " events");
         
-        ArrayList<ArrayList<Double>> listValues = 
-                new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
         
         for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
-            ArrayList<Double> singleValues = new ArrayList<Double>();
+            ArrayList<Double> singleValues = new ArrayList<>();
+            
             for (SurveyDataWrapper wrapper: wrappers) {
                 
                 Double[] values = wrapper.getUserPresenceLightFeaturesExtractor()
@@ -261,8 +274,7 @@ public class UserPresenceLightAnalyzer extends EventsAnalyzer {
                 if (values != null) {
                     singleValues.add(values[0]);
                 }
-            }
-            
+            }    
             listValues.add(singleValues);
         }
         

@@ -138,12 +138,12 @@ public class EventsAnalyzer {
                             }
                             catch(Exception exc) {
                                 outputString += " ----- |";
-                                testPassed.add(false);
+                                testPassed.add(null);
                             }
                         }
                         else {
                             outputString += " ----- |";
-                            testPassed.add(false);
+                            testPassed.add(null);
                         }
                     }
                 }
@@ -201,8 +201,12 @@ public class EventsAnalyzer {
                          * First check if both data list has at least one value, 
                          * otherwise no test can be performed
                          */
-                            
-                        outputString += MathUtils.formatSuccess.format(values.get(counterForValues)) + "%|";        
+                        if (values.get(counterForValues) != null) { 
+                            outputString += MathUtils.formatSuccess.format(values.get(counterForValues)) + "%|";
+                        }
+                        else {
+                            outputString += " - |";
+                        }
                         
                         counterForValues++;
                     }
@@ -217,15 +221,15 @@ public class EventsAnalyzer {
      * Performs all the steps necessary to calculate and print the percentage
      * of success of a particular feature
      * @param values the set of values of tests passed
-     * @param numberOfParticipants the number of participants
+     * @param validTTests a list with the number of valid t-tests
      * @param easyJob true if using only three values, false for five values
      * @param titleMessage the message to write
      */
     protected static void performStepsForPrintingPercentageOfSuccess(ArrayList<Double> values, 
-            int numberOfParticipants, boolean easyJob, String titleMessage) {
+            ArrayList<Integer> validTTests, boolean easyJob, String titleMessage) {
         
         printTitleMessage(titleMessage);
-        calculatePercentages(values, numberOfParticipants);
+        calculatePercentages(values, validTTests);
         printTTestPercentagesOfSuccess(values, easyJob);
     }
     
@@ -248,21 +252,28 @@ public class EventsAnalyzer {
      * @param resultsContainer the list of combinations with the number of 
      * overall passed values
      * @param tTestResults a list of t-test results 
+     * @param validTests a list to count the number of valid tests
      */
     protected static void addTTestResultsToFinalContainer(ArrayList<Double> resultsContainer, 
-            ArrayList<Boolean> tTestResults) {
+            ArrayList<Boolean> tTestResults, ArrayList<Integer> validTests) {
         
         if (resultsContainer.isEmpty()) {
             for (Boolean result: tTestResults) {
                 resultsContainer.add(0.0);
+                validTests.add(0);
             }
         }
         
         for (int index = 0; index < resultsContainer.size(); index++) {
             
             Double currentValue = resultsContainer.get(index);
-            if (tTestResults.get(index)) {
-                resultsContainer.set(index, currentValue + 1);
+            Integer currentCounter = validTests.get(index);
+            
+            if (tTestResults.get(index) != null) {
+                if (tTestResults.get(index)) {
+                    resultsContainer.set(index, currentValue + 1);
+                    validTests.set(index, currentCounter + 1);
+                }
             }
         }
     }
@@ -270,15 +281,20 @@ public class EventsAnalyzer {
     /**
      * Calculates the percentage of checks that passed the t test
      * @param results the final results of 
-     * @param numberParticipants the total number of participants
+     * @param validTTests the total number of participants
      */
     protected static void calculatePercentages(ArrayList<Double> results, 
-            int numberParticipants) {
+            ArrayList<Integer> validTTests) {
         
         for (int index = 0; index < results.size(); index++) {
             
-            Double value = results.get(index);
-            results.set(index, (value / (double) numberParticipants) * 100);
+            Double result = (results.get(index) / 
+                    (double) validTTests.get(index)) * 100;
+            
+            if (result.isInfinite() || result.isNaN()) {
+                result = null;
+            }
+            results.set(index, result);
         }
     }
 }

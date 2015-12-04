@@ -21,12 +21,19 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
          * of the perceived stress from users
          */
         if (!useAllTogether) {
-            ArrayList<Double> tTestPassedForOnOffDurationForOnOffScreenEvennts = 
-                    new ArrayList<Double>(),
+            ArrayList<Double> tTestPassedForOnOffDurationForOnOffScreenEvents = 
+                    new ArrayList<>(),
                     tTestPassedForOnOffDurationForUnlockedScreenEvents = 
-                    new ArrayList<Double>(),
+                    new ArrayList<>(),
                     tTestPassedForUnlockTimeForUnlockedScreenEvents = 
-                    new ArrayList<Double>();
+                    new ArrayList<>();
+            
+            ArrayList<Integer> validTTestsForOnOffDurationForOnOffScreenEvents = 
+                    new ArrayList<>(),
+                    validTTestsForOnOffDurationForUnlockedScreenEvents = 
+                    new ArrayList<>(), 
+                    validTTestsForUnlockTimeForUnlockedScreenEvents = 
+                    new ArrayList<>();
             
             for (Participant participant: participants) {
                 
@@ -43,41 +50,44 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
 
                 ArrayList<Boolean> returnedResults = 
                         workWithOnOffDurationForOnOffScreenEvents(surveyDataWrappers, easyJob);
-                addTTestResultsToFinalContainer(tTestPassedForOnOffDurationForOnOffScreenEvennts, 
-                        returnedResults);
+                addTTestResultsToFinalContainer(tTestPassedForOnOffDurationForOnOffScreenEvents, 
+                        returnedResults, validTTestsForOnOffDurationForOnOffScreenEvents);
                 
                 returnedResults = workWithOnOffDurationForUnlockedScreenEvents(surveyDataWrappers, easyJob);
                 addTTestResultsToFinalContainer(tTestPassedForOnOffDurationForUnlockedScreenEvents, 
-                        returnedResults);
+                        returnedResults, validTTestsForOnOffDurationForUnlockedScreenEvents);
                 
                 workWithUnlockTimeForUnlockedScreenEvents(surveyDataWrappers, easyJob);
                 addTTestResultsToFinalContainer(tTestPassedForUnlockTimeForUnlockedScreenEvents, 
-                        returnedResults);
+                        returnedResults, validTTestsForUnlockTimeForUnlockedScreenEvents);
             }
             
             /**
              * Analyzing percentage of success of On-Off duration for 
              * ScreenOnOff events feature
              */
-            performStepsForPrintingPercentageOfSuccess(tTestPassedForOnOffDurationForOnOffScreenEvennts, 
-                    participants.size(), easyJob, "*** Percentage of success for"
-                            + " On-Off Duration for ScreenOnOff events ***");
+            performStepsForPrintingPercentageOfSuccess(tTestPassedForOnOffDurationForOnOffScreenEvents, 
+                    validTTestsForOnOffDurationForOnOffScreenEvents, easyJob, 
+                    "*** Percentage of success for On-Off Duration for "
+                            + "ScreenOnOff events ***");
             
             /**
              * Analyzing percentage of success of On-Off duration for 
              * UnlockedScreen events feature
              */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForOnOffDurationForUnlockedScreenEvents, 
-                    participants.size(), easyJob, "*** Percentage of success for"
-                            + " On-Off Duration for UnlockedScreen events ***");
+                    validTTestsForOnOffDurationForUnlockedScreenEvents, easyJob, 
+                    "*** Percentage of success for On-Off Duration for "
+                            + "UnlockedScreen events ***");
            
            /**
             * Analyzing percentage of success of Unlock Time for 
             * UnlockedScreen events feature
             */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForUnlockTimeForUnlockedScreenEvents, 
-                    participants.size(), easyJob, "*** Percentage of success for"
-                            + " Unlock Time for UnlockedScreen events ***");
+                    validTTestsForUnlockTimeForUnlockedScreenEvents, easyJob, 
+                    "*** Percentage of success for Unlock Time for "
+                            + "UnlockedScreen events ***");
         }
         
         if (useAllTogether) {

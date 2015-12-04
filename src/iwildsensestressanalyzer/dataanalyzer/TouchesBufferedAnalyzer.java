@@ -24,15 +24,25 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
         
         if (!useAllTogether) {
             
-            ArrayList<Double> tTestPassedForCounter = new ArrayList<Double>(), 
-                    tTestPassedForMinInterval = new ArrayList<Double>(), 
-                    tTestPassedForMaxInterval = new ArrayList<Double>(),
-                    tTestPassedForRange = new ArrayList<Double>(),
-                    tTestPassedForMean = new ArrayList<Double>(),
-                    tTestPassedForMedian = new ArrayList<Double>(), 
-                    tTestPassedForVariance = new ArrayList<Double>(), 
-                    tTestPassedForStandardDeviation = new ArrayList<Double>(),
-                    tTestPassedForSessionDuration = new ArrayList<Double>();
+            ArrayList<Double> tTestPassedForCounter = new ArrayList<>(), 
+                    tTestPassedForMinInterval = new ArrayList<>(), 
+                    tTestPassedForMaxInterval = new ArrayList<>(),
+                    tTestPassedForRange = new ArrayList<>(),
+                    tTestPassedForMean = new ArrayList<>(),
+                    tTestPassedForMedian = new ArrayList<>(), 
+                    tTestPassedForVariance = new ArrayList<>(), 
+                    tTestPassedForStandardDeviation = new ArrayList<>(),
+                    tTestPassedForSessionDuration = new ArrayList<>();
+            
+            ArrayList<Integer> validTTestsForCounter = new ArrayList<>(), 
+                    validTTestsForMinInterval = new ArrayList<>(), 
+                    validTTestsForMaxInterval = new ArrayList<>(), 
+                    validTTestsForRange = new ArrayList<>(), 
+                    validTTestsForMean = new ArrayList<>(), 
+                    validTTestsForMedian = new ArrayList<>(), 
+                    validTTestsForVariance = new ArrayList<>(), 
+                    validTTestsForStandardDeviation = new ArrayList<>(), 
+                    validTTestsForSessionDuration = new ArrayList<>();
             
             for (Participant participant: participants) {
                 
@@ -50,119 +60,128 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
                 ArrayList<Boolean> returnedResults = workWithCounter(wrappers, 
                         easyJob);
                 addTTestResultsToFinalContainer(tTestPassedForCounter, 
-                        returnedResults);
+                        returnedResults, validTTestsForCounter);
                 
                 returnedResults = workWithMinInterval(wrappers, easyJob);
                 addTTestResultsToFinalContainer(tTestPassedForMinInterval, 
-                        returnedResults);
+                        returnedResults, validTTestsForMinInterval);
                 
                 returnedResults = workWithMaxInterval(wrappers, easyJob);
                 addTTestResultsToFinalContainer(tTestPassedForMaxInterval, 
-                        returnedResults);
+                        returnedResults, validTTestsForMaxInterval);
                 
                 returnedResults = workWithRange(wrappers, easyJob);
                 addTTestResultsToFinalContainer(tTestPassedForRange, 
-                        returnedResults);
+                        returnedResults, validTTestsForRange);
                 
                 returnedResults = workWithMean(wrappers, easyJob);
                 addTTestResultsToFinalContainer(tTestPassedForMean, 
-                        returnedResults);
+                        returnedResults, validTTestsForMean);
                 
                 returnedResults = workWithMedian(wrappers, easyJob);
                 addTTestResultsToFinalContainer(tTestPassedForMedian, 
-                        returnedResults);
+                        returnedResults, validTTestsForMedian);
                 
                 returnedResults = workWithVariance(wrappers, easyJob);
                 addTTestResultsToFinalContainer(tTestPassedForVariance, 
-                        returnedResults);
+                        returnedResults, validTTestsForVariance);
                 
                 returnedResults = workWithStandardDeviation(wrappers, easyJob);
                 addTTestResultsToFinalContainer(tTestPassedForStandardDeviation, 
-                        returnedResults);
+                        returnedResults, validTTestsForStandardDeviation);
                 
                 returnedResults = workWithSessionDuration(wrappers, easyJob);
                 addTTestResultsToFinalContainer(tTestPassedForSessionDuration, 
-                        returnedResults);
+                        returnedResults, validTTestsForSessionDuration);
             }
             
             /**
              * Analyzing percentage of success of the counter feature
              */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForCounter, 
-                    participants.size(), easyJob, "*** Percentage of success of "
-                            + "number of touches during usage session ***");
+                    validTTestsForCounter, easyJob, "*** Percentage of success "
+                            + "of number of touches during usage session ***");
             
             /**
              * Analyzing percentage of success of the min_interval feature
              */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForMinInterval, 
-                    participants.size(), easyJob, "*** Percentage of success of "
-                            + "minimum touch interval between two consecutive"
-                            + " touches ***");
+                    validTTestsForMinInterval, easyJob, "*** Percentage of "
+                            + "success of minimum touch interval between two "
+                            + "consecutive touches ***");
             
             /**
              * Analyzing percentage of success of the max_interval feature
              */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForMaxInterval, 
-                    participants.size(), easyJob, "*** Percentage of success of "
-                            + "maximum touch interval between two consecutive"
-                            + " touches ***");
+                    validTTestsForMaxInterval, easyJob, "*** Percentage of "
+                            + "success of maximum touch interval between two "
+                            + "consecutive touches ***");
             
             /**
              * Analyzing percentage of success of the range feature
              */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForRange, 
-                    participants.size(), easyJob, "*** Percentage of success of"
+                    validTTestsForRange, easyJob, "*** Percentage of success of"
                             + " range of touch intervals ***");
             
             /**
              * Analyzing percentage of success of mean feature
              */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForMean, 
-                    participants.size(), easyJob, "*** Percentage of success of"
+                    validTTestsForMean, easyJob, "*** Percentage of success of"
                             + " mean of touch intervals");
             
             /**
              * Analyzing percentage of success of median feature
              */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForMedian, 
-                    participants.size(), easyJob, "*** Percentage of success of"
-                            + " median of touch intervals");
+                    validTTestsForMedian, easyJob, "*** Percentage of success "
+                            + "of median of touch intervals");
             
             /**
              * Analyzing percentage of success of variance feature
              */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForVariance, 
-                    participants.size(), easyJob, "*** Percentage of success of"
-                            + " variance of touch intervals");
+                    validTTestsForVariance, easyJob, "*** Percentage of success"
+                            + " of variance of touch intervals");
             
             /**
              * Analyzing percentage of success of standard_deviation feature
              */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForStandardDeviation, 
-                    participants.size(), easyJob, "*** Percentage of success "
-                            + "standard deviation of touch intervals ***");
+                    validTTestsForStandardDeviation, easyJob, "*** Percentage "
+                            + "of success standard deviation of touch intervals"
+                            + " ***");
 
             /**
              * Analyzing percentage of success of session_duration feature
              */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForSessionDuration, 
-                    participants.size(), easyJob, "*** Percentage of success of"
-                            + " duration of the usage session ***");
+                    validTTestsForSessionDuration, easyJob, "*** Percentage of "
+                            + "success of duration of the usage session ***");
 
         }
         else {
             ArrayList<ArrayList<SurveyDataWrapper>> allSurveyDataWrappers = 
                     prepareDataWrappersForAllParticipants(participants, easyJob);
             
-            workWithCounterValuesOfAllParticipants(allSurveyDataWrappers, easyJob);
-            workWithMinIntervalValuesOfAllParticipants(allSurveyDataWrappers, easyJob);
-            workWithMaxIntervalValuesOfAllParticipants(allSurveyDataWrappers, easyJob);
-            workWithRangeValuesOfAllParticipants(allSurveyDataWrappers, easyJob);
-            workWithMedianValuesOfAllParticipants(allSurveyDataWrappers, easyJob);
-            workWithVarianceValuesOfAllParticipants(allSurveyDataWrappers, easyJob);
-            workWithStandardDeviationValuesOfAllParticipants(allSurveyDataWrappers, easyJob);
-            workWithSessionDurationValuesOfAllParticipants(allSurveyDataWrappers, easyJob);
+            workWithCounterValuesOfAllParticipants(allSurveyDataWrappers, 
+                    easyJob);
+            workWithMinIntervalValuesOfAllParticipants(allSurveyDataWrappers, 
+                    easyJob);
+            workWithMaxIntervalValuesOfAllParticipants(allSurveyDataWrappers, 
+                    easyJob);
+            workWithRangeValuesOfAllParticipants(allSurveyDataWrappers, 
+                    easyJob);
+            workWithMedianValuesOfAllParticipants(allSurveyDataWrappers, 
+                    easyJob);
+            workWithVarianceValuesOfAllParticipants(allSurveyDataWrappers, 
+                    easyJob);
+            workWithStandardDeviationValuesOfAllParticipants(allSurveyDataWrappers, 
+                    easyJob);
+            workWithSessionDurationValuesOfAllParticipants(allSurveyDataWrappers, 
+                    easyJob);
         }
     }
     

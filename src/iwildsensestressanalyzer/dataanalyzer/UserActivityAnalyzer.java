@@ -18,19 +18,33 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
         if (!allTogether) {
             
             ArrayList<Double> tTestPassedForPointsSumOfActivities = 
-                        new ArrayList<Double>(), 
+                        new ArrayList<>(), 
                     tTestPassedForPercentageOfWorkload = 
-                        new ArrayList<Double>(),
+                        new ArrayList<>(),
                     tTestPassedForInfluenceOfWalkingActivityOnTotal = 
-                        new ArrayList<Double>(),
+                        new ArrayList<>(),
                     tTestPassedForInfluenceOfRunningActivityOnTotal = 
-                        new ArrayList<Double>(), 
-                    tTestPassedForInfluenceOfOnBicycleOnTotal = 
-                        new ArrayList<Double>(), 
+                        new ArrayList<>(), 
+                    tTestPassedForInfluenceOfOnBicycleActivityOnTotal = 
+                        new ArrayList<>(), 
                     tTestPassedForPercentageOfTiltingEvents = 
-                        new ArrayList<Double>(), 
+                        new ArrayList<>(), 
                     tTestPassedForPercentageOfInVehicleEvents = 
-                        new ArrayList<Double>();
+                        new ArrayList<>();
+            
+            ArrayList<Integer> validTTestsForPointsSumOfActivities = 
+                        new ArrayList<>(), 
+                    validTTestsForPercentageOfWorkload = new ArrayList<>(), 
+                    validTTestsForInfluenceOfWalkingActivityOnTotal = 
+                        new ArrayList<>(), 
+                    validTTestsForInfluenceOfRunningActivityOnTotal = 
+                        new ArrayList<>(), 
+                    validTTestsForInfluenceOfOnBicycleActivityOnTotal = 
+                        new ArrayList<>(), 
+                    validTTestsForPercentageOfTiltingEvents = new ArrayList<>(), 
+                    validTTestsForPercentageOfInVehicleEvents = 
+                        new ArrayList<>();
+                    
             
             for (Participant participant: participants) {
                 
@@ -48,33 +62,42 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
                 ArrayList<Boolean> returnedResults = 
                         workWithPointsSumOfActivities(wrappers, easyJob);
                 addTTestResultsToFinalContainer(tTestPassedForPointsSumOfActivities, 
-                        returnedResults);
+                        returnedResults, validTTestsForPointsSumOfActivities);
                 
                 returnedResults = workWithPercentageOfWorkload(wrappers, easyJob);
                 addTTestResultsToFinalContainer(tTestPassedForPercentageOfWorkload, 
-                        returnedResults);
+                        returnedResults, validTTestsForPercentageOfWorkload);
                 
                 returnedResults = 
-                        workWithInfluenceOfWalkingActivityOnTotal(wrappers, easyJob);
+                        workWithInfluenceOfWalkingActivityOnTotal(wrappers, 
+                                easyJob);
                 addTTestResultsToFinalContainer(tTestPassedForInfluenceOfWalkingActivityOnTotal, 
-                        returnedResults);
+                        returnedResults, 
+                        validTTestsForInfluenceOfWalkingActivityOnTotal);
                 
                 returnedResults = 
-                        workWithInfluenceOfRunningActivityOnTotal(wrappers, easyJob);
+                        workWithInfluenceOfRunningActivityOnTotal(wrappers, 
+                                easyJob);
                 addTTestResultsToFinalContainer(tTestPassedForInfluenceOfRunningActivityOnTotal, 
-                        returnedResults);
+                        returnedResults, 
+                        validTTestsForInfluenceOfRunningActivityOnTotal);
                 
                 returnedResults = 
                         workWithInfluenceOfOnBicycleOnTotal(wrappers, easyJob);
-                addTTestResultsToFinalContainer(tTestPassedForInfluenceOfOnBicycleOnTotal, 
-                        returnedResults);
+                addTTestResultsToFinalContainer(
+                        tTestPassedForInfluenceOfOnBicycleActivityOnTotal, 
+                        returnedResults, 
+                        validTTestsForInfluenceOfOnBicycleActivityOnTotal);
                 
                 returnedResults = 
                         workWithPercentageOfTiltingEvents(wrappers, easyJob);
-                addTTestResultsToFinalContainer(tTestPassedForPercentageOfTiltingEvents, returnedResults);
+                addTTestResultsToFinalContainer(tTestPassedForPercentageOfTiltingEvents, 
+                        returnedResults, validTTestsForPercentageOfTiltingEvents);
                 
-                returnedResults = workWithPercentageOfInVehicleEvents(wrappers, easyJob);
-                addTTestResultsToFinalContainer(tTestPassedForPercentageOfInVehicleEvents, returnedResults);
+                returnedResults = workWithPercentageOfInVehicleEvents(wrappers, 
+                        easyJob);
+                addTTestResultsToFinalContainer(tTestPassedForPercentageOfInVehicleEvents, 
+                        returnedResults, validTTestsForPercentageOfInVehicleEvents);
             }
             
             /**
@@ -82,60 +105,62 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
              * with activities feature
              */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForPointsSumOfActivities, 
-                    participants.size(), easyJob, "*** Percentage of success "
-                            + "for Sum of the points collected with activities "
-                            + "feature ***");
+                    validTTestsForPointsSumOfActivities, easyJob, 
+                    "*** Percentage of success for Sum of the points collected "
+                            + "with activities feature ***");
             
             /**
              * Analyzing percentage of success of percentage of workload feature
              */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForPercentageOfWorkload, 
-                    participants.size(), easyJob, "*** Percentage of success of"
-                            + " percentage of workload feature ***");
+                    validTTestsForPercentageOfWorkload, easyJob, 
+                    "*** Percentage of success of percentage of workload "
+                            + "feature ***");
             
             /**
              * Analyzing percentage of success of influence of WALKING activity
              * on total feature
              */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForInfluenceOfWalkingActivityOnTotal, 
-                    participants.size(), easyJob, "*** Percentage of success of "
-                            + "influence of WALKING activity on total "
-                            + "feature ***");
+                    validTTestsForInfluenceOfWalkingActivityOnTotal, easyJob, 
+                    "*** Percentage of success of influence of WALKING activity"
+                            + " on total feature ***");
             
             /**
              * Analyzing percentage of success of influence of RUNNING activity
              * on total feature
              */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForInfluenceOfRunningActivityOnTotal, 
-                    participants.size(), easyJob, "*** Percentage of success of"
-                            + " influence of RUNNING activity on total feature"
-                            + " ***");
+                    validTTestsForInfluenceOfRunningActivityOnTotal, easyJob, 
+                    "*** Percentage of success of influence of RUNNING activity"
+                            + " on total feature ***");
             
             /**
              * Analyzing percentage of success of influence of on bicycle 
              * activity on total feature
              */
-            performStepsForPrintingPercentageOfSuccess(tTestPassedForInfluenceOfOnBicycleOnTotal, 
-                    participants.size(), easyJob, "*** Percentage of success of "
-                            + "Influence of ON_BICYCLE activity on total "
-                            + "activity performed feature ***");
+            performStepsForPrintingPercentageOfSuccess(tTestPassedForInfluenceOfOnBicycleActivityOnTotal, 
+                    validTTestsForInfluenceOfOnBicycleActivityOnTotal, easyJob, 
+                    "*** Percentage of success of Influence of ON_BICYCLE "
+                            + "activity on total activity performed feature ***");
             
             /**
              * Analyzing percentage of success of percentage of tilting events
              * on total feature
              */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForPercentageOfTiltingEvents, 
-                    participants.size(), easyJob, "*** Percentage of success of"
-                            + " Percentage of tilting events feature ***");
-            
+                    validTTestsForPercentageOfTiltingEvents, easyJob, 
+                    "*** Percentage of success of Percentage of tilting events"
+                            + " feature ***");
             
             /**
              * Analyzing percentage of success percentage of IN_VEHICLE events
              * on total feature
              */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForPercentageOfInVehicleEvents, 
-                    participants.size(), easyJob, "*** Percentage of success of"
-                            + " Percentage of IN_VEHICLE events feature ***");
+                    validTTestsForPercentageOfInVehicleEvents, easyJob, 
+                    "*** Percentage of success of Percentage of IN_VEHICLE "
+                            + "events feature ***");
             
         }
         else {
@@ -144,11 +169,16 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
             
             workWithPointsSumOfActivitiesOfAllParticipants(listWrappers, easyJob);
             workWithPercentageOfWorkloadOfAllParticipants(listWrappers, easyJob);
-            workWithInfluenceOfWalkingActivityOnTotalOfAllParticipants(listWrappers, easyJob);
-            workWithInfluenceOfRunningActivityOnTotalOfAllParticipants(listWrappers, easyJob);
-            workWithInfluenceOfOnBicycleOnTotalOfAllParticipants(listWrappers, easyJob);
-            workWithPercentageOfTiltingEventsOfAllParticipants(listWrappers, easyJob);
-            workWithPercentageOfInVehicleEventsOfAllParticipants(listWrappers, easyJob);
+            workWithInfluenceOfWalkingActivityOnTotalOfAllParticipants(listWrappers, 
+                    easyJob);
+            workWithInfluenceOfRunningActivityOnTotalOfAllParticipants(listWrappers, 
+                    easyJob);
+            workWithInfluenceOfOnBicycleOnTotalOfAllParticipants(listWrappers, 
+                    easyJob);
+            workWithPercentageOfTiltingEventsOfAllParticipants(listWrappers, 
+                    easyJob);
+            workWithPercentageOfInVehicleEventsOfAllParticipants(listWrappers, 
+                    easyJob);
         }
     }
     
@@ -164,7 +194,7 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
         
         printTitleMessage("*** Sum of the points collected with activities ***");
         
-        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
         
         for (SurveyDataWrapper surveyDataWrapper: surveyDataWrappers) {
             
@@ -188,10 +218,10 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
         printTitleMessage("*** GLOBAL ANALYSIS: Sum of the points collected " +
                 "with activities ***");
         
-        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
         for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
             
-            ArrayList<Double> singleValues = new ArrayList<Double>();
+            ArrayList<Double> singleValues = new ArrayList<>();
             for (SurveyDataWrapper wrapper: wrappers) {
                 Double[] values = wrapper.getUserActivityFeaturesExtractorsListWrapper()
                         .calculateStatisticsPointsSumOfActivities();
@@ -217,7 +247,7 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
         
         printTitleMessage("*** Percentage of workload ***");
         
-        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
         
         for (SurveyDataWrapper wrapper: surveyDataWrappers) {
             
@@ -238,9 +268,9 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
         
         printTitleMessage("*** GLOBAL ANALYSIS: Percentage of workload ***");
         
-        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
         for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
-            ArrayList<Double> singleValues = new ArrayList<Double>();
+            ArrayList<Double> singleValues = new ArrayList<>();
             for (SurveyDataWrapper wrapper: wrappers) {
                 Double[] values = wrapper.getUserActivityFeaturesExtractorsListWrapper()
                         .calculateStatisticsPercentageOfWorkload();
@@ -264,7 +294,7 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
         
         printTitleMessage("*** Influence of Walking Activity on Total ***");
         
-        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
         
         for (SurveyDataWrapper wrapper: surveyDataWrappers) {
             listValues.add(wrapper.getUserActivityFeaturesExtractorsListWrapper()
@@ -286,10 +316,12 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
         printTitleMessage("*** GLOBAL ANALYSIS: Influence of walking Activity" + 
                 " on Total ***");
         
-        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
+        
         for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
-            ArrayList<Double> singleValues = new ArrayList<Double>();
+            ArrayList<Double> singleValues = new ArrayList<>();
             for (SurveyDataWrapper wrapper: wrappers) {
+                
                 Double[] values = wrapper.getUserActivityFeaturesExtractorsListWrapper()
                         .calculateStatisticsInfluenceOfWalkingActivityOnTotal();
                 if (values != null && values[0] != -1) {
@@ -313,7 +345,7 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
         
         printTitleMessage("*** Influence of Running Activity on Total ***");
         
-        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
         
         for (SurveyDataWrapper wrapper: surveyDataWrappers) {
             listValues.add(wrapper.getUserActivityFeaturesExtractorsListWrapper()
@@ -335,9 +367,11 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
         printTitleMessage("*** GLOBAL ANALYSIS: Influence of Running activity "
                 + "on total ***");
         
-        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
+        
         for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
-            ArrayList<Double> singleValues = new ArrayList<Double>();
+            ArrayList<Double> singleValues = new ArrayList<>();
+            
             for (SurveyDataWrapper wrapper: wrappers) {
                 Double[] values = wrapper.getUserActivityFeaturesExtractorsListWrapper()
                         .calculateStatisticsInfluenceOfRunningActivityOnTotal();
@@ -362,7 +396,7 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
         
         printTitleMessage("*** Influence of On Bicycle activity on Total ***");
         
-        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
         
         for (SurveyDataWrapper wrapper: surveyDataWrappers) {
             listValues.add(wrapper.getUserActivityFeaturesExtractorsListWrapper()
@@ -383,9 +417,11 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
         printTitleMessage("*** GLOBAL ANALYSIS: Influence of On Bicycle activity"
                 + " on total activity performed");
         
-        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
+        
         for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
-            ArrayList<Double> singleValues = new ArrayList<Double>();
+            ArrayList<Double> singleValues = new ArrayList<>();
+            
             for (SurveyDataWrapper wrapper: wrappers) {
                 Double[] values = wrapper.getUserActivityFeaturesExtractorsListWrapper()
                         .calculateStatisticsInfluenceOfBicycleActivityOnTotal();
@@ -410,7 +446,7 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
         
         printTitleMessage("*** Percentage of Titlting events ***");
         
-        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
         
         for (SurveyDataWrapper wrapper: surveyDataWrappers) {
             listValues.add(wrapper.getUserActivityFeaturesExtractorsListWrapper()
@@ -431,9 +467,11 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
         printTitleMessage("*** GLOBAL ANALYSIS: Percentage of Tilting events "
                 + "***");
         
-        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
+        
         for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
-            ArrayList<Double> singleValues = new ArrayList<Double>();
+            ArrayList<Double> singleValues = new ArrayList<>();
+            
             for (SurveyDataWrapper wrapper: wrappers) {
                 Double[] values = wrapper.getUserActivityFeaturesExtractorsListWrapper()
                         .calculateStatisticsPercentageOfTiltingEvents();
@@ -457,7 +495,7 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
         
         printTitleMessage("*** Percentage of IN_VEHICLE events ***");
         
-        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
         
         for (SurveyDataWrapper wrapper: surveyDataWrappers) {
             listValues.add(wrapper.getUserActivityFeaturesExtractorsListWrapper()
@@ -477,9 +515,10 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
         
         printTitleMessage("*** GLOBAL ANALYSIS: Percentage of IN_VEHICLE events");
         
-        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
         for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
-            ArrayList<Double> singleValues = new ArrayList<Double>();
+            ArrayList<Double> singleValues = new ArrayList<>();
+            
             for (SurveyDataWrapper wrapper: wrappers) {
                 Double[] values = wrapper.getUserActivityFeaturesExtractorsListWrapper()
                         .calculateStatisticsPercentageOfInVehicleEvents();

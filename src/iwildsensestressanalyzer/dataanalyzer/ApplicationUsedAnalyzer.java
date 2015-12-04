@@ -1,6 +1,5 @@
 package iwildsensestressanalyzer.dataanalyzer;
 
-import iwildsensestressanalyzer.IWildSenseStressAnalyzer;
 import iwildsensestressanalyzer.participant.Participant;
 import java.util.ArrayList;
 
@@ -28,9 +27,14 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
             for (String appCategory: allAppCategories) {
                 
                 ArrayList<Double> tTestPassedForAppCategoryFrequency = 
-                            new ArrayList<Double>(),
+                            new ArrayList<>(),
                         tTestPassedForAppCategoryTimingInfluence = 
-                            new ArrayList<Double>();
+                            new ArrayList<>();
+                
+                ArrayList<Integer> validTTestsForAppCategoryFrequency = 
+                            new ArrayList<>(), 
+                        validTTestsForAppCategoryTimingInfluence = 
+                            new ArrayList<>();
             
                 for (Participant participant: participants) {
                     
@@ -49,12 +53,12 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
                             workWithAppCategoryFrequency(wrappers, appCategory, 
                                     easyJob);
                     addTTestResultsToFinalContainer(tTestPassedForAppCategoryFrequency, 
-                            results);
+                            results, validTTestsForAppCategoryFrequency);
                     
                     results = workWithAppCategoryTimingInfluence(wrappers, 
                             appCategory, easyJob);
                     addTTestResultsToFinalContainer(tTestPassedForAppCategoryTimingInfluence, 
-                            results);
+                            results, validTTestsForAppCategoryTimingInfluence);
                 }
                 
                 /**
@@ -62,18 +66,18 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
                  * category
                  */
                 performStepsForPrintingPercentageOfSuccess(tTestPassedForAppCategoryFrequency, 
-                        participants.size(), easyJob, "*** Percentage of success"
-                                + " of influence of " + appCategory + 
-                                " application category ***");
+                        validTTestsForAppCategoryFrequency, easyJob, 
+                        "*** Percentage of success of influence of " + 
+                                appCategory + " application category ***");
                 
                 /**
                  * Analyzing percentage of success of the timing influence 
                  * of a particular application category
                  */
                 performStepsForPrintingPercentageOfSuccess(tTestPassedForAppCategoryTimingInfluence, 
-                        participants.size(), easyJob, "*** Percentage of success"
-                                + " of timing influence of " + appCategory + 
-                                " application category ***");
+                        validTTestsForAppCategoryTimingInfluence, easyJob, 
+                        "*** Percentage of success of timing influence of " + 
+                                appCategory + " application category ***");
             }
         }
         else {
