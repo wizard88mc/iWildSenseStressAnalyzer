@@ -302,6 +302,8 @@ public class IWildSenseStressAnalyzer {
         WekaAnalyzer.workWithClassificationProblem(participantsListWithMoreThanAverageAnswers, 
                 TITLE_MORE_THAN_INITIAL_AVERAGE, "More_Than_Average");
         
+        WekaAnalyzer.createdFilesWriter.closeFile();
+        
     }
     
     private static void performAnalysisSteps(ArrayList<Participant> participantsList) {

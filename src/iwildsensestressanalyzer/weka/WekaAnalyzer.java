@@ -2,6 +2,7 @@ package iwildsensestressanalyzer.weka;
 
 import iwildsensestressanalyzer.esm.StressSurvey;
 import iwildsensestressanalyzer.filewriter.ARFFWekaWriter;
+import iwildsensestressanalyzer.filewriter.CreatedFilesWriter;
 import iwildsensestressanalyzer.filewriter.WekaEvaluationOutputWriter;
 import iwildsensestressanalyzer.participant.Participant;
 import iwildsensestressanalyzer.utils.MathUtils;
@@ -15,7 +16,6 @@ import weka.classifiers.functions.MultilayerPerceptron;
 import weka.classifiers.lazy.IBk;
 import weka.classifiers.rules.ZeroR;
 import weka.classifiers.trees.J48;
-import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
@@ -29,10 +29,14 @@ import weka.filters.supervised.instance.SMOTE;
  */
 public class WekaAnalyzer {
     
-    public static ArrayList<File> listCreatedFiles = new ArrayList<File>();
+    public static ArrayList<File> listCreatedFiles;
+    public static CreatedFilesWriter createdFilesWriter = 
+            new CreatedFilesWriter();
     
     public static void workWithClassificationProblem(ArrayList<Participant> 
             participants, String initialMessage, String subfolderName) {
+        
+        listCreatedFiles = new ArrayList<File>();
         
         /**
          * For Application used we need to create features only once all the 
@@ -157,7 +161,9 @@ public class WekaAnalyzer {
         
         listCreatedFiles.addAll(writerForAllParticipants.getOutputFiles());
         
-        //performWekaClassificationTask(initialMessage, subfolderName, false);
+        createdFilesWriter.writeCreatedFiles(listCreatedFiles);
+        
+        performWekaClassificationTask(initialMessage, subfolderName, false);
         performWekaClassificationTask(initialMessage, subfolderName, true);
     }
     
@@ -201,98 +207,106 @@ public class WekaAnalyzer {
                         outputWriter.writeClassesOccurrences(countOccurrences(data, easyTask), 
                                 false);
                     }
-                    /**
-                     * ZeroR baseline classification test
-                     */
-                    ZeroR zeroR = new ZeroR();
-                    zeroR.buildClassifier(data);
-                    Evaluation zeroREval = new Evaluation(data);
-                    zeroREval.crossValidateModel(zeroR, data, 10, new Random(10));
                     
-                    outputWriter.writeOnOutputFile("ZeroR Classification");
-                    outputWriter.writeOnOutputFile(evaluateClassificationPerformances(zeroREval, easyTask));
-                    
-                    /**
-                     * Tree classification test
-                     */
-                    J48 tree = new J48();
-                    tree.buildClassifier(data);
-                    Evaluation treeEval = new Evaluation(data);
-                    treeEval.crossValidateModel(tree, data, 10, new Random(10));
-                    
-                    outputWriter.writeOnOutputFile("TREE Classification");
-                    outputWriter.writeOnOutputFile(evaluateClassificationPerformances(treeEval, easyTask));
-                    
-                    /**
-                     * kNN classification test
-                     */
-                    for (int k = 2; k < 4; k++) {
-                        
-                        IBk knn = new IBk(k);
-                        knn.setOptions(weka.core.Utils.splitOptions("-W 0 -X -A weka.core.neighboursearch.LinearNNSearch"));
-                        knn.buildClassifier(data);
-                        Evaluation knnEval = new Evaluation(data);
-                        knnEval.crossValidateModel(knn, data, 10, new Random(10));
-                        
-                        outputWriter.writeOnOutputFile(k + "-kNN Classification");
-                        outputWriter.writeOnOutputFile(evaluateClassificationPerformances(knnEval, easyTask));
-                    }
-                    
-                    /**
-                     * SVM evaluation
-                     */
                     try {
-                        LibSVM svm = new LibSVM();
-                        svm.setOptions(weka.core.Utils.splitOptions("-S 1 -K 2 "
-                                + "-D 5 -G 0.0 -R 0.0 -N 0.5 -M 40 -C 2.0 "
-                                + "-E 0.001 -P 0.1 -Z -seed 1"));
-                        svm.setDoNotReplaceMissingValues(true);
-                        svm.buildClassifier(data);
-                        Evaluation svmEval = new Evaluation(data);
-                        svmEval.crossValidateModel(svm, data, 10, new Random(10));
-						
-                        outputWriter.writeOnOutputFile("SVM Classification");
-                        outputWriter.writeOnOutputFile(evaluateClassificationPerformances(svmEval, easyTask));
+                        /**
+                         * ZeroR baseline classification test
+                         */
+                        ZeroR zeroR = new ZeroR();
+                        zeroR.buildClassifier(data);
+                        Evaluation zeroREval = new Evaluation(data);
+                        zeroREval.crossValidateModel(zeroR, data, 10, new Random(10));
+
+                        outputWriter.writeOnOutputFile("ZeroR Classification");
+                        outputWriter.writeOnOutputFile(evaluateClassificationPerformances(zeroREval, easyTask));
+
+                        /**
+                         * Tree classification test
+                         */
+                        J48 tree = new J48();
+                        tree.buildClassifier(data);
+                        Evaluation treeEval = new Evaluation(data);
+                        treeEval.crossValidateModel(tree, data, 10, new Random(10));
+
+                        outputWriter.writeOnOutputFile("TREE Classification");
+                        outputWriter.writeOnOutputFile(evaluateClassificationPerformances(treeEval, easyTask));
+
+                        /**
+                         * kNN classification test
+                         */
+                        for (int k = 2; k < 4; k++) {
+
+                            IBk knn = new IBk(k);
+                            knn.setOptions(weka.core.Utils.splitOptions("-W 0 -X -A weka.core.neighboursearch.LinearNNSearch"));
+                            knn.buildClassifier(data);
+                            Evaluation knnEval = new Evaluation(data);
+                            knnEval.crossValidateModel(knn, data, 10, new Random(10));
+
+                            outputWriter.writeOnOutputFile(k + "-kNN Classification");
+                            outputWriter.writeOnOutputFile(evaluateClassificationPerformances(knnEval, easyTask));
+                        }
+
+                        /**
+                         * SVM evaluation
+                         */
+                        try {
+                            LibSVM svm = new LibSVM();
+                            svm.setOptions(weka.core.Utils.splitOptions("-S 1 -K 2 "
+                                    + "-D 5 -G 0.0 -R 0.0 -N 0.5 -M 40 -C 2.0 "
+                                    + "-E 0.001 -P 0.1 -Z -seed 1"));
+                            svm.setDoNotReplaceMissingValues(true);
+                            svm.buildClassifier(data);
+                            Evaluation svmEval = new Evaluation(data);
+                            svmEval.crossValidateModel(svm, data, 10, new Random(10));
+
+                            outputWriter.writeOnOutputFile("SVM Classification");
+                            outputWriter.writeOnOutputFile(evaluateClassificationPerformances(svmEval, easyTask));
+                        }
+                        catch(Exception exc) {}
+
+                        /**
+                         * Multilayer Perceptron evaluation
+                         */
+                        MultilayerPerceptron multiPerceptron = new MultilayerPerceptron();
+                        multiPerceptron.setOptions(weka.core.Utils.splitOptions("-L 0.3 -M 0.2 -N 1000 -V 0 -S 1 -E 20 -H a"));
+                        multiPerceptron.buildClassifier(data);
+                        Evaluation multiPEval = new Evaluation(data);
+                        multiPEval.crossValidateModel(multiPerceptron, data, 10, new Random(10));
+
+                        outputWriter.writeOnOutputFile("Multilayer Perceptron Classification");
+                        outputWriter.writeOnOutputFile(evaluateClassificationPerformances(multiPEval, easyTask));
+
+                        /**
+                         * Voted Perceptron evaluation
+                         */
+                        /*VotedPerceptron votedPerceptron = new VotedPerceptron();
+                        votedPerceptron.setOptions(weka.core.Utils.splitOptions("-I 10 -E 1.0 -S 2 -M 10000"));
+                        votedPerceptron.buildClassifier(data);
+                        Evaluation votedPEval = new Evaluation(data);
+                        votedPEval.crossValidateModel(votedPerceptron, data, 10, new Random(10));
+
+                        outputWriter.writeOnOutputFile("Voted Perceptron Classification");
+                        outputWriter.writeOnOutputFile(evaluateClassificationPerformances(votedPEval, easyTask));*/
+
+                        /**
+                         * Bayesan Network evaluation
+                         */
+                        BayesNet bayes = new BayesNet();
+                        bayes.setOptions(weka.core.Utils.splitOptions("-D -Q "
+                                + "weka.classifiers.bayes.net.search.local.K2 -- "
+                                + "-P 1 -S BAYES -E "
+                                + "weka.classifiers.bayes.net.estimate.SimpleEstimator"
+                                + " -- -A 0.5"));
+                        bayes.buildClassifier(data);
+                        Evaluation bayesEval = new Evaluation(data);
+                        bayesEval.crossValidateModel(bayes, data, 10, new Random(10));
+
+                        outputWriter.writeOnOutputFile("Bayes network");
+                        outputWriter.writeOnOutputFile(evaluateClassificationPerformances(bayesEval, easyTask));
                     }
-                    catch(Exception exc) {}
-                    
-                    /**
-                     * Multilayer Perceptron evaluation
-                     */
-                    MultilayerPerceptron multiPerceptron = new MultilayerPerceptron();
-                    multiPerceptron.setOptions(weka.core.Utils.splitOptions("-L 0.3 -M 0.2 -N 1000 -V 0 -S 1 -E 20 -H a"));
-                    multiPerceptron.buildClassifier(data);
-                    Evaluation multiPEval = new Evaluation(data);
-                    multiPEval.crossValidateModel(multiPerceptron, data, 10, new Random(10));
-					
-                    outputWriter.writeOnOutputFile("Multilayer Perceptron Classification");
-                    outputWriter.writeOnOutputFile(evaluateClassificationPerformances(multiPEval, easyTask));
-					
-                    /**
-                     * Voted Perceptron evaluation
-                     */
-                    /*VotedPerceptron votedPerceptron = new VotedPerceptron();
-                    votedPerceptron.setOptions(weka.core.Utils.splitOptions("-I 10 -E 1.0 -S 2 -M 10000"));
-                    votedPerceptron.buildClassifier(data);
-                    Evaluation votedPEval = new Evaluation(data);
-                    votedPEval.crossValidateModel(votedPerceptron, data, 10, new Random(10));
-					
-                    outputWriter.writeOnOutputFile("Voted Perceptron Classification");
-                    outputWriter.writeOnOutputFile(evaluateClassificationPerformances(votedPEval, easyTask));*/
-                    
-                    /**
-                     * Bayesan Network evaluation
-                     */
-                    BayesNet bayes = new BayesNet();
-                    bayes.setOptions(weka.core.Utils.splitOptions("-D -Q weka.classifiers.bayes.net.search.local.SimulatedAnnealing "
-                            + "-- -A 10.0 -U 10000 -D 0.999 -R 1 -S BAYES "
-                            + "-E weka.classifiers.bayes.net.estimate.SimpleEstimator -- -A 0.5"));
-                    bayes.buildClassifier(data);
-                    Evaluation bayesEval = new Evaluation(data);
-                    bayesEval.crossValidateModel(bayes, data, 10, new Random(10));
-					
-                    outputWriter.writeOnOutputFile("Bayes network");
-                    outputWriter.writeOnOutputFile(evaluateClassificationPerformances(bayesEval, easyTask));
+                    catch(Exception exc) {
+                        
+                    }
                 }
             
             }
