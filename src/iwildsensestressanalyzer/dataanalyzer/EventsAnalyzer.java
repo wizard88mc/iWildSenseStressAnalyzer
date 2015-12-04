@@ -290,13 +290,18 @@ public class EventsAnalyzer {
             
             if (index < validTTests.size()) {
             
-                Double result = (results.get(index) / 
-                        (double) validTTests.get(index)) * 100;
+                try {
+                    Double result = (results.get(index) / 
+                            (double) validTTests.get(index)) * 100;
 
-                if (result.isInfinite() || result.isNaN()) {
-                    result = null;
+                    if (result.isInfinite() || result.isNaN()) {
+                        result = null;
+                    }
+                    results.set(index, result);
                 }
-                results.set(index, result);
+                catch(Exception exc) {
+                    results.set(index, null);
+                }
             }
             else {
                 results.set(index, null);
