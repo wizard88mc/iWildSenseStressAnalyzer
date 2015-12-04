@@ -272,8 +272,8 @@ public class EventsAnalyzer {
             if (tTestResults.get(index) != null) {
                 if (tTestResults.get(index)) {
                     resultsContainer.set(index, currentValue + 1);
-                    validTests.set(index, currentCounter + 1);
                 }
+                validTests.set(index, currentCounter + 1);
             }
         }
     }
@@ -288,7 +288,7 @@ public class EventsAnalyzer {
         
         for (int index = 0; index < results.size(); index++) {
             
-            if (validTTests.size() < index) {
+            if (index < validTTests.size()) {
             
                 Double result = (results.get(index) / 
                         (double) validTTests.get(index)) * 100;
