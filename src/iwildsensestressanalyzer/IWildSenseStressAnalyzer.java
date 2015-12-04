@@ -34,7 +34,9 @@ public class IWildSenseStressAnalyzer {
     public static final boolean COMPELTE_ANALYSIS = true;
     public static final StatisticalSignificanceOutputWriter outputWriter = new StatisticalSignificanceOutputWriter();
     
-    private static final String TITLE_PARTICIPANTS_ZERO_ANSERS = "*** Removing"
+    private static final String TITLE_ALL_PARTICIPANTS = "*** Keeping all "
+                + "participants ***",
+            TITLE_PARTICIPANTS_ZERO_ANSERS = "*** Removing"
                 + " participants with 0 answers provided ***", 
             TITLE_MORE_THRESHOLD = "*** Keeping only participants with answers"
                 + " higher than our arbitrary threshold ***", 
@@ -205,6 +207,14 @@ public class IWildSenseStressAnalyzer {
          * have the number of answers higher than the average
          */
         SurveyAnalyzer.printAnalysisParticipantsParticipation(participantList);
+        
+        /**
+         * Keeping all the participants
+         */
+        System.out.println();
+        System.out.println(TITLE_ALL_PARTICIPANTS);
+        EventsAnalyzer.printTitleMessage(null);
+        EventsAnalyzer.printTitleMessage(TITLE_ALL_PARTICIPANTS);
         
         performAnalysisSteps(participantList);
         

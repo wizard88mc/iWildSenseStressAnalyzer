@@ -288,13 +288,19 @@ public class EventsAnalyzer {
         
         for (int index = 0; index < results.size(); index++) {
             
-            Double result = (results.get(index) / 
-                    (double) validTTests.get(index)) * 100;
+            if (validTTests.size() < index) {
             
-            if (result.isInfinite() || result.isNaN()) {
-                result = null;
+                Double result = (results.get(index) / 
+                        (double) validTTests.get(index)) * 100;
+
+                if (result.isInfinite() || result.isNaN()) {
+                    result = null;
+                }
+                results.set(index, result);
             }
-            results.set(index, result);
+            else {
+                results.set(index, null);
+            }
         }
     }
 }
