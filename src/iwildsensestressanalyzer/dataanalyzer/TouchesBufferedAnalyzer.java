@@ -24,7 +24,7 @@ public class TouchesBufferedAnalyzer extends EventsAnalyzer {
         
         if (!useAllTogether) {
             
-            ArrayList<Double> tTestPassedForCounter = new ArrayList<>(), 
+            ArrayList<Integer> tTestPassedForCounter = new ArrayList<>(), 
                     tTestPassedForMinInterval = new ArrayList<>(), 
                     tTestPassedForMaxInterval = new ArrayList<>(),
                     tTestPassedForRange = new ArrayList<>(),

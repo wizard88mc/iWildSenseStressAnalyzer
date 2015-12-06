@@ -162,7 +162,8 @@ public class SurveyAnalyzer {
      */
     public static void printAnalysisParticipantsParticipation(ArrayList<Participant> participants) {
         int higherThanAverage = 0, lowerThanAverage = 0, 
-                higherThanThreshold = 0, lowerThanThreshold = 0;
+                higherThanThreshold = 0, lowerThanThreshold = 0, 
+                higherThanMoreThanOnePerDay = 0, lowerThanMoreThanOnePerDay = 0;
         
         for (Participant participant: participants) {
             if (participant.getSurveyAnswersCount() >= initialAverage) {
@@ -177,6 +178,13 @@ public class SurveyAnalyzer {
             }
             else {
                 lowerThanThreshold++;
+            }
+            
+            if (participant.getSurveyAnswersCount() >= ANSWERS_ONE_PER_DAY) {
+                higherThanMoreThanOnePerDay++;
+            }
+            else {
+                lowerThanMoreThanOnePerDay++;
             }
         }
         
@@ -198,6 +206,16 @@ public class SurveyAnalyzer {
                 .writeOutputStatisticalSignificance("Number of participants with"
                         + " number of answers lower than the threshold: " 
                         + lowerThanThreshold);
+        
+        IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance("Number of participants with"
+                        + " number of answers higher than one per day: " 
+                        + higherThanMoreThanOnePerDay);
+        
+        IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance("Number of participants with"
+                        + " number of answers lower than one per day: " 
+                        + lowerThanMoreThanOnePerDay);
     }
     
     /**

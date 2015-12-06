@@ -17,7 +17,7 @@ public class UserActivityAnalyzer extends EventsAnalyzer {
         
         if (!allTogether) {
             
-            ArrayList<Double> tTestPassedForPointsSumOfActivities = 
+            ArrayList<Integer> tTestPassedForPointsSumOfActivities = 
                         new ArrayList<>(), 
                     tTestPassedForPercentageOfWorkload = 
                         new ArrayList<>(),

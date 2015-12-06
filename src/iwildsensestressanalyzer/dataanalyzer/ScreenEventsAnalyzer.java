@@ -21,7 +21,7 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
          * of the perceived stress from users
          */
         if (!useAllTogether) {
-            ArrayList<Double> tTestPassedForOnOffDurationForOnOffScreenEvents = 
+            ArrayList<Integer> tTestPassedForOnOffDurationForOnOffScreenEvents = 
                     new ArrayList<>(),
                     tTestPassedForOnOffDurationForUnlockedScreenEvents = 
                     new ArrayList<>(),

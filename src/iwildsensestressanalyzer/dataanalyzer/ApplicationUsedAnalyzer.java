@@ -26,7 +26,7 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
             
             for (String appCategory: allAppCategories) {
                 
-                ArrayList<Double> tTestPassedForAppCategoryFrequency = 
+                ArrayList<Integer> tTestPassedForAppCategoryFrequency = 
                             new ArrayList<>(),
                         tTestPassedForAppCategoryTimingInfluence = 
                             new ArrayList<>();

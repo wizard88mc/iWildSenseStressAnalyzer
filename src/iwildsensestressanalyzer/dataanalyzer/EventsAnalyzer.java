@@ -225,12 +225,12 @@ public class EventsAnalyzer {
      * @param easyJob true if using only three values, false for five values
      * @param titleMessage the message to write
      */
-    protected static void performStepsForPrintingPercentageOfSuccess(ArrayList<Double> values, 
+    protected static void performStepsForPrintingPercentageOfSuccess(ArrayList<Integer> values, 
             ArrayList<Integer> validTTests, boolean easyJob, String titleMessage) {
         
         printTitleMessage(titleMessage);
-        calculatePercentages(values, validTTests);
-        printTTestPercentagesOfSuccess(values, easyJob);
+        ArrayList<Double> results = calculatePercentages(values, validTTests);
+        printTTestPercentagesOfSuccess(results, easyJob);
     }
     
     /**
@@ -254,26 +254,23 @@ public class EventsAnalyzer {
      * @param tTestResults a list of t-test results 
      * @param validTests a list to count the number of valid tests
      */
-    protected static void addTTestResultsToFinalContainer(ArrayList<Double> resultsContainer, 
+    protected static void addTTestResultsToFinalContainer(ArrayList<Integer> resultsContainer, 
             ArrayList<Boolean> tTestResults, ArrayList<Integer> validTests) {
         
         if (resultsContainer.isEmpty()) {
             for (Boolean result: tTestResults) {
-                resultsContainer.add(0.0);
+                resultsContainer.add(0);
                 validTests.add(0);
             }
         }
         
         for (int index = 0; index < resultsContainer.size(); index++) {
             
-            Double currentValue = resultsContainer.get(index);
-            Integer currentCounter = validTests.get(index);
-            
             if (tTestResults.get(index) != null) {
                 if (tTestResults.get(index)) {
-                    resultsContainer.set(index, currentValue + 1);
+                    resultsContainer.set(index, resultsContainer.get(index) + 1);
                 }
-                validTests.set(index, currentCounter + 1);
+                validTests.set(index, validTests.get(index) + 1);
             }
         }
     }
@@ -282,9 +279,15 @@ public class EventsAnalyzer {
      * Calculates the percentage of checks that passed the t test
      * @param results the final results of 
      * @param validTTests the total number of participants
+     * @return a list with the percentages of success
      */
-    protected static void calculatePercentages(ArrayList<Double> results, 
+    protected static ArrayList<Double> calculatePercentages(ArrayList<Integer> results, 
             ArrayList<Integer> validTTests) {
+        
+        ArrayList<Double> dResults = new ArrayList<>();
+        for (Integer result: results) {
+            dResults.add(null);
+        }
         
         for (int index = 0; index < results.size(); index++) {
             
@@ -297,15 +300,17 @@ public class EventsAnalyzer {
                     if (result.isInfinite() || result.isNaN()) {
                         result = null;
                     }
-                    results.set(index, result);
+                    dResults.set(index, result);
                 }
                 catch(Exception exc) {
-                    results.set(index, null);
+                    dResults.set(index, null);
                 }
             }
             else {
-                results.set(index, null);
+                dResults.set(index, null);
             }
         }
+        
+        return dResults;
     }
 }

@@ -1,6 +1,8 @@
 package iwildsensestressanalyzer.weka;
 
+import iwildsensestressanalyzer.IWildSenseStressAnalyzer;
 import iwildsensestressanalyzer.esm.StressSurvey;
+import iwildsensestressanalyzer.filereader.WekaFilesCreatedReader;
 import iwildsensestressanalyzer.filewriter.ARFFWekaWriter;
 import iwildsensestressanalyzer.filewriter.CreatedFilesWriter;
 import iwildsensestressanalyzer.filewriter.WekaEvaluationOutputWriter;
@@ -29,14 +31,18 @@ import weka.filters.supervised.instance.SMOTE;
  */
 public class WekaAnalyzer {
     
-    public static ArrayList<File> listCreatedFiles;
-    public static CreatedFilesWriter createdFilesWriter = 
-            new CreatedFilesWriter();
+    public static CreatedFilesWriter createdFilesWriter = null;
     
-    public static void workWithClassificationProblem(ArrayList<Participant> 
-            participants, String initialMessage, String subfolderName) {
+    private static ArrayList<String> listIMEIsAlreadyTested = new ArrayList<>();
+    
+    public static void createWekaFiles(ArrayList<Participant> 
+            participants, String subfolderName) {
         
-        listCreatedFiles = new ArrayList<File>();
+        if (createdFilesWriter == null) {
+            createdFilesWriter = new CreatedFilesWriter();
+        }
+        
+        ArrayList<File> listCreatedFiles = new ArrayList<>();
         
         /**
          * For Application used we need to create features only once all the 
@@ -45,16 +51,16 @@ public class WekaAnalyzer {
         WekaFeaturesForApplicationUsed.createFeaturesName();
         
         ArrayList<ArrayList<Double>> featuresForApplicationUsedForAllParticipants = 
-                    new ArrayList<ArrayList<Double>>(), 
+                    new ArrayList<>(), 
                 featuresForTouchesBufferedForAllParticipants = 
-                    new ArrayList<ArrayList<Double>>(), 
+                    new ArrayList<>(), 
                 featuresForUserActivityForAllParticipants = 
-                    new ArrayList<ArrayList<Double>>(), 
+                    new ArrayList<>(), 
                 featuresForUserPresenceLightForAllParticipants = 
-                    new ArrayList<ArrayList<Double>>();
+                    new ArrayList<>();
         
         ArrayList<Integer> surveyAnswersForAllParticipants = 
-            new ArrayList<Integer>();
+            new ArrayList<>();
                 
         for (Participant participant: participants) {
             
@@ -62,24 +68,28 @@ public class WekaAnalyzer {
                     subfolderName);
             
             ArrayList<ArrayList<Double>> featuresForApplicationUsed = 
-                        new ArrayList<ArrayList<Double>>(), 
+                        new ArrayList<>(), 
                     featuresForTouchesBuffered = 
-                        new ArrayList<ArrayList<Double>>(), 
+                        new ArrayList<>(), 
                     featuresForUserActivity = 
-                        new ArrayList<ArrayList<Double>>(), 
+                        new ArrayList<>(), 
                     featuresForUserPresenceLight = 
-                        new ArrayList<ArrayList<Double>>();
+                        new ArrayList<>();
             
-            ArrayList<Integer> surveyAnswers = new ArrayList<Integer>();
+            ArrayList<Integer> surveyAnswers = new ArrayList<>();
             
             for (StressSurvey survey: participant.getStressSurveys()) {
                 
                 surveyAnswers.add(survey.getStress());
                 
-                featuresForApplicationUsed.add(WekaFeaturesForApplicationUsed.getFeaturesForUserActivity(survey));
-                featuresForTouchesBuffered.add(WekaFeaturesForTouchesBuffered.getFeaturesForTouchesBufferedEvents(survey));
-                featuresForUserActivity.add(WekaFeaturesForUserActivity.getFeaturesForUserActivity(survey));
-                featuresForUserPresenceLight.add(WekaFeaturesForUserPresenceLight.getFeaturesForUserPresenceLightEvent(survey));
+                featuresForApplicationUsed.add(WekaFeaturesForApplicationUsed.
+                        getFeaturesForUserActivity(survey));
+                featuresForTouchesBuffered.add(WekaFeaturesForTouchesBuffered.
+                        getFeaturesForTouchesBufferedEvents(survey));
+                featuresForUserActivity.add(WekaFeaturesForUserActivity.
+                        getFeaturesForUserActivity(survey));
+                featuresForUserPresenceLight.add(WekaFeaturesForUserPresenceLight.
+                        getFeaturesForUserPresenceLightEvent(survey));
             }
             
             /**
@@ -97,20 +107,24 @@ public class WekaAnalyzer {
              * Normalizing features
              */
             ArrayList<ArrayList<Double>> normalizedFeaturesForApplicationUser = 
-                        MathUtils.normalizeSetOfDoubleData(featuresForApplicationUsed, 0.0, 1.0), 
+                        MathUtils.normalizeSetOfDoubleData(featuresForApplicationUsed, 
+                                0.0, 1.0), 
                     normalizedFeaturesForTouchesBuffered = 
-                        MathUtils.normalizeSetOfDoubleData(featuresForTouchesBuffered, 0.0, 1.0),
+                        MathUtils.normalizeSetOfDoubleData(featuresForTouchesBuffered, 
+                                0.0, 1.0),
                     normalizedFeaturesForUserActivity = 
-                        MathUtils.normalizeSetOfDoubleData(featuresForUserActivity, 0.0, 1.0),
+                        MathUtils.normalizeSetOfDoubleData(featuresForUserActivity, 
+                                0.0, 1.0),
                     normalizedFeaturesForUserPresenceLight = 
-                        MathUtils.normalizeSetOfDoubleData(featuresForUserPresenceLight, 0.0, 1.0);
+                        MathUtils.normalizeSetOfDoubleData(featuresForUserPresenceLight, 
+                                0.0, 1.0);
             
             /**
              * Writing output file for the participant
              */
             for (int i = 0; i < surveyAnswers.size(); i++) {
                 
-                ArrayList<Double> features = new ArrayList<Double>();
+                ArrayList<Double> features = new ArrayList<>();
                 features.addAll(normalizedFeaturesForApplicationUser.get(i));
                 features.addAll(normalizedFeaturesForTouchesBuffered.get(i));
                 features.addAll(normalizedFeaturesForUserActivity.get(i));
@@ -130,13 +144,17 @@ public class WekaAnalyzer {
          * Normalizing features with all participants
          */
         ArrayList<ArrayList<Double>> normalizedFeaturesForApplicationsForAllParticipants = 
-                    MathUtils.normalizeSetOfDoubleData(featuresForApplicationUsedForAllParticipants, 0.0, 1.0), 
+                    MathUtils.normalizeSetOfDoubleData(
+                            featuresForApplicationUsedForAllParticipants, 0.0, 1.0),
                 normalizedFeaturesForTouchesBufferedForAllParticipants = 
-                    MathUtils.normalizeSetOfDoubleData(featuresForTouchesBufferedForAllParticipants, 0.0, 1.0), 
+                    MathUtils.normalizeSetOfDoubleData(
+                            featuresForTouchesBufferedForAllParticipants, 0.0, 1.0), 
                 normalizedFeaturesForUserActivityForAllParticipants = 
-                    MathUtils.normalizeSetOfDoubleData(featuresForUserActivityForAllParticipants, 0.0, 1.0), 
+                    MathUtils.normalizeSetOfDoubleData(
+                            featuresForUserActivityForAllParticipants, 0.0, 1.0), 
                 normalizedFeaturesforUserPresenceLightForAllParticipants = 
-                    MathUtils.normalizeSetOfDoubleData(featuresForUserPresenceLightForAllParticipants, 0.0, 1.0);
+                    MathUtils.normalizeSetOfDoubleData(
+                            featuresForUserPresenceLightForAllParticipants, 0.0, 1.0);
         
         /**
          * Writing output file for all participants
@@ -146,7 +164,7 @@ public class WekaAnalyzer {
         
         for (int i = 0; i < surveyAnswersForAllParticipants.size(); i++) {
             
-            ArrayList<Double> features = new ArrayList<Double>();
+            ArrayList<Double> features = new ArrayList<>();
             features.addAll(normalizedFeaturesForApplicationsForAllParticipants.get(i));
             features.addAll(normalizedFeaturesForTouchesBufferedForAllParticipants.get(i));
             features.addAll(normalizedFeaturesForUserActivityForAllParticipants.get(i));
@@ -162,159 +180,256 @@ public class WekaAnalyzer {
         listCreatedFiles.addAll(writerForAllParticipants.getOutputFiles());
         
         createdFilesWriter.writeCreatedFiles(listCreatedFiles);
+    }
+    
+    public static void startWithWekaClassificationTask() {
         
-        performWekaClassificationTask(initialMessage, subfolderName, false);
-        performWekaClassificationTask(initialMessage, subfolderName, true);
+        ArrayList<String> allFileNames = WekaFilesCreatedReader.getCreatedWekaFiles(),
+                moreThanZeroAnswers = new ArrayList<>(),
+                moreThanThreshold = new ArrayList<>(),
+                moreThanOnePerDay = new ArrayList<>(), 
+                moreThanInitialAverage = new ArrayList<>();
+        
+        for (String fileName: allFileNames) {
+            if (fileName.contains(IWildSenseStressAnalyzer.FOLDER_MORE_ZERO_ANSWERS)) {
+                moreThanZeroAnswers.add(fileName);
+            }
+            else if (fileName.contains(IWildSenseStressAnalyzer.FOLDER_MORE_THRESHOLD)) {
+                moreThanThreshold.add(fileName);
+            }
+            else if (fileName.contains(IWildSenseStressAnalyzer.FOLDER_MORE_ONE_SURVEY_PER_DAY)) {
+                moreThanOnePerDay.add(fileName);
+            }
+            else if (fileName.contains(IWildSenseStressAnalyzer.FOLDER_MORE_THAN_INITIAL_AVERAGE)) {
+                moreThanInitialAverage.add(fileName);
+            }
+        }
+        
+        /**
+         * Starting weka classification task
+         */
+        System.out.println("*** Classification for participants with more than "
+                + "zero answers ***");
+        performWekaClassificationTask(moreThanZeroAnswers, 
+                IWildSenseStressAnalyzer.TITLE_PARTICIPANTS_ZERO_ANSWERS, 
+                IWildSenseStressAnalyzer.FOLDER_MORE_ZERO_ANSWERS, false);
+        performWekaClassificationTask(moreThanZeroAnswers, 
+                IWildSenseStressAnalyzer.TITLE_PARTICIPANTS_ZERO_ANSWERS, 
+                IWildSenseStressAnalyzer.FOLDER_MORE_ZERO_ANSWERS, true);
+        
+        System.out.println("*** Classification for participants with more "
+                + "answers than the threshold ***");
+        performWekaClassificationTask(moreThanThreshold, 
+                IWildSenseStressAnalyzer.TITLE_MORE_THRESHOLD, 
+                IWildSenseStressAnalyzer.FOLDER_MORE_THRESHOLD, false);
+        performWekaClassificationTask(moreThanThreshold, 
+                IWildSenseStressAnalyzer.TITLE_MORE_THRESHOLD, 
+                IWildSenseStressAnalyzer.FOLDER_MORE_THRESHOLD, true);
+        
+        System.out.println("*** Classification for participants with more than "
+                + "one answer per day ***");
+        performWekaClassificationTask(moreThanOnePerDay, 
+                IWildSenseStressAnalyzer.TITLE_MORE_ONE_SURVEY_PER_DAY, 
+                IWildSenseStressAnalyzer.FOLDER_MORE_ONE_SURVEY_PER_DAY, false);
+        performWekaClassificationTask(moreThanOnePerDay, 
+                IWildSenseStressAnalyzer.TITLE_MORE_ONE_SURVEY_PER_DAY, 
+                IWildSenseStressAnalyzer.FOLDER_MORE_ONE_SURVEY_PER_DAY, true);
+        
+        System.out.println("*** Classification for participants with number of "
+                + "answers more than the initial average ***");
+        performWekaClassificationTask(moreThanInitialAverage, 
+                IWildSenseStressAnalyzer.TITLE_MORE_THAN_INITIAL_AVERAGE, 
+                IWildSenseStressAnalyzer.FOLDER_MORE_THAN_INITIAL_AVERAGE, false);
+        performWekaClassificationTask(moreThanInitialAverage, 
+                IWildSenseStressAnalyzer.TITLE_MORE_THAN_INITIAL_AVERAGE, 
+                IWildSenseStressAnalyzer.FOLDER_MORE_THAN_INITIAL_AVERAGE, true);
     }
     
     /**
      * Performs Classification
      */
-    private static void performWekaClassificationTask(String initialMessage, 
-            String subfolder, boolean oversampleData) {
+    private static void performWekaClassificationTask(ArrayList<String> listFileNames, 
+            String initialMessage, String subfolder, boolean oversampleData) {
         
         WekaEvaluationOutputWriter outputWriter = 
                 new WekaEvaluationOutputWriter(subfolder);
         
         outputWriter.writeOnOutputFile(initialMessage);
         
-        for (File file: listCreatedFiles) {
+        for (String fileName: listFileNames) {
             
-            try {
-                DataSource source = new DataSource(file.getPath());
-                Instances data = source.getDataSet();
+            String[] elementsFileName = fileName.split(File.separator);
+            String IMEI = elementsFileName[elementsFileName.length - 2];
             
-                if (data.classIndex() == -1) {
-                    data.setClassIndex(data.numAttributes() - 1);
+            if (!listIMEIsAlreadyTested.contains(IMEI)) {
+                
+                if (!IMEI.contains("ALL")) {
+                    listIMEIsAlreadyTested.add(IMEI);
                 }
             
-                if (data.numInstances() > 10) {
-                    
-                    outputWriter.writeOnOutputFile(file.getPath());
-                    
-                    boolean easyTask = file.getName().contains("EASY");
-                    
-                    if (oversampleData) {
-                    /**
-                     * Initial filtering 
-                     */
-                        checkNumberOfIstances(data, easyTask);
-                        data = applySMOTEFilterToTrainingData(data, easyTask);
-                        outputWriter.writeClassesOccurrences(countOccurrences(data, easyTask), 
-                                true);
+                File file = new File(fileName);
+
+                try {
+                    DataSource source = new DataSource(file.getPath());
+                    Instances data = source.getDataSet();
+
+                    if (data.classIndex() == -1) {
+                        data.setClassIndex(data.numAttributes() - 1);
                     }
-                    else {
-                        outputWriter.writeClassesOccurrences(countOccurrences(data, easyTask), 
-                                false);
-                    }
-                    
-                    try {
+
+                    if (data.numInstances() > 10) {
+
+                        outputWriter.writeOnOutputFile(file.getPath());
+
+                        boolean easyTask = file.getName().contains("EASY");
+
+                        if (oversampleData) {
                         /**
-                         * ZeroR baseline classification test
+                         * Initial filtering 
                          */
-                        ZeroR zeroR = new ZeroR();
-                        zeroR.buildClassifier(data);
-                        Evaluation zeroREval = new Evaluation(data);
-                        zeroREval.crossValidateModel(zeroR, data, 10, new Random(10));
-
-                        outputWriter.writeOnOutputFile("ZeroR Classification");
-                        outputWriter.writeOnOutputFile(evaluateClassificationPerformances(zeroREval, easyTask));
-
-                        /**
-                         * Tree classification test
-                         */
-                        J48 tree = new J48();
-                        tree.buildClassifier(data);
-                        Evaluation treeEval = new Evaluation(data);
-                        treeEval.crossValidateModel(tree, data, 10, new Random(10));
-
-                        outputWriter.writeOnOutputFile("TREE Classification");
-                        outputWriter.writeOnOutputFile(evaluateClassificationPerformances(treeEval, easyTask));
-
-                        /**
-                         * kNN classification test
-                         */
-                        for (int k = 2; k < 4; k++) {
-
-                            IBk knn = new IBk(k);
-                            knn.setOptions(weka.core.Utils.splitOptions("-W 0 -X -A weka.core.neighboursearch.LinearNNSearch"));
-                            knn.buildClassifier(data);
-                            Evaluation knnEval = new Evaluation(data);
-                            knnEval.crossValidateModel(knn, data, 10, new Random(10));
-
-                            outputWriter.writeOnOutputFile(k + "-kNN Classification");
-                            outputWriter.writeOnOutputFile(evaluateClassificationPerformances(knnEval, easyTask));
+                            checkNumberOfIstances(data, easyTask);
+                            data = applySMOTEFilterToTrainingData(data, easyTask);
+                            outputWriter.writeClassesOccurrences(countOccurrences(data, easyTask), 
+                                    true);
+                        }
+                        else {
+                            outputWriter.writeClassesOccurrences(countOccurrences(data, easyTask), 
+                                    false);
                         }
 
-                        /**
-                         * SVM evaluation
-                         */
                         try {
-                            LibSVM svm = new LibSVM();
-                            svm.setOptions(weka.core.Utils.splitOptions("-S 1 -K 2 "
-                                    + "-D 5 -G 0.0 -R 0.0 -N 0.5 -M 40 -C 2.0 "
-                                    + "-E 0.001 -P 0.1 -Z -seed 1"));
-                            svm.setDoNotReplaceMissingValues(true);
-                            svm.buildClassifier(data);
-                            Evaluation svmEval = new Evaluation(data);
-                            svmEval.crossValidateModel(svm, data, 10, new Random(10));
+                            /**
+                             * ZeroR baseline classification test
+                             */
+                            ZeroR zeroR = new ZeroR();
+                            zeroR.buildClassifier(data);
+                            Evaluation zeroREval = new Evaluation(data);
+                            zeroREval.crossValidateModel(zeroR, data, 10, 
+                                    new Random(10));
 
-                            outputWriter.writeOnOutputFile("SVM Classification");
-                            outputWriter.writeOnOutputFile(evaluateClassificationPerformances(svmEval, easyTask));
+                            outputWriter.writeOnOutputFile("ZeroR Classification");
+                            outputWriter.writeOnOutputFile(
+                                    evaluateClassificationPerformances(zeroREval, 
+                                            easyTask));
+
+                            /**
+                             * Tree classification test
+                             */
+                            J48 tree = new J48();
+                            tree.buildClassifier(data);
+                            Evaluation treeEval = new Evaluation(data);
+                            treeEval.crossValidateModel(tree, data, 10, new Random(10));
+
+                            outputWriter.writeOnOutputFile("TREE Classification");
+                            outputWriter.writeOnOutputFile(
+                                    evaluateClassificationPerformances(treeEval, 
+                                            easyTask));
+
+                            /**
+                             * kNN classification test
+                             */
+                            for (int k = 2; k < 4; k++) {
+
+                                IBk knn = new IBk(k);
+                                knn.setOptions(weka.core.Utils.
+                                        splitOptions("-W 0 -X -A "
+                                                + "weka.core.neighboursearch.LinearNNSearch"));
+                                knn.buildClassifier(data);
+                                Evaluation knnEval = new Evaluation(data);
+                                knnEval.crossValidateModel(knn, data, 10, 
+                                        new Random(10));
+
+                                outputWriter.writeOnOutputFile(k + "-kNN Classification");
+                                outputWriter.writeOnOutputFile(
+                                        evaluateClassificationPerformances(knnEval, 
+                                                easyTask));
+                            }
+
+                            /**
+                             * SVM evaluation
+                             */
+                            try {
+                                LibSVM svm = new LibSVM();
+                                svm.setOptions(weka.core.Utils.splitOptions("-S 1 -K 2 "
+                                        + "-D 5 -G 0.0 -R 0.0 -N 0.5 -M 40 -C 2.0 "
+                                        + "-E 0.001 -P 0.1 -Z -seed 1"));
+                                svm.setDoNotReplaceMissingValues(false);
+                                svm.buildClassifier(data);
+                                Evaluation svmEval = new Evaluation(data);
+                                svmEval.crossValidateModel(svm, data, 10, 
+                                        new Random(10));
+
+                                outputWriter.writeOnOutputFile("SVM Classification");
+                                outputWriter.writeOnOutputFile(
+                                        evaluateClassificationPerformances(svmEval, 
+                                                easyTask));
+                            }
+                            catch(Exception exc) {
+                                System.out.println("SVM exception: " + exc.toString());
+                            }
+
+                            /**
+                             * Multilayer Perceptron evaluation
+                             */
+                            MultilayerPerceptron multiPerceptron = new MultilayerPerceptron();
+                            multiPerceptron.setOptions(weka.core.Utils.
+                                    splitOptions("-L 0.3 -M 0.2 -N 1000 -V 0 "
+                                            + "-S 1 -E 20 -H a"));
+                            multiPerceptron.buildClassifier(data);
+                            Evaluation multiPEval = new Evaluation(data);
+                            multiPEval.crossValidateModel(multiPerceptron, data, 
+                                    10, new Random(10));
+
+                            outputWriter.writeOnOutputFile("Multilayer Perceptron "
+                                    + "Classification");
+                            outputWriter.writeOnOutputFile(
+                                    evaluateClassificationPerformances(multiPEval, 
+                                            easyTask));
+
+                            /**
+                             * Voted Perceptron evaluation
+                             */
+                            /*VotedPerceptron votedPerceptron = new VotedPerceptron();
+                            votedPerceptron.setOptions(weka.core.Utils.splitOptions("-I 10 -E 1.0 -S 2 -M 10000"));
+                            votedPerceptron.buildClassifier(data);
+                            Evaluation votedPEval = new Evaluation(data);
+                            votedPEval.crossValidateModel(votedPerceptron, data, 10, new Random(10));
+
+                            outputWriter.writeOnOutputFile("Voted Perceptron Classification");
+                            outputWriter.writeOnOutputFile(evaluateClassificationPerformances(votedPEval, easyTask));*/
+
+                            /**
+                             * Bayesan Network evaluation
+                             */
+                            BayesNet bayes = new BayesNet();
+                            bayes.setOptions(weka.core.Utils.splitOptions("-D -Q "
+                                    + "weka.classifiers.bayes.net.search.local.K2 -- "
+                                    + "-P 1 -S BAYES -E "
+                                    + "weka.classifiers.bayes.net.estimate.SimpleEstimator"
+                                    + " -- -A 0.5"));
+                            bayes.buildClassifier(data);
+                            Evaluation bayesEval = new Evaluation(data);
+                            bayesEval.crossValidateModel(bayes, data, 10, 
+                                    new Random(10));
+
+                            outputWriter.writeOnOutputFile("Bayes network");
+                            outputWriter.writeOnOutputFile(
+                                    evaluateClassificationPerformances(bayesEval, 
+                                            easyTask));
                         }
-                        catch(Exception exc) {}
+                        catch(Exception exc) {
 
-                        /**
-                         * Multilayer Perceptron evaluation
-                         */
-                        MultilayerPerceptron multiPerceptron = new MultilayerPerceptron();
-                        multiPerceptron.setOptions(weka.core.Utils.splitOptions("-L 0.3 -M 0.2 -N 1000 -V 0 -S 1 -E 20 -H a"));
-                        multiPerceptron.buildClassifier(data);
-                        Evaluation multiPEval = new Evaluation(data);
-                        multiPEval.crossValidateModel(multiPerceptron, data, 10, new Random(10));
-
-                        outputWriter.writeOnOutputFile("Multilayer Perceptron Classification");
-                        outputWriter.writeOnOutputFile(evaluateClassificationPerformances(multiPEval, easyTask));
-
-                        /**
-                         * Voted Perceptron evaluation
-                         */
-                        /*VotedPerceptron votedPerceptron = new VotedPerceptron();
-                        votedPerceptron.setOptions(weka.core.Utils.splitOptions("-I 10 -E 1.0 -S 2 -M 10000"));
-                        votedPerceptron.buildClassifier(data);
-                        Evaluation votedPEval = new Evaluation(data);
-                        votedPEval.crossValidateModel(votedPerceptron, data, 10, new Random(10));
-
-                        outputWriter.writeOnOutputFile("Voted Perceptron Classification");
-                        outputWriter.writeOnOutputFile(evaluateClassificationPerformances(votedPEval, easyTask));*/
-
-                        /**
-                         * Bayesan Network evaluation
-                         */
-                        BayesNet bayes = new BayesNet();
-                        bayes.setOptions(weka.core.Utils.splitOptions("-D -Q "
-                                + "weka.classifiers.bayes.net.search.local.K2 -- "
-                                + "-P 1 -S BAYES -E "
-                                + "weka.classifiers.bayes.net.estimate.SimpleEstimator"
-                                + " -- -A 0.5"));
-                        bayes.buildClassifier(data);
-                        Evaluation bayesEval = new Evaluation(data);
-                        bayesEval.crossValidateModel(bayes, data, 10, new Random(10));
-
-                        outputWriter.writeOnOutputFile("Bayes network");
-                        outputWriter.writeOnOutputFile(evaluateClassificationPerformances(bayesEval, easyTask));
+                        }
                     }
-                    catch(Exception exc) {
-                        
-                    }
+
                 }
-            
-            }
-            catch(Exception exc) {
-                System.out.println("Exception in performWekaClassificationTask");
-                exc.printStackTrace();
+                catch(Exception exc) {
+                    System.out.println("Exception in performWekaClassificationTask");
+                    exc.printStackTrace();
+                }
             }
         }
+        
         outputWriter.closeFile();
     }
     

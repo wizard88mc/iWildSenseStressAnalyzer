@@ -34,9 +34,9 @@ public class IWildSenseStressAnalyzer {
     public static final boolean COMPELTE_ANALYSIS = true;
     public static final StatisticalSignificanceOutputWriter outputWriter = new StatisticalSignificanceOutputWriter();
     
-    private static final String TITLE_ALL_PARTICIPANTS = "*** Keeping all "
+    public static final String TITLE_ALL_PARTICIPANTS = "*** Keeping all "
                 + "participants ***",
-            TITLE_PARTICIPANTS_ZERO_ANSERS = "*** Removing"
+            TITLE_PARTICIPANTS_ZERO_ANSWERS = "*** Removing"
                 + " participants with 0 answers provided ***", 
             TITLE_MORE_THRESHOLD = "*** Keeping only participants with answers"
                 + " higher than our arbitrary threshold ***", 
@@ -44,279 +44,290 @@ public class IWildSenseStressAnalyzer {
                 + " than one survey answer per day ***", 
             TITLE_MORE_THAN_INITIAL_AVERAGE = "*** Keeping participants with"
                 + " number of answers higher than the initial average ***";
+    
+    public static final String FOLDER_MORE_ZERO_ANSWERS = "More_Zero_Answers",
+            FOLDER_MORE_THRESHOLD = "More_Than_Threshold",
+            FOLDER_MORE_ONE_SURVEY_PER_DAY = "More_Than_OnePerDay",
+            FOLDER_MORE_THAN_INITIAL_AVERAGE = "More_Than_Average";
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
 
-        /**
-         * Step 1: collect all the IMEI of the participants that will be used
-         * to retrieve the files
-         */
-        ArrayList<String> listImei = IMEIListReader.getIMEIsList();
-        
-        /**
-         * Step 2: For each IMEI, we create a Participant object that will hold
-         * all the answers and his/her behavior
-         */
-        ArrayList<Participant> participantList = new ArrayList<Participant>();
-        int counter = 1;
-        for (String imei: listImei) {
-            
-            System.out.println("Acquiring data for participant (" + counter + 
-                    "/" + listImei.size() + "): " + imei);
-            
+        if (args[0].equals("0")) {
             /**
-             * Creating a new Participant
+             * Step 1: collect all the IMEI of the participants that will be used
+             * to retrieve the files
              */
-            Participant newParticipant = new Participant(imei);
-            
+            ArrayList<String> listImei = IMEIListReader.getIMEIsList();
+
             /**
-             * Retrieving all the answers provided
+             * Step 2: For each IMEI, we create a Participant object that will hold
+             * all the answers and his/her behavior
              */
-            ArrayList<String> surveyAnswers = new ArrayList<String>(),
-                    questionnaireAnswers = new ArrayList<String>();
-            
-            SurveyQuestionnaireReader.readFile(imei, surveyAnswers, 
-                    questionnaireAnswers);
-            
-            /**
-             * Adding the answers to the Surveys
-             */
-            newParticipant.addSurveyAnswers(surveyAnswers);
-            
-            if (COMPELTE_ANALYSIS) {
-                ArrayList<String> userPresenceEventsLines = 
-                    UserPresenceEventsReader.getAllUserPresenceEventsLines(newParticipant);
-                newParticipant.addUserPresenceEvents(userPresenceEventsLines);
-            
-                if (DEBUG) {
-                    System.out.println("DEBUG: Adding the UserPresenceEvent events to the "+ 
-                        "participant");
-                }
-                /**
-                 * Adding the UserPresenceEvent events to the participant
-                 */
+            ArrayList<Participant> participantList = new ArrayList<Participant>();
+            int counter = 1;
+            for (String imei: listImei) {
 
-                if (DEBUG) {
-                    System.out.println("DEBUG: Adding the UserActivityEvent events " + 
-                            "to the participant");
-                }
-                /**
-                 * Adding the UserActivityEvent events to the participant
-                 */
-            
-                ArrayList<String> userActivityEventsLines = 
-                    UserActivityReader.getAllUserActivityEventsLines(newParticipant);
-                newParticipant.addUserActivityEvents(userActivityEventsLines);
-            
-            
-                if (DEBUG) {
-                    System.out.println("DEBUG: Retrieving Light lines");
-                }
-                /**
-                 * Retrieving Light lines 
-                 */
-            
-                ArrayList<String> userPresenceLightEventsLines = 
-                    UserPresenceLightReader.getALlUserPresenceLightEventsLines(newParticipant);
-            
-            
-                /**
-                 * Adding the ActivityServServiceEvent events to the participant
-                 */
-                /*ArrayList<String> activityServServiceEventsLines = 
-                        ActivityServServiceReader.getAllActivityServServiceEventsLines(newParticipant);
-                newParticipant.addActivityServServiceEvents(activityServServiceEventsLines);*/
+                System.out.println("Acquiring data for participant (" + counter + 
+                        "/" + listImei.size() + "): " + imei);
 
-                if (DEBUG) {
-                    System.out.println("DEBUG: Retrieving ApplicationUsed lines");
-                }
                 /**
-                 * Retrieving the ApplicationUsed lines 
+                 * Creating a new Participant
                  */
-            
-                ArrayList<String> applicationUsedEventsLines = 
-                    ApplicationsUsedReader.getAllApplicationsUsedEventsLines(newParticipant);
-                
-                if (DEBUG) {
-                    System.out.println("DEBUG: Adding ApplicationUsed Events");
-                }
-                
-                newParticipant.addApplicationsUsedEvents(applicationUsedEventsLines);
-            
-                if (DEBUG) {
-                    System.out.println("DEBUG: Making association between survey " + 
-                            "time validity and events");
-                }
-                /**
-                 * Making association between survey time validity and events
-                 */
-            
-                newParticipant.addUserEventsToSurveys();
-            
+                Participant newParticipant = new Participant(imei);
 
-                if (DEBUG) {
-                    System.out.println("DEBUG: Retrieving TouchesBuffered events");
-                }
                 /**
-                 * Retrieving the TouchesBuffered events
+                 * Retrieving all the answers provided
                  */
-                ArrayList<String> touchesBufferedEventsLines = 
-                        TouchesBufferedReader.getAllTouchesBufferedEventsLines(newParticipant);
+                ArrayList<String> surveyAnswers = new ArrayList<String>(),
+                        questionnaireAnswers = new ArrayList<String>();
 
-                if (DEBUG) {
-                    System.out.println("DEBUG: Adding TouchesBufferedEvent events " + 
-                            "to the UnlockedScreen events");
-                }
+                SurveyQuestionnaireReader.readFile(imei, surveyAnswers, 
+                        questionnaireAnswers);
+
                 /**
-                 * Adding TouchesBufferedEvent events to the UnlockedScreen 
-                 * events
+                 * Adding the answers to the Surveys
                  */
-                newParticipant.addTouchesBufferedEventsToUnlockedScreen(
-                        TouchesBufferedEvent.createListOfTouchesBufferedEvents(touchesBufferedEventsLines));
+                newParticipant.addSurveyAnswers(surveyAnswers);
 
-                if (DEBUG) {
-                    System.out.println("DEBUG: Adding UserPresenceLightEvent " + 
-                            "to the Screen events");
-                }
-                /**
-                 * Adding UserPresenceLightEvent events to the Screen events
-                 */
-                newParticipant.addUserPresenceLightEvents(UserPresenceLightEvent.
-                        createListOfUserPresenceLightEvents(userPresenceLightEventsLines));
+                if (COMPELTE_ANALYSIS) {
+                    ArrayList<String> userPresenceEventsLines = 
+                        UserPresenceEventsReader.getAllUserPresenceEventsLines(newParticipant);
+                    newParticipant.addUserPresenceEvents(userPresenceEventsLines);
 
-                if (DEBUG) {
-                    System.out.println("DEBUG: Spreading events among survey data wrapper");
+                    if (DEBUG) {
+                        System.out.println("DEBUG: Adding the UserPresenceEvent events to the "+ 
+                            "participant");
+                    }
+                    /**
+                     * Adding the UserPresenceEvent events to the participant
+                     */
+
+                    if (DEBUG) {
+                        System.out.println("DEBUG: Adding the UserActivityEvent events " + 
+                                "to the participant");
+                    }
+                    /**
+                     * Adding the UserActivityEvent events to the participant
+                     */
+
+                    ArrayList<String> userActivityEventsLines = 
+                        UserActivityReader.getAllUserActivityEventsLines(newParticipant);
+                    newParticipant.addUserActivityEvents(userActivityEventsLines);
+
+
+                    if (DEBUG) {
+                        System.out.println("DEBUG: Retrieving Light lines");
+                    }
+                    /**
+                     * Retrieving Light lines 
+                     */
+
+                    ArrayList<String> userPresenceLightEventsLines = 
+                        UserPresenceLightReader.getALlUserPresenceLightEventsLines(newParticipant);
+
+
+                    /**
+                     * Adding the ActivityServServiceEvent events to the participant
+                     */
+                    /*ArrayList<String> activityServServiceEventsLines = 
+                            ActivityServServiceReader.getAllActivityServServiceEventsLines(newParticipant);
+                    newParticipant.addActivityServServiceEvents(activityServServiceEventsLines);*/
+
+                    if (DEBUG) {
+                        System.out.println("DEBUG: Retrieving ApplicationUsed lines");
+                    }
+                    /**
+                     * Retrieving the ApplicationUsed lines 
+                     */
+
+                    ArrayList<String> applicationUsedEventsLines = 
+                        ApplicationsUsedReader.getAllApplicationsUsedEventsLines(newParticipant);
+
+                    if (DEBUG) {
+                        System.out.println("DEBUG: Adding ApplicationUsed Events");
+                    }
+
+                    newParticipant.addApplicationsUsedEvents(applicationUsedEventsLines);
+
+                    if (DEBUG) {
+                        System.out.println("DEBUG: Making association between survey " + 
+                                "time validity and events");
+                    }
+                    /**
+                     * Making association between survey time validity and events
+                     */
+
+                    newParticipant.addUserEventsToSurveys();
+
+
+                    if (DEBUG) {
+                        System.out.println("DEBUG: Retrieving TouchesBuffered events");
+                    }
+                    /**
+                     * Retrieving the TouchesBuffered events
+                     */
+                    ArrayList<String> touchesBufferedEventsLines = 
+                            TouchesBufferedReader.getAllTouchesBufferedEventsLines(newParticipant);
+
+                    if (DEBUG) {
+                        System.out.println("DEBUG: Adding TouchesBufferedEvent events " + 
+                                "to the UnlockedScreen events");
+                    }
+                    /**
+                     * Adding TouchesBufferedEvent events to the UnlockedScreen 
+                     * events
+                     */
+                    newParticipant.addTouchesBufferedEventsToUnlockedScreen(
+                            TouchesBufferedEvent.createListOfTouchesBufferedEvents(touchesBufferedEventsLines));
+
+                    if (DEBUG) {
+                        System.out.println("DEBUG: Adding UserPresenceLightEvent " + 
+                                "to the Screen events");
+                    }
+                    /**
+                     * Adding UserPresenceLightEvent events to the Screen events
+                     */
+                    newParticipant.addUserPresenceLightEvents(UserPresenceLightEvent.
+                            createListOfUserPresenceLightEvents(userPresenceLightEventsLines));
+
+                    if (DEBUG) {
+                        System.out.println("DEBUG: Spreading events among survey data wrapper");
+                    }
+                    newParticipant.spreadEventsAmongSurveyDataWrapper();
                 }
-                newParticipant.spreadEventsAmongSurveyDataWrapper();
+
+                participantList.add(newParticipant);
+                counter++;
             }
-            
-            participantList.add(newParticipant);
-            counter++;
+
+            /**
+             * Step 3: Printing statistics about the surveys
+             */
+            SurveyAnalyzer.calculateStatisticsAnswers(participantList);
+
+            /**
+             * Analyzing answers provided, to understand how many participants 
+             * have the number of answers higher than the average
+             */
+            SurveyAnalyzer.printAnalysisParticipantsParticipation(participantList);
+
+            /**
+             * Keeping all the participants
+             */
+            System.out.println();
+            System.out.println(TITLE_ALL_PARTICIPANTS);
+            EventsAnalyzer.printTitleMessage(null);
+            EventsAnalyzer.printTitleMessage(TITLE_ALL_PARTICIPANTS);
+
+            performStatisticalAnalysisSteps(participantList);
+
+            /**
+             * Calculating statistics for participants with more than one answer
+             * per day
+             */
+            System.out.println();
+            System.out.println(TITLE_PARTICIPANTS_ZERO_ANSWERS);
+            EventsAnalyzer.printTitleMessage(null);
+            EventsAnalyzer.printTitleMessage(TITLE_PARTICIPANTS_ZERO_ANSWERS);
+
+            ArrayList<Participant> participantsListWithMoreThanZeroAnswers = 
+                    SurveyAnalyzer.
+                    getListParticipantsWithMoreThanZeroAnswers(participantList);
+
+            SurveyAnalyzer.calculateStatisticsAnswers(participantsListWithMoreThanZeroAnswers);
+
+            performStatisticalAnalysisSteps(participantsListWithMoreThanZeroAnswers);
+
+            /**
+             * Calculating statistics for participants with more than our
+             * threshold answers number
+             */
+            System.out.println();
+            System.out.println(TITLE_MORE_THRESHOLD);
+            EventsAnalyzer.printTitleMessage(null);
+            EventsAnalyzer.printTitleMessage(TITLE_MORE_THRESHOLD);
+
+            ArrayList<Participant> participantsListWithMoreThanThresholdAnswers = 
+                    SurveyAnalyzer.
+                    getListParticipantsOverArbitraryThreshold(participantList);
+
+            SurveyAnalyzer.calculateStatisticsAnswers(participantsListWithMoreThanThresholdAnswers);
+
+            performStatisticalAnalysisSteps(participantsListWithMoreThanThresholdAnswers);
+
+            /**
+             * Calculating statistics for participants with more than one per 
+             * day answer
+             */
+            System.out.println();
+            System.out.println(TITLE_MORE_ONE_SURVEY_PER_DAY);
+            EventsAnalyzer.printTitleMessage(null);
+            EventsAnalyzer.printTitleMessage(TITLE_MORE_ONE_SURVEY_PER_DAY);
+
+            ArrayList<Participant> participantsListWithMoreThanOneAnswerPerDay =
+                    SurveyAnalyzer.
+                    getListParticipantsOverOnePerDayAnswer(participantList);
+
+            SurveyAnalyzer.calculateStatisticsAnswers(participantsListWithMoreThanOneAnswerPerDay);
+
+            performStatisticalAnalysisSteps(participantsListWithMoreThanOneAnswerPerDay);
+
+            /**
+             * Calculating statistics for participants with more answers than the
+             * initial average
+             */
+            System.out.println();
+            System.out.println(TITLE_MORE_THAN_INITIAL_AVERAGE);
+            EventsAnalyzer.printTitleMessage(null);
+            EventsAnalyzer.printTitleMessage(TITLE_MORE_THAN_INITIAL_AVERAGE);
+
+            ArrayList<Participant> participantsListWithMoreThanAverageAnswers = 
+                    SurveyAnalyzer.
+                    getListParticipantsOverInitialAverage(participantList);
+
+            SurveyAnalyzer.calculateStatisticsAnswers(participantsListWithMoreThanAverageAnswers);
+
+            performStatisticalAnalysisSteps(participantsListWithMoreThanAverageAnswers);
+
+            outputWriter.closeFile();
+
+            /**
+             * Now starting working with Weka files for classification
+             */
+            System.out.println("*** Creating weka files for classification task ***");
+
+            System.out.println("*** Creating file for classification task for "
+                    + "participants with more than 0 answers ***");
+            WekaAnalyzer.createWekaFiles(participantsListWithMoreThanZeroAnswers, 
+                    FOLDER_MORE_ZERO_ANSWERS);
+
+            System.out.println("*** Creating file for classification task for "
+                    + "participants with answers more than the arbitrary threshold ***");
+            WekaAnalyzer.createWekaFiles(participantsListWithMoreThanThresholdAnswers, 
+                    FOLDER_MORE_THRESHOLD);
+
+            System.out.println("*** Creating files for classification task for "
+                    + "participants with more than one answer per day ***");
+            WekaAnalyzer.createWekaFiles(participantsListWithMoreThanOneAnswerPerDay, 
+                    FOLDER_MORE_ONE_SURVEY_PER_DAY);
+
+            System.out.println("*** Creating files for classification task for "
+                    + "participant with more answers than the initial average ***");
+            WekaAnalyzer.createWekaFiles(participantsListWithMoreThanAverageAnswers, 
+                    FOLDER_MORE_THAN_INITIAL_AVERAGE);
+
+            WekaAnalyzer.createdFilesWriter.closeFile();
+        
         }
-        
-        /**
-         * Step 3: Printing statistics about the surveys
-         */
-        SurveyAnalyzer.calculateStatisticsAnswers(participantList);
-        
-        /**
-         * Analyzing answers provided, to understand how many participants 
-         * have the number of answers higher than the average
-         */
-        SurveyAnalyzer.printAnalysisParticipantsParticipation(participantList);
-        
-        /**
-         * Keeping all the participants
-         */
-        System.out.println();
-        System.out.println(TITLE_ALL_PARTICIPANTS);
-        EventsAnalyzer.printTitleMessage(null);
-        EventsAnalyzer.printTitleMessage(TITLE_ALL_PARTICIPANTS);
-        
-        performAnalysisSteps(participantList);
-        
-        /**
-         * Calculating statistics for participants with more than one answer
-         * per day
-         */
-        System.out.println();
-        System.out.println(TITLE_PARTICIPANTS_ZERO_ANSERS);
-        EventsAnalyzer.printTitleMessage(null);
-        EventsAnalyzer.printTitleMessage(TITLE_PARTICIPANTS_ZERO_ANSERS);
-        
-        ArrayList<Participant> participantsListWithMoreThanZeroAnswers = 
-                SurveyAnalyzer.
-                getListParticipantsWithMoreThanZeroAnswers(participantList);
-        
-        SurveyAnalyzer.calculateStatisticsAnswers(participantsListWithMoreThanZeroAnswers);
-        
-        performAnalysisSteps(participantsListWithMoreThanZeroAnswers);
-        
-        /**
-         * Calculating statistics for participants with more than our
-         * threshold answers number
-         */
-        System.out.println();
-        System.out.println(TITLE_MORE_THRESHOLD);
-        EventsAnalyzer.printTitleMessage(null);
-        EventsAnalyzer.printTitleMessage(TITLE_MORE_THRESHOLD);
-        
-        ArrayList<Participant> participantsListWithMoreThanThresholdAnswers = 
-                SurveyAnalyzer.
-                getListParticipantsOverArbitraryThreshold(participantList);
-        
-        SurveyAnalyzer.calculateStatisticsAnswers(participantsListWithMoreThanThresholdAnswers);
-        
-        performAnalysisSteps(participantsListWithMoreThanThresholdAnswers);
-        
-        /**
-         * Calculating statistics for participants with more than one per 
-         * day answer
-         */
-        System.out.println();
-        System.out.println(TITLE_MORE_ONE_SURVEY_PER_DAY);
-        EventsAnalyzer.printTitleMessage(null);
-        EventsAnalyzer.printTitleMessage(TITLE_MORE_ONE_SURVEY_PER_DAY);
-        
-        ArrayList<Participant> participantsListWithMoreThanOneAnswerPerDay =
-                SurveyAnalyzer.
-                getListParticipantsOverOnePerDayAnswer(participantList);
-        
-        SurveyAnalyzer.calculateStatisticsAnswers(participantsListWithMoreThanOneAnswerPerDay);
-        
-        performAnalysisSteps(participantsListWithMoreThanOneAnswerPerDay);
-        
-        /**
-         * Calculating statistics for participants with more answers than the
-         * initial average
-         */
-        System.out.println();
-        System.out.println(TITLE_MORE_THAN_INITIAL_AVERAGE);
-        EventsAnalyzer.printTitleMessage(null);
-        EventsAnalyzer.printTitleMessage(TITLE_MORE_THAN_INITIAL_AVERAGE);
-        
-        ArrayList<Participant> participantsListWithMoreThanAverageAnswers = 
-                SurveyAnalyzer.
-                getListParticipantsOverInitialAverage(participantList);
-        
-        SurveyAnalyzer.calculateStatisticsAnswers(participantsListWithMoreThanAverageAnswers);
-        
-        performAnalysisSteps(participantsListWithMoreThanAverageAnswers);
-        
-        outputWriter.closeFile();
-        
-        /**
-         * Now starting working with Weka files for classification
-         */
-        System.out.println("*** Creating weka files for classification task ***");
-        System.out.println("*** Classification task with participants with more"
-                + " than 0 answers ***");
-        WekaAnalyzer.workWithClassificationProblem(participantsListWithMoreThanZeroAnswers, 
-                TITLE_PARTICIPANTS_ZERO_ANSERS, "More_Zero_Answers");
-        
-        System.out.println("*** Classification task with participants with"
-                + " answers more than the arbitrary threshold ***");
-        WekaAnalyzer.workWithClassificationProblem(participantsListWithMoreThanThresholdAnswers, 
-                TITLE_MORE_THRESHOLD, "More_Than_Threshold");
-        
-        System.out.println("*** Classification task with participants with more"
-                + " than one answer per day ***");
-        WekaAnalyzer.workWithClassificationProblem(participantsListWithMoreThanOneAnswerPerDay, 
-                TITLE_MORE_ONE_SURVEY_PER_DAY, "More_Than_OnePerDay");
-        
-        System.out.println("*** Classification task with participant with more"
-                + " answers than the initial average ***");
-        WekaAnalyzer.workWithClassificationProblem(participantsListWithMoreThanAverageAnswers, 
-                TITLE_MORE_THAN_INITIAL_AVERAGE, "More_Than_Average");
-        
-        WekaAnalyzer.createdFilesWriter.closeFile();
-        
+        else if (args[0].equals("1")) {
+            WekaAnalyzer.startWithWekaClassificationTask();
+        }
     }
     
-    private static void performAnalysisSteps(ArrayList<Participant> participantsList) {
+    private static void performStatisticalAnalysisSteps(ArrayList<Participant> participantsList) {
         
         /**
          * First Step: all features, difficult task, participants divided

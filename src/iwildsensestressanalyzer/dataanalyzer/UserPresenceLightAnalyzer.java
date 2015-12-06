@@ -17,7 +17,7 @@ public class UserPresenceLightAnalyzer extends EventsAnalyzer {
         
         if (!useAllTogether) {
             
-            ArrayList<Double> tTestPassedForLightValuesOfScreenOnOffEvents = 
+            ArrayList<Integer> tTestPassedForLightValuesOfScreenOnOffEvents = 
                         new ArrayList<>(),
                     tTestPassedForLightValuesOfUnlockedScreenEvents = 
                         new ArrayList<>(),

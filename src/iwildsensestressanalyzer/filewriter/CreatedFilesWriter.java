@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class CreatedFilesWriter extends OutputFileWriter {
     
     private static final String OUTPUT_FILE = BASE_OUTPUT_FOLDER + 
-            "Classification" + File.separator + "WekaFileCreated.txt";
+            "Classification" + File.separator + "CreatedWekaFiles.txt";
     
     private File outputFile = null;
     private BufferedWriter outputFileWriter = null;
