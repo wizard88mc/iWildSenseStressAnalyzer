@@ -27,7 +27,7 @@ public class EventsAnalyzer {
         ArrayList<Participant> participants, boolean easyJob) {
         
         ArrayList<ArrayList<SurveyDataWrapper>> allSurveyDataWrappers =
-            new ArrayList<ArrayList<SurveyDataWrapper>>();
+            new ArrayList<>();
             
         if (!easyJob) {    
             for(int i = 0; i < participants.get(0).getSurveyDataWrappers().length; i++) {
@@ -74,12 +74,12 @@ public class EventsAnalyzer {
         /**
          * Converting data to an array of double for the TTest library
          */
-        ArrayList<double[]> valuesForTTest = new ArrayList<double[]>();
+        ArrayList<double[]> valuesForTTest = new ArrayList<>();
         for (ArrayList<Double> values: normalizedValues) {
             valuesForTTest.add(MathUtils.convertToArrayDouble(values));
         }
         
-        ArrayList<Boolean> testPassed = new ArrayList<Boolean>();
+        ArrayList<Boolean> testPassed = new ArrayList<>();
         
         if (!easyJob) {
             IWildSenseStressAnalyzer.outputWriter
@@ -120,7 +120,7 @@ public class EventsAnalyzer {
                                 valuesForTTest.get(j).length != 0) {
                             
                             try {
-                                double tTest = new TTest().tTest(valuesForTTest.get(i), 
+                                double tTest = new TTest().pairedTTest(valuesForTTest.get(i), 
                                     valuesForTTest.get(j));
                                 
                                 if (Double.isNaN(tTest) || Double.isInfinite(tTest)) {

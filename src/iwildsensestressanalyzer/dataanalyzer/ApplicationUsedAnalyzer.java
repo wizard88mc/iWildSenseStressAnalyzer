@@ -14,7 +14,7 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
     
     public static final Boolean DEBUG_APP_CATEGORY = false;
     
-    private static final ArrayList<String> allAppCategories = new ArrayList<String>();
+    private static final ArrayList<String> allAppCategories = new ArrayList<>();
     
     public static void analyzeDataOfApplicationUsedForEachParticipant(
             ArrayList<Participant> participants, boolean easyJob, 
@@ -130,11 +130,11 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
         printTitleMessage("*** GLOBAL ANALYSIS: Influence of " + appCategory 
             + " application category ***");
 
-        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
 
         for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
 
-            ArrayList<Double> singleValues = new ArrayList<Double>();
+            ArrayList<Double> singleValues = new ArrayList<>();
 
             for (SurveyDataWrapper wrapper: wrappers) {
                 Double[] values = wrapper.getApplicationUsedFeaturesExtractorListWrapper()

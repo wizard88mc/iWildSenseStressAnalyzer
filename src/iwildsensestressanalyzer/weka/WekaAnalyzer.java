@@ -211,9 +211,9 @@ public class WekaAnalyzer {
          */
         System.out.println("*** Classification for participants with more than "
                 + "zero answers ***");
-        performWekaClassificationTask(moreThanZeroAnswers, 
+        /*performWekaClassificationTask(moreThanZeroAnswers, 
                 IWildSenseStressAnalyzer.TITLE_PARTICIPANTS_ZERO_ANSWERS, 
-                IWildSenseStressAnalyzer.FOLDER_MORE_ZERO_ANSWERS, false);
+                IWildSenseStressAnalyzer.FOLDER_MORE_ZERO_ANSWERS, false);*/
         performWekaClassificationTask(moreThanZeroAnswers, 
                 IWildSenseStressAnalyzer.TITLE_PARTICIPANTS_ZERO_ANSWERS, 
                 IWildSenseStressAnalyzer.FOLDER_MORE_ZERO_ANSWERS, true);
@@ -259,8 +259,9 @@ public class WekaAnalyzer {
         
         for (String fileName: listFileNames) {
             
-            String[] elementsFileName = fileName.split(File.separator);
+            String[] elementsFileName = fileName.split("/");
             String IMEI = elementsFileName[elementsFileName.length - 2];
+            //String IMEI = "_ALL";
             
             if ((fileName.contains("EASY") && !listIMEIsAlreadyTestedEasy.contains(IMEI))
                     || (fileName.contains("DIFFICULT") && 
@@ -381,8 +382,8 @@ public class WekaAnalyzer {
                              */
                             MultilayerPerceptron multiPerceptron = new MultilayerPerceptron();
                             multiPerceptron.setOptions(weka.core.Utils.
-                                    splitOptions("-L 0.3 -M 0.2 -N 1000 -V 0 "
-                                            + "-S 1 -E 20 -H a"));
+                                    splitOptions("-L 0.3 -M 0.2 -N 500 -V 0 "
+                                            + "-S 0 -E 20 -H a"));
                             multiPerceptron.buildClassifier(data);
                             Evaluation multiPEval = new Evaluation(data);
                             multiPEval.crossValidateModel(multiPerceptron, data, 
