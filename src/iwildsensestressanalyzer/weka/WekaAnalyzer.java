@@ -33,7 +33,8 @@ public class WekaAnalyzer {
     
     public static CreatedFilesWriter createdFilesWriter = null;
     
-    private static ArrayList<String> listIMEIsAlreadyTested = new ArrayList<>();
+    private static ArrayList<String> listIMEIsAlreadyTestedDifficult = new ArrayList<>(),
+            listIMEIsAlreadyTestedEasy = new ArrayList<>();
     
     public static void createWekaFiles(ArrayList<Participant> 
             participants, String subfolderName) {
@@ -217,7 +218,7 @@ public class WekaAnalyzer {
                 IWildSenseStressAnalyzer.TITLE_PARTICIPANTS_ZERO_ANSWERS, 
                 IWildSenseStressAnalyzer.FOLDER_MORE_ZERO_ANSWERS, true);
         
-        System.out.println("*** Classification for participants with more "
+        /*System.out.println("*** Classification for participants with more "
                 + "answers than the threshold ***");
         performWekaClassificationTask(moreThanThreshold, 
                 IWildSenseStressAnalyzer.TITLE_MORE_THRESHOLD, 
@@ -242,7 +243,7 @@ public class WekaAnalyzer {
                 IWildSenseStressAnalyzer.FOLDER_MORE_THAN_INITIAL_AVERAGE, false);
         performWekaClassificationTask(moreThanInitialAverage, 
                 IWildSenseStressAnalyzer.TITLE_MORE_THAN_INITIAL_AVERAGE, 
-                IWildSenseStressAnalyzer.FOLDER_MORE_THAN_INITIAL_AVERAGE, true);
+                IWildSenseStressAnalyzer.FOLDER_MORE_THAN_INITIAL_AVERAGE, true);*/
     }
     
     /**
@@ -252,7 +253,7 @@ public class WekaAnalyzer {
             String initialMessage, String subfolder, boolean oversampleData) {
         
         WekaEvaluationOutputWriter outputWriter = 
-                new WekaEvaluationOutputWriter(subfolder);
+                new WekaEvaluationOutputWriter(subfolder, oversampleData);
         
         outputWriter.writeOnOutputFile(initialMessage);
         
@@ -261,10 +262,17 @@ public class WekaAnalyzer {
             String[] elementsFileName = fileName.split(File.separator);
             String IMEI = elementsFileName[elementsFileName.length - 2];
             
-            if (!listIMEIsAlreadyTested.contains(IMEI)) {
+            if ((fileName.contains("EASY") && !listIMEIsAlreadyTestedEasy.contains(IMEI))
+                    || (fileName.contains("DIFFICULT") && 
+                    !listIMEIsAlreadyTestedDifficult.contains(IMEI))) {
                 
-                if (!IMEI.contains("ALL")) {
-                    listIMEIsAlreadyTested.add(IMEI);
+                if (!IMEI.contains("ALL") && fileName.contains("EASY")) {
+                    if (fileName.contains("EASY")) {
+                        listIMEIsAlreadyTestedEasy.add(IMEI);
+                    }
+                    else {
+                        listIMEIsAlreadyTestedDifficult.add(IMEI);
+                    }
                 }
             
                 File file = new File(fileName);
@@ -401,7 +409,7 @@ public class WekaAnalyzer {
                             /**
                              * Bayesan Network evaluation
                              */
-                            BayesNet bayes = new BayesNet();
+                            /*BayesNet bayes = new BayesNet();
                             bayes.setOptions(weka.core.Utils.splitOptions("-D -Q "
                                     + "weka.classifiers.bayes.net.search.local.K2 -- "
                                     + "-P 1 -S BAYES -E "
@@ -415,7 +423,7 @@ public class WekaAnalyzer {
                             outputWriter.writeOnOutputFile("Bayes network");
                             outputWriter.writeOnOutputFile(
                                     evaluateClassificationPerformances(bayesEval, 
-                                            easyTask));
+                                            easyTask));*/
                         }
                         catch(Exception exc) {
 

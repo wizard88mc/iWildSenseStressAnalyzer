@@ -32,7 +32,7 @@ public class IWildSenseStressAnalyzer {
     
     public static final boolean DEBUG = true;
     public static final boolean COMPELTE_ANALYSIS = true;
-    public static final StatisticalSignificanceOutputWriter outputWriter = new StatisticalSignificanceOutputWriter();
+    public static StatisticalSignificanceOutputWriter outputWriter = null;
     
     public static final String TITLE_ALL_PARTICIPANTS = "*** Keeping all "
                 + "participants ***",
@@ -56,6 +56,10 @@ public class IWildSenseStressAnalyzer {
     public static void main(String[] args) {
 
         if (args[0].equals("0")) {
+            
+            if (outputWriter == null) {
+                outputWriter = new StatisticalSignificanceOutputWriter();
+            }
             /**
              * Step 1: collect all the IMEI of the participants that will be used
              * to retrieve the files

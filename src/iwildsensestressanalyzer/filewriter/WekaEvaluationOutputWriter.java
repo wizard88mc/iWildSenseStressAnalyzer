@@ -21,12 +21,18 @@ public class WekaEvaluationOutputWriter extends OutputFileWriter {
     
     private BufferedWriter outputWriter = null;
     
-    public WekaEvaluationOutputWriter(String subfolder) {
+    public WekaEvaluationOutputWriter(String subfolder, boolean oversample) {
         
         try {
             
-            outputFile = new File(OUTPUT_FOLDER + subfolder + File.separator + 
-                    OUTPUT_FILE_NAME);
+            String finalFile = OUTPUT_FOLDER + subfolder + File.separator;
+            
+            if (oversample) {
+                finalFile += "SMOTHE";
+            }
+            finalFile += OUTPUT_FILE_NAME;
+            
+            outputFile = new File(finalFile);
             outputFile.getParentFile().mkdirs();
             
             outputWriter = new BufferedWriter(new FileWriter(outputFile));

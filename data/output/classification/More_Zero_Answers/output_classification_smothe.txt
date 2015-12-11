@@ -1,0 +1,1985 @@
+*** Removing participants with 0 answers provided ***
+data/output/Classification/More_Zero_Answers/351565052265664/StressClassification351565052265664DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 58; [2] => 57; [3] => 48; [4] => 57; [5] => 0; }
+ZeroR Classification
+Average Accuracy: 0.70545
+Error rate: 0.29455
+Class 1: {TP: 58.0; FP: 162.0; TN: 0.0; FN: 0.0; Precision: 0.26364; Recall: 1.00000; F-Measure: 0.41727}
+Class 2: {TP: 0.0; FP: 0.0; TN: 163.0; FN: 57.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 3: {TP: 0.0; FP: 0.0; TN: 172.0; FN: 48.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 163.0; FN: 57.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 220.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.26364; Recall: 0.26364; Fscore: 0.26364 }
+Macro {Precision: 0.05273; Recall: 0.00000; Fscore: 0.00000}
+TREE Classification
+Average Accuracy: 0.94182
+Error rate: 0.05818
+Class 1: {TP: 40.0; FP: 12.0; TN: 150.0; FN: 18.0; Precision: 0.76923; Recall: 0.68966; F-Measure: 0.72727}
+Class 2: {TP: 44.0; FP: 17.0; TN: 146.0; FN: 13.0; Precision: 0.72131; Recall: 0.77193; F-Measure: 0.74576}
+Class 3: {TP: 47.0; FP: 2.0; TN: 170.0; FN: 1.0; Precision: 0.95918; Recall: 0.97917; F-Measure: 0.96907}
+Class 4: {TP: 57.0; FP: 1.0; TN: 162.0; FN: 0.0; Precision: 0.98276; Recall: 1.00000; F-Measure: 0.99130}
+Class 5: {TP: 0.0; FP: 0.0; TN: 220.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.85455; Recall: 0.85455; Fscore: 0.85455 }
+Macro {Precision: 0.68650; Recall: 0.00000; Fscore: 0.00000}
+2-kNN Classification
+Average Accuracy: 0.89091
+Error rate: 0.10909
+Class 1: {TP: 42.0; FP: 20.0; TN: 142.0; FN: 16.0; Precision: 0.67742; Recall: 0.72414; F-Measure: 0.70000}
+Class 2: {TP: 39.0; FP: 39.0; TN: 124.0; FN: 18.0; Precision: 0.50000; Recall: 0.68421; F-Measure: 0.57778}
+Class 3: {TP: 22.0; FP: 0.0; TN: 172.0; FN: 26.0; Precision: 1.00000; Recall: 0.45833; F-Measure: 0.62857}
+Class 4: {TP: 57.0; FP: 1.0; TN: 162.0; FN: 0.0; Precision: 0.98276; Recall: 1.00000; F-Measure: 0.99130}
+Class 5: {TP: 0.0; FP: 0.0; TN: 220.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.72727; Recall: 0.72727; Fscore: 0.72727 }
+Macro {Precision: 0.63204; Recall: 0.00000; Fscore: 0.00000}
+3-kNN Classification
+Average Accuracy: 0.89091
+Error rate: 0.10909
+Class 1: {TP: 42.0; FP: 20.0; TN: 142.0; FN: 16.0; Precision: 0.67742; Recall: 0.72414; F-Measure: 0.70000}
+Class 2: {TP: 39.0; FP: 39.0; TN: 124.0; FN: 18.0; Precision: 0.50000; Recall: 0.68421; F-Measure: 0.57778}
+Class 3: {TP: 22.0; FP: 0.0; TN: 172.0; FN: 26.0; Precision: 1.00000; Recall: 0.45833; F-Measure: 0.62857}
+Class 4: {TP: 57.0; FP: 1.0; TN: 162.0; FN: 0.0; Precision: 0.98276; Recall: 1.00000; F-Measure: 0.99130}
+Class 5: {TP: 0.0; FP: 0.0; TN: 220.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.72727; Recall: 0.72727; Fscore: 0.72727 }
+Macro {Precision: 0.63204; Recall: 0.00000; Fscore: 0.00000}
+SVM Classification
+Average Accuracy: 0.92727
+Error rate: 0.07273
+Class 1: {TP: 36.0; FP: 16.0; TN: 146.0; FN: 22.0; Precision: 0.69231; Recall: 0.62069; F-Measure: 0.65455}
+Class 2: {TP: 40.0; FP: 18.0; TN: 145.0; FN: 17.0; Precision: 0.68966; Recall: 0.70175; F-Measure: 0.69565}
+Class 3: {TP: 47.0; FP: 5.0; TN: 167.0; FN: 1.0; Precision: 0.90385; Recall: 0.97917; F-Measure: 0.94000}
+Class 4: {TP: 57.0; FP: 1.0; TN: 162.0; FN: 0.0; Precision: 0.98276; Recall: 1.00000; F-Measure: 0.99130}
+Class 5: {TP: 0.0; FP: 0.0; TN: 220.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.81818; Recall: 0.81818; Fscore: 0.81818 }
+Macro {Precision: 0.65371; Recall: 0.00000; Fscore: 0.00000}
+Multilayer Perceptron Classification
+Average Accuracy: 0.94182
+Error rate: 0.05818
+Class 1: {TP: 37.0; FP: 8.0; TN: 154.0; FN: 21.0; Precision: 0.82222; Recall: 0.63793; F-Measure: 0.71845}
+Class 2: {TP: 48.0; FP: 15.0; TN: 148.0; FN: 9.0; Precision: 0.76190; Recall: 0.84211; F-Measure: 0.80000}
+Class 3: {TP: 46.0; FP: 7.0; TN: 165.0; FN: 2.0; Precision: 0.86792; Recall: 0.95833; F-Measure: 0.91089}
+Class 4: {TP: 57.0; FP: 2.0; TN: 161.0; FN: 0.0; Precision: 0.96610; Recall: 1.00000; F-Measure: 0.98276}
+Class 5: {TP: 0.0; FP: 0.0; TN: 220.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.85455; Recall: 0.85455; Fscore: 0.85455 }
+Macro {Precision: 0.68363; Recall: 0.00000; Fscore: 0.00000}
+Bayes network
+Average Accuracy: 0.94182
+Error rate: 0.05818
+Class 1: {TP: 48.0; FP: 21.0; TN: 141.0; FN: 10.0; Precision: 0.69565; Recall: 0.82759; F-Measure: 0.75591}
+Class 2: {TP: 37.0; FP: 9.0; TN: 154.0; FN: 20.0; Precision: 0.80435; Recall: 0.64912; F-Measure: 0.71845}
+Class 3: {TP: 46.0; FP: 1.0; TN: 171.0; FN: 2.0; Precision: 0.97872; Recall: 0.95833; F-Measure: 0.96842}
+Class 4: {TP: 57.0; FP: 1.0; TN: 162.0; FN: 0.0; Precision: 0.98276; Recall: 1.00000; F-Measure: 0.99130}
+Class 5: {TP: 0.0; FP: 0.0; TN: 220.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.85455; Recall: 0.85455; Fscore: 0.85455 }
+Macro {Precision: 0.69230; Recall: 0.00000; Fscore: 0.00000}
+data/output/Classification/More_Zero_Answers/352136063152108/StressClassification352136063152108DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 20; [2] => 21; [3] => 22; [4] => 20; [5] => 16; }
+ZeroR Classification
+Average Accuracy: 0.68081
+Error rate: 0.31919
+Class 1: {TP: 0.0; FP: 0.0; TN: 79.0; FN: 20.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 2: {TP: 4.0; FP: 16.0; TN: 62.0; FN: 17.0; Precision: 0.20000; Recall: 0.19048; F-Measure: 0.19512}
+Class 3: {TP: 16.0; FP: 63.0; TN: 14.0; FN: 6.0; Precision: 0.20253; Recall: 0.72727; F-Measure: 0.31683}
+Class 4: {TP: 0.0; FP: 0.0; TN: 79.0; FN: 20.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 83.0; FN: 16.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.20202; Recall: 0.20202; Fscore: 0.20202 }
+Macro {Precision: 0.08051; Recall: 0.18355; Fscore: 0.11192}
+TREE Classification
+Average Accuracy: 0.87071
+Error rate: 0.12929
+Class 1: {TP: 17.0; FP: 5.0; TN: 74.0; FN: 3.0; Precision: 0.77273; Recall: 0.85000; F-Measure: 0.80952}
+Class 2: {TP: 10.0; FP: 8.0; TN: 70.0; FN: 11.0; Precision: 0.55556; Recall: 0.47619; F-Measure: 0.51282}
+Class 3: {TP: 12.0; FP: 8.0; TN: 69.0; FN: 10.0; Precision: 0.60000; Recall: 0.54545; F-Measure: 0.57143}
+Class 4: {TP: 12.0; FP: 10.0; TN: 69.0; FN: 8.0; Precision: 0.54545; Recall: 0.60000; F-Measure: 0.57143}
+Class 5: {TP: 16.0; FP: 1.0; TN: 82.0; FN: 0.0; Precision: 0.94118; Recall: 1.00000; F-Measure: 0.96970}
+Micro: {Precision: 0.67677; Recall: 0.67677; Fscore: 0.67677 }
+Macro {Precision: 0.68298; Recall: 0.69433; Fscore: 0.68861}
+2-kNN Classification
+Average Accuracy: 0.90707
+Error rate: 0.09293
+Class 1: {TP: 20.0; FP: 1.0; TN: 78.0; FN: 0.0; Precision: 0.95238; Recall: 1.00000; F-Measure: 0.97561}
+Class 2: {TP: 11.0; FP: 6.0; TN: 72.0; FN: 10.0; Precision: 0.64706; Recall: 0.52381; F-Measure: 0.57895}
+Class 3: {TP: 11.0; FP: 6.0; TN: 71.0; FN: 11.0; Precision: 0.64706; Recall: 0.50000; F-Measure: 0.56410}
+Class 4: {TP: 18.0; FP: 8.0; TN: 71.0; FN: 2.0; Precision: 0.69231; Recall: 0.90000; F-Measure: 0.78261}
+Class 5: {TP: 16.0; FP: 2.0; TN: 81.0; FN: 0.0; Precision: 0.88889; Recall: 1.00000; F-Measure: 0.94118}
+Micro: {Precision: 0.76768; Recall: 0.76768; Fscore: 0.76768 }
+Macro {Precision: 0.76554; Recall: 0.78476; Fscore: 0.77503}
+3-kNN Classification
+Average Accuracy: 0.90707
+Error rate: 0.09293
+Class 1: {TP: 20.0; FP: 1.0; TN: 78.0; FN: 0.0; Precision: 0.95238; Recall: 1.00000; F-Measure: 0.97561}
+Class 2: {TP: 11.0; FP: 6.0; TN: 72.0; FN: 10.0; Precision: 0.64706; Recall: 0.52381; F-Measure: 0.57895}
+Class 3: {TP: 11.0; FP: 6.0; TN: 71.0; FN: 11.0; Precision: 0.64706; Recall: 0.50000; F-Measure: 0.56410}
+Class 4: {TP: 18.0; FP: 8.0; TN: 71.0; FN: 2.0; Precision: 0.69231; Recall: 0.90000; F-Measure: 0.78261}
+Class 5: {TP: 16.0; FP: 2.0; TN: 81.0; FN: 0.0; Precision: 0.88889; Recall: 1.00000; F-Measure: 0.94118}
+Micro: {Precision: 0.76768; Recall: 0.76768; Fscore: 0.76768 }
+Macro {Precision: 0.76554; Recall: 0.78476; Fscore: 0.77503}
+SVM Classification
+Average Accuracy: 0.89495
+Error rate: 0.10505
+Class 1: {TP: 18.0; FP: 2.0; TN: 77.0; FN: 2.0; Precision: 0.90000; Recall: 0.90000; F-Measure: 0.90000}
+Class 2: {TP: 14.0; FP: 5.0; TN: 73.0; FN: 7.0; Precision: 0.73684; Recall: 0.66667; F-Measure: 0.70000}
+Class 3: {TP: 14.0; FP: 11.0; TN: 66.0; FN: 8.0; Precision: 0.56000; Recall: 0.63636; F-Measure: 0.59574}
+Class 4: {TP: 11.0; FP: 6.0; TN: 73.0; FN: 9.0; Precision: 0.64706; Recall: 0.55000; F-Measure: 0.59459}
+Class 5: {TP: 16.0; FP: 2.0; TN: 81.0; FN: 0.0; Precision: 0.88889; Recall: 1.00000; F-Measure: 0.94118}
+Micro: {Precision: 0.73737; Recall: 0.73737; Fscore: 0.73737 }
+Macro {Precision: 0.74656; Recall: 0.75061; Fscore: 0.74858}
+Multilayer Perceptron Classification
+Average Accuracy: 0.89495
+Error rate: 0.10505
+Class 1: {TP: 19.0; FP: 2.0; TN: 77.0; FN: 1.0; Precision: 0.90476; Recall: 0.95000; F-Measure: 0.92683}
+Class 2: {TP: 11.0; FP: 6.0; TN: 72.0; FN: 10.0; Precision: 0.64706; Recall: 0.52381; F-Measure: 0.57895}
+Class 3: {TP: 13.0; FP: 8.0; TN: 69.0; FN: 9.0; Precision: 0.61905; Recall: 0.59091; F-Measure: 0.60465}
+Class 4: {TP: 14.0; FP: 9.0; TN: 70.0; FN: 6.0; Precision: 0.60870; Recall: 0.70000; F-Measure: 0.65116}
+Class 5: {TP: 16.0; FP: 1.0; TN: 82.0; FN: 0.0; Precision: 0.94118; Recall: 1.00000; F-Measure: 0.96970}
+Micro: {Precision: 0.73737; Recall: 0.73737; Fscore: 0.73737 }
+Macro {Precision: 0.74415; Recall: 0.75294; Fscore: 0.74852}
+Bayes network
+Average Accuracy: 0.83838
+Error rate: 0.16162
+Class 1: {TP: 18.0; FP: 1.0; TN: 78.0; FN: 2.0; Precision: 0.94737; Recall: 0.90000; F-Measure: 0.92308}
+Class 2: {TP: 7.0; FP: 12.0; TN: 66.0; FN: 14.0; Precision: 0.36842; Recall: 0.33333; F-Measure: 0.35000}
+Class 3: {TP: 12.0; FP: 18.0; TN: 59.0; FN: 10.0; Precision: 0.40000; Recall: 0.54545; F-Measure: 0.46154}
+Class 4: {TP: 8.0; FP: 9.0; TN: 70.0; FN: 12.0; Precision: 0.47059; Recall: 0.40000; F-Measure: 0.43243}
+Class 5: {TP: 14.0; FP: 0.0; TN: 83.0; FN: 2.0; Precision: 1.00000; Recall: 0.87500; F-Measure: 0.93333}
+Micro: {Precision: 0.59596; Recall: 0.59596; Fscore: 0.59596 }
+Macro {Precision: 0.63728; Recall: 0.61076; Fscore: 0.62373}
+data/output/Classification/More_Zero_Answers/352136063152124/StressClassification352136063152124DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 18; [2] => 10; [3] => 8; [4] => 8; [5] => 10; }
+ZeroR Classification
+Average Accuracy: 0.73333
+Error rate: 0.26667
+Class 1: {TP: 18.0; FP: 36.0; TN: 0.0; FN: 0.0; Precision: 0.33333; Recall: 1.00000; F-Measure: 0.50000}
+Class 2: {TP: 0.0; FP: 0.0; TN: 44.0; FN: 10.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 3: {TP: 0.0; FP: 0.0; TN: 46.0; FN: 8.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 46.0; FN: 8.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 44.0; FN: 10.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.33333; Recall: 0.33333; Fscore: 0.33333 }
+Macro {Precision: 0.06667; Recall: 0.20000; Fscore: 0.10000}
+TREE Classification
+Average Accuracy: 0.83704
+Error rate: 0.16296
+Class 1: {TP: 7.0; FP: 10.0; TN: 26.0; FN: 11.0; Precision: 0.41176; Recall: 0.38889; F-Measure: 0.40000}
+Class 2: {TP: 6.0; FP: 7.0; TN: 37.0; FN: 4.0; Precision: 0.46154; Recall: 0.60000; F-Measure: 0.52174}
+Class 3: {TP: 4.0; FP: 0.0; TN: 46.0; FN: 4.0; Precision: 1.00000; Recall: 0.50000; F-Measure: 0.66667}
+Class 4: {TP: 8.0; FP: 3.0; TN: 43.0; FN: 0.0; Precision: 0.72727; Recall: 1.00000; F-Measure: 0.84211}
+Class 5: {TP: 7.0; FP: 2.0; TN: 42.0; FN: 3.0; Precision: 0.77778; Recall: 0.70000; F-Measure: 0.73684}
+Micro: {Precision: 0.59259; Recall: 0.59259; Fscore: 0.59259 }
+Macro {Precision: 0.67567; Recall: 0.63778; Fscore: 0.65618}
+2-kNN Classification
+Average Accuracy: 0.90370
+Error rate: 0.09630
+Class 1: {TP: 9.0; FP: 2.0; TN: 34.0; FN: 9.0; Precision: 0.81818; Recall: 0.50000; F-Measure: 0.62069}
+Class 2: {TP: 9.0; FP: 4.0; TN: 40.0; FN: 1.0; Precision: 0.69231; Recall: 0.90000; F-Measure: 0.78261}
+Class 3: {TP: 7.0; FP: 3.0; TN: 43.0; FN: 1.0; Precision: 0.70000; Recall: 0.87500; F-Measure: 0.77778}
+Class 4: {TP: 8.0; FP: 2.0; TN: 44.0; FN: 0.0; Precision: 0.80000; Recall: 1.00000; F-Measure: 0.88889}
+Class 5: {TP: 8.0; FP: 2.0; TN: 42.0; FN: 2.0; Precision: 0.80000; Recall: 0.80000; F-Measure: 0.80000}
+Micro: {Precision: 0.75926; Recall: 0.75926; Fscore: 0.75926 }
+Macro {Precision: 0.76210; Recall: 0.81500; Fscore: 0.78766}
+3-kNN Classification
+Average Accuracy: 0.90370
+Error rate: 0.09630
+Class 1: {TP: 9.0; FP: 2.0; TN: 34.0; FN: 9.0; Precision: 0.81818; Recall: 0.50000; F-Measure: 0.62069}
+Class 2: {TP: 9.0; FP: 4.0; TN: 40.0; FN: 1.0; Precision: 0.69231; Recall: 0.90000; F-Measure: 0.78261}
+Class 3: {TP: 7.0; FP: 3.0; TN: 43.0; FN: 1.0; Precision: 0.70000; Recall: 0.87500; F-Measure: 0.77778}
+Class 4: {TP: 8.0; FP: 2.0; TN: 44.0; FN: 0.0; Precision: 0.80000; Recall: 1.00000; F-Measure: 0.88889}
+Class 5: {TP: 8.0; FP: 2.0; TN: 42.0; FN: 2.0; Precision: 0.80000; Recall: 0.80000; F-Measure: 0.80000}
+Micro: {Precision: 0.75926; Recall: 0.75926; Fscore: 0.75926 }
+Macro {Precision: 0.76210; Recall: 0.81500; Fscore: 0.78766}
+SVM Classification
+Average Accuracy: 0.88889
+Error rate: 0.11111
+Class 1: {TP: 10.0; FP: 5.0; TN: 31.0; FN: 8.0; Precision: 0.66667; Recall: 0.55556; F-Measure: 0.60606}
+Class 2: {TP: 5.0; FP: 5.0; TN: 39.0; FN: 5.0; Precision: 0.50000; Recall: 0.50000; F-Measure: 0.50000}
+Class 3: {TP: 7.0; FP: 0.0; TN: 46.0; FN: 1.0; Precision: 1.00000; Recall: 0.87500; F-Measure: 0.93333}
+Class 4: {TP: 8.0; FP: 2.0; TN: 44.0; FN: 0.0; Precision: 0.80000; Recall: 1.00000; F-Measure: 0.88889}
+Class 5: {TP: 9.0; FP: 3.0; TN: 41.0; FN: 1.0; Precision: 0.75000; Recall: 0.90000; F-Measure: 0.81818}
+Micro: {Precision: 0.72222; Recall: 0.72222; Fscore: 0.72222 }
+Macro {Precision: 0.74333; Recall: 0.76611; Fscore: 0.75455}
+Multilayer Perceptron Classification
+Average Accuracy: 0.82222
+Error rate: 0.17778
+Class 1: {TP: 3.0; FP: 5.0; TN: 31.0; FN: 15.0; Precision: 0.37500; Recall: 0.16667; F-Measure: 0.23077}
+Class 2: {TP: 6.0; FP: 9.0; TN: 35.0; FN: 4.0; Precision: 0.40000; Recall: 0.60000; F-Measure: 0.48000}
+Class 3: {TP: 6.0; FP: 1.0; TN: 45.0; FN: 2.0; Precision: 0.85714; Recall: 0.75000; F-Measure: 0.80000}
+Class 4: {TP: 8.0; FP: 5.0; TN: 41.0; FN: 0.0; Precision: 0.61538; Recall: 1.00000; F-Measure: 0.76190}
+Class 5: {TP: 7.0; FP: 4.0; TN: 40.0; FN: 3.0; Precision: 0.63636; Recall: 0.70000; F-Measure: 0.66667}
+Micro: {Precision: 0.55556; Recall: 0.55556; Fscore: 0.55556 }
+Macro {Precision: 0.57678; Recall: 0.64333; Fscore: 0.60824}
+Bayes network
+Average Accuracy: 0.80741
+Error rate: 0.19259
+Class 1: {TP: 4.0; FP: 7.0; TN: 29.0; FN: 14.0; Precision: 0.36364; Recall: 0.22222; F-Measure: 0.27586}
+Class 2: {TP: 4.0; FP: 4.0; TN: 40.0; FN: 6.0; Precision: 0.50000; Recall: 0.40000; F-Measure: 0.44444}
+Class 3: {TP: 3.0; FP: 2.0; TN: 44.0; FN: 5.0; Precision: 0.60000; Recall: 0.37500; F-Measure: 0.46154}
+Class 4: {TP: 8.0; FP: 0.0; TN: 46.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 5: {TP: 9.0; FP: 13.0; TN: 31.0; FN: 1.0; Precision: 0.40909; Recall: 0.90000; F-Measure: 0.56250}
+Micro: {Precision: 0.51852; Recall: 0.51852; Fscore: 0.51852 }
+Macro {Precision: 0.57455; Recall: 0.57944; Fscore: 0.57698}
+data/output/Classification/More_Zero_Answers/352136063153650/StressClassification352136063153650DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 9; [2] => 14; [3] => 15; [4] => 7; [5] => 0; }
+ZeroR Classification
+Average Accuracy: 0.68889
+Error rate: 0.31111
+Class 1: {TP: 0.0; FP: 0.0; TN: 36.0; FN: 9.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 2: {TP: 5.0; FP: 16.0; TN: 15.0; FN: 9.0; Precision: 0.23810; Recall: 0.35714; F-Measure: 0.28571}
+Class 3: {TP: 5.0; FP: 19.0; TN: 11.0; FN: 10.0; Precision: 0.20833; Recall: 0.33333; F-Measure: 0.25641}
+Class 4: {TP: 0.0; FP: 0.0; TN: 38.0; FN: 7.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 45.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.22222; Recall: 0.22222; Fscore: 0.22222 }
+Macro {Precision: 0.08929; Recall: 0.00000; Fscore: 0.00000}
+TREE Classification
+Average Accuracy: 0.68889
+Error rate: 0.31111
+Class 1: {TP: 1.0; FP: 13.0; TN: 23.0; FN: 8.0; Precision: 0.07143; Recall: 0.11111; F-Measure: 0.08696}
+Class 2: {TP: 5.0; FP: 7.0; TN: 24.0; FN: 9.0; Precision: 0.41667; Recall: 0.35714; F-Measure: 0.38462}
+Class 3: {TP: 4.0; FP: 13.0; TN: 17.0; FN: 11.0; Precision: 0.23529; Recall: 0.26667; F-Measure: 0.25000}
+Class 4: {TP: 0.0; FP: 2.0; TN: 36.0; FN: 7.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 45.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.22222; Recall: 0.22222; Fscore: 0.22222 }
+Macro {Precision: 0.14468; Recall: 0.00000; Fscore: 0.00000}
+2-kNN Classification
+Average Accuracy: 0.74222
+Error rate: 0.25778
+Class 1: {TP: 2.0; FP: 4.0; TN: 32.0; FN: 7.0; Precision: 0.33333; Recall: 0.22222; F-Measure: 0.26667}
+Class 2: {TP: 6.0; FP: 10.0; TN: 21.0; FN: 8.0; Precision: 0.37500; Recall: 0.42857; F-Measure: 0.40000}
+Class 3: {TP: 8.0; FP: 13.0; TN: 17.0; FN: 7.0; Precision: 0.38095; Recall: 0.53333; F-Measure: 0.44444}
+Class 4: {TP: 0.0; FP: 2.0; TN: 36.0; FN: 7.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 45.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.35556; Recall: 0.35556; Fscore: 0.35556 }
+Macro {Precision: 0.21786; Recall: 0.00000; Fscore: 0.00000}
+3-kNN Classification
+Average Accuracy: 0.74222
+Error rate: 0.25778
+Class 1: {TP: 2.0; FP: 4.0; TN: 32.0; FN: 7.0; Precision: 0.33333; Recall: 0.22222; F-Measure: 0.26667}
+Class 2: {TP: 6.0; FP: 10.0; TN: 21.0; FN: 8.0; Precision: 0.37500; Recall: 0.42857; F-Measure: 0.40000}
+Class 3: {TP: 8.0; FP: 13.0; TN: 17.0; FN: 7.0; Precision: 0.38095; Recall: 0.53333; F-Measure: 0.44444}
+Class 4: {TP: 0.0; FP: 2.0; TN: 36.0; FN: 7.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 45.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.35556; Recall: 0.35556; Fscore: 0.35556 }
+Macro {Precision: 0.21786; Recall: 0.00000; Fscore: 0.00000}
+SVM Classification
+Average Accuracy: 0.68889
+Error rate: 0.31111
+Class 1: {TP: 2.0; FP: 2.0; TN: 34.0; FN: 7.0; Precision: 0.50000; Recall: 0.22222; F-Measure: 0.30769}
+Class 2: {TP: 1.0; FP: 10.0; TN: 21.0; FN: 13.0; Precision: 0.09091; Recall: 0.07143; F-Measure: 0.08000}
+Class 3: {TP: 6.0; FP: 13.0; TN: 17.0; FN: 9.0; Precision: 0.31579; Recall: 0.40000; F-Measure: 0.35294}
+Class 4: {TP: 1.0; FP: 10.0; TN: 28.0; FN: 6.0; Precision: 0.09091; Recall: 0.14286; F-Measure: 0.11111}
+Class 5: {TP: 0.0; FP: 0.0; TN: 45.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.22222; Recall: 0.22222; Fscore: 0.22222 }
+Macro {Precision: 0.19952; Recall: 0.00000; Fscore: 0.00000}
+Multilayer Perceptron Classification
+Average Accuracy: 0.70667
+Error rate: 0.29333
+Class 1: {TP: 3.0; FP: 4.0; TN: 32.0; FN: 6.0; Precision: 0.42857; Recall: 0.33333; F-Measure: 0.37500}
+Class 2: {TP: 3.0; FP: 12.0; TN: 19.0; FN: 11.0; Precision: 0.20000; Recall: 0.21429; F-Measure: 0.20690}
+Class 3: {TP: 5.0; FP: 9.0; TN: 21.0; FN: 10.0; Precision: 0.35714; Recall: 0.33333; F-Measure: 0.34483}
+Class 4: {TP: 1.0; FP: 8.0; TN: 30.0; FN: 6.0; Precision: 0.11111; Recall: 0.14286; F-Measure: 0.12500}
+Class 5: {TP: 0.0; FP: 0.0; TN: 45.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.26667; Recall: 0.26667; Fscore: 0.26667 }
+Macro {Precision: 0.21937; Recall: 0.00000; Fscore: 0.00000}
+Bayes network
+Average Accuracy: 0.68889
+Error rate: 0.31111
+Class 1: {TP: 0.0; FP: 0.0; TN: 36.0; FN: 9.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 2: {TP: 5.0; FP: 16.0; TN: 15.0; FN: 9.0; Precision: 0.23810; Recall: 0.35714; F-Measure: 0.28571}
+Class 3: {TP: 5.0; FP: 19.0; TN: 11.0; FN: 10.0; Precision: 0.20833; Recall: 0.33333; F-Measure: 0.25641}
+Class 4: {TP: 0.0; FP: 0.0; TN: 38.0; FN: 7.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 45.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.22222; Recall: 0.22222; Fscore: 0.22222 }
+Macro {Precision: 0.08929; Recall: 0.00000; Fscore: 0.00000}
+data/output/Classification/More_Zero_Answers/352136063159012/StressClassification352136063159012DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 62; [2] => 61; [3] => 61; [4] => 0; [5] => 0; }
+ZeroR Classification
+Average Accuracy: 0.73478
+Error rate: 0.26522
+Class 1: {TP: 62.0; FP: 122.0; TN: 0.0; FN: 0.0; Precision: 0.33696; Recall: 1.00000; F-Measure: 0.50407}
+Class 2: {TP: 0.0; FP: 0.0; TN: 123.0; FN: 61.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 3: {TP: 0.0; FP: 0.0; TN: 123.0; FN: 61.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 184.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 184.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.33696; Recall: 0.33696; Fscore: 0.33696 }
+Macro {Precision: 0.06739; Recall: 0.00000; Fscore: 0.00000}
+TREE Classification
+Average Accuracy: 0.90217
+Error rate: 0.09783
+Class 1: {TP: 42.0; FP: 25.0; TN: 97.0; FN: 20.0; Precision: 0.62687; Recall: 0.67742; F-Measure: 0.65116}
+Class 2: {TP: 37.0; FP: 18.0; TN: 105.0; FN: 24.0; Precision: 0.67273; Recall: 0.60656; F-Measure: 0.63793}
+Class 3: {TP: 60.0; FP: 2.0; TN: 121.0; FN: 1.0; Precision: 0.96774; Recall: 0.98361; F-Measure: 0.97561}
+Class 4: {TP: 0.0; FP: 0.0; TN: 184.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 184.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.75543; Recall: 0.75543; Fscore: 0.75543 }
+Macro {Precision: 0.45347; Recall: 0.00000; Fscore: 0.00000}
+2-kNN Classification
+Average Accuracy: 0.92609
+Error rate: 0.07391
+Class 1: {TP: 31.0; FP: 3.0; TN: 119.0; FN: 31.0; Precision: 0.91176; Recall: 0.50000; F-Measure: 0.64583}
+Class 2: {TP: 58.0; FP: 29.0; TN: 94.0; FN: 3.0; Precision: 0.66667; Recall: 0.95082; F-Measure: 0.78378}
+Class 3: {TP: 61.0; FP: 2.0; TN: 121.0; FN: 0.0; Precision: 0.96825; Recall: 1.00000; F-Measure: 0.98387}
+Class 4: {TP: 0.0; FP: 0.0; TN: 184.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 184.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.81522; Recall: 0.81522; Fscore: 0.81522 }
+Macro {Precision: 0.50934; Recall: 0.00000; Fscore: 0.00000}
+3-kNN Classification
+Average Accuracy: 0.92609
+Error rate: 0.07391
+Class 1: {TP: 31.0; FP: 3.0; TN: 119.0; FN: 31.0; Precision: 0.91176; Recall: 0.50000; F-Measure: 0.64583}
+Class 2: {TP: 58.0; FP: 29.0; TN: 94.0; FN: 3.0; Precision: 0.66667; Recall: 0.95082; F-Measure: 0.78378}
+Class 3: {TP: 61.0; FP: 2.0; TN: 121.0; FN: 0.0; Precision: 0.96825; Recall: 1.00000; F-Measure: 0.98387}
+Class 4: {TP: 0.0; FP: 0.0; TN: 184.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 184.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.81522; Recall: 0.81522; Fscore: 0.81522 }
+Macro {Precision: 0.50934; Recall: 0.00000; Fscore: 0.00000}
+SVM Classification
+Average Accuracy: 0.91522
+Error rate: 0.08478
+Class 1: {TP: 40.0; FP: 17.0; TN: 105.0; FN: 22.0; Precision: 0.70175; Recall: 0.64516; F-Measure: 0.67227}
+Class 2: {TP: 44.0; FP: 19.0; TN: 104.0; FN: 17.0; Precision: 0.69841; Recall: 0.72131; F-Measure: 0.70968}
+Class 3: {TP: 61.0; FP: 3.0; TN: 120.0; FN: 0.0; Precision: 0.95312; Recall: 1.00000; F-Measure: 0.97600}
+Class 4: {TP: 0.0; FP: 0.0; TN: 184.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 184.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.78804; Recall: 0.78804; Fscore: 0.78804 }
+Macro {Precision: 0.47066; Recall: 0.00000; Fscore: 0.00000}
+Multilayer Perceptron Classification
+Average Accuracy: 0.92826
+Error rate: 0.07174
+Class 1: {TP: 37.0; FP: 8.0; TN: 114.0; FN: 25.0; Precision: 0.82222; Recall: 0.59677; F-Measure: 0.69159}
+Class 2: {TP: 53.0; FP: 23.0; TN: 100.0; FN: 8.0; Precision: 0.69737; Recall: 0.86885; F-Measure: 0.77372}
+Class 3: {TP: 61.0; FP: 2.0; TN: 121.0; FN: 0.0; Precision: 0.96825; Recall: 1.00000; F-Measure: 0.98387}
+Class 4: {TP: 0.0; FP: 0.0; TN: 184.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 184.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.82065; Recall: 0.82065; Fscore: 0.82065 }
+Macro {Precision: 0.49757; Recall: 0.00000; Fscore: 0.00000}
+Bayes network
+Average Accuracy: 0.93043
+Error rate: 0.06957
+Class 1: {TP: 45.0; FP: 13.0; TN: 109.0; FN: 17.0; Precision: 0.77586; Recall: 0.72581; F-Measure: 0.75000}
+Class 2: {TP: 48.0; FP: 17.0; TN: 106.0; FN: 13.0; Precision: 0.73846; Recall: 0.78689; F-Measure: 0.76190}
+Class 3: {TP: 59.0; FP: 0.0; TN: 123.0; FN: 2.0; Precision: 1.00000; Recall: 0.96721; F-Measure: 0.98333}
+Class 4: {TP: 0.0; FP: 2.0; TN: 182.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 184.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.82609; Recall: 0.82609; Fscore: 0.82609 }
+Macro {Precision: 0.50286; Recall: 0.00000; Fscore: 0.00000}
+data/output/Classification/More_Zero_Answers/352136063159269/StressClassification352136063159269DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 43; [2] => 44; [3] => 43; [4] => 43; [5] => 0; }
+ZeroR Classification
+Average Accuracy: 0.69249
+Error rate: 0.30751
+Class 1: {TP: 16.0; FP: 52.0; TN: 78.0; FN: 27.0; Precision: 0.23529; Recall: 0.37209; F-Measure: 0.28829}
+Class 2: {TP: 24.0; FP: 81.0; TN: 48.0; FN: 20.0; Precision: 0.22857; Recall: 0.54545; F-Measure: 0.32215}
+Class 3: {TP: 0.0; FP: 0.0; TN: 130.0; FN: 43.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 130.0; FN: 43.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 173.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.23121; Recall: 0.23121; Fscore: 0.23121 }
+Macro {Precision: 0.09277; Recall: 0.00000; Fscore: 0.00000}
+TREE Classification
+Average Accuracy: 0.92370
+Error rate: 0.07630
+Class 1: {TP: 38.0; FP: 4.0; TN: 126.0; FN: 5.0; Precision: 0.90476; Recall: 0.88372; F-Measure: 0.89412}
+Class 2: {TP: 28.0; FP: 14.0; TN: 115.0; FN: 16.0; Precision: 0.66667; Recall: 0.63636; F-Measure: 0.65116}
+Class 3: {TP: 33.0; FP: 14.0; TN: 116.0; FN: 10.0; Precision: 0.70213; Recall: 0.76744; F-Measure: 0.73333}
+Class 4: {TP: 41.0; FP: 1.0; TN: 129.0; FN: 2.0; Precision: 0.97619; Recall: 0.95349; F-Measure: 0.96471}
+Class 5: {TP: 0.0; FP: 0.0; TN: 173.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.80925; Recall: 0.80925; Fscore: 0.80925 }
+Macro {Precision: 0.64995; Recall: 0.00000; Fscore: 0.00000}
+2-kNN Classification
+Average Accuracy: 0.93757
+Error rate: 0.06243
+Class 1: {TP: 43.0; FP: 3.0; TN: 127.0; FN: 0.0; Precision: 0.93478; Recall: 1.00000; F-Measure: 0.96629}
+Class 2: {TP: 19.0; FP: 2.0; TN: 127.0; FN: 25.0; Precision: 0.90476; Recall: 0.43182; F-Measure: 0.58462}
+Class 3: {TP: 41.0; FP: 21.0; TN: 109.0; FN: 2.0; Precision: 0.66129; Recall: 0.95349; F-Measure: 0.78095}
+Class 4: {TP: 43.0; FP: 1.0; TN: 129.0; FN: 0.0; Precision: 0.97727; Recall: 1.00000; F-Measure: 0.98851}
+Class 5: {TP: 0.0; FP: 0.0; TN: 173.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.84393; Recall: 0.84393; Fscore: 0.84393 }
+Macro {Precision: 0.69562; Recall: 0.00000; Fscore: 0.00000}
+3-kNN Classification
+Average Accuracy: 0.93757
+Error rate: 0.06243
+Class 1: {TP: 43.0; FP: 3.0; TN: 127.0; FN: 0.0; Precision: 0.93478; Recall: 1.00000; F-Measure: 0.96629}
+Class 2: {TP: 19.0; FP: 2.0; TN: 127.0; FN: 25.0; Precision: 0.90476; Recall: 0.43182; F-Measure: 0.58462}
+Class 3: {TP: 41.0; FP: 21.0; TN: 109.0; FN: 2.0; Precision: 0.66129; Recall: 0.95349; F-Measure: 0.78095}
+Class 4: {TP: 43.0; FP: 1.0; TN: 129.0; FN: 0.0; Precision: 0.97727; Recall: 1.00000; F-Measure: 0.98851}
+Class 5: {TP: 0.0; FP: 0.0; TN: 173.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.84393; Recall: 0.84393; Fscore: 0.84393 }
+Macro {Precision: 0.69562; Recall: 0.00000; Fscore: 0.00000}
+SVM Classification
+Average Accuracy: 0.93526
+Error rate: 0.06474
+Class 1: {TP: 42.0; FP: 7.0; TN: 123.0; FN: 1.0; Precision: 0.85714; Recall: 0.97674; F-Measure: 0.91304}
+Class 2: {TP: 23.0; FP: 6.0; TN: 123.0; FN: 21.0; Precision: 0.79310; Recall: 0.52273; F-Measure: 0.63014}
+Class 3: {TP: 38.0; FP: 11.0; TN: 119.0; FN: 5.0; Precision: 0.77551; Recall: 0.88372; F-Measure: 0.82609}
+Class 4: {TP: 42.0; FP: 4.0; TN: 126.0; FN: 1.0; Precision: 0.91304; Recall: 0.97674; F-Measure: 0.94382}
+Class 5: {TP: 0.0; FP: 0.0; TN: 173.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.83815; Recall: 0.83815; Fscore: 0.83815 }
+Macro {Precision: 0.66776; Recall: 0.00000; Fscore: 0.00000}
+Multilayer Perceptron Classification
+Average Accuracy: 0.95376
+Error rate: 0.04624
+Class 1: {TP: 42.0; FP: 4.0; TN: 126.0; FN: 1.0; Precision: 0.91304; Recall: 0.97674; F-Measure: 0.94382}
+Class 2: {TP: 29.0; FP: 3.0; TN: 126.0; FN: 15.0; Precision: 0.90625; Recall: 0.65909; F-Measure: 0.76316}
+Class 3: {TP: 40.0; FP: 11.0; TN: 119.0; FN: 3.0; Precision: 0.78431; Recall: 0.93023; F-Measure: 0.85106}
+Class 4: {TP: 42.0; FP: 2.0; TN: 128.0; FN: 1.0; Precision: 0.95455; Recall: 0.97674; F-Measure: 0.96552}
+Class 5: {TP: 0.0; FP: 0.0; TN: 173.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.88439; Recall: 0.88439; Fscore: 0.88439 }
+Macro {Precision: 0.71163; Recall: 0.00000; Fscore: 0.00000}
+Bayes network
+Average Accuracy: 0.95376
+Error rate: 0.04624
+Class 1: {TP: 39.0; FP: 0.0; TN: 130.0; FN: 4.0; Precision: 1.00000; Recall: 0.90698; F-Measure: 0.95122}
+Class 2: {TP: 39.0; FP: 10.0; TN: 119.0; FN: 5.0; Precision: 0.79592; Recall: 0.88636; F-Measure: 0.83871}
+Class 3: {TP: 35.0; FP: 7.0; TN: 123.0; FN: 8.0; Precision: 0.83333; Recall: 0.81395; F-Measure: 0.82353}
+Class 4: {TP: 40.0; FP: 0.0; TN: 130.0; FN: 3.0; Precision: 1.00000; Recall: 0.93023; F-Measure: 0.96386}
+Class 5: {TP: 0.0; FP: 3.0; TN: 170.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.88439; Recall: 0.88439; Fscore: 0.88439 }
+Macro {Precision: 0.72585; Recall: 0.00000; Fscore: 0.00000}
+data/output/Classification/More_Zero_Answers/352136063160267/StressClassification352136063160267DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 60; [2] => 59; [3] => 59; [4] => 0; [5] => 0; }
+ZeroR Classification
+Average Accuracy: 0.73483
+Error rate: 0.26517
+Class 1: {TP: 60.0; FP: 118.0; TN: 0.0; FN: 0.0; Precision: 0.33708; Recall: 1.00000; F-Measure: 0.50420}
+Class 2: {TP: 0.0; FP: 0.0; TN: 119.0; FN: 59.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 3: {TP: 0.0; FP: 0.0; TN: 119.0; FN: 59.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 178.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 178.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.33708; Recall: 0.33708; Fscore: 0.33708 }
+Macro {Precision: 0.06742; Recall: 0.00000; Fscore: 0.00000}
+TREE Classification
+Average Accuracy: 0.98876
+Error rate: 0.01124
+Class 1: {TP: 56.0; FP: 1.0; TN: 117.0; FN: 4.0; Precision: 0.98246; Recall: 0.93333; F-Measure: 0.95726}
+Class 2: {TP: 58.0; FP: 2.0; TN: 117.0; FN: 1.0; Precision: 0.96667; Recall: 0.98305; F-Measure: 0.97479}
+Class 3: {TP: 59.0; FP: 2.0; TN: 117.0; FN: 0.0; Precision: 0.96721; Recall: 1.00000; F-Measure: 0.98333}
+Class 4: {TP: 0.0; FP: 0.0; TN: 178.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 178.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.97191; Recall: 0.97191; Fscore: 0.97191 }
+Macro {Precision: 0.58327; Recall: 0.00000; Fscore: 0.00000}
+2-kNN Classification
+Average Accuracy: 0.86742
+Error rate: 0.13258
+Class 1: {TP: 60.0; FP: 59.0; TN: 59.0; FN: 0.0; Precision: 0.50420; Recall: 1.00000; F-Measure: 0.67039}
+Class 2: {TP: 0.0; FP: 0.0; TN: 119.0; FN: 59.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 3: {TP: 59.0; FP: 0.0; TN: 119.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 178.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 178.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.66854; Recall: 0.66854; Fscore: 0.66854 }
+Macro {Precision: 0.30084; Recall: 0.00000; Fscore: 0.00000}
+3-kNN Classification
+Average Accuracy: 0.86742
+Error rate: 0.13258
+Class 1: {TP: 60.0; FP: 59.0; TN: 59.0; FN: 0.0; Precision: 0.50420; Recall: 1.00000; F-Measure: 0.67039}
+Class 2: {TP: 0.0; FP: 0.0; TN: 119.0; FN: 59.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 3: {TP: 59.0; FP: 0.0; TN: 119.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 178.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 178.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.66854; Recall: 0.66854; Fscore: 0.66854 }
+Macro {Precision: 0.30084; Recall: 0.00000; Fscore: 0.00000}
+SVM Classification
+Average Accuracy: 0.97753
+Error rate: 0.02247
+Class 1: {TP: 50.0; FP: 0.0; TN: 118.0; FN: 10.0; Precision: 1.00000; Recall: 0.83333; F-Measure: 0.90909}
+Class 2: {TP: 59.0; FP: 9.0; TN: 110.0; FN: 0.0; Precision: 0.86765; Recall: 1.00000; F-Measure: 0.92913}
+Class 3: {TP: 59.0; FP: 1.0; TN: 118.0; FN: 0.0; Precision: 0.98333; Recall: 1.00000; F-Measure: 0.99160}
+Class 4: {TP: 0.0; FP: 0.0; TN: 178.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 178.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.94382; Recall: 0.94382; Fscore: 0.94382 }
+Macro {Precision: 0.57020; Recall: 0.00000; Fscore: 0.00000}
+Multilayer Perceptron Classification
+Average Accuracy: 0.97978
+Error rate: 0.02022
+Class 1: {TP: 51.0; FP: 0.0; TN: 118.0; FN: 9.0; Precision: 1.00000; Recall: 0.85000; F-Measure: 0.91892}
+Class 2: {TP: 59.0; FP: 7.0; TN: 112.0; FN: 0.0; Precision: 0.89394; Recall: 1.00000; F-Measure: 0.94400}
+Class 3: {TP: 59.0; FP: 2.0; TN: 117.0; FN: 0.0; Precision: 0.96721; Recall: 1.00000; F-Measure: 0.98333}
+Class 4: {TP: 0.0; FP: 0.0; TN: 178.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 178.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.94944; Recall: 0.94944; Fscore: 0.94944 }
+Macro {Precision: 0.57223; Recall: 0.00000; Fscore: 0.00000}
+Bayes network
+Average Accuracy: 0.99551
+Error rate: 0.00449
+Class 1: {TP: 58.0; FP: 0.0; TN: 118.0; FN: 2.0; Precision: 1.00000; Recall: 0.96667; F-Measure: 0.98305}
+Class 2: {TP: 59.0; FP: 1.0; TN: 118.0; FN: 0.0; Precision: 0.98333; Recall: 1.00000; F-Measure: 0.99160}
+Class 3: {TP: 59.0; FP: 0.0; TN: 119.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 4: {TP: 0.0; FP: 1.0; TN: 177.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 178.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.98876; Recall: 0.98876; Fscore: 0.98876 }
+Macro {Precision: 0.59667; Recall: 0.00000; Fscore: 0.00000}
+data/output/Classification/More_Zero_Answers/352136063160457/StressClassification352136063160457DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 34; [2] => 35; [3] => 34; [4] => 35; [5] => 0; }
+ZeroR Classification
+Average Accuracy: 0.68696
+Error rate: 0.31304
+Class 1: {TP: 6.0; FP: 22.0; TN: 82.0; FN: 28.0; Precision: 0.21429; Recall: 0.17647; F-Measure: 0.19355}
+Class 2: {TP: 15.0; FP: 53.0; TN: 50.0; FN: 20.0; Precision: 0.22059; Recall: 0.42857; F-Measure: 0.29126}
+Class 3: {TP: 0.0; FP: 0.0; TN: 104.0; FN: 34.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 9.0; FP: 33.0; TN: 70.0; FN: 26.0; Precision: 0.21429; Recall: 0.25714; F-Measure: 0.23377}
+Class 5: {TP: 0.0; FP: 0.0; TN: 138.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.21739; Recall: 0.21739; Fscore: 0.21739 }
+Macro {Precision: 0.12983; Recall: 0.00000; Fscore: 0.00000}
+TREE Classification
+Average Accuracy: 0.93043
+Error rate: 0.06957
+Class 1: {TP: 29.0; FP: 7.0; TN: 97.0; FN: 5.0; Precision: 0.80556; Recall: 0.85294; F-Measure: 0.82857}
+Class 2: {TP: 20.0; FP: 5.0; TN: 98.0; FN: 15.0; Precision: 0.80000; Recall: 0.57143; F-Measure: 0.66667}
+Class 3: {TP: 31.0; FP: 8.0; TN: 96.0; FN: 3.0; Precision: 0.79487; Recall: 0.91176; F-Measure: 0.84932}
+Class 4: {TP: 34.0; FP: 4.0; TN: 99.0; FN: 1.0; Precision: 0.89474; Recall: 0.97143; F-Measure: 0.93151}
+Class 5: {TP: 0.0; FP: 0.0; TN: 138.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.82609; Recall: 0.82609; Fscore: 0.82609 }
+Macro {Precision: 0.65903; Recall: 0.00000; Fscore: 0.00000}
+2-kNN Classification
+Average Accuracy: 0.94203
+Error rate: 0.05797
+Class 1: {TP: 32.0; FP: 6.0; TN: 98.0; FN: 2.0; Precision: 0.84211; Recall: 0.94118; F-Measure: 0.88889}
+Class 2: {TP: 18.0; FP: 3.0; TN: 100.0; FN: 17.0; Precision: 0.85714; Recall: 0.51429; F-Measure: 0.64286}
+Class 3: {TP: 34.0; FP: 5.0; TN: 99.0; FN: 0.0; Precision: 0.87179; Recall: 1.00000; F-Measure: 0.93151}
+Class 4: {TP: 34.0; FP: 6.0; TN: 97.0; FN: 1.0; Precision: 0.85000; Recall: 0.97143; F-Measure: 0.90667}
+Class 5: {TP: 0.0; FP: 0.0; TN: 138.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.85507; Recall: 0.85507; Fscore: 0.85507 }
+Macro {Precision: 0.68421; Recall: 0.00000; Fscore: 0.00000}
+3-kNN Classification
+Average Accuracy: 0.94203
+Error rate: 0.05797
+Class 1: {TP: 32.0; FP: 6.0; TN: 98.0; FN: 2.0; Precision: 0.84211; Recall: 0.94118; F-Measure: 0.88889}
+Class 2: {TP: 18.0; FP: 3.0; TN: 100.0; FN: 17.0; Precision: 0.85714; Recall: 0.51429; F-Measure: 0.64286}
+Class 3: {TP: 34.0; FP: 5.0; TN: 99.0; FN: 0.0; Precision: 0.87179; Recall: 1.00000; F-Measure: 0.93151}
+Class 4: {TP: 34.0; FP: 6.0; TN: 97.0; FN: 1.0; Precision: 0.85000; Recall: 0.97143; F-Measure: 0.90667}
+Class 5: {TP: 0.0; FP: 0.0; TN: 138.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.85507; Recall: 0.85507; Fscore: 0.85507 }
+Macro {Precision: 0.68421; Recall: 0.00000; Fscore: 0.00000}
+SVM Classification
+Average Accuracy: 0.93333
+Error rate: 0.06667
+Class 1: {TP: 28.0; FP: 4.0; TN: 100.0; FN: 6.0; Precision: 0.87500; Recall: 0.82353; F-Measure: 0.84848}
+Class 2: {TP: 20.0; FP: 4.0; TN: 99.0; FN: 15.0; Precision: 0.83333; Recall: 0.57143; F-Measure: 0.67797}
+Class 3: {TP: 34.0; FP: 7.0; TN: 97.0; FN: 0.0; Precision: 0.82927; Recall: 1.00000; F-Measure: 0.90667}
+Class 4: {TP: 33.0; FP: 8.0; TN: 95.0; FN: 2.0; Precision: 0.80488; Recall: 0.94286; F-Measure: 0.86842}
+Class 5: {TP: 0.0; FP: 0.0; TN: 138.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.83333; Recall: 0.83333; Fscore: 0.83333 }
+Macro {Precision: 0.66850; Recall: 0.00000; Fscore: 0.00000}
+Multilayer Perceptron Classification
+Average Accuracy: 0.93623
+Error rate: 0.06377
+Class 1: {TP: 29.0; FP: 6.0; TN: 98.0; FN: 5.0; Precision: 0.82857; Recall: 0.85294; F-Measure: 0.84058}
+Class 2: {TP: 21.0; FP: 5.0; TN: 98.0; FN: 14.0; Precision: 0.80769; Recall: 0.60000; F-Measure: 0.68852}
+Class 3: {TP: 33.0; FP: 7.0; TN: 97.0; FN: 1.0; Precision: 0.82500; Recall: 0.97059; F-Measure: 0.89189}
+Class 4: {TP: 33.0; FP: 4.0; TN: 99.0; FN: 2.0; Precision: 0.89189; Recall: 0.94286; F-Measure: 0.91667}
+Class 5: {TP: 0.0; FP: 0.0; TN: 138.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.84058; Recall: 0.84058; Fscore: 0.84058 }
+Macro {Precision: 0.67063; Recall: 0.00000; Fscore: 0.00000}
+Bayes network
+Average Accuracy: 0.92464
+Error rate: 0.07536
+Class 1: {TP: 24.0; FP: 8.0; TN: 96.0; FN: 10.0; Precision: 0.75000; Recall: 0.70588; F-Measure: 0.72727}
+Class 2: {TP: 23.0; FP: 11.0; TN: 92.0; FN: 12.0; Precision: 0.67647; Recall: 0.65714; F-Measure: 0.66667}
+Class 3: {TP: 31.0; FP: 6.0; TN: 98.0; FN: 3.0; Precision: 0.83784; Recall: 0.91176; F-Measure: 0.87324}
+Class 4: {TP: 34.0; FP: 1.0; TN: 102.0; FN: 1.0; Precision: 0.97143; Recall: 0.97143; F-Measure: 0.97143}
+Class 5: {TP: 0.0; FP: 0.0; TN: 138.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.81159; Recall: 0.81159; Fscore: 0.81159 }
+Macro {Precision: 0.64715; Recall: 0.00000; Fscore: 0.00000}
+data/output/Classification/More_Zero_Answers/352136063160606/StressClassification352136063160606DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 40; [2] => 36; [3] => 32; [4] => 32; [5] => 0; }
+ZeroR Classification
+Average Accuracy: 0.71429
+Error rate: 0.28571
+Class 1: {TP: 40.0; FP: 100.0; TN: 0.0; FN: 0.0; Precision: 0.28571; Recall: 1.00000; F-Measure: 0.44444}
+Class 2: {TP: 0.0; FP: 0.0; TN: 104.0; FN: 36.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 3: {TP: 0.0; FP: 0.0; TN: 108.0; FN: 32.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 108.0; FN: 32.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 140.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.28571; Recall: 0.28571; Fscore: 0.28571 }
+Macro {Precision: 0.05714; Recall: 0.00000; Fscore: 0.00000}
+TREE Classification
+Average Accuracy: 0.86857
+Error rate: 0.13143
+Class 1: {TP: 17.0; FP: 16.0; TN: 84.0; FN: 23.0; Precision: 0.51515; Recall: 0.42500; F-Measure: 0.46575}
+Class 2: {TP: 24.0; FP: 12.0; TN: 92.0; FN: 12.0; Precision: 0.66667; Recall: 0.66667; F-Measure: 0.66667}
+Class 3: {TP: 28.0; FP: 10.0; TN: 98.0; FN: 4.0; Precision: 0.73684; Recall: 0.87500; F-Measure: 0.80000}
+Class 4: {TP: 25.0; FP: 8.0; TN: 100.0; FN: 7.0; Precision: 0.75758; Recall: 0.78125; F-Measure: 0.76923}
+Class 5: {TP: 0.0; FP: 0.0; TN: 140.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.67143; Recall: 0.67143; Fscore: 0.67143 }
+Macro {Precision: 0.53525; Recall: 0.00000; Fscore: 0.00000}
+2-kNN Classification
+Average Accuracy: 0.87143
+Error rate: 0.12857
+Class 1: {TP: 17.0; FP: 10.0; TN: 90.0; FN: 23.0; Precision: 0.62963; Recall: 0.42500; F-Measure: 0.50746}
+Class 2: {TP: 24.0; FP: 15.0; TN: 89.0; FN: 12.0; Precision: 0.61538; Recall: 0.66667; F-Measure: 0.64000}
+Class 3: {TP: 30.0; FP: 6.0; TN: 102.0; FN: 2.0; Precision: 0.83333; Recall: 0.93750; F-Measure: 0.88235}
+Class 4: {TP: 24.0; FP: 14.0; TN: 94.0; FN: 8.0; Precision: 0.63158; Recall: 0.75000; F-Measure: 0.68571}
+Class 5: {TP: 0.0; FP: 0.0; TN: 140.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.67857; Recall: 0.67857; Fscore: 0.67857 }
+Macro {Precision: 0.54199; Recall: 0.00000; Fscore: 0.00000}
+3-kNN Classification
+Average Accuracy: 0.87143
+Error rate: 0.12857
+Class 1: {TP: 17.0; FP: 10.0; TN: 90.0; FN: 23.0; Precision: 0.62963; Recall: 0.42500; F-Measure: 0.50746}
+Class 2: {TP: 24.0; FP: 15.0; TN: 89.0; FN: 12.0; Precision: 0.61538; Recall: 0.66667; F-Measure: 0.64000}
+Class 3: {TP: 30.0; FP: 6.0; TN: 102.0; FN: 2.0; Precision: 0.83333; Recall: 0.93750; F-Measure: 0.88235}
+Class 4: {TP: 24.0; FP: 14.0; TN: 94.0; FN: 8.0; Precision: 0.63158; Recall: 0.75000; F-Measure: 0.68571}
+Class 5: {TP: 0.0; FP: 0.0; TN: 140.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.67857; Recall: 0.67857; Fscore: 0.67857 }
+Macro {Precision: 0.54199; Recall: 0.00000; Fscore: 0.00000}
+SVM Classification
+Average Accuracy: 0.81143
+Error rate: 0.18857
+Class 1: {TP: 15.0; FP: 25.0; TN: 75.0; FN: 25.0; Precision: 0.37500; Recall: 0.37500; F-Measure: 0.37500}
+Class 2: {TP: 18.0; FP: 26.0; TN: 78.0; FN: 18.0; Precision: 0.40909; Recall: 0.50000; F-Measure: 0.45000}
+Class 3: {TP: 18.0; FP: 4.0; TN: 104.0; FN: 14.0; Precision: 0.81818; Recall: 0.56250; F-Measure: 0.66667}
+Class 4: {TP: 23.0; FP: 11.0; TN: 97.0; FN: 9.0; Precision: 0.67647; Recall: 0.71875; F-Measure: 0.69697}
+Class 5: {TP: 0.0; FP: 0.0; TN: 140.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.52857; Recall: 0.52857; Fscore: 0.52857 }
+Macro {Precision: 0.45575; Recall: 0.00000; Fscore: 0.00000}
+Multilayer Perceptron Classification
+Average Accuracy: 0.86857
+Error rate: 0.13143
+Class 1: {TP: 14.0; FP: 8.0; TN: 92.0; FN: 26.0; Precision: 0.63636; Recall: 0.35000; F-Measure: 0.45161}
+Class 2: {TP: 23.0; FP: 17.0; TN: 87.0; FN: 13.0; Precision: 0.57500; Recall: 0.63889; F-Measure: 0.60526}
+Class 3: {TP: 29.0; FP: 7.0; TN: 101.0; FN: 3.0; Precision: 0.80556; Recall: 0.90625; F-Measure: 0.85294}
+Class 4: {TP: 28.0; FP: 14.0; TN: 94.0; FN: 4.0; Precision: 0.66667; Recall: 0.87500; F-Measure: 0.75676}
+Class 5: {TP: 0.0; FP: 0.0; TN: 140.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.67143; Recall: 0.67143; Fscore: 0.67143 }
+Macro {Precision: 0.53672; Recall: 0.00000; Fscore: 0.00000}
+Bayes network
+Average Accuracy: 0.84571
+Error rate: 0.15429
+Class 1: {TP: 15.0; FP: 10.0; TN: 90.0; FN: 25.0; Precision: 0.60000; Recall: 0.37500; F-Measure: 0.46154}
+Class 2: {TP: 27.0; FP: 23.0; TN: 81.0; FN: 9.0; Precision: 0.54000; Recall: 0.75000; F-Measure: 0.62791}
+Class 3: {TP: 23.0; FP: 15.0; TN: 93.0; FN: 9.0; Precision: 0.60526; Recall: 0.71875; F-Measure: 0.65714}
+Class 4: {TP: 21.0; FP: 6.0; TN: 102.0; FN: 11.0; Precision: 0.77778; Recall: 0.65625; F-Measure: 0.71186}
+Class 5: {TP: 0.0; FP: 0.0; TN: 140.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.61429; Recall: 0.61429; Fscore: 0.61429 }
+Macro {Precision: 0.50461; Recall: 0.00000; Fscore: 0.00000}
+data/output/Classification/More_Zero_Answers/352136063161935/StressClassification352136063161935DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 39; [2] => 39; [3] => 39; [4] => 32; [5] => 0; }
+ZeroR Classification
+Average Accuracy: 0.69933
+Error rate: 0.30067
+Class 1: {TP: 31.0; FP: 89.0; TN: 21.0; FN: 8.0; Precision: 0.25833; Recall: 0.79487; F-Measure: 0.38994}
+Class 2: {TP: 3.0; FP: 11.0; TN: 99.0; FN: 36.0; Precision: 0.21429; Recall: 0.07692; F-Measure: 0.11321}
+Class 3: {TP: 3.0; FP: 12.0; TN: 98.0; FN: 36.0; Precision: 0.20000; Recall: 0.07692; F-Measure: 0.11111}
+Class 4: {TP: 0.0; FP: 0.0; TN: 117.0; FN: 32.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 149.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.24832; Recall: 0.24832; Fscore: 0.24832 }
+Macro {Precision: 0.13452; Recall: 0.00000; Fscore: 0.00000}
+TREE Classification
+Average Accuracy: 0.91678
+Error rate: 0.08322
+Class 1: {TP: 23.0; FP: 10.0; TN: 100.0; FN: 16.0; Precision: 0.69697; Recall: 0.58974; F-Measure: 0.63889}
+Class 2: {TP: 31.0; FP: 10.0; TN: 100.0; FN: 8.0; Precision: 0.75610; Recall: 0.79487; F-Measure: 0.77500}
+Class 3: {TP: 32.0; FP: 10.0; TN: 100.0; FN: 7.0; Precision: 0.76190; Recall: 0.82051; F-Measure: 0.79012}
+Class 4: {TP: 32.0; FP: 1.0; TN: 116.0; FN: 0.0; Precision: 0.96970; Recall: 1.00000; F-Measure: 0.98462}
+Class 5: {TP: 0.0; FP: 0.0; TN: 149.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.79195; Recall: 0.79195; Fscore: 0.79195 }
+Macro {Precision: 0.63693; Recall: 0.00000; Fscore: 0.00000}
+2-kNN Classification
+Average Accuracy: 0.90336
+Error rate: 0.09664
+Class 1: {TP: 15.0; FP: 2.0; TN: 108.0; FN: 24.0; Precision: 0.88235; Recall: 0.38462; F-Measure: 0.53571}
+Class 2: {TP: 32.0; FP: 23.0; TN: 87.0; FN: 7.0; Precision: 0.58182; Recall: 0.82051; F-Measure: 0.68085}
+Class 3: {TP: 34.0; FP: 11.0; TN: 99.0; FN: 5.0; Precision: 0.75556; Recall: 0.87179; F-Measure: 0.80952}
+Class 4: {TP: 32.0; FP: 0.0; TN: 117.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 149.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.75839; Recall: 0.75839; Fscore: 0.75839 }
+Macro {Precision: 0.64395; Recall: 0.00000; Fscore: 0.00000}
+3-kNN Classification
+Average Accuracy: 0.90336
+Error rate: 0.09664
+Class 1: {TP: 15.0; FP: 2.0; TN: 108.0; FN: 24.0; Precision: 0.88235; Recall: 0.38462; F-Measure: 0.53571}
+Class 2: {TP: 32.0; FP: 23.0; TN: 87.0; FN: 7.0; Precision: 0.58182; Recall: 0.82051; F-Measure: 0.68085}
+Class 3: {TP: 34.0; FP: 11.0; TN: 99.0; FN: 5.0; Precision: 0.75556; Recall: 0.87179; F-Measure: 0.80952}
+Class 4: {TP: 32.0; FP: 0.0; TN: 117.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 149.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.75839; Recall: 0.75839; Fscore: 0.75839 }
+Macro {Precision: 0.64395; Recall: 0.00000; Fscore: 0.00000}
+SVM Classification
+Average Accuracy: 0.90604
+Error rate: 0.09396
+Class 1: {TP: 15.0; FP: 4.0; TN: 106.0; FN: 24.0; Precision: 0.78947; Recall: 0.38462; F-Measure: 0.51724}
+Class 2: {TP: 35.0; FP: 20.0; TN: 90.0; FN: 4.0; Precision: 0.63636; Recall: 0.89744; F-Measure: 0.74468}
+Class 3: {TP: 32.0; FP: 10.0; TN: 100.0; FN: 7.0; Precision: 0.76190; Recall: 0.82051; F-Measure: 0.79012}
+Class 4: {TP: 32.0; FP: 1.0; TN: 116.0; FN: 0.0; Precision: 0.96970; Recall: 1.00000; F-Measure: 0.98462}
+Class 5: {TP: 0.0; FP: 0.0; TN: 149.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.76510; Recall: 0.76510; Fscore: 0.76510 }
+Macro {Precision: 0.63149; Recall: 0.00000; Fscore: 0.00000}
+Multilayer Perceptron Classification
+Average Accuracy: 0.91409
+Error rate: 0.08591
+Class 1: {TP: 19.0; FP: 5.0; TN: 105.0; FN: 20.0; Precision: 0.79167; Recall: 0.48718; F-Measure: 0.60317}
+Class 2: {TP: 33.0; FP: 18.0; TN: 92.0; FN: 6.0; Precision: 0.64706; Recall: 0.84615; F-Measure: 0.73333}
+Class 3: {TP: 33.0; FP: 9.0; TN: 101.0; FN: 6.0; Precision: 0.78571; Recall: 0.84615; F-Measure: 0.81481}
+Class 4: {TP: 32.0; FP: 0.0; TN: 117.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 149.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.78523; Recall: 0.78523; Fscore: 0.78523 }
+Macro {Precision: 0.64489; Recall: 0.00000; Fscore: 0.00000}
+Bayes network
+Average Accuracy: 0.90872
+Error rate: 0.09128
+Class 1: {TP: 28.0; FP: 15.0; TN: 95.0; FN: 11.0; Precision: 0.65116; Recall: 0.71795; F-Measure: 0.68293}
+Class 2: {TP: 25.0; FP: 13.0; TN: 97.0; FN: 14.0; Precision: 0.65789; Recall: 0.64103; F-Measure: 0.64935}
+Class 3: {TP: 30.0; FP: 6.0; TN: 104.0; FN: 9.0; Precision: 0.83333; Recall: 0.76923; F-Measure: 0.80000}
+Class 4: {TP: 32.0; FP: 0.0; TN: 117.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 149.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.77181; Recall: 0.77181; Fscore: 0.77181 }
+Macro {Precision: 0.62848; Recall: 0.00000; Fscore: 0.00000}
+data/output/Classification/More_Zero_Answers/352136063161984/StressClassification352136063161984DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 8; [2] => 9; [3] => 8; [4] => 5; [5] => 0; }
+ZeroR Classification
+Average Accuracy: 0.69333
+Error rate: 0.30667
+Class 1: {TP: 0.0; FP: 6.0; TN: 16.0; FN: 8.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 2: {TP: 7.0; FP: 17.0; TN: 4.0; FN: 2.0; Precision: 0.29167; Recall: 0.77778; F-Measure: 0.42424}
+Class 3: {TP: 0.0; FP: 0.0; TN: 22.0; FN: 8.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 25.0; FN: 5.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 30.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.23333; Recall: 0.23333; Fscore: 0.23333 }
+Macro {Precision: 0.05833; Recall: 0.00000; Fscore: 0.00000}
+TREE Classification
+Average Accuracy: 0.70667
+Error rate: 0.29333
+Class 1: {TP: 2.0; FP: 4.0; TN: 18.0; FN: 6.0; Precision: 0.33333; Recall: 0.25000; F-Measure: 0.28571}
+Class 2: {TP: 4.0; FP: 6.0; TN: 15.0; FN: 5.0; Precision: 0.40000; Recall: 0.44444; F-Measure: 0.42105}
+Class 3: {TP: 2.0; FP: 8.0; TN: 14.0; FN: 6.0; Precision: 0.20000; Recall: 0.25000; F-Measure: 0.22222}
+Class 4: {TP: 0.0; FP: 4.0; TN: 21.0; FN: 5.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 30.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.26667; Recall: 0.26667; Fscore: 0.26667 }
+Macro {Precision: 0.18667; Recall: 0.00000; Fscore: 0.00000}
+2-kNN Classification
+Average Accuracy: 0.66667
+Error rate: 0.33333
+Class 1: {TP: 2.0; FP: 6.0; TN: 16.0; FN: 6.0; Precision: 0.25000; Recall: 0.25000; F-Measure: 0.25000}
+Class 2: {TP: 2.0; FP: 6.0; TN: 15.0; FN: 7.0; Precision: 0.25000; Recall: 0.22222; F-Measure: 0.23529}
+Class 3: {TP: 0.0; FP: 6.0; TN: 16.0; FN: 8.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 1.0; FP: 7.0; TN: 18.0; FN: 4.0; Precision: 0.12500; Recall: 0.20000; F-Measure: 0.15385}
+Class 5: {TP: 0.0; FP: 0.0; TN: 30.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.16667; Recall: 0.16667; Fscore: 0.16667 }
+Macro {Precision: 0.12500; Recall: 0.00000; Fscore: 0.00000}
+3-kNN Classification
+Average Accuracy: 0.66667
+Error rate: 0.33333
+Class 1: {TP: 2.0; FP: 6.0; TN: 16.0; FN: 6.0; Precision: 0.25000; Recall: 0.25000; F-Measure: 0.25000}
+Class 2: {TP: 2.0; FP: 6.0; TN: 15.0; FN: 7.0; Precision: 0.25000; Recall: 0.22222; F-Measure: 0.23529}
+Class 3: {TP: 0.0; FP: 6.0; TN: 16.0; FN: 8.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 1.0; FP: 7.0; TN: 18.0; FN: 4.0; Precision: 0.12500; Recall: 0.20000; F-Measure: 0.15385}
+Class 5: {TP: 0.0; FP: 0.0; TN: 30.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.16667; Recall: 0.16667; Fscore: 0.16667 }
+Macro {Precision: 0.12500; Recall: 0.00000; Fscore: 0.00000}
+SVM Classification
+Average Accuracy: 0.68000
+Error rate: 0.32000
+Class 1: {TP: 1.0; FP: 8.0; TN: 14.0; FN: 7.0; Precision: 0.11111; Recall: 0.12500; F-Measure: 0.11765}
+Class 2: {TP: 5.0; FP: 12.0; TN: 9.0; FN: 4.0; Precision: 0.29412; Recall: 0.55556; F-Measure: 0.38462}
+Class 3: {TP: 0.0; FP: 2.0; TN: 20.0; FN: 8.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 2.0; TN: 23.0; FN: 5.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 30.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.20000; Recall: 0.20000; Fscore: 0.20000 }
+Macro {Precision: 0.08105; Recall: 0.00000; Fscore: 0.00000}
+Multilayer Perceptron Classification
+Average Accuracy: 0.68000
+Error rate: 0.32000
+Class 1: {TP: 2.0; FP: 7.0; TN: 15.0; FN: 6.0; Precision: 0.22222; Recall: 0.25000; F-Measure: 0.23529}
+Class 2: {TP: 3.0; FP: 10.0; TN: 11.0; FN: 6.0; Precision: 0.23077; Recall: 0.33333; F-Measure: 0.27273}
+Class 3: {TP: 1.0; FP: 4.0; TN: 18.0; FN: 7.0; Precision: 0.20000; Recall: 0.12500; F-Measure: 0.15385}
+Class 4: {TP: 0.0; FP: 3.0; TN: 22.0; FN: 5.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 30.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.20000; Recall: 0.20000; Fscore: 0.20000 }
+Macro {Precision: 0.13060; Recall: 0.00000; Fscore: 0.00000}
+Bayes network
+Average Accuracy: 0.69333
+Error rate: 0.30667
+Class 1: {TP: 0.0; FP: 6.0; TN: 16.0; FN: 8.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 2: {TP: 7.0; FP: 17.0; TN: 4.0; FN: 2.0; Precision: 0.29167; Recall: 0.77778; F-Measure: 0.42424}
+Class 3: {TP: 0.0; FP: 0.0; TN: 22.0; FN: 8.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 25.0; FN: 5.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 30.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.23333; Recall: 0.23333; Fscore: 0.23333 }
+Macro {Precision: 0.05833; Recall: 0.00000; Fscore: 0.00000}
+data/output/Classification/More_Zero_Answers/352136063162289/StressClassification352136063162289DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 39; [2] => 39; [3] => 38; [4] => 38; [5] => 0; }
+ZeroR Classification
+Average Accuracy: 0.69870
+Error rate: 0.30130
+Class 1: {TP: 35.0; FP: 104.0; TN: 11.0; FN: 4.0; Precision: 0.25180; Recall: 0.89744; F-Measure: 0.39326}
+Class 2: {TP: 3.0; FP: 12.0; TN: 103.0; FN: 36.0; Precision: 0.20000; Recall: 0.07692; F-Measure: 0.11111}
+Class 3: {TP: 0.0; FP: 0.0; TN: 116.0; FN: 38.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 116.0; FN: 38.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 154.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.24675; Recall: 0.24675; Fscore: 0.24675 }
+Macro {Precision: 0.09036; Recall: 0.00000; Fscore: 0.00000}
+TREE Classification
+Average Accuracy: 0.86494
+Error rate: 0.13506
+Class 1: {TP: 28.0; FP: 17.0; TN: 98.0; FN: 11.0; Precision: 0.62222; Recall: 0.71795; F-Measure: 0.66667}
+Class 2: {TP: 16.0; FP: 20.0; TN: 95.0; FN: 23.0; Precision: 0.44444; Recall: 0.41026; F-Measure: 0.42667}
+Class 3: {TP: 22.0; FP: 13.0; TN: 103.0; FN: 16.0; Precision: 0.62857; Recall: 0.57895; F-Measure: 0.60274}
+Class 4: {TP: 36.0; FP: 2.0; TN: 114.0; FN: 2.0; Precision: 0.94737; Recall: 0.94737; F-Measure: 0.94737}
+Class 5: {TP: 0.0; FP: 0.0; TN: 154.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.66234; Recall: 0.66234; Fscore: 0.66234 }
+Macro {Precision: 0.52852; Recall: 0.00000; Fscore: 0.00000}
+2-kNN Classification
+Average Accuracy: 0.93506
+Error rate: 0.06494
+Class 1: {TP: 37.0; FP: 10.0; TN: 105.0; FN: 2.0; Precision: 0.78723; Recall: 0.94872; F-Measure: 0.86047}
+Class 2: {TP: 21.0; FP: 5.0; TN: 110.0; FN: 18.0; Precision: 0.80769; Recall: 0.53846; F-Measure: 0.64615}
+Class 3: {TP: 33.0; FP: 8.0; TN: 108.0; FN: 5.0; Precision: 0.80488; Recall: 0.86842; F-Measure: 0.83544}
+Class 4: {TP: 38.0; FP: 2.0; TN: 114.0; FN: 0.0; Precision: 0.95000; Recall: 1.00000; F-Measure: 0.97436}
+Class 5: {TP: 0.0; FP: 0.0; TN: 154.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.83766; Recall: 0.83766; Fscore: 0.83766 }
+Macro {Precision: 0.66996; Recall: 0.00000; Fscore: 0.00000}
+3-kNN Classification
+Average Accuracy: 0.93506
+Error rate: 0.06494
+Class 1: {TP: 37.0; FP: 10.0; TN: 105.0; FN: 2.0; Precision: 0.78723; Recall: 0.94872; F-Measure: 0.86047}
+Class 2: {TP: 21.0; FP: 5.0; TN: 110.0; FN: 18.0; Precision: 0.80769; Recall: 0.53846; F-Measure: 0.64615}
+Class 3: {TP: 33.0; FP: 8.0; TN: 108.0; FN: 5.0; Precision: 0.80488; Recall: 0.86842; F-Measure: 0.83544}
+Class 4: {TP: 38.0; FP: 2.0; TN: 114.0; FN: 0.0; Precision: 0.95000; Recall: 1.00000; F-Measure: 0.97436}
+Class 5: {TP: 0.0; FP: 0.0; TN: 154.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.83766; Recall: 0.83766; Fscore: 0.83766 }
+Macro {Precision: 0.66996; Recall: 0.00000; Fscore: 0.00000}
+SVM Classification
+Average Accuracy: 0.88312
+Error rate: 0.11688
+Class 1: {TP: 27.0; FP: 8.0; TN: 107.0; FN: 12.0; Precision: 0.77143; Recall: 0.69231; F-Measure: 0.72973}
+Class 2: {TP: 21.0; FP: 19.0; TN: 96.0; FN: 18.0; Precision: 0.52500; Recall: 0.53846; F-Measure: 0.53165}
+Class 3: {TP: 23.0; FP: 15.0; TN: 101.0; FN: 15.0; Precision: 0.60526; Recall: 0.60526; F-Measure: 0.60526}
+Class 4: {TP: 38.0; FP: 3.0; TN: 113.0; FN: 0.0; Precision: 0.92683; Recall: 1.00000; F-Measure: 0.96203}
+Class 5: {TP: 0.0; FP: 0.0; TN: 154.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.70779; Recall: 0.70779; Fscore: 0.70779 }
+Macro {Precision: 0.56570; Recall: 0.00000; Fscore: 0.00000}
+Multilayer Perceptron Classification
+Average Accuracy: 0.92727
+Error rate: 0.07273
+Class 1: {TP: 37.0; FP: 9.0; TN: 106.0; FN: 2.0; Precision: 0.80435; Recall: 0.94872; F-Measure: 0.87059}
+Class 2: {TP: 22.0; FP: 8.0; TN: 107.0; FN: 17.0; Precision: 0.73333; Recall: 0.56410; F-Measure: 0.63768}
+Class 3: {TP: 29.0; FP: 11.0; TN: 105.0; FN: 9.0; Precision: 0.72500; Recall: 0.76316; F-Measure: 0.74359}
+Class 4: {TP: 38.0; FP: 0.0; TN: 116.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 154.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.81818; Recall: 0.81818; Fscore: 0.81818 }
+Macro {Precision: 0.65254; Recall: 0.00000; Fscore: 0.00000}
+Bayes network
+Average Accuracy: 0.86753
+Error rate: 0.13247
+Class 1: {TP: 18.0; FP: 11.0; TN: 104.0; FN: 21.0; Precision: 0.62069; Recall: 0.46154; F-Measure: 0.52941}
+Class 2: {TP: 22.0; FP: 21.0; TN: 94.0; FN: 17.0; Precision: 0.51163; Recall: 0.56410; F-Measure: 0.53659}
+Class 3: {TP: 26.0; FP: 17.0; TN: 99.0; FN: 12.0; Precision: 0.60465; Recall: 0.68421; F-Measure: 0.64198}
+Class 4: {TP: 37.0; FP: 0.0; TN: 116.0; FN: 1.0; Precision: 1.00000; Recall: 0.97368; F-Measure: 0.98667}
+Class 5: {TP: 0.0; FP: 2.0; TN: 152.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.66883; Recall: 0.66883; Fscore: 0.66883 }
+Macro {Precision: 0.54739; Recall: 0.00000; Fscore: 0.00000}
+data/output/Classification/More_Zero_Answers/352136063162636/StressClassification352136063162636DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 90; [2] => 80; [3] => 89; [4] => 89; [5] => 89; }
+ZeroR Classification
+Average Accuracy: 0.68238
+Error rate: 0.31762
+Class 1: {TP: 90.0; FP: 347.0; TN: 0.0; FN: 0.0; Precision: 0.20595; Recall: 1.00000; F-Measure: 0.34156}
+Class 2: {TP: 0.0; FP: 0.0; TN: 357.0; FN: 80.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 3: {TP: 0.0; FP: 0.0; TN: 348.0; FN: 89.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 348.0; FN: 89.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 348.0; FN: 89.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.20595; Recall: 0.20595; Fscore: 0.20595 }
+Macro {Precision: 0.04119; Recall: 0.20000; Fscore: 0.06831}
+TREE Classification
+Average Accuracy: 0.98078
+Error rate: 0.01922
+Class 1: {TP: 76.0; FP: 6.0; TN: 341.0; FN: 14.0; Precision: 0.92683; Recall: 0.84444; F-Measure: 0.88372}
+Class 2: {TP: 77.0; FP: 5.0; TN: 352.0; FN: 3.0; Precision: 0.93902; Recall: 0.96250; F-Measure: 0.95062}
+Class 3: {TP: 85.0; FP: 7.0; TN: 341.0; FN: 4.0; Precision: 0.92391; Recall: 0.95506; F-Measure: 0.93923}
+Class 4: {TP: 89.0; FP: 1.0; TN: 347.0; FN: 0.0; Precision: 0.98889; Recall: 1.00000; F-Measure: 0.99441}
+Class 5: {TP: 89.0; FP: 2.0; TN: 346.0; FN: 0.0; Precision: 0.97802; Recall: 1.00000; F-Measure: 0.98889}
+Micro: {Precision: 0.95195; Recall: 0.95195; Fscore: 0.95195 }
+Macro {Precision: 0.95134; Recall: 0.95240; Fscore: 0.95187}
+2-kNN Classification
+Average Accuracy: 0.97071
+Error rate: 0.02929
+Class 1: {TP: 75.0; FP: 1.0; TN: 346.0; FN: 15.0; Precision: 0.98684; Recall: 0.83333; F-Measure: 0.90361}
+Class 2: {TP: 63.0; FP: 11.0; TN: 346.0; FN: 17.0; Precision: 0.85135; Recall: 0.78750; F-Measure: 0.81818}
+Class 3: {TP: 89.0; FP: 19.0; TN: 329.0; FN: 0.0; Precision: 0.82407; Recall: 1.00000; F-Measure: 0.90355}
+Class 4: {TP: 89.0; FP: 0.0; TN: 348.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 5: {TP: 89.0; FP: 1.0; TN: 347.0; FN: 0.0; Precision: 0.98889; Recall: 1.00000; F-Measure: 0.99441}
+Micro: {Precision: 0.92677; Recall: 0.92677; Fscore: 0.92677 }
+Macro {Precision: 0.93023; Recall: 0.92417; Fscore: 0.92719}
+3-kNN Classification
+Average Accuracy: 0.97071
+Error rate: 0.02929
+Class 1: {TP: 75.0; FP: 1.0; TN: 346.0; FN: 15.0; Precision: 0.98684; Recall: 0.83333; F-Measure: 0.90361}
+Class 2: {TP: 63.0; FP: 11.0; TN: 346.0; FN: 17.0; Precision: 0.85135; Recall: 0.78750; F-Measure: 0.81818}
+Class 3: {TP: 89.0; FP: 19.0; TN: 329.0; FN: 0.0; Precision: 0.82407; Recall: 1.00000; F-Measure: 0.90355}
+Class 4: {TP: 89.0; FP: 0.0; TN: 348.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 5: {TP: 89.0; FP: 1.0; TN: 347.0; FN: 0.0; Precision: 0.98889; Recall: 1.00000; F-Measure: 0.99441}
+Micro: {Precision: 0.92677; Recall: 0.92677; Fscore: 0.92677 }
+Macro {Precision: 0.93023; Recall: 0.92417; Fscore: 0.92719}
+SVM Classification
+Average Accuracy: 0.94691
+Error rate: 0.05309
+Class 1: {TP: 33.0; FP: 0.0; TN: 347.0; FN: 57.0; Precision: 1.00000; Recall: 0.36667; F-Measure: 0.53659}
+Class 2: {TP: 80.0; FP: 19.0; TN: 338.0; FN: 0.0; Precision: 0.80808; Recall: 1.00000; F-Measure: 0.89385}
+Class 3: {TP: 88.0; FP: 12.0; TN: 336.0; FN: 1.0; Precision: 0.88000; Recall: 0.98876; F-Measure: 0.93122}
+Class 4: {TP: 89.0; FP: 8.0; TN: 340.0; FN: 0.0; Precision: 0.91753; Recall: 1.00000; F-Measure: 0.95699}
+Class 5: {TP: 89.0; FP: 19.0; TN: 329.0; FN: 0.0; Precision: 0.82407; Recall: 1.00000; F-Measure: 0.90355}
+Micro: {Precision: 0.86728; Recall: 0.86728; Fscore: 0.86728 }
+Macro {Precision: 0.88594; Recall: 0.87109; Fscore: 0.87845}
+Multilayer Perceptron Classification
+Average Accuracy: 0.98261
+Error rate: 0.01739
+Class 1: {TP: 74.0; FP: 3.0; TN: 344.0; FN: 16.0; Precision: 0.96104; Recall: 0.82222; F-Measure: 0.88623}
+Class 2: {TP: 78.0; FP: 6.0; TN: 351.0; FN: 2.0; Precision: 0.92857; Recall: 0.97500; F-Measure: 0.95122}
+Class 3: {TP: 88.0; FP: 5.0; TN: 343.0; FN: 1.0; Precision: 0.94624; Recall: 0.98876; F-Measure: 0.96703}
+Class 4: {TP: 89.0; FP: 2.0; TN: 346.0; FN: 0.0; Precision: 0.97802; Recall: 1.00000; F-Measure: 0.98889}
+Class 5: {TP: 89.0; FP: 3.0; TN: 345.0; FN: 0.0; Precision: 0.96739; Recall: 1.00000; F-Measure: 0.98343}
+Micro: {Precision: 0.95652; Recall: 0.95652; Fscore: 0.95652 }
+Macro {Precision: 0.95625; Recall: 0.95720; Fscore: 0.95672}
+Bayes network
+Average Accuracy: 0.99176
+Error rate: 0.00824
+Class 1: {TP: 88.0; FP: 7.0; TN: 340.0; FN: 2.0; Precision: 0.92632; Recall: 0.97778; F-Measure: 0.95135}
+Class 2: {TP: 76.0; FP: 1.0; TN: 356.0; FN: 4.0; Precision: 0.98701; Recall: 0.95000; F-Measure: 0.96815}
+Class 3: {TP: 86.0; FP: 0.0; TN: 348.0; FN: 3.0; Precision: 1.00000; Recall: 0.96629; F-Measure: 0.98286}
+Class 4: {TP: 89.0; FP: 0.0; TN: 348.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 5: {TP: 89.0; FP: 1.0; TN: 347.0; FN: 0.0; Precision: 0.98889; Recall: 1.00000; F-Measure: 0.99441}
+Micro: {Precision: 0.97941; Recall: 0.97941; Fscore: 0.97941 }
+Macro {Precision: 0.98044; Recall: 0.97881; Fscore: 0.97963}
+data/output/Classification/More_Zero_Answers/352136063166470/StressClassification352136063166470DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 56; [2] => 56; [3] => 55; [4] => 56; [5] => 0; }
+ZeroR Classification
+Average Accuracy: 0.68969
+Error rate: 0.31031
+Class 1: {TP: 20.0; FP: 69.0; TN: 98.0; FN: 36.0; Precision: 0.22472; Recall: 0.35714; F-Measure: 0.27586}
+Class 2: {TP: 20.0; FP: 68.0; TN: 99.0; FN: 36.0; Precision: 0.22727; Recall: 0.35714; F-Measure: 0.27778}
+Class 3: {TP: 0.0; FP: 0.0; TN: 168.0; FN: 55.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 10.0; FP: 36.0; TN: 131.0; FN: 46.0; Precision: 0.21739; Recall: 0.17857; F-Measure: 0.19608}
+Class 5: {TP: 0.0; FP: 0.0; TN: 223.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.22422; Recall: 0.22422; Fscore: 0.22422 }
+Macro {Precision: 0.13388; Recall: 0.00000; Fscore: 0.00000}
+TREE Classification
+Average Accuracy: 0.92287
+Error rate: 0.07713
+Class 1: {TP: 31.0; FP: 15.0; TN: 152.0; FN: 25.0; Precision: 0.67391; Recall: 0.55357; F-Measure: 0.60784}
+Class 2: {TP: 47.0; FP: 15.0; TN: 152.0; FN: 9.0; Precision: 0.75806; Recall: 0.83929; F-Measure: 0.79661}
+Class 3: {TP: 49.0; FP: 9.0; TN: 159.0; FN: 6.0; Precision: 0.84483; Recall: 0.89091; F-Measure: 0.86726}
+Class 4: {TP: 53.0; FP: 4.0; TN: 163.0; FN: 3.0; Precision: 0.92982; Recall: 0.94643; F-Measure: 0.93805}
+Class 5: {TP: 0.0; FP: 0.0; TN: 223.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.80717; Recall: 0.80717; Fscore: 0.80717 }
+Macro {Precision: 0.64133; Recall: 0.00000; Fscore: 0.00000}
+2-kNN Classification
+Average Accuracy: 0.93722
+Error rate: 0.06278
+Class 1: {TP: 29.0; FP: 6.0; TN: 161.0; FN: 27.0; Precision: 0.82857; Recall: 0.51786; F-Measure: 0.63736}
+Class 2: {TP: 53.0; FP: 15.0; TN: 152.0; FN: 3.0; Precision: 0.77941; Recall: 0.94643; F-Measure: 0.85484}
+Class 3: {TP: 51.0; FP: 13.0; TN: 155.0; FN: 4.0; Precision: 0.79688; Recall: 0.92727; F-Measure: 0.85714}
+Class 4: {TP: 55.0; FP: 1.0; TN: 166.0; FN: 1.0; Precision: 0.98214; Recall: 0.98214; F-Measure: 0.98214}
+Class 5: {TP: 0.0; FP: 0.0; TN: 223.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.84305; Recall: 0.84305; Fscore: 0.84305 }
+Macro {Precision: 0.67740; Recall: 0.00000; Fscore: 0.00000}
+3-kNN Classification
+Average Accuracy: 0.93722
+Error rate: 0.06278
+Class 1: {TP: 29.0; FP: 6.0; TN: 161.0; FN: 27.0; Precision: 0.82857; Recall: 0.51786; F-Measure: 0.63736}
+Class 2: {TP: 53.0; FP: 15.0; TN: 152.0; FN: 3.0; Precision: 0.77941; Recall: 0.94643; F-Measure: 0.85484}
+Class 3: {TP: 51.0; FP: 13.0; TN: 155.0; FN: 4.0; Precision: 0.79688; Recall: 0.92727; F-Measure: 0.85714}
+Class 4: {TP: 55.0; FP: 1.0; TN: 166.0; FN: 1.0; Precision: 0.98214; Recall: 0.98214; F-Measure: 0.98214}
+Class 5: {TP: 0.0; FP: 0.0; TN: 223.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.84305; Recall: 0.84305; Fscore: 0.84305 }
+Macro {Precision: 0.67740; Recall: 0.00000; Fscore: 0.00000}
+SVM Classification
+Average Accuracy: 0.92287
+Error rate: 0.07713
+Class 1: {TP: 26.0; FP: 6.0; TN: 161.0; FN: 30.0; Precision: 0.81250; Recall: 0.46429; F-Measure: 0.59091}
+Class 2: {TP: 51.0; FP: 23.0; TN: 144.0; FN: 5.0; Precision: 0.68919; Recall: 0.91071; F-Measure: 0.78462}
+Class 3: {TP: 49.0; FP: 10.0; TN: 158.0; FN: 6.0; Precision: 0.83051; Recall: 0.89091; F-Measure: 0.85965}
+Class 4: {TP: 54.0; FP: 4.0; TN: 163.0; FN: 2.0; Precision: 0.93103; Recall: 0.96429; F-Measure: 0.94737}
+Class 5: {TP: 0.0; FP: 0.0; TN: 223.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.80717; Recall: 0.80717; Fscore: 0.80717 }
+Macro {Precision: 0.65265; Recall: 0.00000; Fscore: 0.00000}
+Multilayer Perceptron Classification
+Average Accuracy: 0.93901
+Error rate: 0.06099
+Class 1: {TP: 30.0; FP: 7.0; TN: 160.0; FN: 26.0; Precision: 0.81081; Recall: 0.53571; F-Measure: 0.64516}
+Class 2: {TP: 52.0; FP: 16.0; TN: 151.0; FN: 4.0; Precision: 0.76471; Recall: 0.92857; F-Measure: 0.83871}
+Class 3: {TP: 52.0; FP: 8.0; TN: 160.0; FN: 3.0; Precision: 0.86667; Recall: 0.94545; F-Measure: 0.90435}
+Class 4: {TP: 55.0; FP: 3.0; TN: 164.0; FN: 1.0; Precision: 0.94828; Recall: 0.98214; F-Measure: 0.96491}
+Class 5: {TP: 0.0; FP: 0.0; TN: 223.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.84753; Recall: 0.84753; Fscore: 0.84753 }
+Macro {Precision: 0.67809; Recall: 0.00000; Fscore: 0.00000}
+Bayes network
+Average Accuracy: 0.94619
+Error rate: 0.05381
+Class 1: {TP: 44.0; FP: 17.0; TN: 150.0; FN: 12.0; Precision: 0.72131; Recall: 0.78571; F-Measure: 0.75214}
+Class 2: {TP: 44.0; FP: 8.0; TN: 159.0; FN: 12.0; Precision: 0.84615; Recall: 0.78571; F-Measure: 0.81481}
+Class 3: {TP: 50.0; FP: 3.0; TN: 165.0; FN: 5.0; Precision: 0.94340; Recall: 0.90909; F-Measure: 0.92593}
+Class 4: {TP: 55.0; FP: 0.0; TN: 167.0; FN: 1.0; Precision: 1.00000; Recall: 0.98214; F-Measure: 0.99099}
+Class 5: {TP: 0.0; FP: 2.0; TN: 221.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.86547; Recall: 0.86547; Fscore: 0.86547 }
+Macro {Precision: 0.70217; Recall: 0.00000; Fscore: 0.00000}
+data/output/Classification/More_Zero_Answers/353490061561268/StressClassification353490061561268DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 58; [2] => 58; [3] => 48; [4] => 57; [5] => 57; }
+ZeroR Classification
+Average Accuracy: 0.68058
+Error rate: 0.31942
+Class 1: {TP: 46.0; FP: 178.0; TN: 42.0; FN: 12.0; Precision: 0.20536; Recall: 0.79310; F-Measure: 0.32624}
+Class 2: {TP: 10.0; FP: 44.0; TN: 176.0; FN: 48.0; Precision: 0.18519; Recall: 0.17241; F-Measure: 0.17857}
+Class 3: {TP: 0.0; FP: 0.0; TN: 230.0; FN: 48.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 221.0; FN: 57.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 221.0; FN: 57.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.20144; Recall: 0.20144; Fscore: 0.20144 }
+Macro {Precision: 0.07811; Recall: 0.19310; Fscore: 0.11123}
+TREE Classification
+Average Accuracy: 0.94820
+Error rate: 0.05180
+Class 1: {TP: 42.0; FP: 12.0; TN: 208.0; FN: 16.0; Precision: 0.77778; Recall: 0.72414; F-Measure: 0.75000}
+Class 2: {TP: 40.0; FP: 15.0; TN: 205.0; FN: 18.0; Precision: 0.72727; Recall: 0.68966; F-Measure: 0.70796}
+Class 3: {TP: 46.0; FP: 7.0; TN: 223.0; FN: 2.0; Precision: 0.86792; Recall: 0.95833; F-Measure: 0.91089}
+Class 4: {TP: 57.0; FP: 0.0; TN: 221.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 5: {TP: 57.0; FP: 2.0; TN: 219.0; FN: 0.0; Precision: 0.96610; Recall: 1.00000; F-Measure: 0.98276}
+Micro: {Precision: 0.87050; Recall: 0.87050; Fscore: 0.87050 }
+Macro {Precision: 0.86782; Recall: 0.87443; Fscore: 0.87111}
+2-kNN Classification
+Average Accuracy: 0.95540
+Error rate: 0.04460
+Class 1: {TP: 53.0; FP: 15.0; TN: 205.0; FN: 5.0; Precision: 0.77941; Recall: 0.91379; F-Measure: 0.84127}
+Class 2: {TP: 32.0; FP: 5.0; TN: 215.0; FN: 26.0; Precision: 0.86486; Recall: 0.55172; F-Measure: 0.67368}
+Class 3: {TP: 48.0; FP: 9.0; TN: 221.0; FN: 0.0; Precision: 0.84211; Recall: 1.00000; F-Measure: 0.91429}
+Class 4: {TP: 57.0; FP: 2.0; TN: 219.0; FN: 0.0; Precision: 0.96610; Recall: 1.00000; F-Measure: 0.98276}
+Class 5: {TP: 57.0; FP: 0.0; TN: 221.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Micro: {Precision: 0.88849; Recall: 0.88849; Fscore: 0.88849 }
+Macro {Precision: 0.89050; Recall: 0.89310; Fscore: 0.89180}
+3-kNN Classification
+Average Accuracy: 0.95540
+Error rate: 0.04460
+Class 1: {TP: 53.0; FP: 15.0; TN: 205.0; FN: 5.0; Precision: 0.77941; Recall: 0.91379; F-Measure: 0.84127}
+Class 2: {TP: 32.0; FP: 5.0; TN: 215.0; FN: 26.0; Precision: 0.86486; Recall: 0.55172; F-Measure: 0.67368}
+Class 3: {TP: 48.0; FP: 9.0; TN: 221.0; FN: 0.0; Precision: 0.84211; Recall: 1.00000; F-Measure: 0.91429}
+Class 4: {TP: 57.0; FP: 2.0; TN: 219.0; FN: 0.0; Precision: 0.96610; Recall: 1.00000; F-Measure: 0.98276}
+Class 5: {TP: 57.0; FP: 0.0; TN: 221.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Micro: {Precision: 0.88849; Recall: 0.88849; Fscore: 0.88849 }
+Macro {Precision: 0.89050; Recall: 0.89310; Fscore: 0.89180}
+SVM Classification
+Average Accuracy: 0.93525
+Error rate: 0.06475
+Class 1: {TP: 43.0; FP: 14.0; TN: 206.0; FN: 15.0; Precision: 0.75439; Recall: 0.74138; F-Measure: 0.74783}
+Class 2: {TP: 29.0; FP: 15.0; TN: 205.0; FN: 29.0; Precision: 0.65909; Recall: 0.50000; F-Measure: 0.56863}
+Class 3: {TP: 47.0; FP: 7.0; TN: 223.0; FN: 1.0; Precision: 0.87037; Recall: 0.97917; F-Measure: 0.92157}
+Class 4: {TP: 57.0; FP: 6.0; TN: 215.0; FN: 0.0; Precision: 0.90476; Recall: 1.00000; F-Measure: 0.95000}
+Class 5: {TP: 57.0; FP: 3.0; TN: 218.0; FN: 0.0; Precision: 0.95000; Recall: 1.00000; F-Measure: 0.97436}
+Micro: {Precision: 0.83813; Recall: 0.83813; Fscore: 0.83813 }
+Macro {Precision: 0.82772; Recall: 0.84411; Fscore: 0.83584}
+Multilayer Perceptron Classification
+Average Accuracy: 0.94388
+Error rate: 0.05612
+Class 1: {TP: 47.0; FP: 21.0; TN: 199.0; FN: 11.0; Precision: 0.69118; Recall: 0.81034; F-Measure: 0.74603}
+Class 2: {TP: 31.0; FP: 12.0; TN: 208.0; FN: 27.0; Precision: 0.72093; Recall: 0.53448; F-Measure: 0.61386}
+Class 3: {TP: 47.0; FP: 4.0; TN: 226.0; FN: 1.0; Precision: 0.92157; Recall: 0.97917; F-Measure: 0.94949}
+Class 4: {TP: 57.0; FP: 1.0; TN: 220.0; FN: 0.0; Precision: 0.98276; Recall: 1.00000; F-Measure: 0.99130}
+Class 5: {TP: 57.0; FP: 1.0; TN: 220.0; FN: 0.0; Precision: 0.98276; Recall: 1.00000; F-Measure: 0.99130}
+Micro: {Precision: 0.85971; Recall: 0.85971; Fscore: 0.85971 }
+Macro {Precision: 0.85984; Recall: 0.86480; Fscore: 0.86231}
+Bayes network
+Average Accuracy: 0.96978
+Error rate: 0.03022
+Class 1: {TP: 48.0; FP: 5.0; TN: 215.0; FN: 10.0; Precision: 0.90566; Recall: 0.82759; F-Measure: 0.86486}
+Class 2: {TP: 53.0; FP: 16.0; TN: 204.0; FN: 5.0; Precision: 0.76812; Recall: 0.91379; F-Measure: 0.83465}
+Class 3: {TP: 42.0; FP: 0.0; TN: 230.0; FN: 6.0; Precision: 1.00000; Recall: 0.87500; F-Measure: 0.93333}
+Class 4: {TP: 57.0; FP: 0.0; TN: 221.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 5: {TP: 57.0; FP: 0.0; TN: 221.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Micro: {Precision: 0.92446; Recall: 0.92446; Fscore: 0.92446 }
+Macro {Precision: 0.93476; Recall: 0.92328; Fscore: 0.92898}
+data/output/Classification/More_Zero_Answers/358240050552579/StressClassification358240050552579DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 8; [2] => 17; [3] => 12; [4] => 0; [5] => 0; }
+ZeroR Classification
+Average Accuracy: 0.78378
+Error rate: 0.21622
+Class 1: {TP: 0.0; FP: 0.0; TN: 29.0; FN: 8.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 2: {TP: 17.0; FP: 20.0; TN: 0.0; FN: 0.0; Precision: 0.45946; Recall: 1.00000; F-Measure: 0.62963}
+Class 3: {TP: 0.0; FP: 0.0; TN: 25.0; FN: 12.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 37.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 37.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.45946; Recall: 0.45946; Fscore: 0.45946 }
+Macro {Precision: 0.09189; Recall: 0.00000; Fscore: 0.00000}
+TREE Classification
+Average Accuracy: 0.92432
+Error rate: 0.07568
+Class 1: {TP: 7.0; FP: 2.0; TN: 27.0; FN: 1.0; Precision: 0.77778; Recall: 0.87500; F-Measure: 0.82353}
+Class 2: {TP: 13.0; FP: 3.0; TN: 17.0; FN: 4.0; Precision: 0.81250; Recall: 0.76471; F-Measure: 0.78788}
+Class 3: {TP: 10.0; FP: 2.0; TN: 23.0; FN: 2.0; Precision: 0.83333; Recall: 0.83333; F-Measure: 0.83333}
+Class 4: {TP: 0.0; FP: 0.0; TN: 37.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 37.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.81081; Recall: 0.81081; Fscore: 0.81081 }
+Macro {Precision: 0.48472; Recall: 0.00000; Fscore: 0.00000}
+2-kNN Classification
+Average Accuracy: 0.97838
+Error rate: 0.02162
+Class 1: {TP: 8.0; FP: 2.0; TN: 27.0; FN: 0.0; Precision: 0.80000; Recall: 1.00000; F-Measure: 0.88889}
+Class 2: {TP: 15.0; FP: 0.0; TN: 20.0; FN: 2.0; Precision: 1.00000; Recall: 0.88235; F-Measure: 0.93750}
+Class 3: {TP: 12.0; FP: 0.0; TN: 25.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 37.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 37.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.94595; Recall: 0.94595; Fscore: 0.94595 }
+Macro {Precision: 0.56000; Recall: 0.00000; Fscore: 0.00000}
+3-kNN Classification
+Average Accuracy: 0.97838
+Error rate: 0.02162
+Class 1: {TP: 8.0; FP: 2.0; TN: 27.0; FN: 0.0; Precision: 0.80000; Recall: 1.00000; F-Measure: 0.88889}
+Class 2: {TP: 15.0; FP: 0.0; TN: 20.0; FN: 2.0; Precision: 1.00000; Recall: 0.88235; F-Measure: 0.93750}
+Class 3: {TP: 12.0; FP: 0.0; TN: 25.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 37.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 37.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.94595; Recall: 0.94595; Fscore: 0.94595 }
+Macro {Precision: 0.56000; Recall: 0.00000; Fscore: 0.00000}
+SVM Classification
+Average Accuracy: 0.95676
+Error rate: 0.04324
+Class 1: {TP: 7.0; FP: 1.0; TN: 28.0; FN: 1.0; Precision: 0.87500; Recall: 0.87500; F-Measure: 0.87500}
+Class 2: {TP: 14.0; FP: 1.0; TN: 19.0; FN: 3.0; Precision: 0.93333; Recall: 0.82353; F-Measure: 0.87500}
+Class 3: {TP: 12.0; FP: 2.0; TN: 23.0; FN: 0.0; Precision: 0.85714; Recall: 1.00000; F-Measure: 0.92308}
+Class 4: {TP: 0.0; FP: 0.0; TN: 37.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 37.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.89189; Recall: 0.89189; Fscore: 0.89189 }
+Macro {Precision: 0.53310; Recall: 0.00000; Fscore: 0.00000}
+Multilayer Perceptron Classification
+Average Accuracy: 0.95676
+Error rate: 0.04324
+Class 1: {TP: 6.0; FP: 2.0; TN: 27.0; FN: 2.0; Precision: 0.75000; Recall: 0.75000; F-Measure: 0.75000}
+Class 2: {TP: 15.0; FP: 2.0; TN: 18.0; FN: 2.0; Precision: 0.88235; Recall: 0.88235; F-Measure: 0.88235}
+Class 3: {TP: 12.0; FP: 0.0; TN: 25.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 37.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 37.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.89189; Recall: 0.89189; Fscore: 0.89189 }
+Macro {Precision: 0.52647; Recall: 0.00000; Fscore: 0.00000}
+Bayes network
+Average Accuracy: 0.93514
+Error rate: 0.06486
+Class 1: {TP: 6.0; FP: 2.0; TN: 27.0; FN: 2.0; Precision: 0.75000; Recall: 0.75000; F-Measure: 0.75000}
+Class 2: {TP: 15.0; FP: 3.0; TN: 17.0; FN: 2.0; Precision: 0.83333; Recall: 0.88235; F-Measure: 0.85714}
+Class 3: {TP: 10.0; FP: 0.0; TN: 25.0; FN: 2.0; Precision: 1.00000; Recall: 0.83333; F-Measure: 0.90909}
+Class 4: {TP: 0.0; FP: 1.0; TN: 36.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 37.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.83784; Recall: 0.83784; Fscore: 0.83784 }
+Macro {Precision: 0.51667; Recall: 0.00000; Fscore: 0.00000}
+data/output/Classification/More_Zero_Answers/358240050552686/StressClassification358240050552686DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 28; [2] => 30; [3] => 29; [4] => 29; [5] => 0; }
+ZeroR Classification
+Average Accuracy: 0.70345
+Error rate: 0.29655
+Class 1: {TP: 0.0; FP: 0.0; TN: 88.0; FN: 28.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 2: {TP: 30.0; FP: 86.0; TN: 0.0; FN: 0.0; Precision: 0.25862; Recall: 1.00000; F-Measure: 0.41096}
+Class 3: {TP: 0.0; FP: 0.0; TN: 87.0; FN: 29.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 87.0; FN: 29.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 116.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.25862; Recall: 0.25862; Fscore: 0.25862 }
+Macro {Precision: 0.05172; Recall: 0.00000; Fscore: 0.00000}
+TREE Classification
+Average Accuracy: 0.88966
+Error rate: 0.11034
+Class 1: {TP: 18.0; FP: 10.0; TN: 78.0; FN: 10.0; Precision: 0.64286; Recall: 0.64286; F-Measure: 0.64286}
+Class 2: {TP: 19.0; FP: 14.0; TN: 72.0; FN: 11.0; Precision: 0.57576; Recall: 0.63333; F-Measure: 0.60317}
+Class 3: {TP: 18.0; FP: 6.0; TN: 81.0; FN: 11.0; Precision: 0.75000; Recall: 0.62069; F-Measure: 0.67925}
+Class 4: {TP: 29.0; FP: 2.0; TN: 85.0; FN: 0.0; Precision: 0.93548; Recall: 1.00000; F-Measure: 0.96667}
+Class 5: {TP: 0.0; FP: 0.0; TN: 116.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.72414; Recall: 0.72414; Fscore: 0.72414 }
+Macro {Precision: 0.58082; Recall: 0.00000; Fscore: 0.00000}
+2-kNN Classification
+Average Accuracy: 0.88966
+Error rate: 0.11034
+Class 1: {TP: 25.0; FP: 7.0; TN: 81.0; FN: 3.0; Precision: 0.78125; Recall: 0.89286; F-Measure: 0.83333}
+Class 2: {TP: 13.0; FP: 8.0; TN: 78.0; FN: 17.0; Precision: 0.61905; Recall: 0.43333; F-Measure: 0.50980}
+Class 3: {TP: 17.0; FP: 13.0; TN: 74.0; FN: 12.0; Precision: 0.56667; Recall: 0.58621; F-Measure: 0.57627}
+Class 4: {TP: 29.0; FP: 4.0; TN: 83.0; FN: 0.0; Precision: 0.87879; Recall: 1.00000; F-Measure: 0.93548}
+Class 5: {TP: 0.0; FP: 0.0; TN: 116.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.72414; Recall: 0.72414; Fscore: 0.72414 }
+Macro {Precision: 0.56915; Recall: 0.00000; Fscore: 0.00000}
+3-kNN Classification
+Average Accuracy: 0.88966
+Error rate: 0.11034
+Class 1: {TP: 25.0; FP: 7.0; TN: 81.0; FN: 3.0; Precision: 0.78125; Recall: 0.89286; F-Measure: 0.83333}
+Class 2: {TP: 13.0; FP: 8.0; TN: 78.0; FN: 17.0; Precision: 0.61905; Recall: 0.43333; F-Measure: 0.50980}
+Class 3: {TP: 17.0; FP: 13.0; TN: 74.0; FN: 12.0; Precision: 0.56667; Recall: 0.58621; F-Measure: 0.57627}
+Class 4: {TP: 29.0; FP: 4.0; TN: 83.0; FN: 0.0; Precision: 0.87879; Recall: 1.00000; F-Measure: 0.93548}
+Class 5: {TP: 0.0; FP: 0.0; TN: 116.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.72414; Recall: 0.72414; Fscore: 0.72414 }
+Macro {Precision: 0.56915; Recall: 0.00000; Fscore: 0.00000}
+SVM Classification
+Average Accuracy: 0.90000
+Error rate: 0.10000
+Class 1: {TP: 18.0; FP: 2.0; TN: 86.0; FN: 10.0; Precision: 0.90000; Recall: 0.64286; F-Measure: 0.75000}
+Class 2: {TP: 17.0; FP: 8.0; TN: 78.0; FN: 13.0; Precision: 0.68000; Recall: 0.56667; F-Measure: 0.61818}
+Class 3: {TP: 23.0; FP: 9.0; TN: 78.0; FN: 6.0; Precision: 0.71875; Recall: 0.79310; F-Measure: 0.75410}
+Class 4: {TP: 29.0; FP: 10.0; TN: 77.0; FN: 0.0; Precision: 0.74359; Recall: 1.00000; F-Measure: 0.85294}
+Class 5: {TP: 0.0; FP: 0.0; TN: 116.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.75000; Recall: 0.75000; Fscore: 0.75000 }
+Macro {Precision: 0.60847; Recall: 0.00000; Fscore: 0.00000}
+Multilayer Perceptron Classification
+Average Accuracy: 0.92069
+Error rate: 0.07931
+Class 1: {TP: 25.0; FP: 8.0; TN: 80.0; FN: 3.0; Precision: 0.75758; Recall: 0.89286; F-Measure: 0.81967}
+Class 2: {TP: 17.0; FP: 6.0; TN: 80.0; FN: 13.0; Precision: 0.73913; Recall: 0.56667; F-Measure: 0.64151}
+Class 3: {TP: 22.0; FP: 7.0; TN: 80.0; FN: 7.0; Precision: 0.75862; Recall: 0.75862; F-Measure: 0.75862}
+Class 4: {TP: 29.0; FP: 2.0; TN: 85.0; FN: 0.0; Precision: 0.93548; Recall: 1.00000; F-Measure: 0.96667}
+Class 5: {TP: 0.0; FP: 0.0; TN: 116.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.80172; Recall: 0.80172; Fscore: 0.80172 }
+Macro {Precision: 0.63816; Recall: 0.00000; Fscore: 0.00000}
+Bayes network
+Average Accuracy: 0.88621
+Error rate: 0.11379
+Class 1: {TP: 18.0; FP: 10.0; TN: 78.0; FN: 10.0; Precision: 0.64286; Recall: 0.64286; F-Measure: 0.64286}
+Class 2: {TP: 16.0; FP: 13.0; TN: 73.0; FN: 14.0; Precision: 0.55172; Recall: 0.53333; F-Measure: 0.54237}
+Class 3: {TP: 20.0; FP: 10.0; TN: 77.0; FN: 9.0; Precision: 0.66667; Recall: 0.68966; F-Measure: 0.67797}
+Class 4: {TP: 29.0; FP: 0.0; TN: 87.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 116.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.71552; Recall: 0.71552; Fscore: 0.71552 }
+Macro {Precision: 0.57225; Recall: 0.00000; Fscore: 0.00000}
+data/output/Classification/More_Zero_Answers/358240051668267/StressClassification358240051668267DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 73; [2] => 0; [3] => 0; [4] => 0; [5] => 0; }
+ZeroR Classification
+Average Accuracy: 1.00000
+Error rate: 0.00000
+Class 1: {TP: 73.0; FP: 0.0; TN: 0.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 2: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 3: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 1.00000; Recall: 1.00000; Fscore: 1.00000 }
+Macro {Precision: 0.20000; Recall: 0.00000; Fscore: 0.00000}
+TREE Classification
+Average Accuracy: 1.00000
+Error rate: 0.00000
+Class 1: {TP: 73.0; FP: 0.0; TN: 0.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 2: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 3: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 1.00000; Recall: 1.00000; Fscore: 1.00000 }
+Macro {Precision: 0.20000; Recall: 0.00000; Fscore: 0.00000}
+2-kNN Classification
+Average Accuracy: 1.00000
+Error rate: 0.00000
+Class 1: {TP: 73.0; FP: 0.0; TN: 0.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 2: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 3: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 1.00000; Recall: 1.00000; Fscore: 1.00000 }
+Macro {Precision: 0.20000; Recall: 0.00000; Fscore: 0.00000}
+3-kNN Classification
+Average Accuracy: 1.00000
+Error rate: 0.00000
+Class 1: {TP: 73.0; FP: 0.0; TN: 0.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 2: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 3: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 1.00000; Recall: 1.00000; Fscore: 1.00000 }
+Macro {Precision: 0.20000; Recall: 0.00000; Fscore: 0.00000}
+SVM Classification
+Average Accuracy: 1.00000
+Error rate: 0.00000
+Class 1: {TP: 73.0; FP: 0.0; TN: 0.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 2: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 3: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 1.00000; Recall: 1.00000; Fscore: 1.00000 }
+Macro {Precision: 0.20000; Recall: 0.00000; Fscore: 0.00000}
+Multilayer Perceptron Classification
+Average Accuracy: 1.00000
+Error rate: 0.00000
+Class 1: {TP: 73.0; FP: 0.0; TN: 0.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 2: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 3: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 1.00000; Recall: 1.00000; Fscore: 1.00000 }
+Macro {Precision: 0.20000; Recall: 0.00000; Fscore: 0.00000}
+Bayes network
+Average Accuracy: 1.00000
+Error rate: 0.00000
+Class 1: {TP: 73.0; FP: 0.0; TN: 0.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 2: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 3: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 73.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 1.00000; Recall: 1.00000; Fscore: 1.00000 }
+Macro {Precision: 0.20000; Recall: 0.00000; Fscore: 0.00000}
+data/output/Classification/More_Zero_Answers/358240052286374/StressClassification358240052286374DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 34; [2] => 31; [3] => 24; [4] => 0; [5] => 0; }
+ZeroR Classification
+Average Accuracy: 0.75281
+Error rate: 0.24719
+Class 1: {TP: 34.0; FP: 55.0; TN: 0.0; FN: 0.0; Precision: 0.38202; Recall: 1.00000; F-Measure: 0.55285}
+Class 2: {TP: 0.0; FP: 0.0; TN: 58.0; FN: 31.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 3: {TP: 0.0; FP: 0.0; TN: 65.0; FN: 24.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 89.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 89.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.38202; Recall: 0.38202; Fscore: 0.38202 }
+Macro {Precision: 0.07640; Recall: 0.00000; Fscore: 0.00000}
+TREE Classification
+Average Accuracy: 0.85169
+Error rate: 0.14831
+Class 1: {TP: 18.0; FP: 13.0; TN: 42.0; FN: 16.0; Precision: 0.58065; Recall: 0.52941; F-Measure: 0.55385}
+Class 2: {TP: 18.0; FP: 16.0; TN: 42.0; FN: 13.0; Precision: 0.52941; Recall: 0.58065; F-Measure: 0.55385}
+Class 3: {TP: 20.0; FP: 4.0; TN: 61.0; FN: 4.0; Precision: 0.83333; Recall: 0.83333; F-Measure: 0.83333}
+Class 4: {TP: 0.0; FP: 0.0; TN: 89.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 89.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.62921; Recall: 0.62921; Fscore: 0.62921 }
+Macro {Precision: 0.38868; Recall: 0.00000; Fscore: 0.00000}
+2-kNN Classification
+Average Accuracy: 0.83820
+Error rate: 0.16180
+Class 1: {TP: 13.0; FP: 6.0; TN: 49.0; FN: 21.0; Precision: 0.68421; Recall: 0.38235; F-Measure: 0.49057}
+Class 2: {TP: 16.0; FP: 13.0; TN: 45.0; FN: 15.0; Precision: 0.55172; Recall: 0.51613; F-Measure: 0.53333}
+Class 3: {TP: 24.0; FP: 17.0; TN: 48.0; FN: 0.0; Precision: 0.58537; Recall: 1.00000; F-Measure: 0.73846}
+Class 4: {TP: 0.0; FP: 0.0; TN: 89.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 89.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.59551; Recall: 0.59551; Fscore: 0.59551 }
+Macro {Precision: 0.36426; Recall: 0.00000; Fscore: 0.00000}
+3-kNN Classification
+Average Accuracy: 0.83820
+Error rate: 0.16180
+Class 1: {TP: 13.0; FP: 6.0; TN: 49.0; FN: 21.0; Precision: 0.68421; Recall: 0.38235; F-Measure: 0.49057}
+Class 2: {TP: 16.0; FP: 13.0; TN: 45.0; FN: 15.0; Precision: 0.55172; Recall: 0.51613; F-Measure: 0.53333}
+Class 3: {TP: 24.0; FP: 17.0; TN: 48.0; FN: 0.0; Precision: 0.58537; Recall: 1.00000; F-Measure: 0.73846}
+Class 4: {TP: 0.0; FP: 0.0; TN: 89.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 89.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.59551; Recall: 0.59551; Fscore: 0.59551 }
+Macro {Precision: 0.36426; Recall: 0.00000; Fscore: 0.00000}
+SVM Classification
+Average Accuracy: 0.82921
+Error rate: 0.17079
+Class 1: {TP: 18.0; FP: 19.0; TN: 36.0; FN: 16.0; Precision: 0.48649; Recall: 0.52941; F-Measure: 0.50704}
+Class 2: {TP: 14.0; FP: 15.0; TN: 43.0; FN: 17.0; Precision: 0.48276; Recall: 0.45161; F-Measure: 0.46667}
+Class 3: {TP: 19.0; FP: 4.0; TN: 61.0; FN: 5.0; Precision: 0.82609; Recall: 0.79167; F-Measure: 0.80851}
+Class 4: {TP: 0.0; FP: 0.0; TN: 89.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 89.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.57303; Recall: 0.57303; Fscore: 0.57303 }
+Macro {Precision: 0.35907; Recall: 0.00000; Fscore: 0.00000}
+Multilayer Perceptron Classification
+Average Accuracy: 0.85169
+Error rate: 0.14831
+Class 1: {TP: 19.0; FP: 15.0; TN: 40.0; FN: 15.0; Precision: 0.55882; Recall: 0.55882; F-Measure: 0.55882}
+Class 2: {TP: 14.0; FP: 13.0; TN: 45.0; FN: 17.0; Precision: 0.51852; Recall: 0.45161; F-Measure: 0.48276}
+Class 3: {TP: 23.0; FP: 5.0; TN: 60.0; FN: 1.0; Precision: 0.82143; Recall: 0.95833; F-Measure: 0.88462}
+Class 4: {TP: 0.0; FP: 0.0; TN: 89.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 89.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.62921; Recall: 0.62921; Fscore: 0.62921 }
+Macro {Precision: 0.37975; Recall: 0.00000; Fscore: 0.00000}
+Bayes network
+Average Accuracy: 0.84719
+Error rate: 0.15281
+Class 1: {TP: 26.0; FP: 20.0; TN: 35.0; FN: 8.0; Precision: 0.56522; Recall: 0.76471; F-Measure: 0.65000}
+Class 2: {TP: 9.0; FP: 7.0; TN: 51.0; FN: 22.0; Precision: 0.56250; Recall: 0.29032; F-Measure: 0.38298}
+Class 3: {TP: 20.0; FP: 0.0; TN: 65.0; FN: 4.0; Precision: 1.00000; Recall: 0.83333; F-Measure: 0.90909}
+Class 4: {TP: 0.0; FP: 7.0; TN: 82.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 89.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.61798; Recall: 0.61798; Fscore: 0.61798 }
+Macro {Precision: 0.42554; Recall: 0.00000; Fscore: 0.00000}
+data/output/Classification/More_Zero_Answers/358240052286630/StressClassification358240052286630DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 5; [2] => 10; [3] => 6; [4] => 5; [5] => 0; }
+ZeroR Classification
+Average Accuracy: 0.75385
+Error rate: 0.24615
+Class 1: {TP: 0.0; FP: 0.0; TN: 21.0; FN: 5.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 2: {TP: 10.0; FP: 16.0; TN: 0.0; FN: 0.0; Precision: 0.38462; Recall: 1.00000; F-Measure: 0.55556}
+Class 3: {TP: 0.0; FP: 0.0; TN: 20.0; FN: 6.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 21.0; FN: 5.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 26.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.38462; Recall: 0.38462; Fscore: 0.38462 }
+Macro {Precision: 0.07692; Recall: 0.00000; Fscore: 0.00000}
+TREE Classification
+Average Accuracy: 0.73846
+Error rate: 0.26154
+Class 1: {TP: 2.0; FP: 5.0; TN: 16.0; FN: 3.0; Precision: 0.28571; Recall: 0.40000; F-Measure: 0.33333}
+Class 2: {TP: 4.0; FP: 6.0; TN: 10.0; FN: 6.0; Precision: 0.40000; Recall: 0.40000; F-Measure: 0.40000}
+Class 3: {TP: 1.0; FP: 6.0; TN: 14.0; FN: 5.0; Precision: 0.14286; Recall: 0.16667; F-Measure: 0.15385}
+Class 4: {TP: 2.0; FP: 0.0; TN: 21.0; FN: 3.0; Precision: 1.00000; Recall: 0.40000; F-Measure: 0.57143}
+Class 5: {TP: 0.0; FP: 0.0; TN: 26.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.34615; Recall: 0.34615; Fscore: 0.34615 }
+Macro {Precision: 0.36571; Recall: 0.00000; Fscore: 0.00000}
+2-kNN Classification
+Average Accuracy: 0.72308
+Error rate: 0.27692
+Class 1: {TP: 0.0; FP: 2.0; TN: 19.0; FN: 5.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 2: {TP: 1.0; FP: 4.0; TN: 12.0; FN: 9.0; Precision: 0.20000; Recall: 0.10000; F-Measure: 0.13333}
+Class 3: {TP: 3.0; FP: 9.0; TN: 11.0; FN: 3.0; Precision: 0.25000; Recall: 0.50000; F-Measure: 0.33333}
+Class 4: {TP: 4.0; FP: 3.0; TN: 18.0; FN: 1.0; Precision: 0.57143; Recall: 0.80000; F-Measure: 0.66667}
+Class 5: {TP: 0.0; FP: 0.0; TN: 26.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.30769; Recall: 0.30769; Fscore: 0.30769 }
+Macro {Precision: 0.20429; Recall: 0.00000; Fscore: 0.00000}
+3-kNN Classification
+Average Accuracy: 0.72308
+Error rate: 0.27692
+Class 1: {TP: 0.0; FP: 2.0; TN: 19.0; FN: 5.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 2: {TP: 1.0; FP: 4.0; TN: 12.0; FN: 9.0; Precision: 0.20000; Recall: 0.10000; F-Measure: 0.13333}
+Class 3: {TP: 3.0; FP: 9.0; TN: 11.0; FN: 3.0; Precision: 0.25000; Recall: 0.50000; F-Measure: 0.33333}
+Class 4: {TP: 4.0; FP: 3.0; TN: 18.0; FN: 1.0; Precision: 0.57143; Recall: 0.80000; F-Measure: 0.66667}
+Class 5: {TP: 0.0; FP: 0.0; TN: 26.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.30769; Recall: 0.30769; Fscore: 0.30769 }
+Macro {Precision: 0.20429; Recall: 0.00000; Fscore: 0.00000}
+SVM Classification
+Average Accuracy: 0.81538
+Error rate: 0.18462
+Class 1: {TP: 4.0; FP: 1.0; TN: 20.0; FN: 1.0; Precision: 0.80000; Recall: 0.80000; F-Measure: 0.80000}
+Class 2: {TP: 3.0; FP: 2.0; TN: 14.0; FN: 7.0; Precision: 0.60000; Recall: 0.30000; F-Measure: 0.40000}
+Class 3: {TP: 3.0; FP: 3.0; TN: 17.0; FN: 3.0; Precision: 0.50000; Recall: 0.50000; F-Measure: 0.50000}
+Class 4: {TP: 4.0; FP: 6.0; TN: 15.0; FN: 1.0; Precision: 0.40000; Recall: 0.80000; F-Measure: 0.53333}
+Class 5: {TP: 0.0; FP: 0.0; TN: 26.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.53846; Recall: 0.53846; Fscore: 0.53846 }
+Macro {Precision: 0.46000; Recall: 0.00000; Fscore: 0.00000}
+Multilayer Perceptron Classification
+Average Accuracy: 0.78462
+Error rate: 0.21538
+Class 1: {TP: 2.0; FP: 3.0; TN: 18.0; FN: 3.0; Precision: 0.40000; Recall: 0.40000; F-Measure: 0.40000}
+Class 2: {TP: 4.0; FP: 4.0; TN: 12.0; FN: 6.0; Precision: 0.50000; Recall: 0.40000; F-Measure: 0.44444}
+Class 3: {TP: 2.0; FP: 2.0; TN: 18.0; FN: 4.0; Precision: 0.50000; Recall: 0.33333; F-Measure: 0.40000}
+Class 4: {TP: 4.0; FP: 5.0; TN: 16.0; FN: 1.0; Precision: 0.44444; Recall: 0.80000; F-Measure: 0.57143}
+Class 5: {TP: 0.0; FP: 0.0; TN: 26.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.46154; Recall: 0.46154; Fscore: 0.46154 }
+Macro {Precision: 0.36889; Recall: 0.00000; Fscore: 0.00000}
+Bayes network
+Average Accuracy: 0.73846
+Error rate: 0.26154
+Class 1: {TP: 0.0; FP: 0.0; TN: 21.0; FN: 5.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 2: {TP: 9.0; FP: 15.0; TN: 1.0; FN: 1.0; Precision: 0.37500; Recall: 0.90000; F-Measure: 0.52941}
+Class 3: {TP: 0.0; FP: 2.0; TN: 18.0; FN: 6.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 21.0; FN: 5.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 26.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.34615; Recall: 0.34615; Fscore: 0.34615 }
+Macro {Precision: 0.07500; Recall: 0.00000; Fscore: 0.00000}
+data/output/Classification/More_Zero_Answers/358240053585378/StressClassification358240053585378DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 59; [2] => 59; [3] => 60; [4] => 0; [5] => 59; }
+ZeroR Classification
+Average Accuracy: 0.69789
+Error rate: 0.30211
+Class 1: {TP: 5.0; FP: 18.0; TN: 160.0; FN: 54.0; Precision: 0.21739; Recall: 0.08475; F-Measure: 0.12195}
+Class 2: {TP: 5.0; FP: 18.0; TN: 160.0; FN: 54.0; Precision: 0.21739; Recall: 0.08475; F-Measure: 0.12195}
+Class 3: {TP: 48.0; FP: 143.0; TN: 34.0; FN: 12.0; Precision: 0.25131; Recall: 0.80000; F-Measure: 0.38247}
+Class 4: {TP: 0.0; FP: 0.0; TN: 237.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 178.0; FN: 59.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.24473; Recall: 0.24473; Fscore: 0.24473 }
+Macro {Precision: 0.13722; Recall: 0.00000; Fscore: 0.00000}
+TREE Classification
+Average Accuracy: 0.94937
+Error rate: 0.05063
+Class 1: {TP: 47.0; FP: 9.0; TN: 169.0; FN: 12.0; Precision: 0.83929; Recall: 0.79661; F-Measure: 0.81739}
+Class 2: {TP: 57.0; FP: 3.0; TN: 175.0; FN: 2.0; Precision: 0.95000; Recall: 0.96610; F-Measure: 0.95798}
+Class 3: {TP: 45.0; FP: 15.0; TN: 162.0; FN: 15.0; Precision: 0.75000; Recall: 0.75000; F-Measure: 0.75000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 237.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 58.0; FP: 3.0; TN: 175.0; FN: 1.0; Precision: 0.95082; Recall: 0.98305; F-Measure: 0.96667}
+Micro: {Precision: 0.87342; Recall: 0.87342; Fscore: 0.87342 }
+Macro {Precision: 0.69802; Recall: 0.00000; Fscore: 0.00000}
+2-kNN Classification
+Average Accuracy: 0.95612
+Error rate: 0.04388
+Class 1: {TP: 58.0; FP: 15.0; TN: 163.0; FN: 1.0; Precision: 0.79452; Recall: 0.98305; F-Measure: 0.87879}
+Class 2: {TP: 59.0; FP: 4.0; TN: 174.0; FN: 0.0; Precision: 0.93651; Recall: 1.00000; F-Measure: 0.96721}
+Class 3: {TP: 35.0; FP: 1.0; TN: 176.0; FN: 25.0; Precision: 0.97222; Recall: 0.58333; F-Measure: 0.72917}
+Class 4: {TP: 0.0; FP: 0.0; TN: 237.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 59.0; FP: 6.0; TN: 172.0; FN: 0.0; Precision: 0.90769; Recall: 1.00000; F-Measure: 0.95161}
+Micro: {Precision: 0.89030; Recall: 0.89030; Fscore: 0.89030 }
+Macro {Precision: 0.72219; Recall: 0.00000; Fscore: 0.00000}
+3-kNN Classification
+Average Accuracy: 0.95612
+Error rate: 0.04388
+Class 1: {TP: 58.0; FP: 15.0; TN: 163.0; FN: 1.0; Precision: 0.79452; Recall: 0.98305; F-Measure: 0.87879}
+Class 2: {TP: 59.0; FP: 4.0; TN: 174.0; FN: 0.0; Precision: 0.93651; Recall: 1.00000; F-Measure: 0.96721}
+Class 3: {TP: 35.0; FP: 1.0; TN: 176.0; FN: 25.0; Precision: 0.97222; Recall: 0.58333; F-Measure: 0.72917}
+Class 4: {TP: 0.0; FP: 0.0; TN: 237.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 59.0; FP: 6.0; TN: 172.0; FN: 0.0; Precision: 0.90769; Recall: 1.00000; F-Measure: 0.95161}
+Micro: {Precision: 0.89030; Recall: 0.89030; Fscore: 0.89030 }
+Macro {Precision: 0.72219; Recall: 0.00000; Fscore: 0.00000}
+SVM Classification
+Average Accuracy: 0.94768
+Error rate: 0.05232
+Class 1: {TP: 54.0; FP: 13.0; TN: 165.0; FN: 5.0; Precision: 0.80597; Recall: 0.91525; F-Measure: 0.85714}
+Class 2: {TP: 59.0; FP: 8.0; TN: 170.0; FN: 0.0; Precision: 0.88060; Recall: 1.00000; F-Measure: 0.93651}
+Class 3: {TP: 34.0; FP: 3.0; TN: 174.0; FN: 26.0; Precision: 0.91892; Recall: 0.56667; F-Measure: 0.70103}
+Class 4: {TP: 0.0; FP: 0.0; TN: 237.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 59.0; FP: 7.0; TN: 171.0; FN: 0.0; Precision: 0.89394; Recall: 1.00000; F-Measure: 0.94400}
+Micro: {Precision: 0.86920; Recall: 0.86920; Fscore: 0.86920 }
+Macro {Precision: 0.69989; Recall: 0.00000; Fscore: 0.00000}
+Multilayer Perceptron Classification
+Average Accuracy: 0.96793
+Error rate: 0.03207
+Class 1: {TP: 56.0; FP: 13.0; TN: 165.0; FN: 3.0; Precision: 0.81159; Recall: 0.94915; F-Measure: 0.87500}
+Class 2: {TP: 59.0; FP: 2.0; TN: 176.0; FN: 0.0; Precision: 0.96721; Recall: 1.00000; F-Measure: 0.98333}
+Class 3: {TP: 44.0; FP: 3.0; TN: 174.0; FN: 16.0; Precision: 0.93617; Recall: 0.73333; F-Measure: 0.82243}
+Class 4: {TP: 0.0; FP: 0.0; TN: 237.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 59.0; FP: 1.0; TN: 177.0; FN: 0.0; Precision: 0.98333; Recall: 1.00000; F-Measure: 0.99160}
+Micro: {Precision: 0.91983; Recall: 0.91983; Fscore: 0.91983 }
+Macro {Precision: 0.73966; Recall: 0.00000; Fscore: 0.00000}
+Bayes network
+Average Accuracy: 0.97806
+Error rate: 0.02194
+Class 1: {TP: 52.0; FP: 2.0; TN: 176.0; FN: 7.0; Precision: 0.96296; Recall: 0.88136; F-Measure: 0.92035}
+Class 2: {TP: 57.0; FP: 0.0; TN: 178.0; FN: 2.0; Precision: 1.00000; Recall: 0.96610; F-Measure: 0.98276}
+Class 3: {TP: 58.0; FP: 10.0; TN: 167.0; FN: 2.0; Precision: 0.85294; Recall: 0.96667; F-Measure: 0.90625}
+Class 4: {TP: 0.0; FP: 1.0; TN: 236.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 57.0; FP: 0.0; TN: 178.0; FN: 2.0; Precision: 1.00000; Recall: 0.96610; F-Measure: 0.98276}
+Micro: {Precision: 0.94515; Recall: 0.94515; Fscore: 0.94515 }
+Macro {Precision: 0.76318; Recall: 0.00000; Fscore: 0.00000}
+data/output/Classification/More_Zero_Answers/358240053586327/StressClassification358240053586327DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 66; [2] => 64; [3] => 64; [4] => 64; [5] => 0; }
+ZeroR Classification
+Average Accuracy: 0.70233
+Error rate: 0.29767
+Class 1: {TP: 66.0; FP: 192.0; TN: 0.0; FN: 0.0; Precision: 0.25581; Recall: 1.00000; F-Measure: 0.40741}
+Class 2: {TP: 0.0; FP: 0.0; TN: 194.0; FN: 64.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 3: {TP: 0.0; FP: 0.0; TN: 194.0; FN: 64.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 194.0; FN: 64.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 258.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.25581; Recall: 0.25581; Fscore: 0.25581 }
+Macro {Precision: 0.05116; Recall: 0.00000; Fscore: 0.00000}
+TREE Classification
+Average Accuracy: 0.98915
+Error rate: 0.01085
+Class 1: {TP: 61.0; FP: 1.0; TN: 191.0; FN: 5.0; Precision: 0.98387; Recall: 0.92424; F-Measure: 0.95312}
+Class 2: {TP: 64.0; FP: 2.0; TN: 192.0; FN: 0.0; Precision: 0.96970; Recall: 1.00000; F-Measure: 0.98462}
+Class 3: {TP: 62.0; FP: 2.0; TN: 192.0; FN: 2.0; Precision: 0.96875; Recall: 0.96875; F-Measure: 0.96875}
+Class 4: {TP: 64.0; FP: 2.0; TN: 192.0; FN: 0.0; Precision: 0.96970; Recall: 1.00000; F-Measure: 0.98462}
+Class 5: {TP: 0.0; FP: 0.0; TN: 258.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.97287; Recall: 0.97287; Fscore: 0.97287 }
+Macro {Precision: 0.77840; Recall: 0.00000; Fscore: 0.00000}
+2-kNN Classification
+Average Accuracy: 0.90543
+Error rate: 0.09457
+Class 1: {TP: 63.0; FP: 58.0; TN: 134.0; FN: 3.0; Precision: 0.52066; Recall: 0.95455; F-Measure: 0.67380}
+Class 2: {TP: 64.0; FP: 1.0; TN: 193.0; FN: 0.0; Precision: 0.98462; Recall: 1.00000; F-Measure: 0.99225}
+Class 3: {TP: 64.0; FP: 2.0; TN: 192.0; FN: 0.0; Precision: 0.96970; Recall: 1.00000; F-Measure: 0.98462}
+Class 4: {TP: 6.0; FP: 0.0; TN: 194.0; FN: 58.0; Precision: 1.00000; Recall: 0.09375; F-Measure: 0.17143}
+Class 5: {TP: 0.0; FP: 0.0; TN: 258.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.76357; Recall: 0.76357; Fscore: 0.76357 }
+Macro {Precision: 0.69499; Recall: 0.00000; Fscore: 0.00000}
+3-kNN Classification
+Average Accuracy: 0.90543
+Error rate: 0.09457
+Class 1: {TP: 63.0; FP: 58.0; TN: 134.0; FN: 3.0; Precision: 0.52066; Recall: 0.95455; F-Measure: 0.67380}
+Class 2: {TP: 64.0; FP: 1.0; TN: 193.0; FN: 0.0; Precision: 0.98462; Recall: 1.00000; F-Measure: 0.99225}
+Class 3: {TP: 64.0; FP: 2.0; TN: 192.0; FN: 0.0; Precision: 0.96970; Recall: 1.00000; F-Measure: 0.98462}
+Class 4: {TP: 6.0; FP: 0.0; TN: 194.0; FN: 58.0; Precision: 1.00000; Recall: 0.09375; F-Measure: 0.17143}
+Class 5: {TP: 0.0; FP: 0.0; TN: 258.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.76357; Recall: 0.76357; Fscore: 0.76357 }
+Macro {Precision: 0.69499; Recall: 0.00000; Fscore: 0.00000}
+SVM Classification
+Average Accuracy: 0.94419
+Error rate: 0.05581
+Class 1: {TP: 45.0; FP: 0.0; TN: 192.0; FN: 21.0; Precision: 1.00000; Recall: 0.68182; F-Measure: 0.81081}
+Class 2: {TP: 64.0; FP: 30.0; TN: 164.0; FN: 0.0; Precision: 0.68085; Recall: 1.00000; F-Measure: 0.81013}
+Class 3: {TP: 49.0; FP: 2.0; TN: 192.0; FN: 15.0; Precision: 0.96078; Recall: 0.76562; F-Measure: 0.85217}
+Class 4: {TP: 64.0; FP: 4.0; TN: 190.0; FN: 0.0; Precision: 0.94118; Recall: 1.00000; F-Measure: 0.96970}
+Class 5: {TP: 0.0; FP: 0.0; TN: 258.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.86047; Recall: 0.86047; Fscore: 0.86047 }
+Macro {Precision: 0.71656; Recall: 0.00000; Fscore: 0.00000}
+Multilayer Perceptron Classification
+Average Accuracy: 0.98760
+Error rate: 0.01240
+Class 1: {TP: 58.0; FP: 0.0; TN: 192.0; FN: 8.0; Precision: 1.00000; Recall: 0.87879; F-Measure: 0.93548}
+Class 2: {TP: 64.0; FP: 2.0; TN: 192.0; FN: 0.0; Precision: 0.96970; Recall: 1.00000; F-Measure: 0.98462}
+Class 3: {TP: 64.0; FP: 2.0; TN: 192.0; FN: 0.0; Precision: 0.96970; Recall: 1.00000; F-Measure: 0.98462}
+Class 4: {TP: 64.0; FP: 4.0; TN: 190.0; FN: 0.0; Precision: 0.94118; Recall: 1.00000; F-Measure: 0.96970}
+Class 5: {TP: 0.0; FP: 0.0; TN: 258.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.96899; Recall: 0.96899; Fscore: 0.96899 }
+Macro {Precision: 0.77611; Recall: 0.00000; Fscore: 0.00000}
+Bayes network
+Average Accuracy: 0.99535
+Error rate: 0.00465
+Class 1: {TP: 65.0; FP: 1.0; TN: 191.0; FN: 1.0; Precision: 0.98485; Recall: 0.98485; F-Measure: 0.98485}
+Class 2: {TP: 64.0; FP: 1.0; TN: 193.0; FN: 0.0; Precision: 0.98462; Recall: 1.00000; F-Measure: 0.99225}
+Class 3: {TP: 62.0; FP: 0.0; TN: 194.0; FN: 2.0; Precision: 1.00000; Recall: 0.96875; F-Measure: 0.98413}
+Class 4: {TP: 64.0; FP: 0.0; TN: 194.0; FN: 0.0; Precision: 1.00000; Recall: 1.00000; F-Measure: 1.00000}
+Class 5: {TP: 0.0; FP: 1.0; TN: 257.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.98837; Recall: 0.98837; Fscore: 0.98837 }
+Macro {Precision: 0.79389; Recall: 0.00000; Fscore: 0.00000}
+data/output/Classification/More_Zero_Answers/358240053587218/StressClassification358240053587218DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 53; [2] => 52; [3] => 52; [4] => 48; [5] => 0; }
+ZeroR Classification
+Average Accuracy: 0.70341
+Error rate: 0.29659
+Class 1: {TP: 53.0; FP: 152.0; TN: 0.0; FN: 0.0; Precision: 0.25854; Recall: 1.00000; F-Measure: 0.41085}
+Class 2: {TP: 0.0; FP: 0.0; TN: 153.0; FN: 52.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 3: {TP: 0.0; FP: 0.0; TN: 153.0; FN: 52.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 157.0; FN: 48.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 205.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.25854; Recall: 0.25854; Fscore: 0.25854 }
+Macro {Precision: 0.05171; Recall: 0.00000; Fscore: 0.00000}
+TREE Classification
+Average Accuracy: 0.92585
+Error rate: 0.07415
+Class 1: {TP: 41.0; FP: 16.0; TN: 136.0; FN: 12.0; Precision: 0.71930; Recall: 0.77358; F-Measure: 0.74545}
+Class 2: {TP: 35.0; FP: 13.0; TN: 140.0; FN: 17.0; Precision: 0.72917; Recall: 0.67308; F-Measure: 0.70000}
+Class 3: {TP: 46.0; FP: 7.0; TN: 146.0; FN: 6.0; Precision: 0.86792; Recall: 0.88462; F-Measure: 0.87619}
+Class 4: {TP: 45.0; FP: 2.0; TN: 155.0; FN: 3.0; Precision: 0.95745; Recall: 0.93750; F-Measure: 0.94737}
+Class 5: {TP: 0.0; FP: 0.0; TN: 205.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.81463; Recall: 0.81463; Fscore: 0.81463 }
+Macro {Precision: 0.65477; Recall: 0.00000; Fscore: 0.00000}
+2-kNN Classification
+Average Accuracy: 0.92195
+Error rate: 0.07805
+Class 1: {TP: 22.0; FP: 6.0; TN: 146.0; FN: 31.0; Precision: 0.78571; Recall: 0.41509; F-Measure: 0.54321}
+Class 2: {TP: 45.0; FP: 24.0; TN: 129.0; FN: 7.0; Precision: 0.65217; Recall: 0.86538; F-Measure: 0.74380}
+Class 3: {TP: 51.0; FP: 9.0; TN: 144.0; FN: 1.0; Precision: 0.85000; Recall: 0.98077; F-Measure: 0.91071}
+Class 4: {TP: 47.0; FP: 1.0; TN: 156.0; FN: 1.0; Precision: 0.97917; Recall: 0.97917; F-Measure: 0.97917}
+Class 5: {TP: 0.0; FP: 0.0; TN: 205.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.80488; Recall: 0.80488; Fscore: 0.80488 }
+Macro {Precision: 0.65341; Recall: 0.00000; Fscore: 0.00000}
+3-kNN Classification
+Average Accuracy: 0.92195
+Error rate: 0.07805
+Class 1: {TP: 22.0; FP: 6.0; TN: 146.0; FN: 31.0; Precision: 0.78571; Recall: 0.41509; F-Measure: 0.54321}
+Class 2: {TP: 45.0; FP: 24.0; TN: 129.0; FN: 7.0; Precision: 0.65217; Recall: 0.86538; F-Measure: 0.74380}
+Class 3: {TP: 51.0; FP: 9.0; TN: 144.0; FN: 1.0; Precision: 0.85000; Recall: 0.98077; F-Measure: 0.91071}
+Class 4: {TP: 47.0; FP: 1.0; TN: 156.0; FN: 1.0; Precision: 0.97917; Recall: 0.97917; F-Measure: 0.97917}
+Class 5: {TP: 0.0; FP: 0.0; TN: 205.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.80488; Recall: 0.80488; Fscore: 0.80488 }
+Macro {Precision: 0.65341; Recall: 0.00000; Fscore: 0.00000}
+SVM Classification
+Average Accuracy: 0.91024
+Error rate: 0.08976
+Class 1: {TP: 22.0; FP: 7.0; TN: 145.0; FN: 31.0; Precision: 0.75862; Recall: 0.41509; F-Measure: 0.53659}
+Class 2: {TP: 38.0; FP: 16.0; TN: 137.0; FN: 14.0; Precision: 0.70370; Recall: 0.73077; F-Measure: 0.71698}
+Class 3: {TP: 52.0; FP: 18.0; TN: 135.0; FN: 0.0; Precision: 0.74286; Recall: 1.00000; F-Measure: 0.85246}
+Class 4: {TP: 47.0; FP: 5.0; TN: 152.0; FN: 1.0; Precision: 0.90385; Recall: 0.97917; F-Measure: 0.94000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 205.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.77561; Recall: 0.77561; Fscore: 0.77561 }
+Macro {Precision: 0.62181; Recall: 0.00000; Fscore: 0.00000}
+Multilayer Perceptron Classification
+Average Accuracy: 0.90829
+Error rate: 0.09171
+Class 1: {TP: 20.0; FP: 8.0; TN: 144.0; FN: 33.0; Precision: 0.71429; Recall: 0.37736; F-Measure: 0.49383}
+Class 2: {TP: 42.0; FP: 20.0; TN: 133.0; FN: 10.0; Precision: 0.67742; Recall: 0.80769; F-Measure: 0.73684}
+Class 3: {TP: 50.0; FP: 14.0; TN: 139.0; FN: 2.0; Precision: 0.78125; Recall: 0.96154; F-Measure: 0.86207}
+Class 4: {TP: 46.0; FP: 5.0; TN: 152.0; FN: 2.0; Precision: 0.90196; Recall: 0.95833; F-Measure: 0.92929}
+Class 5: {TP: 0.0; FP: 0.0; TN: 205.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.77073; Recall: 0.77073; Fscore: 0.77073 }
+Macro {Precision: 0.61498; Recall: 0.00000; Fscore: 0.00000}
+Bayes network
+Average Accuracy: 0.93366
+Error rate: 0.06634
+Class 1: {TP: 40.0; FP: 14.0; TN: 138.0; FN: 13.0; Precision: 0.74074; Recall: 0.75472; F-Measure: 0.74766}
+Class 2: {TP: 41.0; FP: 16.0; TN: 137.0; FN: 11.0; Precision: 0.71930; Recall: 0.78846; F-Measure: 0.75229}
+Class 3: {TP: 45.0; FP: 3.0; TN: 150.0; FN: 7.0; Precision: 0.93750; Recall: 0.86538; F-Measure: 0.90000}
+Class 4: {TP: 45.0; FP: 0.0; TN: 157.0; FN: 3.0; Precision: 1.00000; Recall: 0.93750; F-Measure: 0.96774}
+Class 5: {TP: 0.0; FP: 1.0; TN: 204.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.83415; Recall: 0.83415; Fscore: 0.83415 }
+Macro {Precision: 0.67951; Recall: 0.00000; Fscore: 0.00000}
+data/output/Classification/More_Zero_Answers/358240053591301/StressClassification358240053591301DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 48; [2] => 47; [3] => 48; [4] => 48; [5] => 0; }
+ZeroR Classification
+Average Accuracy: 0.69215
+Error rate: 0.30785
+Class 1: {TP: 28.0; FP: 87.0; TN: 56.0; FN: 20.0; Precision: 0.24348; Recall: 0.58333; F-Measure: 0.34356}
+Class 2: {TP: 0.0; FP: 0.0; TN: 144.0; FN: 47.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 3: {TP: 8.0; FP: 30.0; TN: 113.0; FN: 40.0; Precision: 0.21053; Recall: 0.16667; F-Measure: 0.18605}
+Class 4: {TP: 8.0; FP: 30.0; TN: 113.0; FN: 40.0; Precision: 0.21053; Recall: 0.16667; F-Measure: 0.18605}
+Class 5: {TP: 0.0; FP: 0.0; TN: 191.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.23037; Recall: 0.23037; Fscore: 0.23037 }
+Macro {Precision: 0.13291; Recall: 0.00000; Fscore: 0.00000}
+TREE Classification
+Average Accuracy: 0.93089
+Error rate: 0.06911
+Class 1: {TP: 31.0; FP: 11.0; TN: 132.0; FN: 17.0; Precision: 0.73810; Recall: 0.64583; F-Measure: 0.68889}
+Class 2: {TP: 35.0; FP: 12.0; TN: 132.0; FN: 12.0; Precision: 0.74468; Recall: 0.74468; F-Measure: 0.74468}
+Class 3: {TP: 46.0; FP: 2.0; TN: 141.0; FN: 2.0; Precision: 0.95833; Recall: 0.95833; F-Measure: 0.95833}
+Class 4: {TP: 46.0; FP: 8.0; TN: 135.0; FN: 2.0; Precision: 0.85185; Recall: 0.95833; F-Measure: 0.90196}
+Class 5: {TP: 0.0; FP: 0.0; TN: 191.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.82723; Recall: 0.82723; Fscore: 0.82723 }
+Macro {Precision: 0.65859; Recall: 0.00000; Fscore: 0.00000}
+2-kNN Classification
+Average Accuracy: 0.93927
+Error rate: 0.06073
+Class 1: {TP: 28.0; FP: 6.0; TN: 137.0; FN: 20.0; Precision: 0.82353; Recall: 0.58333; F-Measure: 0.68293}
+Class 2: {TP: 38.0; FP: 16.0; TN: 128.0; FN: 9.0; Precision: 0.70370; Recall: 0.80851; F-Measure: 0.75248}
+Class 3: {TP: 48.0; FP: 4.0; TN: 139.0; FN: 0.0; Precision: 0.92308; Recall: 1.00000; F-Measure: 0.96000}
+Class 4: {TP: 48.0; FP: 3.0; TN: 140.0; FN: 0.0; Precision: 0.94118; Recall: 1.00000; F-Measure: 0.96970}
+Class 5: {TP: 0.0; FP: 0.0; TN: 191.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.84817; Recall: 0.84817; Fscore: 0.84817 }
+Macro {Precision: 0.67830; Recall: 0.00000; Fscore: 0.00000}
+3-kNN Classification
+Average Accuracy: 0.93927
+Error rate: 0.06073
+Class 1: {TP: 28.0; FP: 6.0; TN: 137.0; FN: 20.0; Precision: 0.82353; Recall: 0.58333; F-Measure: 0.68293}
+Class 2: {TP: 38.0; FP: 16.0; TN: 128.0; FN: 9.0; Precision: 0.70370; Recall: 0.80851; F-Measure: 0.75248}
+Class 3: {TP: 48.0; FP: 4.0; TN: 139.0; FN: 0.0; Precision: 0.92308; Recall: 1.00000; F-Measure: 0.96000}
+Class 4: {TP: 48.0; FP: 3.0; TN: 140.0; FN: 0.0; Precision: 0.94118; Recall: 1.00000; F-Measure: 0.96970}
+Class 5: {TP: 0.0; FP: 0.0; TN: 191.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.84817; Recall: 0.84817; Fscore: 0.84817 }
+Macro {Precision: 0.67830; Recall: 0.00000; Fscore: 0.00000}
+SVM Classification
+Average Accuracy: 0.93089
+Error rate: 0.06911
+Class 1: {TP: 29.0; FP: 7.0; TN: 136.0; FN: 19.0; Precision: 0.80556; Recall: 0.60417; F-Measure: 0.69048}
+Class 2: {TP: 34.0; FP: 13.0; TN: 131.0; FN: 13.0; Precision: 0.72340; Recall: 0.72340; F-Measure: 0.72340}
+Class 3: {TP: 48.0; FP: 4.0; TN: 139.0; FN: 0.0; Precision: 0.92308; Recall: 1.00000; F-Measure: 0.96000}
+Class 4: {TP: 47.0; FP: 9.0; TN: 134.0; FN: 1.0; Precision: 0.83929; Recall: 0.97917; F-Measure: 0.90385}
+Class 5: {TP: 0.0; FP: 0.0; TN: 191.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.82723; Recall: 0.82723; Fscore: 0.82723 }
+Macro {Precision: 0.65826; Recall: 0.00000; Fscore: 0.00000}
+Multilayer Perceptron Classification
+Average Accuracy: 0.95812
+Error rate: 0.04188
+Class 1: {TP: 38.0; FP: 6.0; TN: 137.0; FN: 10.0; Precision: 0.86364; Recall: 0.79167; F-Measure: 0.82609}
+Class 2: {TP: 38.0; FP: 9.0; TN: 135.0; FN: 9.0; Precision: 0.80851; Recall: 0.80851; F-Measure: 0.80851}
+Class 3: {TP: 47.0; FP: 3.0; TN: 140.0; FN: 1.0; Precision: 0.94000; Recall: 0.97917; F-Measure: 0.95918}
+Class 4: {TP: 48.0; FP: 2.0; TN: 141.0; FN: 0.0; Precision: 0.96000; Recall: 1.00000; F-Measure: 0.97959}
+Class 5: {TP: 0.0; FP: 0.0; TN: 191.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.89529; Recall: 0.89529; Fscore: 0.89529 }
+Macro {Precision: 0.71443; Recall: 0.00000; Fscore: 0.00000}
+Bayes network
+Average Accuracy: 0.94555
+Error rate: 0.05445
+Class 1: {TP: 36.0; FP: 9.0; TN: 134.0; FN: 12.0; Precision: 0.80000; Recall: 0.75000; F-Measure: 0.77419}
+Class 2: {TP: 38.0; FP: 14.0; TN: 130.0; FN: 9.0; Precision: 0.73077; Recall: 0.80851; F-Measure: 0.76768}
+Class 3: {TP: 45.0; FP: 0.0; TN: 143.0; FN: 3.0; Precision: 1.00000; Recall: 0.93750; F-Measure: 0.96774}
+Class 4: {TP: 46.0; FP: 0.0; TN: 143.0; FN: 2.0; Precision: 1.00000; Recall: 0.95833; F-Measure: 0.97872}
+Class 5: {TP: 0.0; FP: 3.0; TN: 188.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.86387; Recall: 0.86387; Fscore: 0.86387 }
+Macro {Precision: 0.70615; Recall: 0.00000; Fscore: 0.00000}
+data/output/Classification/More_Zero_Answers/358240053592150/StressClassification358240053592150DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 56; [2] => 62; [3] => 62; [4] => 61; [5] => 0; }
+ZeroR Classification
+Average Accuracy: 0.69959
+Error rate: 0.30041
+Class 1: {TP: 0.0; FP: 0.0; TN: 185.0; FN: 56.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 2: {TP: 48.0; FP: 145.0; TN: 34.0; FN: 14.0; Precision: 0.24870; Recall: 0.77419; F-Measure: 0.37647}
+Class 3: {TP: 12.0; FP: 36.0; TN: 143.0; FN: 50.0; Precision: 0.25000; Recall: 0.19355; F-Measure: 0.21818}
+Class 4: {TP: 0.0; FP: 0.0; TN: 180.0; FN: 61.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 241.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.24896; Recall: 0.24896; Fscore: 0.24896 }
+Macro {Precision: 0.09974; Recall: 0.00000; Fscore: 0.00000}
+TREE Classification
+Average Accuracy: 0.94191
+Error rate: 0.05809
+Class 1: {TP: 50.0; FP: 9.0; TN: 176.0; FN: 6.0; Precision: 0.84746; Recall: 0.89286; F-Measure: 0.86957}
+Class 2: {TP: 41.0; FP: 10.0; TN: 169.0; FN: 21.0; Precision: 0.80392; Recall: 0.66129; F-Measure: 0.72566}
+Class 3: {TP: 54.0; FP: 10.0; TN: 169.0; FN: 8.0; Precision: 0.84375; Recall: 0.87097; F-Measure: 0.85714}
+Class 4: {TP: 61.0; FP: 6.0; TN: 174.0; FN: 0.0; Precision: 0.91045; Recall: 1.00000; F-Measure: 0.95312}
+Class 5: {TP: 0.0; FP: 0.0; TN: 241.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.85477; Recall: 0.85477; Fscore: 0.85477 }
+Macro {Precision: 0.68112; Recall: 0.00000; Fscore: 0.00000}
+2-kNN Classification
+Average Accuracy: 0.94191
+Error rate: 0.05809
+Class 1: {TP: 50.0; FP: 11.0; TN: 174.0; FN: 6.0; Precision: 0.81967; Recall: 0.89286; F-Measure: 0.85470}
+Class 2: {TP: 36.0; FP: 5.0; TN: 174.0; FN: 26.0; Precision: 0.87805; Recall: 0.58065; F-Measure: 0.69903}
+Class 3: {TP: 60.0; FP: 14.0; TN: 165.0; FN: 2.0; Precision: 0.81081; Recall: 0.96774; F-Measure: 0.88235}
+Class 4: {TP: 60.0; FP: 5.0; TN: 175.0; FN: 1.0; Precision: 0.92308; Recall: 0.98361; F-Measure: 0.95238}
+Class 5: {TP: 0.0; FP: 0.0; TN: 241.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.85477; Recall: 0.85477; Fscore: 0.85477 }
+Macro {Precision: 0.68632; Recall: 0.00000; Fscore: 0.00000}
+3-kNN Classification
+Average Accuracy: 0.94191
+Error rate: 0.05809
+Class 1: {TP: 50.0; FP: 11.0; TN: 174.0; FN: 6.0; Precision: 0.81967; Recall: 0.89286; F-Measure: 0.85470}
+Class 2: {TP: 36.0; FP: 5.0; TN: 174.0; FN: 26.0; Precision: 0.87805; Recall: 0.58065; F-Measure: 0.69903}
+Class 3: {TP: 60.0; FP: 14.0; TN: 165.0; FN: 2.0; Precision: 0.81081; Recall: 0.96774; F-Measure: 0.88235}
+Class 4: {TP: 60.0; FP: 5.0; TN: 175.0; FN: 1.0; Precision: 0.92308; Recall: 0.98361; F-Measure: 0.95238}
+Class 5: {TP: 0.0; FP: 0.0; TN: 241.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.85477; Recall: 0.85477; Fscore: 0.85477 }
+Macro {Precision: 0.68632; Recall: 0.00000; Fscore: 0.00000}
+SVM Classification
+Average Accuracy: 0.88050
+Error rate: 0.11950
+Class 1: {TP: 44.0; FP: 10.0; TN: 175.0; FN: 12.0; Precision: 0.81481; Recall: 0.78571; F-Measure: 0.80000}
+Class 2: {TP: 36.0; FP: 24.0; TN: 155.0; FN: 26.0; Precision: 0.60000; Recall: 0.58065; F-Measure: 0.59016}
+Class 3: {TP: 46.0; FP: 26.0; TN: 153.0; FN: 16.0; Precision: 0.63889; Recall: 0.74194; F-Measure: 0.68657}
+Class 4: {TP: 43.0; FP: 12.0; TN: 168.0; FN: 18.0; Precision: 0.78182; Recall: 0.70492; F-Measure: 0.74138}
+Class 5: {TP: 0.0; FP: 0.0; TN: 241.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.70124; Recall: 0.70124; Fscore: 0.70124 }
+Macro {Precision: 0.56710; Recall: 0.00000; Fscore: 0.00000}
+Multilayer Perceptron Classification
+Average Accuracy: 0.95187
+Error rate: 0.04813
+Class 1: {TP: 49.0; FP: 7.0; TN: 178.0; FN: 7.0; Precision: 0.87500; Recall: 0.87500; F-Measure: 0.87500}
+Class 2: {TP: 44.0; FP: 6.0; TN: 173.0; FN: 18.0; Precision: 0.88000; Recall: 0.70968; F-Measure: 0.78571}
+Class 3: {TP: 59.0; FP: 10.0; TN: 169.0; FN: 3.0; Precision: 0.85507; Recall: 0.95161; F-Measure: 0.90076}
+Class 4: {TP: 60.0; FP: 6.0; TN: 174.0; FN: 1.0; Precision: 0.90909; Recall: 0.98361; F-Measure: 0.94488}
+Class 5: {TP: 0.0; FP: 0.0; TN: 241.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.87967; Recall: 0.87967; Fscore: 0.87967 }
+Macro {Precision: 0.70383; Recall: 0.00000; Fscore: 0.00000}
+Bayes network
+Average Accuracy: 0.95021
+Error rate: 0.04979
+Class 1: {TP: 42.0; FP: 4.0; TN: 181.0; FN: 14.0; Precision: 0.91304; Recall: 0.75000; F-Measure: 0.82353}
+Class 2: {TP: 55.0; FP: 16.0; TN: 163.0; FN: 7.0; Precision: 0.77465; Recall: 0.88710; F-Measure: 0.82707}
+Class 3: {TP: 56.0; FP: 9.0; TN: 170.0; FN: 6.0; Precision: 0.86154; Recall: 0.90323; F-Measure: 0.88189}
+Class 4: {TP: 58.0; FP: 0.0; TN: 180.0; FN: 3.0; Precision: 1.00000; Recall: 0.95082; F-Measure: 0.97479}
+Class 5: {TP: 0.0; FP: 1.0; TN: 240.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.87552; Recall: 0.87552; Fscore: 0.87552 }
+Macro {Precision: 0.70985; Recall: 0.00000; Fscore: 0.00000}
+data/output/Classification/More_Zero_Answers/358240053664454/StressClassification358240053664454DIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 19; [2] => 20; [3] => 19; [4] => 12; [5] => 0; }
+ZeroR Classification
+Average Accuracy: 0.70857
+Error rate: 0.29143
+Class 1: {TP: 1.0; FP: 6.0; TN: 45.0; FN: 18.0; Precision: 0.14286; Recall: 0.05263; F-Measure: 0.07692}
+Class 2: {TP: 18.0; FP: 45.0; TN: 5.0; FN: 2.0; Precision: 0.28571; Recall: 0.90000; F-Measure: 0.43373}
+Class 3: {TP: 0.0; FP: 0.0; TN: 51.0; FN: 19.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 58.0; FN: 12.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 70.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.27143; Recall: 0.27143; Fscore: 0.27143 }
+Macro {Precision: 0.08571; Recall: 0.00000; Fscore: 0.00000}
+TREE Classification
+Average Accuracy: 0.78286
+Error rate: 0.21714
+Class 1: {TP: 9.0; FP: 13.0; TN: 38.0; FN: 10.0; Precision: 0.40909; Recall: 0.47368; F-Measure: 0.43902}
+Class 2: {TP: 5.0; FP: 16.0; TN: 34.0; FN: 15.0; Precision: 0.23810; Recall: 0.25000; F-Measure: 0.24390}
+Class 3: {TP: 9.0; FP: 7.0; TN: 44.0; FN: 10.0; Precision: 0.56250; Recall: 0.47368; F-Measure: 0.51429}
+Class 4: {TP: 9.0; FP: 2.0; TN: 56.0; FN: 3.0; Precision: 0.81818; Recall: 0.75000; F-Measure: 0.78261}
+Class 5: {TP: 0.0; FP: 0.0; TN: 70.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.45714; Recall: 0.45714; Fscore: 0.45714 }
+Macro {Precision: 0.40557; Recall: 0.00000; Fscore: 0.00000}
+2-kNN Classification
+Average Accuracy: 0.80000
+Error rate: 0.20000
+Class 1: {TP: 7.0; FP: 5.0; TN: 46.0; FN: 12.0; Precision: 0.58333; Recall: 0.36842; F-Measure: 0.45161}
+Class 2: {TP: 10.0; FP: 16.0; TN: 34.0; FN: 10.0; Precision: 0.38462; Recall: 0.50000; F-Measure: 0.43478}
+Class 3: {TP: 7.0; FP: 11.0; TN: 40.0; FN: 12.0; Precision: 0.38889; Recall: 0.36842; F-Measure: 0.37838}
+Class 4: {TP: 11.0; FP: 3.0; TN: 55.0; FN: 1.0; Precision: 0.78571; Recall: 0.91667; F-Measure: 0.84615}
+Class 5: {TP: 0.0; FP: 0.0; TN: 70.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.50000; Recall: 0.50000; Fscore: 0.50000 }
+Macro {Precision: 0.42851; Recall: 0.00000; Fscore: 0.00000}
+3-kNN Classification
+Average Accuracy: 0.80000
+Error rate: 0.20000
+Class 1: {TP: 7.0; FP: 5.0; TN: 46.0; FN: 12.0; Precision: 0.58333; Recall: 0.36842; F-Measure: 0.45161}
+Class 2: {TP: 10.0; FP: 16.0; TN: 34.0; FN: 10.0; Precision: 0.38462; Recall: 0.50000; F-Measure: 0.43478}
+Class 3: {TP: 7.0; FP: 11.0; TN: 40.0; FN: 12.0; Precision: 0.38889; Recall: 0.36842; F-Measure: 0.37838}
+Class 4: {TP: 11.0; FP: 3.0; TN: 55.0; FN: 1.0; Precision: 0.78571; Recall: 0.91667; F-Measure: 0.84615}
+Class 5: {TP: 0.0; FP: 0.0; TN: 70.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.50000; Recall: 0.50000; Fscore: 0.50000 }
+Macro {Precision: 0.42851; Recall: 0.00000; Fscore: 0.00000}
+SVM Classification
+Average Accuracy: 0.80571
+Error rate: 0.19429
+Class 1: {TP: 9.0; FP: 9.0; TN: 42.0; FN: 10.0; Precision: 0.50000; Recall: 0.47368; F-Measure: 0.48649}
+Class 2: {TP: 11.0; FP: 10.0; TN: 40.0; FN: 9.0; Precision: 0.52381; Recall: 0.55000; F-Measure: 0.53659}
+Class 3: {TP: 6.0; FP: 13.0; TN: 38.0; FN: 13.0; Precision: 0.31579; Recall: 0.31579; F-Measure: 0.31579}
+Class 4: {TP: 10.0; FP: 2.0; TN: 56.0; FN: 2.0; Precision: 0.83333; Recall: 0.83333; F-Measure: 0.83333}
+Class 5: {TP: 0.0; FP: 0.0; TN: 70.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.51429; Recall: 0.51429; Fscore: 0.51429 }
+Macro {Precision: 0.43459; Recall: 0.00000; Fscore: 0.00000}
+Multilayer Perceptron Classification
+Average Accuracy: 0.77714
+Error rate: 0.22286
+Class 1: {TP: 8.0; FP: 11.0; TN: 40.0; FN: 11.0; Precision: 0.42105; Recall: 0.42105; F-Measure: 0.42105}
+Class 2: {TP: 11.0; FP: 18.0; TN: 32.0; FN: 9.0; Precision: 0.37931; Recall: 0.55000; F-Measure: 0.44898}
+Class 3: {TP: 3.0; FP: 5.0; TN: 46.0; FN: 16.0; Precision: 0.37500; Recall: 0.15789; F-Measure: 0.22222}
+Class 4: {TP: 9.0; FP: 5.0; TN: 53.0; FN: 3.0; Precision: 0.64286; Recall: 0.75000; F-Measure: 0.69231}
+Class 5: {TP: 0.0; FP: 0.0; TN: 70.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.44286; Recall: 0.44286; Fscore: 0.44286 }
+Macro {Precision: 0.36364; Recall: 0.00000; Fscore: 0.00000}
+Bayes network
+Average Accuracy: 0.74286
+Error rate: 0.25714
+Class 1: {TP: 4.0; FP: 13.0; TN: 38.0; FN: 15.0; Precision: 0.23529; Recall: 0.21053; F-Measure: 0.22222}
+Class 2: {TP: 10.0; FP: 22.0; TN: 28.0; FN: 10.0; Precision: 0.31250; Recall: 0.50000; F-Measure: 0.38462}
+Class 3: {TP: 2.0; FP: 5.0; TN: 46.0; FN: 17.0; Precision: 0.28571; Recall: 0.10526; F-Measure: 0.15385}
+Class 4: {TP: 9.0; FP: 5.0; TN: 53.0; FN: 3.0; Precision: 0.64286; Recall: 0.75000; F-Measure: 0.69231}
+Class 5: {TP: 0.0; FP: 0.0; TN: 70.0; FN: 0.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.35714; Recall: 0.35714; Fscore: 0.35714 }
+Macro {Precision: 0.29527; Recall: 0.00000; Fscore: 0.00000}
+data/output/Classification/More_Zero_Answers/_ALL/StressClassification_ALLEASY.arff
+Occurrences after SMOTE filter: {[1] => 1369; [2] => 1362; [3] => 1365; }
+ZeroR Classification
+Average Accuracy: 0.55615
+Error rate: 0.44385
+Class 1: {TP: 1369.0; FP: 2727.0; TN: 0.0; FN: 0.0; Precision: 0.33423; Recall: 1.00000; F-Measure: 0.50101}
+Class 2: {TP: 0.0; FP: 0.0; TN: 2734.0; FN: 1362.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 3: {TP: 0.0; FP: 0.0; TN: 2731.0; FN: 1365.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.33423; Recall: 0.33423; Fscore: 0.33423 }
+Macro {Precision: 0.11141; Recall: 0.33333; Fscore: 0.16700}
+TREE Classification
+Average Accuracy: 0.88395
+Error rate: 0.11605
+Class 1: {TP: 1043.0; FP: 289.0; TN: 2438.0; FN: 326.0; Precision: 0.78303; Recall: 0.76187; F-Measure: 0.77231}
+Class 2: {TP: 1082.0; FP: 279.0; TN: 2455.0; FN: 280.0; Precision: 0.79500; Recall: 0.79442; F-Measure: 0.79471}
+Class 3: {TP: 1258.0; FP: 145.0; TN: 2586.0; FN: 107.0; Precision: 0.89665; Recall: 0.92161; F-Measure: 0.90896}
+Micro: {Precision: 0.82593; Recall: 0.82593; Fscore: 0.82593 }
+Macro {Precision: 0.82490; Recall: 0.82597; Fscore: 0.82543}
+2-kNN Classification
+Average Accuracy: 0.88835
+Error rate: 0.11165
+Class 1: {TP: 880.0; FP: 99.0; TN: 2628.0; FN: 489.0; Precision: 0.89888; Recall: 0.64280; F-Measure: 0.74957}
+Class 2: {TP: 1277.0; FP: 402.0; TN: 2332.0; FN: 85.0; Precision: 0.76057; Recall: 0.93759; F-Measure: 0.83986}
+Class 3: {TP: 1253.0; FP: 185.0; TN: 2546.0; FN: 112.0; Precision: 0.87135; Recall: 0.91795; F-Measure: 0.89404}
+Micro: {Precision: 0.83252; Recall: 0.83252; Fscore: 0.83252 }
+Macro {Precision: 0.84360; Recall: 0.83278; Fscore: 0.83816}
+3-kNN Classification
+Average Accuracy: 0.88835
+Error rate: 0.11165
+Class 1: {TP: 880.0; FP: 99.0; TN: 2628.0; FN: 489.0; Precision: 0.89888; Recall: 0.64280; F-Measure: 0.74957}
+Class 2: {TP: 1277.0; FP: 402.0; TN: 2332.0; FN: 85.0; Precision: 0.76057; Recall: 0.93759; F-Measure: 0.83986}
+Class 3: {TP: 1253.0; FP: 185.0; TN: 2546.0; FN: 112.0; Precision: 0.87135; Recall: 0.91795; F-Measure: 0.89404}
+Micro: {Precision: 0.83252; Recall: 0.83252; Fscore: 0.83252 }
+Macro {Precision: 0.84360; Recall: 0.83278; Fscore: 0.83816}
+SVM Classification
+Average Accuracy: 0.74235
+Error rate: 0.25765
+Class 1: {TP: 781.0; FP: 628.0; TN: 2099.0; FN: 588.0; Precision: 0.55429; Recall: 0.57049; F-Measure: 0.56228}
+Class 2: {TP: 773.0; FP: 541.0; TN: 2193.0; FN: 589.0; Precision: 0.58828; Recall: 0.56755; F-Measure: 0.57773}
+Class 3: {TP: 959.0; FP: 414.0; TN: 2317.0; FN: 406.0; Precision: 0.69847; Recall: 0.70256; F-Measure: 0.70051}
+Micro: {Precision: 0.61353; Recall: 0.61353; Fscore: 0.61353 }
+Macro {Precision: 0.61368; Recall: 0.61353; Fscore: 0.61361}
+Multilayer Perceptron Classification
+Average Accuracy: 0.66976
+Error rate: 0.33024
+Class 1: {TP: 669.0; FP: 846.0; TN: 1881.0; FN: 700.0; Precision: 0.44158; Recall: 0.48868; F-Measure: 0.46394}
+Class 2: {TP: 705.0; FP: 641.0; TN: 2093.0; FN: 657.0; Precision: 0.52377; Recall: 0.51762; F-Measure: 0.52068}
+Class 3: {TP: 693.0; FP: 542.0; TN: 2189.0; FN: 672.0; Precision: 0.56113; Recall: 0.50769; F-Measure: 0.53308}
+Micro: {Precision: 0.50464; Recall: 0.50464; Fscore: 0.50464 }
+Macro {Precision: 0.50883; Recall: 0.50466; Fscore: 0.50674}
+data/output/Classification/More_Zero_Answers/_ALL/StressClassification_ALLDIFFICULT.arff
+Occurrences after SMOTE filter: {[1] => 834; [2] => 829; [3] => 828; [4] => 832; [5] => 830; }
+ZeroR Classification
+Average Accuracy: 0.68033
+Error rate: 0.31967
+Class 1: {TP: 834.0; FP: 3319.0; TN: 0.0; FN: 0.0; Precision: 0.20082; Recall: 1.00000; F-Measure: 0.33447}
+Class 2: {TP: 0.0; FP: 0.0; TN: 3324.0; FN: 829.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 3: {TP: 0.0; FP: 0.0; TN: 3325.0; FN: 828.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 4: {TP: 0.0; FP: 0.0; TN: 3321.0; FN: 832.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Class 5: {TP: 0.0; FP: 0.0; TN: 3323.0; FN: 830.0; Precision: 0.00000; Recall: 0.00000; F-Measure: 0.00000}
+Micro: {Precision: 0.20082; Recall: 0.20082; Fscore: 0.20082 }
+Macro {Precision: 0.04016; Recall: 0.20000; Fscore: 0.06689}
+TREE Classification
+Average Accuracy: 0.88153
+Error rate: 0.11847
+Class 1: {TP: 438.0; FP: 409.0; TN: 2910.0; FN: 396.0; Precision: 0.51712; Recall: 0.52518; F-Measure: 0.52112}
+Class 2: {TP: 430.0; FP: 382.0; TN: 2942.0; FN: 399.0; Precision: 0.52956; Recall: 0.51870; F-Measure: 0.52407}
+Class 3: {TP: 518.0; FP: 306.0; TN: 3019.0; FN: 310.0; Precision: 0.62864; Recall: 0.62560; F-Measure: 0.62712}
+Class 4: {TP: 722.0; FP: 119.0; TN: 3202.0; FN: 110.0; Precision: 0.85850; Recall: 0.86779; F-Measure: 0.86312}
+Class 5: {TP: 815.0; FP: 14.0; TN: 3309.0; FN: 15.0; Precision: 0.98311; Recall: 0.98193; F-Measure: 0.98252}
+Micro: {Precision: 0.70383; Recall: 0.70383; Fscore: 0.70383 }
+Macro {Precision: 0.70339; Recall: 0.70384; Fscore: 0.70361}
+2-kNN Classification
+Average Accuracy: 0.89974
+Error rate: 0.10026
+Class 1: {TP: 345.0; FP: 168.0; TN: 3151.0; FN: 489.0; Precision: 0.67251; Recall: 0.41367; F-Measure: 0.51225}
+Class 2: {TP: 551.0; FP: 366.0; TN: 2958.0; FN: 278.0; Precision: 0.60087; Recall: 0.66466; F-Measure: 0.63116}
+Class 3: {TP: 709.0; FP: 349.0; TN: 2976.0; FN: 119.0; Precision: 0.67013; Recall: 0.85628; F-Measure: 0.75186}
+Class 4: {TP: 752.0; FP: 142.0; TN: 3179.0; FN: 80.0; Precision: 0.84116; Recall: 0.90385; F-Measure: 0.87138}
+Class 5: {TP: 755.0; FP: 16.0; TN: 3307.0; FN: 75.0; Precision: 0.97925; Recall: 0.90964; F-Measure: 0.94316}
+Micro: {Precision: 0.74934; Recall: 0.74934; Fscore: 0.74934 }
+Macro {Precision: 0.75279; Recall: 0.74962; Fscore: 0.75120}
+3-kNN Classification
+Average Accuracy: 0.89974
+Error rate: 0.10026
+Class 1: {TP: 345.0; FP: 168.0; TN: 3151.0; FN: 489.0; Precision: 0.67251; Recall: 0.41367; F-Measure: 0.51225}
+Class 2: {TP: 551.0; FP: 366.0; TN: 2958.0; FN: 278.0; Precision: 0.60087; Recall: 0.66466; F-Measure: 0.63116}
+Class 3: {TP: 709.0; FP: 349.0; TN: 2976.0; FN: 119.0; Precision: 0.67013; Recall: 0.85628; F-Measure: 0.75186}
+Class 4: {TP: 752.0; FP: 142.0; TN: 3179.0; FN: 80.0; Precision: 0.84116; Recall: 0.90385; F-Measure: 0.87138}
+Class 5: {TP: 755.0; FP: 16.0; TN: 3307.0; FN: 75.0; Precision: 0.97925; Recall: 0.90964; F-Measure: 0.94316}
+Micro: {Precision: 0.74934; Recall: 0.74934; Fscore: 0.74934 }
+Macro {Precision: 0.75279; Recall: 0.74962; Fscore: 0.75120}
+SVM Classification
+Average Accuracy: 0.81440
+Error rate: 0.18560
+Class 1: {TP: 267.0; FP: 203.0; TN: 3116.0; FN: 567.0; Precision: 0.56809; Recall: 0.32014; F-Measure: 0.40951}
+Class 2: {TP: 300.0; FP: 527.0; TN: 2797.0; FN: 529.0; Precision: 0.36276; Recall: 0.36188; F-Measure: 0.36232}
+Class 3: {TP: 339.0; FP: 387.0; TN: 2938.0; FN: 489.0; Precision: 0.46694; Recall: 0.40942; F-Measure: 0.43629}
+Class 4: {TP: 524.0; FP: 295.0; TN: 3026.0; FN: 308.0; Precision: 0.63980; Recall: 0.62981; F-Measure: 0.63477}
+Class 5: {TP: 796.0; FP: 515.0; TN: 2808.0; FN: 34.0; Precision: 0.60717; Recall: 0.95904; F-Measure: 0.74358}
+Micro: {Precision: 0.53600; Recall: 0.53600; Fscore: 0.53600 }
+Macro {Precision: 0.52895; Recall: 0.53606; Fscore: 0.53248}
+Multilayer Perceptron Classification
+Average Accuracy: 0.76499
+Error rate: 0.23501
+Class 1: {TP: 341.0; FP: 659.0; TN: 2660.0; FN: 493.0; Precision: 0.34100; Recall: 0.40887; F-Measure: 0.37186}
+Class 2: {TP: 302.0; FP: 909.0; TN: 2415.0; FN: 527.0; Precision: 0.24938; Recall: 0.36429; F-Measure: 0.29608}
+Class 3: {TP: 199.0; FP: 294.0; TN: 3031.0; FN: 629.0; Precision: 0.40365; Recall: 0.24034; F-Measure: 0.30129}
+Class 4: {TP: 374.0; FP: 456.0; TN: 2865.0; FN: 458.0; Precision: 0.45060; Recall: 0.44952; F-Measure: 0.45006}
+Class 5: {TP: 497.0; FP: 122.0; TN: 3201.0; FN: 333.0; Precision: 0.80291; Recall: 0.59880; F-Measure: 0.68599}
+Micro: {Precision: 0.41247; Recall: 0.41247; Fscore: 0.41247 }
+Macro {Precision: 0.44951; Recall: 0.41236; Fscore: 0.43014}

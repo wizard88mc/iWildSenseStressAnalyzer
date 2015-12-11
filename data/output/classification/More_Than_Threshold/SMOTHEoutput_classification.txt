@@ -1,0 +1,1 @@
+*** Keeping only participants with answers higher than our arbitrary threshold ***
