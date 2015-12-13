@@ -115,7 +115,7 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
         
         printTitleMessage("*** On-Off Duration for ScreenOnOff Events ***");
     
-        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
         
         for (SurveyDataWrapper wrapper: surveyDataWrappers) {
             

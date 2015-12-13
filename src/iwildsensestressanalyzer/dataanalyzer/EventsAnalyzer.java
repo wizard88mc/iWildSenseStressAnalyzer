@@ -120,7 +120,7 @@ public class EventsAnalyzer {
                                 valuesForTTest.get(j).length != 0) {
                             
                             try {
-                                double tTest = new TTest().pairedTTest(valuesForTTest.get(i), 
+                                double tTest = new TTest().tTest(valuesForTTest.get(i), 
                                     valuesForTTest.get(j));
                                 
                                 if (Double.isNaN(tTest) || Double.isInfinite(tTest)) {

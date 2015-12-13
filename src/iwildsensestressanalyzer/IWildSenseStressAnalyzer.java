@@ -70,7 +70,7 @@ public class IWildSenseStressAnalyzer {
              * Step 2: For each IMEI, we create a Participant object that will hold
              * all the answers and his/her behavior
              */
-            ArrayList<Participant> participantList = new ArrayList<Participant>();
+            ArrayList<Participant> participantList = new ArrayList<>();
             int counter = 1;
             for (String imei: listImei) {
 
@@ -85,8 +85,8 @@ public class IWildSenseStressAnalyzer {
                 /**
                  * Retrieving all the answers provided
                  */
-                ArrayList<String> surveyAnswers = new ArrayList<String>(),
-                        questionnaireAnswers = new ArrayList<String>();
+                ArrayList<String> surveyAnswers = new ArrayList<>(),
+                        questionnaireAnswers = new ArrayList<>();
 
                 SurveyQuestionnaireReader.readFile(imei, surveyAnswers, 
                         questionnaireAnswers);
