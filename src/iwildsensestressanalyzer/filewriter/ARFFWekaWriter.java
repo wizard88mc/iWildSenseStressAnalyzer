@@ -6,6 +6,7 @@
 package iwildsensestressanalyzer.filewriter;
 
 import iwildsensestressanalyzer.weka.WekaFeaturesForApplicationUsed;
+import iwildsensestressanalyzer.weka.WekaFeaturesForScreenEvents;
 import iwildsensestressanalyzer.weka.WekaFeaturesForTouchesBuffered;
 import iwildsensestressanalyzer.weka.WekaFeaturesForUserActivity;
 import iwildsensestressanalyzer.weka.WekaFeaturesForUserPresenceLight;
@@ -102,6 +103,7 @@ public class ARFFWekaWriter extends OutputFileWriter {
         addNumericAttributeToPreamble(WekaFeaturesForApplicationUsed.featuresName, writer);
         addNumericAttributeToPreamble(WekaFeaturesForTouchesBuffered.featuresName, writer);
         addNumericAttributeToPreamble(WekaFeaturesForUserActivity.featuresName, writer);
+        addNumericAttributeToPreamble(WekaFeaturesForScreenEvents.featuresNames, writer);
         addNumericAttributeToPreamble(WekaFeaturesForUserPresenceLight.featuresName, writer);
     }
     

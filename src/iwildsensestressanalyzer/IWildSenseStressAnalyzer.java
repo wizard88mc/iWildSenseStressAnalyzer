@@ -221,7 +221,7 @@ public class IWildSenseStressAnalyzer {
             /**
              * Keeping all the participants
              */
-            System.out.println();
+            /*System.out.println();
             System.out.println(TITLE_ALL_PARTICIPANTS);
             EventsAnalyzer.printTitleMessage(null);
             EventsAnalyzer.printTitleMessage(TITLE_ALL_PARTICIPANTS);
@@ -241,15 +241,15 @@ public class IWildSenseStressAnalyzer {
                     SurveyAnalyzer.
                     getListParticipantsWithMoreThanZeroAnswers(participantList);
 
-            SurveyAnalyzer.calculateStatisticsAnswers(participantsListWithMoreThanZeroAnswers);
+            //SurveyAnalyzer.calculateStatisticsAnswers(participantsListWithMoreThanZeroAnswers);
 
-            performStatisticalAnalysisSteps(participantsListWithMoreThanZeroAnswers);
+            //performStatisticalAnalysisSteps(participantsListWithMoreThanZeroAnswers);
 
             /**
              * Calculating statistics for participants with more than our
              * threshold answers number
              */
-            System.out.println();
+            /*System.out.println();
             System.out.println(TITLE_MORE_THRESHOLD);
             EventsAnalyzer.printTitleMessage(null);
             EventsAnalyzer.printTitleMessage(TITLE_MORE_THRESHOLD);
@@ -266,7 +266,7 @@ public class IWildSenseStressAnalyzer {
              * Calculating statistics for participants with more than one per 
              * day answer
              */
-            System.out.println();
+            /*System.out.println();
             System.out.println(TITLE_MORE_ONE_SURVEY_PER_DAY);
             EventsAnalyzer.printTitleMessage(null);
             EventsAnalyzer.printTitleMessage(TITLE_MORE_ONE_SURVEY_PER_DAY);
@@ -283,7 +283,7 @@ public class IWildSenseStressAnalyzer {
              * Calculating statistics for participants with more answers than the
              * initial average
              */
-            System.out.println();
+            /*System.out.println();
             System.out.println(TITLE_MORE_THAN_INITIAL_AVERAGE);
             EventsAnalyzer.printTitleMessage(null);
             EventsAnalyzer.printTitleMessage(TITLE_MORE_THAN_INITIAL_AVERAGE);
@@ -294,7 +294,7 @@ public class IWildSenseStressAnalyzer {
 
             SurveyAnalyzer.calculateStatisticsAnswers(participantsListWithMoreThanAverageAnswers);
 
-            performStatisticalAnalysisSteps(participantsListWithMoreThanAverageAnswers);
+            performStatisticalAnalysisSteps(participantsListWithMoreThanAverageAnswers);*/
 
             outputWriter.closeFile();
 
@@ -308,7 +308,7 @@ public class IWildSenseStressAnalyzer {
             WekaAnalyzer.createWekaFiles(participantsListWithMoreThanZeroAnswers, 
                     FOLDER_MORE_ZERO_ANSWERS);
 
-            System.out.println("*** Creating file for classification task for "
+            /*System.out.println("*** Creating file for classification task for "
                     + "participants with answers more than the arbitrary threshold ***");
             WekaAnalyzer.createWekaFiles(participantsListWithMoreThanThresholdAnswers, 
                     FOLDER_MORE_THRESHOLD);
@@ -321,7 +321,7 @@ public class IWildSenseStressAnalyzer {
             System.out.println("*** Creating files for classification task for "
                     + "participant with more answers than the initial average ***");
             WekaAnalyzer.createWekaFiles(participantsListWithMoreThanAverageAnswers, 
-                    FOLDER_MORE_THAN_INITIAL_AVERAGE);
+                    FOLDER_MORE_THAN_INITIAL_AVERAGE);*/
 
             WekaAnalyzer.createdFilesWriter.closeFile();
         

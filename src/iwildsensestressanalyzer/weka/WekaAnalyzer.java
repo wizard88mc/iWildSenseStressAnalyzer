@@ -12,7 +12,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 import weka.classifiers.Evaluation;
-import weka.classifiers.bayes.BayesNet;
 import weka.classifiers.functions.LibSVM;
 import weka.classifiers.functions.MultilayerPerceptron;
 import weka.classifiers.lazy.IBk;
@@ -56,7 +55,9 @@ public class WekaAnalyzer {
                 featuresForTouchesBufferedForAllParticipants = 
                     new ArrayList<>(), 
                 featuresForUserActivityForAllParticipants = 
-                    new ArrayList<>(), 
+                    new ArrayList<>(),
+                featuresForUserPresenceEventsForAllParticipants = 
+                    new ArrayList<>(),
                 featuresForUserPresenceLightForAllParticipants = 
                     new ArrayList<>();
         
@@ -74,6 +75,8 @@ public class WekaAnalyzer {
                         new ArrayList<>(), 
                     featuresForUserActivity = 
                         new ArrayList<>(), 
+                    featuresForUserPresenceEvents = 
+                        new ArrayList<>(),
                     featuresForUserPresenceLight = 
                         new ArrayList<>();
             
@@ -89,6 +92,8 @@ public class WekaAnalyzer {
                         getFeaturesForTouchesBufferedEvents(survey));
                 featuresForUserActivity.add(WekaFeaturesForUserActivity.
                         getFeaturesForUserActivity(survey));
+                featuresForUserPresenceEvents.add(WekaFeaturesForScreenEvents.
+                        getFeaturesForScreenEvents(survey));
                 featuresForUserPresenceLight.add(WekaFeaturesForUserPresenceLight.
                         getFeaturesForUserPresenceLightEvent(survey));
             }
@@ -100,6 +105,7 @@ public class WekaAnalyzer {
             featuresForApplicationUsedForAllParticipants.addAll(featuresForApplicationUsed);
             featuresForTouchesBufferedForAllParticipants.addAll(featuresForTouchesBuffered);
             featuresForUserActivityForAllParticipants.addAll(featuresForUserActivity);
+            featuresForUserPresenceEventsForAllParticipants.addAll(featuresForUserPresenceEvents);
             featuresForUserPresenceLightForAllParticipants.addAll(featuresForUserPresenceLight);
             
             surveyAnswersForAllParticipants.addAll(surveyAnswers);
@@ -116,6 +122,9 @@ public class WekaAnalyzer {
                     normalizedFeaturesForUserActivity = 
                         MathUtils.normalizeSetOfDoubleData(featuresForUserActivity, 
                                 0.0, 1.0),
+                    normalizedFeaturesForUserPresence = 
+                        MathUtils.normalizeSetOfDoubleData(featuresForUserPresenceEvents, 
+                                0.0, 1.0),
                     normalizedFeaturesForUserPresenceLight = 
                         MathUtils.normalizeSetOfDoubleData(featuresForUserPresenceLight, 
                                 0.0, 1.0);
@@ -129,6 +138,7 @@ public class WekaAnalyzer {
                 features.addAll(normalizedFeaturesForApplicationUser.get(i));
                 features.addAll(normalizedFeaturesForTouchesBuffered.get(i));
                 features.addAll(normalizedFeaturesForUserActivity.get(i));
+                features.addAll(normalizedFeaturesForUserPresence.get(i));
                 features.addAll(normalizedFeaturesForUserPresenceLight.get(i));
                 
                 output.writeCalculatedFeaturesOnOutputFiles(
@@ -153,6 +163,9 @@ public class WekaAnalyzer {
                 normalizedFeaturesForUserActivityForAllParticipants = 
                     MathUtils.normalizeSetOfDoubleData(
                             featuresForUserActivityForAllParticipants, 0.0, 1.0), 
+                normalizedFeaturesForUserPresenceEventsForAllParticipants = 
+                    MathUtils.normalizeSetOfDoubleData(
+                            featuresForUserPresenceEventsForAllParticipants, 0.0, 1.0),
                 normalizedFeaturesforUserPresenceLightForAllParticipants = 
                     MathUtils.normalizeSetOfDoubleData(
                             featuresForUserPresenceLightForAllParticipants, 0.0, 1.0);
@@ -169,6 +182,7 @@ public class WekaAnalyzer {
             features.addAll(normalizedFeaturesForApplicationsForAllParticipants.get(i));
             features.addAll(normalizedFeaturesForTouchesBufferedForAllParticipants.get(i));
             features.addAll(normalizedFeaturesForUserActivityForAllParticipants.get(i));
+            features.addAll(normalizedFeaturesForUserPresenceEventsForAllParticipants.get(i));
             features.addAll(normalizedFeaturesforUserPresenceLightForAllParticipants.get(i));
             
             writerForAllParticipants.writeCalculatedFeaturesOnOutputFiles(
@@ -337,7 +351,7 @@ public class WekaAnalyzer {
                             /**
                              * kNN classification test
                              */
-                            for (int k = 2; k < 4; k++) {
+                            for (int k = 2; k < 3; k++) {
 
                                 IBk knn = new IBk(k);
                                 knn.setOptions(weka.core.Utils.

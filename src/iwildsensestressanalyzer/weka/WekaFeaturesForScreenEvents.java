@@ -29,7 +29,8 @@ public class WekaFeaturesForScreenEvents extends WekaFeaturesCreator {
         "ScreenEvents_AVG_OnOffForUnlockedScreen", 
         "ScreenEvents_STD_OnOffForUnlockedScreen", 
         "ScreenEvents_AVG_UnlockTimeForUnlockedScreen", 
-        "ScreenEvents_STD_UnlockTimeForUnlockedScreen"};
+        "ScreenEvents_STD_UnlockTimeForUnlockedScreen", 
+        "ScreenEvents_OnOffScreen_Over_UnlockedScreen"};
     
     /**
      * Creates a list of features for the ScreenEvent objects
@@ -57,6 +58,8 @@ public class WekaFeaturesForScreenEvents extends WekaFeaturesCreator {
         addCalculatedFeatures(features, statisticsOnOffDurationScreenOnOffEvents);
         addCalculatedFeatures(features, statisticsOnOffDurationUnlockedScreenEvents);
         addCalculatedFeatures(features, statisticsUnlockTimeForUnlockedScreenEvents);
+        features.add((double)featuresExtractor.getNumberOfScreenOnOff() / 
+                (double) featuresExtractor.getNumberOfUnlockedScreen());
 
         return features;
     }
