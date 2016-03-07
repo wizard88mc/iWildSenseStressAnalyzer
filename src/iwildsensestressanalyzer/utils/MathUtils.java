@@ -15,9 +15,9 @@ import java.util.Locale;
  */
 public class MathUtils {
     
-    public static final DecimalFormat decimalFormat = new DecimalFormat("0.00000", 
+    public static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.00000", 
             new DecimalFormatSymbols(Locale.US));
-    public static final DecimalFormat formatSuccess = new DecimalFormat("00");
+    public static final DecimalFormat FORMAT_SUCCESS = new DecimalFormat("00");
     
     /**
      * Calculates average, variance and standard deviation of a set of Long values
@@ -302,7 +302,7 @@ public class MathUtils {
         for (Double feature: features) {
             
             if (feature != null) {
-                stringFeatures.add(decimalFormat.format(feature));
+                stringFeatures.add(DECIMAL_FORMAT.format(feature));
             }
             else {
                 stringFeatures.add("?");

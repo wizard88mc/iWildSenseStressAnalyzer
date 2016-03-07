@@ -27,7 +27,7 @@ public class ApplicationUsedFeaturesExtractorListWrapper {
      */
     public ArrayList<Double> getAllInfluenceOfAppCategory(String appCategory) {
         
-        ArrayList<Double> listValues = new ArrayList<Double>();
+        ArrayList<Double> listValues = new ArrayList<>();
         
         for (ApplicationUsedFeaturesExtractor appFeaturesExtractor: 
                 applicationUsedFeaturesExtractorList) {
@@ -65,7 +65,7 @@ public class ApplicationUsedFeaturesExtractorListWrapper {
      */
     public ArrayList<Double> getAllTimingInfluenceOfAppCategory(String appCategory) {
         
-        ArrayList<Double> listValues = new ArrayList<Double>();
+        ArrayList<Double> listValues = new ArrayList<>();
         
         for (ApplicationUsedFeaturesExtractor appFeaturesExtractor: 
                 applicationUsedFeaturesExtractorList) {
@@ -92,5 +92,18 @@ public class ApplicationUsedFeaturesExtractorListWrapper {
         else {
             return null;
         }
+    }
+    
+    public ArrayList<Double> getAllInfluenceOfAppType(String appType) {
+        
+        ArrayList<Double> listValues = new ArrayList<>();
+        
+        for (ApplicationUsedFeaturesExtractor appFeatureExtractor: 
+                applicationUsedFeaturesExtractorList) {
+            
+            listValues.add(appFeatureExtractor.calculateTimingInfluenceOfAppType(appType));
+        }
+        
+        return listValues;
     }
 }

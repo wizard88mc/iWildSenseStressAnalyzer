@@ -122,8 +122,8 @@ public class StressSurvey {
      */
     public void addScreenEvents(UserPresenceAdvancedEventsWrapper eventsWrapper) {
         
-        ArrayList<ScreenOnOff> screenOnOffEvents = new ArrayList<ScreenOnOff>();
-        ArrayList<UnlockedScreen> unlockedScreenEvents = new ArrayList<UnlockedScreen>();
+        ArrayList<ScreenOnOff> screenOnOffEvents = new ArrayList<>();
+        ArrayList<UnlockedScreen> unlockedScreenEvents = new ArrayList<>();
         
         for (ScreenOnOff screenEvent: eventsWrapper.getScreenOnOffEvents()) {
             
@@ -153,7 +153,7 @@ public class StressSurvey {
      */
     public void addUserActivityEvents(ArrayList<UserActivityEvent> events) {
         
-        ArrayList<UserActivityEvent> correctEvents = new ArrayList<UserActivityEvent>();
+        ArrayList<UserActivityEvent> correctEvents = new ArrayList<>();
         
         for (UserActivityEvent event: events) {
             if (isEventInsideSurveyTiming(this.timestamp, event.getTimestamp())) {
@@ -172,7 +172,7 @@ public class StressSurvey {
     public void addAppliactionUsedList(ArrayList<ApplicationsUsedEvent> listOfEvents) {
         
         ArrayList<ApplicationsUsedEvent> listOfValidEvents = 
-                new ArrayList<ApplicationsUsedEvent>();
+                new ArrayList<>();
         
         for (ApplicationsUsedEvent event: listOfEvents) {
             
@@ -186,6 +186,17 @@ public class StressSurvey {
                 new ApplicationUsedFeaturesExtractor(
                         ApplicationUsed.createListOfApplicationsUsed(
                                 listOfValidEvents));
+    }
+    
+    /**
+     * Returns if during the time validity of the survey that particular 
+     * application category has been used
+     * @param appCategory the category of the app
+     * @return true if the application category has been used, false otherwise
+     */
+    public Boolean isApplicationCategoryUsed(String appCategory) {
+        
+        return applicationUsedFeaturesExtractor.hasUsedTheApplicationCategory(appCategory);
     }
     
     /**

@@ -3,6 +3,7 @@ package iwildsensestressanalyzer.dataanalyzer;
 import iwildsensestressanalyzer.IWildSenseStressAnalyzer;
 import iwildsensestressanalyzer.esm.StressSurvey;
 import iwildsensestressanalyzer.participant.Participant;
+import iwildsensestressanalyzer.utils.MathUtils;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -65,7 +66,6 @@ public class SurveyAnalyzer {
                     }
                 }
             }
-            
         }
         
         average = (double)answersCounter / (double)participants.size();
@@ -97,11 +97,12 @@ public class SurveyAnalyzer {
                 percentageFive = (100 * (double)counterFive) / (double)totalAnswers;
         
         /**
-         * Printing number of surveys for each participant (maybe to remove the 
-         * ones with number of answers lower of a particular value??)
+         * Printing number of surveys for each participant
          */
         IWildSenseStressAnalyzer.outputWriter
-                .writeOutputStatisticalSignificance("Total participants: " + participants.size());
+                .writeOutputStatisticalSignificance("Total participants: " 
+                        + participants.size());
+        
         IWildSenseStressAnalyzer.outputWriter
                 .writeOutputStatisticalSignificance("*** PRINTING IMEI: # OF ANSWERS ***");
         for (Participant participant: participants) {
@@ -112,40 +113,40 @@ public class SurveyAnalyzer {
         
         IWildSenseStressAnalyzer.outputWriter
                 .writeOutputStatisticalSignificance(null);
+        
         /**
          * Printing results
          */
-        DecimalFormat format = new DecimalFormat("#.##");
         IWildSenseStressAnalyzer.outputWriter
                 .writeOutputStatisticalSignificance("Average survey answers provided: " 
-                        + format.format(average));
+                    + MathUtils.DECIMAL_FORMAT.format(average));
         IWildSenseStressAnalyzer.outputWriter
-                .writeOutputStatisticalSignificance("Standard deviation: " + 
-                        format.format(standardDeviation));
+                .writeOutputStatisticalSignificance("Standard deviation: " 
+                    + MathUtils.DECIMAL_FORMAT.format(standardDeviation));
         
         IWildSenseStressAnalyzer.outputWriter
                 .writeOutputStatisticalSignificance("Percentage answer = 1: " + 
-                        format.format(percentageOne) + " (" + counterOne + "/" + 
+                    MathUtils.DECIMAL_FORMAT.format(percentageOne) + " (" + counterOne + "/" + 
                         totalAnswers + ")");
         
         IWildSenseStressAnalyzer.outputWriter
                 .writeOutputStatisticalSignificance("Percentage answer = 2: " + 
-                        format.format(percentageTwo) + " (" + counterTwo + "/" + 
+                        MathUtils.DECIMAL_FORMAT.format(percentageTwo) + " (" + counterTwo + "/" + 
                         totalAnswers + ")");
         
         IWildSenseStressAnalyzer.outputWriter
                 .writeOutputStatisticalSignificance("Percentage answer = 3: " + 
-                        format.format(percentageThree) + " (" + counterThree + "/" 
+                        MathUtils.DECIMAL_FORMAT.format(percentageThree) + " (" + counterThree + "/" 
                         + totalAnswers + ")");
         
         IWildSenseStressAnalyzer.outputWriter
                 .writeOutputStatisticalSignificance("Percentage answer = 4: " + 
-                        format.format(percentageFour) + " (" + counterFour + "/" 
+                        MathUtils.FORMAT_SUCCESS.format(percentageFour) + " (" + counterFour + "/" 
                         + totalAnswers + ")");
         
         IWildSenseStressAnalyzer.outputWriter
                 .writeOutputStatisticalSignificance("Percentage answer = 5: " + 
-                        format.format(percentageFive) + " (" + counterFive + "/" 
+                        MathUtils.DECIMAL_FORMAT.format(percentageFive) + " (" + counterFive + "/" 
                         + totalAnswers + ")");
         
         if (initialAverage == 0.0) {
@@ -161,6 +162,7 @@ public class SurveyAnalyzer {
      * @param participants 
      */
     public static void printAnalysisParticipantsParticipation(ArrayList<Participant> participants) {
+        
         int higherThanAverage = 0, lowerThanAverage = 0, 
                 higherThanThreshold = 0, lowerThanThreshold = 0, 
                 higherThanMoreThanOnePerDay = 0, lowerThanMoreThanOnePerDay = 0;

@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class ApplicationsUsedReader extends AllFilesReader {
     
-    private static final String APPLICATIONS_USED_FILE_NAME = 
+    protected static final String APPLICATIONS_USED_FILE_NAME = 
             "ApplicationsUsed.csv";
     
     /**

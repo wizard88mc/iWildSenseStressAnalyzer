@@ -12,10 +12,21 @@ public class ApplicationUsed {
     private final ArrayList<ApplicationsUsedEvent> applicationsUsedEvents;
     private long timestampEndActivity = 0;
     private final String category;
+    private final String appOrGame;
     
     public ApplicationUsed(ArrayList<ApplicationsUsedEvent> applicationsUsedEvents) {
+        
         this.applicationsUsedEvents = applicationsUsedEvents;
-        category = CategorizeApps.categorizeApp(this.applicationsUsedEvents.get(0).getApp());
+        String[] appCategorization = 
+            CategorizeApps.categorizeApp(this.applicationsUsedEvents.get(0).getApp());
+        
+        if (appCategorization != null) {
+            category = appCategorization[0];
+            appOrGame = appCategorization[1];
+        }
+        else {
+            category = null; appOrGame = null;
+        }
     }
     
     /**
@@ -51,6 +62,15 @@ public class ApplicationUsed {
     }
     
     /**
+     * Returns App or Game depending on the Application category
+     * @return "App" if the application category is an application, 
+     * "Game" otherwise
+     */
+    public String getAppOrGame() {
+        return this.appOrGame;
+    }
+    
+    /**
      * Returns the size of the List of ApplicationsUsedEvent
      * @return the number of the ApplicationsUsedEvent stored
      */
@@ -66,6 +86,7 @@ public class ApplicationUsed {
      * @return the duration of the ApplicationUsed in terms of milliseconds 
      */
     public Double getTotalDurationOfApplicationUsed() {
+        
         if (isTimestampEndActivityAlreadySet()) {
             return Double.valueOf(this.timestampEndActivity) - 
                     this.applicationsUsedEvents.get(0).getTimestamp();
@@ -90,7 +111,7 @@ public class ApplicationUsed {
     public static ArrayList<ApplicationUsed> createListOfApplicationsUsed(
             ArrayList<ApplicationsUsedEvent> applicationsUsedEvent) {
         
-        ArrayList<ApplicationUsed> applicationsUsed = new ArrayList<ApplicationUsed>();
+        ArrayList<ApplicationUsed> applicationsUsed = new ArrayList<>();
         boolean startWithNewApplicationUsed = true; String currentAppName = "";
         
         ArrayList<ApplicationsUsedEvent> currentListApplicationsUsedEvent = null;
@@ -100,7 +121,7 @@ public class ApplicationUsed {
             if (startWithNewApplicationUsed) {
                 
                 currentListApplicationsUsedEvent = 
-                        new ArrayList<ApplicationsUsedEvent>();
+                        new ArrayList<>();
                 
                 currentListApplicationsUsedEvent.add(applicationsUsedEvent.get(i));
                 

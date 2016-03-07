@@ -31,11 +31,11 @@ public class Participant {
     
     private UserPresenceAdvancedEventsWrapper userPresenceAdvancedEventsWrapper;
     
-    private SurveyDataWrapper[] surveyDataWrappers = {new SurveyDataWrapper(1, false), 
+    private final SurveyDataWrapper[] surveyDataWrappers = {new SurveyDataWrapper(1, false), 
         new SurveyDataWrapper(2, false), new SurveyDataWrapper(3, false), new SurveyDataWrapper(4, false), 
         new SurveyDataWrapper(5, false)};
     
-    private SurveyDataWrapper[] easyDataWrappers = {new SurveyDataWrapper(1, true), 
+    private final SurveyDataWrapper[] easyDataWrappers = {new SurveyDataWrapper(1, true), 
         new SurveyDataWrapper(3, true), new SurveyDataWrapper(5, true)};
     
     /**
@@ -63,7 +63,7 @@ public class Participant {
      */
     public void addSurveyAnswers(ArrayList<String> linesAnswers) {
         
-        stressSurveyList = new ArrayList<StressSurvey>();
+        stressSurveyList = new ArrayList<>();
         
         for (String answer: linesAnswers) {
             stressSurveyList.add(new StressSurvey(answer));
@@ -78,7 +78,7 @@ public class Participant {
      */
     public void addUserPresenceEvents(ArrayList<String> linesEvents) {
         
-        userPresenceEventsList = new ArrayList<UserPresenceEvent>();
+        userPresenceEventsList = new ArrayList<>();
         
         for (String event: linesEvents) {
             userPresenceEventsList.add(new UserPresenceEvent(event));
@@ -101,7 +101,7 @@ public class Participant {
      */
     public void addUserActivityEvents(ArrayList<String> linesActivities) {
         
-        userActivityEventsList = new ArrayList<UserActivityEvent>();
+        userActivityEventsList = new ArrayList<>();
         
         for (String activity: linesActivities) {
             userActivityEventsList.add(new UserActivityEvent(activity));
@@ -115,7 +115,7 @@ public class Participant {
      */
     public void addApplicationsUsedEvents(ArrayList<String> lines) {
         
-        applicationsUsedEventsList = new ArrayList<ApplicationsUsedEvent>();
+        applicationsUsedEventsList = new ArrayList<>();
         
         for (String line: lines) {
             applicationsUsedEventsList.add(new ApplicationsUsedEvent(line));
@@ -130,7 +130,7 @@ public class Participant {
      */
     public void addActivityServServiceEvents(ArrayList<String> linesServServices) {
         
-        activityServServiceEventsList = new ArrayList<ActivityServServiceEvent>();
+        activityServServiceEventsList = new ArrayList<>();
         
         for (String event: linesServServices) {
             activityServServiceEventsList.add(new ActivityServServiceEvent(event));
@@ -190,6 +190,7 @@ public class Participant {
     public void spreadEventsAmongSurveyDataWrapper() {
         
         for (SurveyDataWrapper dataWrapper: surveyDataWrappers) {
+            
             dataWrapper.createScreenEventsFeaturesExtractor(stressSurveyList);
             dataWrapper.createUserActivityFeaturesExtractor(stressSurveyList);
             dataWrapper.createTouchesBufferedFeaturesExtractor();
@@ -198,6 +199,7 @@ public class Participant {
         }
         
         for (SurveyDataWrapper dataWrapper: easyDataWrappers) {
+            
             dataWrapper.createScreenEventsFeaturesExtractor(stressSurveyList);
             dataWrapper.createUserActivityFeaturesExtractor(stressSurveyList);
             dataWrapper.createTouchesBufferedFeaturesExtractor();
@@ -211,6 +213,7 @@ public class Participant {
      * @param events a list of TouchesBufferedEvent events
      */
     public void addTouchesBufferedEventsToUnlockedScreen(ArrayList<TouchesBufferedEvent> events) {
+        
         for (StressSurvey survey: stressSurveyList) {
             survey.addTouchesBufferedEvent(events);
         }
@@ -221,6 +224,7 @@ public class Participant {
      * @param events a list of UserPresenceLight events
      */
     public void addUserPresenceLightEvents(ArrayList<UserPresenceLightEvent> events) {
+        
         for (StressSurvey survey: stressSurveyList) {
             survey.addUserPresenceLightEvent(events);
         }
@@ -269,5 +273,26 @@ public class Participant {
      */
     public SurveyDataWrapper[] getEasySurveyDataWrappers() {
         return this.easyDataWrappers;
+    }
+    
+    /**
+     * Returns if the participant has ever used the application category
+     * during the time validity of all the surveys
+     * @param appCategory the application category
+     * @return true if the participant used the application category, false 
+     * otherwise
+     */
+    public Boolean hasUsedTheApplicationCategory(String appCategory) {
+        
+        Boolean used = false;
+        
+        for (int i = 0; i < stressSurveyList.size() && !used; i++) {
+            
+            if (stressSurveyList.get(i).isApplicationCategoryUsed(appCategory)) {
+                used = true;
+            }
+        }
+        
+        return used;
     }
 }

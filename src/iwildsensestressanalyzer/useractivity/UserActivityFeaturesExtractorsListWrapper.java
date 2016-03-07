@@ -25,7 +25,7 @@ public class UserActivityFeaturesExtractorsListWrapper {
      */
     public ArrayList<Double> getAllPointsSumOfActivities() {
         
-        ArrayList<Double> listValues = new ArrayList<Double>();
+        ArrayList<Double> listValues = new ArrayList<>();
         
         for (UserActivityFeaturesExtractor featureExtractor: userActivityFeaturesExtractorList) {
             listValues.add(featureExtractor.calculatePointsSumOfActivities());

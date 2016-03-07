@@ -172,10 +172,10 @@ public class PerformanceEvaluator {
     public String evaluatePerformances() {
         
         String result = "Average Accuracy: " + 
-                MathUtils.decimalFormat.format(calculateAverageAccuracy()) 
+                MathUtils.DECIMAL_FORMAT.format(calculateAverageAccuracy()) 
                 + System.getProperty("line.separator") + 
                 "Error rate: " 
-                + MathUtils.decimalFormat.format(calculateErrorRate()) 
+                + MathUtils.DECIMAL_FORMAT.format(calculateErrorRate()) 
                 + System.getProperty("line.separator");
         
         for (int i = 0; i < numberOfClasses; i++) {
@@ -185,11 +185,11 @@ public class PerformanceEvaluator {
                     "TN: " + evaluation.numTrueNegatives(i) + "; " + 
                     "FN: " + evaluation.numFalseNegatives(i) + "; " + 
                     "Precision: " + 
-                    MathUtils.decimalFormat.format(evaluation.precision(i)) 
+                    MathUtils.DECIMAL_FORMAT.format(evaluation.precision(i)) 
                     + "; Recall: " + 
-                    MathUtils.decimalFormat.format(evaluation.recall(i)) +  
+                    MathUtils.DECIMAL_FORMAT.format(evaluation.recall(i)) +  
                     "; F-Measure: " + 
-                    MathUtils.decimalFormat.format(evaluation.fMeasure(i))
+                    MathUtils.DECIMAL_FORMAT.format(evaluation.fMeasure(i))
                     + "}";
             
             result += System.getProperty("line.separator");
@@ -216,14 +216,14 @@ public class PerformanceEvaluator {
         double microFscore = calculateFscore(1, microPrecision, microRecall), 
                 macroFscore = calculateFscore(1, macroPrecision, macroRecall);
         
-        result += "Micro: {Precision: " + MathUtils.decimalFormat.format(microPrecision) + 
-                "; Recall: " + MathUtils.decimalFormat.format(microRecall) + 
-                "; Fscore: " + MathUtils.decimalFormat.format(microFscore) + 
+        result += "Micro: {Precision: " + MathUtils.DECIMAL_FORMAT.format(microPrecision) + 
+                "; Recall: " + MathUtils.DECIMAL_FORMAT.format(microRecall) + 
+                "; Fscore: " + MathUtils.DECIMAL_FORMAT.format(microFscore) + 
                 " }" + System.getProperty("line.separator");
         
-        result += "Macro {Precision: " + MathUtils.decimalFormat.format(macroPrecision) + 
-                "; Recall: " + MathUtils.decimalFormat.format(macroRecall) + 
-                "; Fscore: " + MathUtils.decimalFormat.format((macroFscore)) + "}";
+        result += "Macro {Precision: " + MathUtils.DECIMAL_FORMAT.format(macroPrecision) + 
+                "; Recall: " + MathUtils.DECIMAL_FORMAT.format(macroRecall) + 
+                "; Fscore: " + MathUtils.DECIMAL_FORMAT.format((macroFscore)) + "}";
         
         return result;
     }

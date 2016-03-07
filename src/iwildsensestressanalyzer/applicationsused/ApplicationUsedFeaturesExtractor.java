@@ -10,10 +10,14 @@ import java.util.ArrayList;
  * 0.1 - Influence of a particular application category over the total application
  *       used
  * 0.2 - Influence of a particular application category in terms of timing 
- *       duration over the total timing (non sure good feature)
+ *       duration over the total timing (not sure good feature)
+ * 0.3 - Influence of a particular application type over the total times of 
+ *       applications used
+ * 0.4 - Timing influence of a particular application type over the total 
+ *       amount of time
  * 
  * @author Matteo Ciman
- * @version 0.2
+ * @version 0.3
  */
 public class ApplicationUsedFeaturesExtractor {
  
@@ -74,4 +78,73 @@ public class ApplicationUsedFeaturesExtractor {
         return appTiming / totalTiming;
     }
     
+    /**
+     * Calculates the influence of a particular Application Type over the 
+     * total number of ApplicationsUsedEvent
+     * @param appType the application type we want to analyze
+     * @return the ratio between the number of the target events and the total events
+     */
+    public double calculateInfluenceOfAppType(String appType) {
+        
+        double totalEvents = 0.0, targetEvents = 0.0;
+        
+        for (ApplicationUsed applicationUsed: applicationUsedList) {
+            
+            if (applicationUsed.getAppOrGame()!= null) {
+                totalEvents += applicationUsed.getNumberOfApplicationsUsedEventList();
+            }
+            
+            if (applicationUsed.getAppOrGame()!= null && 
+                    applicationUsed.getAppOrGame().equals(appType)) {
+                targetEvents += applicationUsed.getNumberOfApplicationsUsedEventList();
+            }
+        }
+        
+        return (double) targetEvents / (double) totalEvents;
+    }
+    
+    /**
+     * Calculates the influence of a particular Application Type over the 
+     * total number of ApplicationsUsedEvent
+     * @param appType the application type we want to analyze
+     * @return the ratio between the number of the target events and the total events
+     */
+    public double calculateTimingInfluenceOfAppType(String appType) {
+        
+        double totalTiming = 0.0, appTiming = 0.0;
+        
+        for (ApplicationUsed applicationUsed: applicationUsedList) {
+            
+            if (applicationUsed.getAppOrGame() != null) {
+                totalTiming += applicationUsed.getTotalDurationOfApplicationUsed();
+            }
+            
+            if (applicationUsed.getAppOrGame() != null && 
+                    applicationUsed.getAppOrGame().equals(appType)) {
+                
+                appTiming += applicationUsed.getTotalDurationOfApplicationUsed();
+            }
+        }
+        
+        return appTiming / totalTiming;
+    }
+    
+    /**
+     * Returns if the application category has been used or not
+     * @param appCategory the application category
+     * @return true if the application category has been used, false otherwise
+     */
+    public Boolean hasUsedTheApplicationCategory(String appCategory) {
+        
+        Boolean hasUsed = false;
+        
+        for (int i = 0; i <applicationUsedList.size() && !hasUsed; i++) {
+            
+            if (applicationUsedList.get(i).getAppCategory().equals(appCategory)) {
+                hasUsed = true;
+            }
+        }
+        
+        return hasUsed;
+    }
 }

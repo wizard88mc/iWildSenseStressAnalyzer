@@ -2,6 +2,7 @@ package iwildsensestressanalyzer.dataanalyzer;
 
 import iwildsensestressanalyzer.participant.Participant;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -14,7 +15,9 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
     
     public static final Boolean DEBUG_APP_CATEGORY = false;
     
-    private static final ArrayList<String> allAppCategories = new ArrayList<>();
+    private static final ArrayList<String> ALL_APP_CATEGORIES = new ArrayList<>();
+    
+    private static final ArrayList<String> ALL_APP_TYPE = new ArrayList<>();
     
     public static void analyzeDataOfApplicationUsedForEachParticipant(
             ArrayList<Participant> participants, boolean easyJob, 
@@ -24,7 +27,7 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
         
         if (!useAllTogether) {
             
-            for (String appCategory: allAppCategories) {
+            for (String appCategory: ALL_APP_CATEGORIES) {
                 
                 ArrayList<Integer> tTestPassedForAppCategoryFrequency = 
                             new ArrayList<>(),
@@ -85,7 +88,7 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
             ArrayList<ArrayList<SurveyDataWrapper>> allSurveyDataWrappers = 
                     prepareDataWrappersForAllParticipants(participants, easyJob);
             
-            for (String appCategory: allAppCategories) {
+            for (String appCategory: ALL_APP_CATEGORIES) {
                 
                 workWithAppCategoryFrequencyOfAllParticipants(allSurveyDataWrappers, 
                         appCategory, easyJob);
@@ -155,24 +158,25 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
      * Works with App Category timing influence over all the timing to perform
      * the ttest and calculate the p-value
      * @param wrappers all the surveys and the related data to use
+     * @param appCategory the app category
      * @param easyJob true if we are doing the easy test, false otherwise
      */
-    private static ArrayList<Boolean> workWithAppCategoryTimingInfluence(SurveyDataWrapper[] wrappers, 
-            String appCategory, boolean easyJob) {
+    private static ArrayList<Boolean> workWithAppCategoryTimingInfluence(
+            SurveyDataWrapper[] wrappers, String appCategory, boolean easyJob) {
             
         printTitleMessage("*** Timing influence of " + appCategory +
                 " application category ***");
             
         ArrayList<ArrayList<Double>> listValues = 
-                new ArrayList<ArrayList<Double>>();
+                new ArrayList<>();
             
         for (SurveyDataWrapper wrapper: wrappers) {
+            
             listValues.add(wrapper.getApplicationUsedFeaturesExtractorListWrapper()
                     .getAllTimingInfluenceOfAppCategory(appCategory));
         }
             
         return printTTestResults(listValues, easyJob);
-        
     }
     
     /**
@@ -205,8 +209,55 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
             listValues.add(singleValues);
         }
             
-        return printTTestResults(listValues, easyJob);
+        return printTTestResults(listValues, easyJob);   
+    }
+    
+    /**
+     * Works with App Type timing influence over all the timing to perform
+     * the ttest and calculate the p-value
+     * @param wrappers all the surveys and the related data to use
+     * @param appType the app type
+     * @param easyJob true if we are doing the easy test, false otherwise
+     * @return 
+     */
+    public static ArrayList<Boolean> workWithAppTypeFrequency(
+            SurveyDataWrapper[] wrappers, String appType, Boolean easyJob) {
         
+        printTitleMessage("*** Influence of " + appType + " application" + 
+                " type ***");
+            
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
+                
+        for (SurveyDataWrapper wrapper: wrappers) {
+            listValues.add(wrapper.getApplicationUsedFeaturesExtractorListWrapper()
+                    .getAllInfluenceOfAppType(appType));
+        }
+                
+        return printTTestResults(listValues, easyJob);
+    }
+    
+    public static HashMap<String, Double> analyzeApplicationsUsage(ArrayList<Participant> participants) {
+        
+        HashMap<String, Double> categoriesPercentageOfParticipants = new HashMap<>();
+        
+        for (String category: ALL_APP_CATEGORIES) {
+            
+            Double numberOfTimes = 0.0;
+            
+            for (Participant participant: participants) {
+                
+                if (participant.hasUsedTheApplicationCategory(category)) {
+                    
+                    numberOfTimes += 1.0;
+                }
+            }
+            
+            numberOfTimes /= (double) participants.size();
+            
+            categoriesPercentageOfParticipants.put(category, numberOfTimes);
+        }
+        
+        return categoriesPercentageOfParticipants;
     }
     
     /**
@@ -216,11 +267,11 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
      */
     public static void addCategory(String appCategory) {
         
-        if (!allAppCategories.contains(appCategory)) {
+        if (!ALL_APP_CATEGORIES.contains(appCategory)) {
             if (DEBUG_APP_CATEGORY) {
                 System.out.println(appCategory);
             }
-            allAppCategories.add(appCategory);
+            ALL_APP_CATEGORIES.add(appCategory);
         }
     }
     
@@ -229,7 +280,27 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
      * @return a list of different app categories
      */
     public static ArrayList<String> getAllAppCategories() {
-        return allAppCategories;
+        return ALL_APP_CATEGORIES;
+    }
+    
+    /**
+     * If not already present, adds a new App type to the list of all the
+     * possible type of applications (App or Games)
+     * @param type the new application type
+     */
+    public static void addAppType(String type) {
+        
+        if (!ALL_APP_TYPE.contains(type)) {
+            ALL_APP_TYPE.add(type);
+        }
+    }
+    
+    /**
+     * Returns the list of application types
+     * @return a list of different app types
+     */
+    public static ArrayList<String> getAllAppTypes() {
+        return ALL_APP_TYPE;
     }
     
 }

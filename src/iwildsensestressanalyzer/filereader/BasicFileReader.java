@@ -14,6 +14,7 @@ public class BasicFileReader {
     protected static final String FOLDER_DATA = "data";
     protected static final String FOLDER_PING_DATA = "ping_data";
     protected static final String FOLDER_SURVEY_DATA = "survey_data";
+    protected static final String FOLDER_SETTINGS = "settings";
     protected static final String FILE_SEPARATOR = File.separator;
     protected static final String FILE_SURVEY = "_survey_events.csv";
     

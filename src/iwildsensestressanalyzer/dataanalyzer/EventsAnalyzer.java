@@ -127,7 +127,7 @@ public class EventsAnalyzer {
                                     tTest = 1.0;
                                 }
                             
-                                outputString += MathUtils.decimalFormat.format(tTest) + "|";
+                                outputString += MathUtils.DECIMAL_FORMAT.format(tTest) + "|";
                                 
                                 if (tTest <= 0.05) {
                                     testPassed.add(true);
@@ -202,7 +202,7 @@ public class EventsAnalyzer {
                          * otherwise no test can be performed
                          */
                         if (values.get(counterForValues) != null) { 
-                            outputString += MathUtils.formatSuccess.format(values.get(counterForValues)) + "%|";
+                            outputString += MathUtils.FORMAT_SUCCESS.format(values.get(counterForValues)) + "%|";
                         }
                         else {
                             outputString += " - |";

@@ -2,7 +2,6 @@ package iwildsensestressanalyzer.applicationsused;
 
 import iwildsensestressanalyzer.event.Event;
 import iwildsensestressanalyzer.filereader.AllFilesReader;
-import java.util.ArrayList;
 
 /**
  *

@@ -43,9 +43,9 @@ public class SurveyDataWrapper {
      */
     public void createScreenEventsFeaturesExtractor(ArrayList<StressSurvey> surveys) {
         
-        ArrayList<ScreenOnOff> screenOnOffList = new ArrayList<ScreenOnOff>(); 
+        ArrayList<ScreenOnOff> screenOnOffList = new ArrayList<>(); 
         ArrayList<UnlockedScreen> unlockedScreenList = 
-                new ArrayList<UnlockedScreen>();
+                new ArrayList<>();
         
         for (StressSurvey survey: surveys) {
             
@@ -94,8 +94,8 @@ public class SurveyDataWrapper {
      */
     public void createApplicationUsedFeaturesExtractor(ArrayList<StressSurvey> surveys) {
         
-        ArrayList<ApplicationUsedFeaturesExtractor> applicationUsedFeaturesExtractor = 
-                new ArrayList<ApplicationUsedFeaturesExtractor>();
+        ArrayList<ApplicationUsedFeaturesExtractor> 
+                applicationUsedFeaturesExtractor = new ArrayList<>();
         
         for (StressSurvey survey: surveys) {
             

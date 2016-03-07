@@ -197,67 +197,84 @@ public class WekaAnalyzer {
         createdFilesWriter.writeCreatedFiles(listCreatedFiles);
     }
     
-    public static void startWithWekaClassificationTask() {
+    public static void startWithWekaClassificationTask(String toWorkWith) {
         
         ArrayList<String> allFileNames = WekaFilesCreatedReader.getCreatedWekaFiles(),
-                moreThanZeroAnswers = new ArrayList<>(),
+                filesToUse = new ArrayList<>();
+                /*moreThanZeroAnswers = new ArrayList<>(),
                 moreThanThreshold = new ArrayList<>(),
                 moreThanOnePerDay = new ArrayList<>(), 
-                moreThanInitialAverage = new ArrayList<>();
+                moreThanInitialAverage = new ArrayList<>();*/
         
         for (String fileName: allFileNames) {
-            if (fileName.contains(IWildSenseStressAnalyzer.FOLDER_MORE_ZERO_ANSWERS)) {
-                moreThanZeroAnswers.add(fileName);
+            if (toWorkWith.equals(IWildSenseStressAnalyzer.ONLY_MORE_THAN_ZERO) &&
+                    fileName.contains(IWildSenseStressAnalyzer.FOLDER_MORE_ZERO_ANSWERS)) {
+                
+                filesToUse.add(fileName);
             }
-            else if (fileName.contains(IWildSenseStressAnalyzer.FOLDER_MORE_THRESHOLD)) {
-                moreThanThreshold.add(fileName);
+            else if (toWorkWith.equals(IWildSenseStressAnalyzer.ONLY_MORE_THRESHOLD) &&
+                    fileName.contains(IWildSenseStressAnalyzer.FOLDER_MORE_THRESHOLD)) {
+                
+                filesToUse.add(fileName);
             }
-            else if (fileName.contains(IWildSenseStressAnalyzer.FOLDER_MORE_ONE_SURVEY_PER_DAY)) {
-                moreThanOnePerDay.add(fileName);
+            else if (toWorkWith.equals(IWildSenseStressAnalyzer.ONLY_MORE_ONE_PER_DAY) &&
+                    fileName.contains(IWildSenseStressAnalyzer.FOLDER_MORE_ONE_SURVEY_PER_DAY)) {
+                
+                filesToUse.add(fileName);
             }
-            else if (fileName.contains(IWildSenseStressAnalyzer.FOLDER_MORE_THAN_INITIAL_AVERAGE)) {
-                moreThanInitialAverage.add(fileName);
+            else if (toWorkWith.equals(IWildSenseStressAnalyzer.ONLY_MORE_INITIAL_AVERAGE) &&
+                    fileName.contains(IWildSenseStressAnalyzer.FOLDER_MORE_THAN_INITIAL_AVERAGE)) {
+                
+                filesToUse.add(fileName);
             }
         }
         
         /**
          * Starting weka classification task
          */
+        if (toWorkWith.equals(IWildSenseStressAnalyzer.ONLY_MORE_THAN_ZERO)) {
         System.out.println("*** Classification for participants with more than "
                 + "zero answers ***");
-        /*performWekaClassificationTask(moreThanZeroAnswers, 
-                IWildSenseStressAnalyzer.TITLE_PARTICIPANTS_ZERO_ANSWERS, 
-                IWildSenseStressAnalyzer.FOLDER_MORE_ZERO_ANSWERS, false);*/
-        performWekaClassificationTask(moreThanZeroAnswers, 
-                IWildSenseStressAnalyzer.TITLE_PARTICIPANTS_ZERO_ANSWERS, 
+            performWekaClassificationTask(filesToUse, 
+                IWildSenseStressAnalyzer.TITLE_PARTICIPANTS_MORE_ZERO_ANSWERS, 
+                IWildSenseStressAnalyzer.FOLDER_MORE_ZERO_ANSWERS, false);
+            performWekaClassificationTask(filesToUse, 
+                IWildSenseStressAnalyzer.TITLE_PARTICIPANTS_MORE_ZERO_ANSWERS, 
                 IWildSenseStressAnalyzer.FOLDER_MORE_ZERO_ANSWERS, true);
-        
-        /*System.out.println("*** Classification for participants with more "
+        }
+        else if (toWorkWith.equals(IWildSenseStressAnalyzer.ONLY_MORE_THRESHOLD)) {
+            
+            System.out.println("*** Classification for participants with more "
                 + "answers than the threshold ***");
-        performWekaClassificationTask(moreThanThreshold, 
+            performWekaClassificationTask(filesToUse, 
                 IWildSenseStressAnalyzer.TITLE_MORE_THRESHOLD, 
                 IWildSenseStressAnalyzer.FOLDER_MORE_THRESHOLD, false);
-        performWekaClassificationTask(moreThanThreshold, 
+            performWekaClassificationTask(filesToUse, 
                 IWildSenseStressAnalyzer.TITLE_MORE_THRESHOLD, 
                 IWildSenseStressAnalyzer.FOLDER_MORE_THRESHOLD, true);
+        }
+        else if (toWorkWith.equals(IWildSenseStressAnalyzer.ONLY_MORE_ONE_PER_DAY)) {
         
-        System.out.println("*** Classification for participants with more than "
+            System.out.println("*** Classification for participants with more than "
                 + "one answer per day ***");
-        performWekaClassificationTask(moreThanOnePerDay, 
+            performWekaClassificationTask(filesToUse, 
                 IWildSenseStressAnalyzer.TITLE_MORE_ONE_SURVEY_PER_DAY, 
                 IWildSenseStressAnalyzer.FOLDER_MORE_ONE_SURVEY_PER_DAY, false);
-        performWekaClassificationTask(moreThanOnePerDay, 
+            performWekaClassificationTask(filesToUse, 
                 IWildSenseStressAnalyzer.TITLE_MORE_ONE_SURVEY_PER_DAY, 
                 IWildSenseStressAnalyzer.FOLDER_MORE_ONE_SURVEY_PER_DAY, true);
+        }
+        else if (toWorkWith.equals(IWildSenseStressAnalyzer.ONLY_MORE_INITIAL_AVERAGE)) {
         
-        System.out.println("*** Classification for participants with number of "
+            System.out.println("*** Classification for participants with number of "
                 + "answers more than the initial average ***");
-        performWekaClassificationTask(moreThanInitialAverage, 
+            performWekaClassificationTask(filesToUse, 
                 IWildSenseStressAnalyzer.TITLE_MORE_THAN_INITIAL_AVERAGE, 
                 IWildSenseStressAnalyzer.FOLDER_MORE_THAN_INITIAL_AVERAGE, false);
-        performWekaClassificationTask(moreThanInitialAverage, 
+            performWekaClassificationTask(filesToUse, 
                 IWildSenseStressAnalyzer.TITLE_MORE_THAN_INITIAL_AVERAGE, 
-                IWildSenseStressAnalyzer.FOLDER_MORE_THAN_INITIAL_AVERAGE, true);*/
+                IWildSenseStressAnalyzer.FOLDER_MORE_THAN_INITIAL_AVERAGE, true);
+        }
     }
     
     /**
