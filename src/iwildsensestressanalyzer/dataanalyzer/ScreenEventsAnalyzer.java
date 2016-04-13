@@ -13,6 +13,11 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
     public static void analyzeScreenDataForEachParticipant(ArrayList<Participant> 
             participants, boolean easyJob, boolean useAllTogether) {
         
+        ArrayList<String> labels = EventsAnalyzer.labels5LabelsTaks;
+        if (easyJob) {
+            labels = EventsAnalyzer.labels3LabelsTask;
+        }
+        
         printTitleMessage("*** ANALYZING SCREEN FEATURES ***");
         
         /**
@@ -49,15 +54,15 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
                 }
 
                 ArrayList<Boolean> returnedResults = 
-                        workWithOnOffDurationForOnOffScreenEvents(surveyDataWrappers, easyJob);
+                        workWithOnOffDurationForOnOffScreenEvents(surveyDataWrappers, labels);
                 addTTestResultsToFinalContainer(tTestPassedForOnOffDurationForOnOffScreenEvents, 
                         returnedResults, validTTestsForOnOffDurationForOnOffScreenEvents);
                 
-                returnedResults = workWithOnOffDurationForUnlockedScreenEvents(surveyDataWrappers, easyJob);
+                returnedResults = workWithOnOffDurationForUnlockedScreenEvents(surveyDataWrappers, labels);
                 addTTestResultsToFinalContainer(tTestPassedForOnOffDurationForUnlockedScreenEvents, 
                         returnedResults, validTTestsForOnOffDurationForUnlockedScreenEvents);
                 
-                workWithUnlockTimeForUnlockedScreenEvents(surveyDataWrappers, easyJob);
+                workWithUnlockTimeForUnlockedScreenEvents(surveyDataWrappers, labels);
                 addTTestResultsToFinalContainer(tTestPassedForUnlockTimeForUnlockedScreenEvents, 
                         returnedResults, validTTestsForUnlockTimeForUnlockedScreenEvents);
             }
@@ -67,7 +72,7 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
              * ScreenOnOff events feature
              */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForOnOffDurationForOnOffScreenEvents, 
-                    validTTestsForOnOffDurationForOnOffScreenEvents, easyJob, 
+                    validTTestsForOnOffDurationForOnOffScreenEvents, labels, 
                     "*** Percentage of success for On-Off Duration for "
                             + "ScreenOnOff events ***");
             
@@ -76,7 +81,7 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
              * UnlockedScreen events feature
              */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForOnOffDurationForUnlockedScreenEvents, 
-                    validTTestsForOnOffDurationForUnlockedScreenEvents, easyJob, 
+                    validTTestsForOnOffDurationForUnlockedScreenEvents, labels, 
                     "*** Percentage of success for On-Off Duration for "
                             + "UnlockedScreen events ***");
            
@@ -85,7 +90,7 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
             * UnlockedScreen events feature
             */
             performStepsForPrintingPercentageOfSuccess(tTestPassedForUnlockTimeForUnlockedScreenEvents, 
-                    validTTestsForUnlockTimeForUnlockedScreenEvents, easyJob, 
+                    validTTestsForUnlockTimeForUnlockedScreenEvents, labels, 
                     "*** Percentage of success for Unlock Time for "
                             + "UnlockedScreen events ***");
         }
@@ -96,11 +101,11 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
                     prepareDataWrappersForAllParticipants(participants, easyJob);
             
             workWithOnOffDurationForOnOffScreenEventsOfAllParticipants(allSurveyDataWrappers, 
-                    easyJob);
+                    labels);
             workWithOnOffDurationForUnlockedScreenEventsOfAllParticipants(allSurveyDataWrappers, 
-                    easyJob);
+                    labels);
             workWithUnlockTimeForUnlockedScreenEventsOfAllParticipants(allSurveyDataWrappers, 
-                    easyJob);
+                    labels);
         }
     }
     
@@ -108,10 +113,10 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
      * Works with On-Off duration of OnOffScreen events to calculate p-value
      * using t test between all the answers of the surveys
      * @param surveyDataWrappers the survey and the related data to use
-     * @param easyJob true if we are working with the easy test, false otherwise
+     * @param labels list of labels for the output table
      */
     private static ArrayList<Boolean> workWithOnOffDurationForOnOffScreenEvents(SurveyDataWrapper[] 
-            surveyDataWrappers, boolean easyJob) {
+            surveyDataWrappers, ArrayList<String> labels) {
         
         printTitleMessage("*** On-Off Duration for ScreenOnOff Events ***");
     
@@ -123,26 +128,27 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
                     .getAllOnOffDurationForOnOffEvents());
         }
         
-        return printTTestResults(listValues, easyJob);
+        return printTTestResults(listValues, labels);
     }
     
     /**
      * Works with On-Off duration of OnOff Screen events using data from all the
      * participants 
      * @param listWrappers a list of all the wrappers for all the participants
-     * @param easyJob true if it is the easy test, false otherwise
+     * @param labels list of labels for the output table
      */
-    private static ArrayList<Boolean> workWithOnOffDurationForOnOffScreenEventsOfAllParticipants
-            (ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, boolean easyJob) {
+    private static void workWithOnOffDurationForOnOffScreenEventsOfAllParticipants
+            (ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, 
+                    ArrayList<String> labels) {
                 
         printTitleMessage("*** GLOBAL ANALYSIS: On Off Duration for OnOffScreen "
                 + "Events ***");
                 
-        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
             
         for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
 
-            ArrayList<Double> singleListValues = new ArrayList<Double>();
+            ArrayList<Double> singleListValues = new ArrayList<>();
             
             for (SurveyDataWrapper wrapper: wrappers) {
                 Double[] singleValue = wrapper.getScreenEventsFeaturesExtractor()
@@ -154,20 +160,21 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
             listValues.add(singleListValues);
         }
             
-        return printTTestResults(listValues, easyJob);
+        printTTestResults(listValues, labels);
     }
     
     /**
      * Works with On-Off duration of UnlockedScreen events to calculate p-values
      * using t-test between all the answers of the surveys
      * @param surveyDataWrappers the survey and the related data to use
+     * @param labels list of labels for the output table
      */
     private static ArrayList<Boolean> workWithOnOffDurationForUnlockedScreenEvents(SurveyDataWrapper[] 
-            surveyDataWrappers, boolean easyJob) {
+            surveyDataWrappers, ArrayList<String> labels) {
         
         printTitleMessage("*** On Off duration for UnlockedScreen events ***");
         
-        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
         
         for (SurveyDataWrapper wrapper: surveyDataWrappers) {
             
@@ -175,26 +182,27 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
                     .getAllOnOffDurationForUnlockScreenEvents());
         }
         
-        return printTTestResults(listValues, easyJob);
+        return printTTestResults(listValues, labels);
     }
     
     /**
      * Works with On-Off duration of UnlockedScreen events using data from all the
      * participants 
      * @param listWrappers a list of all the wrappers for all the participants
-     * @param easyJob true if it is the easy test, false otherwise
+     * @param labels list of labels for the output table
      */
     private static ArrayList<Boolean> workWithOnOffDurationForUnlockedScreenEventsOfAllParticipants
-            (ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, boolean easyJob) {
+            (ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, 
+                    ArrayList<String> labels) {
         
         printTitleMessage("*** GLOBAL ANALYSIS: On Off Duration of " + 
                 "UnlockScreen Events ***");
                 
-        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
 
         for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
 
-            ArrayList<Double> singleListValues = new ArrayList<Double>();
+            ArrayList<Double> singleListValues = new ArrayList<>();
 
             for (SurveyDataWrapper wrapper: wrappers) {
                 Double[] singleValue = wrapper.getScreenEventsFeaturesExtractor()
@@ -207,46 +215,48 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
             listValues.add(singleListValues);
         }
 
-        return printTTestResults(listValues, easyJob);
+        return printTTestResults(listValues, labels);
     }
     
     /**
      * Work with UnlockTime duration for UnlockedScreen events to calculate p-values
      * using t-test between all the answers of the surveys
      * @param surveyDataWrappers 
+     * @param labels list of labels for the output table
      */
     private static ArrayList<Boolean> workWithUnlockTimeForUnlockedScreenEvents(SurveyDataWrapper[]
-            surveyDataWrappers, boolean easyJob) {
+            surveyDataWrappers, ArrayList<String> labels) {
         
         printTitleMessage("*** Unlock Time duration of UnlockedScreen events ***");
         
-        ArrayList<ArrayList<Double>> listvalues = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listvalues = new ArrayList<>();
         
         for (SurveyDataWrapper wrapper: surveyDataWrappers) {
             listvalues.add(wrapper.getScreenEventsFeaturesExtractor()
                     .getAllUnlockTimeForUnlockedScreenEvents());
         }
         
-        return printTTestResults(listvalues, easyJob);
+        return printTTestResults(listvalues, labels);
     }
     
     /**
      * Works with Unlock time of UnlockedScreen events using data from all the
      * participants 
      * @param listWrappers a list of all the wrappers for all the participants
-     * @param easyJob true if it is the easy test, false otherwise
+     * @param labels list of labels for the output table
      */
     private static ArrayList<Boolean> workWithUnlockTimeForUnlockedScreenEventsOfAllParticipants
-            (ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, boolean easyJob) {
+            (ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, 
+                    ArrayList<String> labels) {
                 
         printTitleMessage("*** GLOBAL ANALYSIS: Unlock Time of " + 
         "UnlockScreen Events ***");
                 
-        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
 
         for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
 
-            ArrayList<Double> singleListValues = new ArrayList<Double>();
+            ArrayList<Double> singleListValues = new ArrayList<>();
 
             for (SurveyDataWrapper wrapper: wrappers) {
                 Double[] singleValue = wrapper.getScreenEventsFeaturesExtractor()
@@ -259,6 +269,6 @@ public class ScreenEventsAnalyzer extends EventsAnalyzer {
             listValues.add(singleListValues);
         }
 
-        return printTTestResults(listValues, easyJob);
+        return printTTestResults(listValues, labels);
     }   
 }

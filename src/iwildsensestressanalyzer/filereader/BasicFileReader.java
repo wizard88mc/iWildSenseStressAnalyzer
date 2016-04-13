@@ -17,6 +17,7 @@ public class BasicFileReader {
     protected static final String FOLDER_SETTINGS = "settings";
     protected static final String FILE_SEPARATOR = File.separator;
     protected static final String FILE_SURVEY = "_survey_events.csv";
+    protected static final String FILE_WEATHER = "_weather_info.csv";
     
     protected static final String[] MONTHS = {"04", "05"};
     protected static final String[] DAYS = {"01", "02", "03", "04", "05", "06", 

@@ -4,10 +4,13 @@ import iwildsensestressanalyzer.applicationsused.CategorizeApps;
 import iwildsensestressanalyzer.dataanalyzer.ApplicationUsedAnalyzer;
 import iwildsensestressanalyzer.dataanalyzer.EventsAnalyzer;
 import iwildsensestressanalyzer.dataanalyzer.ScreenEventsAnalyzer;
+import iwildsensestressanalyzer.dataanalyzer.StatisticsAnalyzer;
+import iwildsensestressanalyzer.dataanalyzer.StressValuesAnalyzer;
 import iwildsensestressanalyzer.dataanalyzer.SurveyAnalyzer;
 import iwildsensestressanalyzer.dataanalyzer.TouchesBufferedAnalyzer;
 import iwildsensestressanalyzer.dataanalyzer.UserActivityAnalyzer;
 import iwildsensestressanalyzer.dataanalyzer.UserPresenceLightAnalyzer;
+import iwildsensestressanalyzer.esm.WeatherInfos;
 import iwildsensestressanalyzer.filereader.ApplicationsUsedReader;
 import iwildsensestressanalyzer.filereader.IMEIListReader;
 import iwildsensestressanalyzer.filereader.SurveyQuestionnaireReader;
@@ -15,6 +18,7 @@ import iwildsensestressanalyzer.filereader.TouchesBufferedReader;
 import iwildsensestressanalyzer.filereader.UserActivityReader;
 import iwildsensestressanalyzer.filereader.UserPresenceEventsReader;
 import iwildsensestressanalyzer.filereader.UserPresenceLightReader;
+import iwildsensestressanalyzer.filereader.WeatherInfoReader;
 import iwildsensestressanalyzer.filewriter.StatisticalSignificanceOutputWriter;
 import iwildsensestressanalyzer.light.UserPresenceLightEvent;
 import iwildsensestressanalyzer.participant.Participant;
@@ -35,6 +39,14 @@ public class IWildSenseStressAnalyzer {
     public static final boolean COMPELTE_ANALYSIS = true;
     public static StatisticalSignificanceOutputWriter outputWriter = null;
     
+    public static final String DATA_ACQUISITION = "data_acquisition", 
+            WEKA_ANALYSIS = "weka_analysis", 
+            KEEP_ALL = "all", 
+            ONLY_MORE_THAN_ZERO = "only_more_zero", 
+            ONLY_MORE_THRESHOLD = "only_more_threshold",
+            ONLY_MORE_ONE_PER_DAY= "only_one_per_day",
+            ONLY_MORE_INITIAL_AVERAGE = "only_more_average";
+    
     public static final String TITLE_ALL_PARTICIPANTS = "*** Keeping all "
                 + "participants ***",
             
@@ -54,15 +66,6 @@ public class IWildSenseStressAnalyzer {
             FOLDER_MORE_THRESHOLD = "More_Than_Threshold",
             FOLDER_MORE_ONE_SURVEY_PER_DAY = "More_Than_OnePerDay",
             FOLDER_MORE_THAN_INITIAL_AVERAGE = "More_Than_Average";
-    
-    public static final String DATA_ACQUISITION = "data_acquisition", 
-            WEKA_ANALYSIS = "weka_analysis", 
-            KEEP_ALL = "all", 
-            ONLY_MORE_THAN_ZERO = "only_more_zero", 
-            ONLY_MORE_THRESHOLD = "only_more_threshold",
-            ONLY_MORE_ONE_PER_DAY= "only_one_per_day",
-            ONLY_MORE_INITIAL_AVERAGE = "only_more_average";
-            
 
     /**
      * @param args the command line arguments
@@ -108,11 +111,19 @@ public class IWildSenseStressAnalyzer {
 
                 SurveyQuestionnaireReader.readFile(imei, surveyAnswers, 
                         questionnaireAnswers);
+                
+                ArrayList<String> weatherLines = WeatherInfoReader
+                        .readFile(newParticipant.getIMEI());
+                
+                ArrayList<WeatherInfos> weatherInfos = new ArrayList<>();
+                for (String line: weatherLines) {
+                    weatherInfos.add(new WeatherInfos(line));
+                }
 
                 /**
                  * Adding the answers to the Surveys
                  */
-                newParticipant.addSurveyAnswers(surveyAnswers);
+                newParticipant.addSurveyAnswers(surveyAnswers, weatherInfos);
 
                 if (COMPELTE_ANALYSIS) {
                     ArrayList<String> userPresenceEventsLines = 
@@ -120,16 +131,16 @@ public class IWildSenseStressAnalyzer {
                     newParticipant.addUserPresenceEvents(userPresenceEventsLines);
 
                     if (DEBUG) {
-                        System.out.println("DEBUG: Adding the UserPresenceEvent events to the "+ 
-                            "participant");
+                        System.out.println("DEBUG: Adding the UserPresenceEvent"
+                                + " events to the participant");
                     }
                     /**
                      * Adding the UserPresenceEvent events to the participant
                      */
 
                     if (DEBUG) {
-                        System.out.println("DEBUG: Adding the UserActivityEvent events " + 
-                                "to the participant");
+                        System.out.println("DEBUG: Adding the UserActivityEvent"
+                                + " events to the participant");
                     }
                     /**
                      * Adding the UserActivityEvent events to the participant
@@ -148,7 +159,8 @@ public class IWildSenseStressAnalyzer {
                      */
 
                     ArrayList<String> userPresenceLightEventsLines = 
-                        UserPresenceLightReader.getALlUserPresenceLightEventsLines(newParticipant);
+                        UserPresenceLightReader
+                            .getALlUserPresenceLightEventsLines(newParticipant);
 
 
                     /**
@@ -166,17 +178,19 @@ public class IWildSenseStressAnalyzer {
                      */
 
                     ArrayList<String> applicationUsedEventsLines = 
-                        ApplicationsUsedReader.getAllApplicationsUsedEventsLines(newParticipant);
+                        ApplicationsUsedReader
+                            .getAllApplicationsUsedEventsLines(newParticipant);
 
                     if (DEBUG) {
-                        System.out.println("DEBUG: Adding ApplicationUsed Events");
+                        System.out.println("DEBUG: Adding ApplicationUsed"
+                                + " Events");
                     }
 
                     newParticipant.addApplicationsUsedEvents(applicationUsedEventsLines);
 
                     if (DEBUG) {
-                        System.out.println("DEBUG: Making association between survey " + 
-                                "time validity and events");
+                        System.out.println("DEBUG: Making association between"
+                                + " survey time validity and events");
                     }
                     /**
                      * Making association between survey time validity and events
@@ -186,24 +200,27 @@ public class IWildSenseStressAnalyzer {
 
 
                     if (DEBUG) {
-                        System.out.println("DEBUG: Retrieving TouchesBuffered events");
+                        System.out.println("DEBUG: Retrieving TouchesBuffered"
+                                + " events");
                     }
                     /**
                      * Retrieving the TouchesBuffered events
                      */
                     ArrayList<String> touchesBufferedEventsLines = 
-                            TouchesBufferedReader.getAllTouchesBufferedEventsLines(newParticipant);
+                            TouchesBufferedReader
+                                .getAllTouchesBufferedEventsLines(newParticipant);
 
                     if (DEBUG) {
-                        System.out.println("DEBUG: Adding TouchesBufferedEvent events " + 
-                                "to the UnlockedScreen events");
+                        System.out.println("DEBUG: Adding TouchesBufferedEvent"
+                                + " events to the UnlockedScreen events");
                     }
                     /**
                      * Adding TouchesBufferedEvent events to the UnlockedScreen 
                      * events
                      */
                     newParticipant.addTouchesBufferedEventsToUnlockedScreen(
-                            TouchesBufferedEvent.createListOfTouchesBufferedEvents(touchesBufferedEventsLines));
+                            TouchesBufferedEvent
+                                    .createListOfTouchesBufferedEvents(touchesBufferedEventsLines));
 
                     if (DEBUG) {
                         System.out.println("DEBUG: Adding UserPresenceLightEvent " + 
@@ -216,7 +233,8 @@ public class IWildSenseStressAnalyzer {
                             createListOfUserPresenceLightEvents(userPresenceLightEventsLines));
 
                     if (DEBUG) {
-                        System.out.println("DEBUG: Spreading events among survey data wrapper");
+                        System.out.println("DEBUG: Spreading events among"
+                                + " survey data wrapper");
                     }
                     newParticipant.spreadEventsAmongSurveyDataWrapper();
                 }
@@ -256,69 +274,93 @@ public class IWildSenseStressAnalyzer {
              * Calculating statistics for participants with more than one answer
              * per day
              */
-            System.out.println();
-            System.out.println(TITLE_PARTICIPANTS_MORE_ZERO_ANSWERS);
-            EventsAnalyzer.printTitleMessage(null);
-            EventsAnalyzer.printTitleMessage(TITLE_PARTICIPANTS_MORE_ZERO_ANSWERS);
+            
+            ArrayList<Participant> participantsToUse = null;
+            
+            switch(args[1]) {
+            
+                case ONLY_MORE_THAN_ZERO: {
+                    System.out.println();
+                    System.out.println(TITLE_PARTICIPANTS_MORE_ZERO_ANSWERS);
+                    EventsAnalyzer.printTitleMessage(null);
+                    EventsAnalyzer.printTitleMessage(TITLE_PARTICIPANTS_MORE_ZERO_ANSWERS);
 
-            ArrayList<Participant> participantsListWithMoreThanZeroAnswers = 
-                    SurveyAnalyzer.
-                    getListParticipantsWithMoreThanZeroAnswers(participantList);
+                    participantsToUse = SurveyAnalyzer.
+                            getListParticipantsWithMoreThanZeroAnswers(participantList);
 
-            SurveyAnalyzer.calculateStatisticsAnswers(participantsListWithMoreThanZeroAnswers);
+                    SurveyAnalyzer.calculateStatisticsAnswers(participantsToUse);
 
-            performStatisticalAnalysisSteps(participantsListWithMoreThanZeroAnswers);
+                    StatisticsAnalyzer statisticsAnalyzer = 
+                            new StatisticsAnalyzer(participantsToUse);
+                    statisticsAnalyzer.performAnalysis();
+
+                    performStatisticalAnalysisSteps(participantsToUse);
+            
+                    break;
+                }
 
             /**
              * Calculating statistics for participants with more than our
              * threshold answers number
              */
-            System.out.println();
-            System.out.println(TITLE_MORE_THRESHOLD);
-            EventsAnalyzer.printTitleMessage(null);
-            EventsAnalyzer.printTitleMessage(TITLE_MORE_THRESHOLD);
+                case ONLY_MORE_THRESHOLD: {
+                    System.out.println();
+                    System.out.println(TITLE_MORE_THRESHOLD);
+                    EventsAnalyzer.printTitleMessage(null);
+                    EventsAnalyzer.printTitleMessage(TITLE_MORE_THRESHOLD);
 
-            ArrayList<Participant> participantsListWithMoreThanThresholdAnswers = 
-                    SurveyAnalyzer.
-                    getListParticipantsOverArbitraryThreshold(participantList);
+                    participantsToUse = 
+                            SurveyAnalyzer.
+                            getListParticipantsOverArbitraryThreshold(participantList);
 
-            SurveyAnalyzer.calculateStatisticsAnswers(participantsListWithMoreThanThresholdAnswers);
+                    SurveyAnalyzer.calculateStatisticsAnswers(participantsToUse);
 
-            performStatisticalAnalysisSteps(participantsListWithMoreThanThresholdAnswers);
+                    performStatisticalAnalysisSteps(participantsToUse);
+                    
+                    break; 
+                }
 
             /**
              * Calculating statistics for participants with more than one per 
              * day answer
              */
-            System.out.println();
-            System.out.println(TITLE_MORE_ONE_SURVEY_PER_DAY);
-            EventsAnalyzer.printTitleMessage(null);
-            EventsAnalyzer.printTitleMessage(TITLE_MORE_ONE_SURVEY_PER_DAY);
+                case ONLY_MORE_ONE_PER_DAY: {
+                    System.out.println();
+                    System.out.println(TITLE_MORE_ONE_SURVEY_PER_DAY);
+                    EventsAnalyzer.printTitleMessage(null);
+                    EventsAnalyzer.printTitleMessage(TITLE_MORE_ONE_SURVEY_PER_DAY);
 
-            ArrayList<Participant> participantsListWithMoreThanOneAnswerPerDay =
-                    SurveyAnalyzer.
-                    getListParticipantsOverOnePerDayAnswer(participantList);
+                    participantsToUse = SurveyAnalyzer.
+                            getListParticipantsOverOnePerDayAnswer(participantList);
 
-            SurveyAnalyzer.calculateStatisticsAnswers(participantsListWithMoreThanOneAnswerPerDay);
+                    SurveyAnalyzer.calculateStatisticsAnswers(participantsToUse);
 
-            performStatisticalAnalysisSteps(participantsListWithMoreThanOneAnswerPerDay);
+                    performStatisticalAnalysisSteps(participantsToUse);
+
+                    break;
+                }
 
             /**
              * Calculating statistics for participants with more answers than the
              * initial average
              */
-            System.out.println();
-            System.out.println(TITLE_MORE_THAN_INITIAL_AVERAGE);
-            EventsAnalyzer.printTitleMessage(null);
-            EventsAnalyzer.printTitleMessage(TITLE_MORE_THAN_INITIAL_AVERAGE);
+                case ONLY_MORE_INITIAL_AVERAGE: {
+                    System.out.println();
+                    System.out.println(TITLE_MORE_THAN_INITIAL_AVERAGE);
+                    EventsAnalyzer.printTitleMessage(null);
+                    EventsAnalyzer.printTitleMessage(TITLE_MORE_THAN_INITIAL_AVERAGE);
 
-            ArrayList<Participant> participantsListWithMoreThanAverageAnswers = 
-                    SurveyAnalyzer.
-                    getListParticipantsOverInitialAverage(participantList);
+                    ArrayList<Participant> participantsListWithMoreThanAverageAnswers = 
+                            SurveyAnalyzer.
+                            getListParticipantsOverInitialAverage(participantList);
 
-            SurveyAnalyzer.calculateStatisticsAnswers(participantsListWithMoreThanAverageAnswers);
+                    SurveyAnalyzer.calculateStatisticsAnswers(participantsListWithMoreThanAverageAnswers);
 
-            performStatisticalAnalysisSteps(participantsListWithMoreThanAverageAnswers);
+                    performStatisticalAnalysisSteps(participantsListWithMoreThanAverageAnswers);
+
+                    break;
+                }
+            }
 
             outputWriter.closeFile();
 
@@ -327,40 +369,51 @@ public class IWildSenseStressAnalyzer {
              */
             System.out.println("*** Creating weka files for classification task ***");
             
-            if (args[1].equals(ONLY_MORE_THAN_ZERO)) {
+            switch(args[1]) {
+                case ONLY_MORE_THAN_ZERO: {
             
-                System.out.println("*** Creating file for classification task for "
-                    + "participants with more than 0 answers ***");
-                WekaAnalyzer.createWekaFiles(participantsListWithMoreThanZeroAnswers, 
-                    FOLDER_MORE_ZERO_ANSWERS);
-            }
-            else if (args[1].equals(ONLY_MORE_THRESHOLD)) {
+                    System.out.println("*** Creating file for classification task for "
+                        + "participants with more than 0 answers ***");
+                    WekaAnalyzer.createWekaFiles(participantsToUse, 
+                        FOLDER_MORE_ZERO_ANSWERS);
+
+                    break;
+                }
+                case ONLY_MORE_THRESHOLD: {
             
-                System.out.println("*** Creating file for classification task for "
-                    + "participants with answers more than the arbitrary threshold ***");
-                WekaAnalyzer.createWekaFiles(participantsListWithMoreThanThresholdAnswers, 
-                    FOLDER_MORE_THRESHOLD);
-            }
-            else if (args[1].equals(ONLY_MORE_ONE_PER_DAY)) {
+                    System.out.println("*** Creating file for classification task for "
+                        + "participants with answers more than the arbitrary threshold ***");
+                    WekaAnalyzer.createWekaFiles(participantsToUse, 
+                        FOLDER_MORE_THRESHOLD);
+
+                    break;
+                }
+                case ONLY_MORE_ONE_PER_DAY: {
                 
-                System.out.println("*** Creating files for classification task for "
-                    + "participants with more than one answer per day ***");
-                WekaAnalyzer.createWekaFiles(participantsListWithMoreThanOneAnswerPerDay, 
-                    FOLDER_MORE_ONE_SURVEY_PER_DAY);
-            }
-            else if(args[1].equals(ONLY_MORE_INITIAL_AVERAGE)) {
+                    System.out.println("*** Creating files for classification task for "
+                        + "participants with more than one answer per day ***");
+                    WekaAnalyzer.createWekaFiles(participantsToUse, 
+                        FOLDER_MORE_ONE_SURVEY_PER_DAY);
+
+                    break;
+                }
+                case ONLY_MORE_INITIAL_AVERAGE: {
             
-                System.out.println("*** Creating files for classification task for "
-                    + "participant with more answers than the initial average ***");
-                WekaAnalyzer.createWekaFiles(participantsListWithMoreThanAverageAnswers, 
-                    FOLDER_MORE_THAN_INITIAL_AVERAGE);
+                    System.out.println("*** Creating files for classification task for "
+                        + "participant with more answers than the initial average ***");
+                    WekaAnalyzer.createWekaFiles(participantsToUse, 
+                        FOLDER_MORE_THAN_INITIAL_AVERAGE);
+                
+                    break;
+                }
             }
 
             WekaAnalyzer.createdFilesWriter.closeFile();
-        
+            
+            WeatherInfos.printWeatherPossibilities();
         }
         else if (args[0].equals(WEKA_ANALYSIS)) {
-            WekaAnalyzer.startWithWekaClassificationTask(args[1]);
+            WekaAnalyzer.startWithWekaClassificationTask(args[1], args[2]);
         }
     }
     
@@ -390,6 +443,9 @@ public class IWildSenseStressAnalyzer {
     private static void performAnalysis(ArrayList<Participant> participantsList, 
             boolean easyTask, boolean allTogether) {
         
+        if (!easyTask) {
+            StressValuesAnalyzer.analyzeStressValues(participantsList, allTogether);
+        }
         ScreenEventsAnalyzer.analyzeScreenDataForEachParticipant(participantsList, 
                 easyTask, allTogether);
         UserActivityAnalyzer.analyzeUserActivityDataForEachParticipant(participantsList, 
@@ -400,6 +456,5 @@ public class IWildSenseStressAnalyzer {
                 easyTask, allTogether);
         UserPresenceLightAnalyzer.analyzeUserPresenceLightDataForEachParticipant(participantsList, 
                 easyTask, allTogether);
-        
     }
 }

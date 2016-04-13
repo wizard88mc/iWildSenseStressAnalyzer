@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * File Writer to write the 
+ * File Writer to write the list of weka files created 
  * @author Matteo Ciman
  */
 public class CreatedFilesWriter extends OutputFileWriter {

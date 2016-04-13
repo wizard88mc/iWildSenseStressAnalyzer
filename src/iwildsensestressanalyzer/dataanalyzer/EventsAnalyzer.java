@@ -15,6 +15,17 @@ import org.apache.commons.math3.stat.inference.TTest;
  */
 public class EventsAnalyzer {
     
+    public static ArrayList<String> labels5LabelsTaks = new ArrayList<>(), 
+            labels3LabelsTask = new ArrayList<>();
+    
+    static {
+        labels5LabelsTaks.add("1"); labels3LabelsTask.add("1");
+        labels5LabelsTaks.add("2"); labels3LabelsTask.add("2");
+        labels5LabelsTaks.add("3"); labels3LabelsTask.add("3");
+        labels5LabelsTaks.add("4");
+        labels5LabelsTaks.add("5");
+    }
+    
     /**
      * Creates the list of SurveyDataWrapper from all the participants that 
      * will be used to analyze data all together
@@ -62,11 +73,11 @@ public class EventsAnalyzer {
      * Prints the confusion matrix between all the stress states 
      * @param listValues a list of array of double with the values for the
      * t-test
-     * @param easyJob false if using all the 5-likert scale, false otherwise
+     * @param labels the labels of the ttests
      * @return list of passed or not passed test for each test
      */
     protected static ArrayList<Boolean> printTTestResults(ArrayList<ArrayList<Double>> listValues, 
-            boolean easyJob) {
+            ArrayList<String> labels) {
         
         ArrayList<ArrayList<Double>> normalizedValues = 
                 MathUtils.normalizeSetOfDoubleData(listValues, 0.0, 1.0);
@@ -81,14 +92,14 @@ public class EventsAnalyzer {
         
         ArrayList<Boolean> testPassed = new ArrayList<>();
         
-        if (!easyJob) {
-            IWildSenseStressAnalyzer.outputWriter
-                .writeOutputStatisticalSignificance("   |   1   |   2   |   3   |   4   |   5   |");
+        String caption = "   |";
+        for (String label: labels) {
+            caption += "   " + label + "   |";
         }
-        else {
-            IWildSenseStressAnalyzer.outputWriter
-                .writeOutputStatisticalSignificance("   |   1   |   2   |   3   |");
-        }
+        
+        IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance(caption);
+        
         IWildSenseStressAnalyzer.outputWriter
                 .writeOutputStatisticalSignificance("--------------------------------------------");
         
@@ -99,7 +110,7 @@ public class EventsAnalyzer {
             for (int j = 0; j < valuesForTTest.size(); j++) {
              
                 if (j == 0) {
-                    outputString += " " + (i + 1) + " |" + " ----- |"; 
+                    outputString += " " + labels.get(i) + " |" + " ----- |"; 
                 }
                 else {
                     if (j <= i) {
@@ -158,23 +169,21 @@ public class EventsAnalyzer {
     /**
      * Prints the percentage of success of a particular feature
      * @param values the values of success to print
-     * @param easyJob true is it is the easy test, false otherwise
+     * @param labels the list of labels of the t tests
      */
     protected static void printTTestPercentagesOfSuccess(ArrayList<Double> values, 
-            boolean easyJob) {
+            ArrayList<String> labels) {
         
-        int numRowsAndColumns;
+        int numRowsAndColumns = labels.size();
         
-        if (!easyJob) {
-            IWildSenseStressAnalyzer.outputWriter
-                .writeOutputStatisticalSignificance("   | 1 | 2 | 3 | 4 | 5 |");
-            numRowsAndColumns = 5;
+        String caption = "   |";
+        for (String label: labels) {
+            caption += " " + label + " |";
         }
-        else {
-            IWildSenseStressAnalyzer.outputWriter
-                .writeOutputStatisticalSignificance("   | 1 | 2 | 3 |");
-            numRowsAndColumns = 3;
-        }
+        
+        IWildSenseStressAnalyzer.outputWriter
+                .writeOutputStatisticalSignificance(caption);
+        
         IWildSenseStressAnalyzer.outputWriter
                 .writeOutputStatisticalSignificance("--------------------------------------------");
         
@@ -186,7 +195,7 @@ public class EventsAnalyzer {
             for (int j = 0; j < numRowsAndColumns; j++) {
              
                 if (j == 0) {
-                    outputString += " " + (i + 1) + " |" + " - |"; 
+                    outputString += " " + labels.get(i) + " |" + " - |"; 
                 }
                 else {
                     if (j <= i) {
@@ -202,7 +211,8 @@ public class EventsAnalyzer {
                          * otherwise no test can be performed
                          */
                         if (values.get(counterForValues) != null) { 
-                            outputString += MathUtils.FORMAT_SUCCESS.format(values.get(counterForValues)) + "%|";
+                            outputString += MathUtils.FORMAT_SUCCESS
+                                    .format(values.get(counterForValues)) + "%|";
                         }
                         else {
                             outputString += " - |";
@@ -222,15 +232,15 @@ public class EventsAnalyzer {
      * of success of a particular feature
      * @param values the set of values of tests passed
      * @param validTTests a list with the number of valid t-tests
-     * @param easyJob true if using only three values, false for five values
+     * @param labels set of labels for the output
      * @param titleMessage the message to write
      */
     protected static void performStepsForPrintingPercentageOfSuccess(ArrayList<Integer> values, 
-            ArrayList<Integer> validTTests, boolean easyJob, String titleMessage) {
+            ArrayList<Integer> validTTests, ArrayList<String> labels, String titleMessage) {
         
         printTitleMessage(titleMessage);
         ArrayList<Double> results = calculatePercentages(values, validTTests);
-        printTTestPercentagesOfSuccess(results, easyJob);
+        printTTestPercentagesOfSuccess(results, labels);
     }
     
     /**

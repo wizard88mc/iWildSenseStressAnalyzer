@@ -184,6 +184,8 @@ public class CategorizeApps extends BasicFileReader {
 
                     String category = webPage.substring(startIndex + 
                             INTERESTING_TAG.length(), endIndex).trim().replace("&amp;", "&");
+                    
+                    category = category.trim();
 
                     /**
                      * The interesting String  
@@ -214,6 +216,7 @@ public class CategorizeApps extends BasicFileReader {
             }
             else {
                 String category = (String) APPS_ALREADY_CATEGORIZED.get(applicationName);
+                ApplicationUsedAnalyzer.addCategory(category);
                 return new String[]{category, getAppOrGame(category)};
             }
         }

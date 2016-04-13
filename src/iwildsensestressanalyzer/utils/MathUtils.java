@@ -26,7 +26,7 @@ public class MathUtils {
      */
     public static Double[] calculateStatisticInformation(ArrayList<Double> values) {
         
-        double average = 0, variance = 0, standardDeviation = 0;
+        Double average = 0.0, variance = 0.0, standardDeviation;
         
         for (Double value: values) {
             average += value;
@@ -40,10 +40,22 @@ public class MathUtils {
             variance /= values.size();
         }
         else {
-            variance = 0;
+            variance = 0.0;
         }
         
         standardDeviation = Math.sqrt(variance);
+        
+        if (Double.isNaN(average) || Double.isInfinite(average)) {
+            average = 0.0;
+        }
+        
+        if (variance.isInfinite() || variance.isNaN()) {
+            average = 0.0;
+        }
+        
+        if (standardDeviation.isInfinite() || standardDeviation.isNaN()) {
+            standardDeviation = 0.0;
+        }
         
         Double[] results = {average, variance, standardDeviation};
         return results;

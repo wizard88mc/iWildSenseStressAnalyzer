@@ -90,12 +90,12 @@ public class ApplicationUsedFeaturesExtractor {
         
         for (ApplicationUsed applicationUsed: applicationUsedList) {
             
-            if (applicationUsed.getAppOrGame()!= null) {
+            if (applicationUsed.getAppType()!= null) {
                 totalEvents += applicationUsed.getNumberOfApplicationsUsedEventList();
             }
             
-            if (applicationUsed.getAppOrGame()!= null && 
-                    applicationUsed.getAppOrGame().equals(appType)) {
+            if (applicationUsed.getAppType()!= null && 
+                    applicationUsed.getAppType().equals(appType)) {
                 targetEvents += applicationUsed.getNumberOfApplicationsUsedEventList();
             }
         }
@@ -115,12 +115,12 @@ public class ApplicationUsedFeaturesExtractor {
         
         for (ApplicationUsed applicationUsed: applicationUsedList) {
             
-            if (applicationUsed.getAppOrGame() != null) {
+            if (applicationUsed.getAppType()!= null) {
                 totalTiming += applicationUsed.getTotalDurationOfApplicationUsed();
             }
             
-            if (applicationUsed.getAppOrGame() != null && 
-                    applicationUsed.getAppOrGame().equals(appType)) {
+            if (applicationUsed.getAppType()!= null && 
+                    applicationUsed.getAppType().equals(appType)) {
                 
                 appTiming += applicationUsed.getTotalDurationOfApplicationUsed();
             }
@@ -138,9 +138,30 @@ public class ApplicationUsedFeaturesExtractor {
         
         Boolean hasUsed = false;
         
-        for (int i = 0; i <applicationUsedList.size() && !hasUsed; i++) {
+        for (int i = 0; i < applicationUsedList.size() && !hasUsed; i++) {
             
-            if (applicationUsedList.get(i).getAppCategory().equals(appCategory)) {
+            if (applicationUsedList.get(i).getAppCategory() != null && 
+                    applicationUsedList.get(i).getAppCategory().equals(appCategory)) {
+                hasUsed = true;
+            }
+        }
+        
+        return hasUsed;
+    }
+    
+    /**
+     * Returns if the application type has been used or not
+     * @param appType the application type
+     * @return true if the application type has been used, false otherwise
+     */
+    public Boolean hasUsedApplicationType(String appType) {
+        
+        Boolean hasUsed = false;
+        
+        for (int i = 0; i < applicationUsedList.size() && !hasUsed; i++) {
+            
+            if (applicationUsedList.get(i).getAppType() != null && 
+                    applicationUsedList.get(i).getAppType().equals(appType)) {
                 hasUsed = true;
             }
         }

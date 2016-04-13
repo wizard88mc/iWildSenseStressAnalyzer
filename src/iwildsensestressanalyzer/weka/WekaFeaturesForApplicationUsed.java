@@ -4,7 +4,6 @@ import iwildsensestressanalyzer.applicationsused.ApplicationUsedFeaturesExtracto
 import iwildsensestressanalyzer.applicationsused.ApplicationUsedFeaturesExtractorListWrapper;
 import iwildsensestressanalyzer.dataanalyzer.ApplicationUsedAnalyzer;
 import iwildsensestressanalyzer.esm.StressSurvey;
-import iwildsensestressanalyzer.utils.MathUtils;
 import java.util.ArrayList;
 
 /**
@@ -23,6 +22,14 @@ public class WekaFeaturesForApplicationUsed extends WekaFeaturesCreator {
      * - Timing Influence
      *    - average
      *    - standard deviation
+     * 
+     * For each application type
+     * - Influence
+     *     - average
+     *     - standard deviation
+     * - Timing influence
+     *     - average
+     *     - standard deviation
      */
     public static String[] featuresName;
     
@@ -33,12 +40,12 @@ public class WekaFeaturesForApplicationUsed extends WekaFeaturesCreator {
      */
     public static ArrayList<Double> getFeaturesForUserActivity(StressSurvey survey) {
         
-        ArrayList<Double> features = new ArrayList<Double>();
+        ArrayList<Double> features = new ArrayList<>();
         
         for (String category: ApplicationUsedAnalyzer.getAllAppCategories()) {
             
             ArrayList<ApplicationUsedFeaturesExtractor> fExtractor = 
-                    new ArrayList<ApplicationUsedFeaturesExtractor>();
+                    new ArrayList<>();
             fExtractor.add(survey.getApplicationUsedFeaturesExtractor());
             
             ApplicationUsedFeaturesExtractorListWrapper featuresExtractor = 
@@ -53,6 +60,27 @@ public class WekaFeaturesForApplicationUsed extends WekaFeaturesCreator {
             addCalculatedFeatures(features, statisticsTimingInfluenceOfAppCategory);
         }
         
+        /**
+         * Calculating features for all Application Types
+         */
+        for (String type: ApplicationUsedAnalyzer.getAllAppTypes()) {
+            
+            ArrayList<ApplicationUsedFeaturesExtractor> fExtractor = 
+                    new ArrayList<>();
+            fExtractor.add(survey.getApplicationUsedFeaturesExtractor());
+            
+            ApplicationUsedFeaturesExtractorListWrapper featuresExtractor = 
+                    new ApplicationUsedFeaturesExtractorListWrapper(fExtractor);
+            
+            Double[] statisticsInfluenceOfAppType = 
+                        featuresExtractor.calculateStatisticsInfluenceOfAppType(type),
+                    statisticsTimingInfluenceOfAppType = 
+                        featuresExtractor.calculateStatisticsOfTimingInfluenceOfAppType(type);
+            
+            addCalculatedFeatures(features, statisticsInfluenceOfAppType);
+            addCalculatedFeatures(features, statisticsTimingInfluenceOfAppType);
+        }
+        
         return features;
     }
     
@@ -61,14 +89,30 @@ public class WekaFeaturesForApplicationUsed extends WekaFeaturesCreator {
      */
     public static void createFeaturesName() {
         
-        ArrayList<String> names = new ArrayList<String>();
+        ArrayList<String> names = new ArrayList<>();
         
         for (String appCategory: ApplicationUsedAnalyzer.getAllAppCategories()) {
-            names.add("ApplicationsUsed_AVG_" + appCategory.replaceAll(" ", "") + "Influence");
-            names.add("ApplicationsUsed_STD_" + appCategory.replaceAll(" ", "") + "Influence");
+            names.add("ApplicationsUsed_AVG_" + appCategory.replaceAll(" ", "") 
+                    + "Influence");
+            names.add("ApplicationsUsed_STD_" + appCategory.replaceAll(" ", "") 
+                    + "Influence");
             
-            names.add("ApplicationsUsed_AVG_" + appCategory.replaceAll(" ", "") + "TimingInfluence");
-            names.add("ApplicationsUsed_STD_" + appCategory.replaceAll(" ", "") + "TimingInfluence");
+            names.add("ApplicationsUsed_AVG_" + appCategory.replaceAll(" ", "") 
+                    + "TimingInfluence");
+            names.add("ApplicationsUsed_STD_" + appCategory.replaceAll(" ", "") 
+                    + "TimingInfluence");
+        }
+        
+        for (String appType: ApplicationUsedAnalyzer.getAllAppTypes()) {
+            names.add("ApplicationsUsed_AVG_" + appType.replaceAll(" ", "") + 
+                    "Influence");
+            names.add("ApplicationsUsed_STD_" + appType.replaceAll(" ", "") + 
+                    "Influence");
+            
+            names.add("ApplicationsUsed_AVG_" + appType.replaceAll(" ", "") + 
+                    "TimingInfluence");
+            names.add("ApplicationsUsed_STD_" + appType.replaceAll(" ", "") + 
+                    "TimingInfluence");
         }
         
         featuresName = new String[names.size()];

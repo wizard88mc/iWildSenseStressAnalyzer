@@ -32,8 +32,8 @@ public class WekaAnalyzer {
     
     public static CreatedFilesWriter createdFilesWriter = null;
     
-    private static ArrayList<String> listIMEIsAlreadyTestedDifficult = new ArrayList<>(),
-            listIMEIsAlreadyTestedEasy = new ArrayList<>();
+    private static final ArrayList<String> IMEIS_ALREADY_TESTED_5CLASSES = new ArrayList<>(),
+            IMEIS_ALREADY_TESTED_3CLASSES = new ArrayList<>();
     
     public static void createWekaFiles(ArrayList<Participant> 
             participants, String subfolderName) {
@@ -54,12 +54,13 @@ public class WekaAnalyzer {
                     new ArrayList<>(), 
                 featuresForTouchesBufferedForAllParticipants = 
                     new ArrayList<>(), 
-                featuresForUserActivityForAllParticipants = 
-                    new ArrayList<>(),
+                featuresForUserActivityForAllParticipants = new ArrayList<>(),
                 featuresForUserPresenceEventsForAllParticipants = 
                     new ArrayList<>(),
                 featuresForUserPresenceLightForAllParticipants = 
                     new ArrayList<>();
+        ArrayList<ArrayList<String>> featuresForDaysAndWeatherForAllParticipants = 
+                new ArrayList<>();
         
         ArrayList<Integer> surveyAnswersForAllParticipants = 
             new ArrayList<>();
@@ -71,14 +72,11 @@ public class WekaAnalyzer {
             
             ArrayList<ArrayList<Double>> featuresForApplicationUsed = 
                         new ArrayList<>(), 
-                    featuresForTouchesBuffered = 
-                        new ArrayList<>(), 
-                    featuresForUserActivity = 
-                        new ArrayList<>(), 
-                    featuresForUserPresenceEvents = 
-                        new ArrayList<>(),
-                    featuresForUserPresenceLight = 
-                        new ArrayList<>();
+                    featuresForTouchesBuffered = new ArrayList<>(), 
+                    featuresForUserActivity = new ArrayList<>(), 
+                    featuresForUserPresenceEvents = new ArrayList<>(),
+                    featuresForUserPresenceLight = new ArrayList<>();
+            ArrayList<ArrayList<String>> featuresForDaysAndWeather = new ArrayList<>();
             
             ArrayList<Integer> surveyAnswers = new ArrayList<>();
             
@@ -96,6 +94,8 @@ public class WekaAnalyzer {
                         getFeaturesForScreenEvents(survey));
                 featuresForUserPresenceLight.add(WekaFeaturesForUserPresenceLight.
                         getFeaturesForUserPresenceLightEvent(survey));
+                featuresForDaysAndWeather.add(WekaFeaturesForDaysAndWeather.
+                        getFeaturesForDaysAndWeather(survey));
             }
             
             /**
@@ -107,6 +107,7 @@ public class WekaAnalyzer {
             featuresForUserActivityForAllParticipants.addAll(featuresForUserActivity);
             featuresForUserPresenceEventsForAllParticipants.addAll(featuresForUserPresenceEvents);
             featuresForUserPresenceLightForAllParticipants.addAll(featuresForUserPresenceLight);
+            featuresForDaysAndWeatherForAllParticipants.addAll(featuresForDaysAndWeather);
             
             surveyAnswersForAllParticipants.addAll(surveyAnswers);
             
@@ -142,8 +143,12 @@ public class WekaAnalyzer {
                 features.addAll(normalizedFeaturesForUserPresenceLight.get(i));
                 
                 output.writeCalculatedFeaturesOnOutputFiles(
-                        MathUtils.convertFeaturesToASetOfString(features), 
-                        surveyAnswers.get(i));
+                        MathUtils.convertFeaturesToASetOfString(features));
+                
+                output.writeCalculatedFeaturesOnOutputFiles(
+                        featuresForDaysAndWeather.get(i));
+                
+                output.writeInstanceClass(surveyAnswers.get(i));
             }
             
             output.closeFiles();
@@ -186,8 +191,13 @@ public class WekaAnalyzer {
             features.addAll(normalizedFeaturesforUserPresenceLightForAllParticipants.get(i));
             
             writerForAllParticipants.writeCalculatedFeaturesOnOutputFiles(
-                    MathUtils.convertFeaturesToASetOfString(features), 
-                    surveyAnswersForAllParticipants.get(i));
+                    MathUtils.convertFeaturesToASetOfString(features));
+            
+            writerForAllParticipants.writeCalculatedFeaturesOnOutputFiles(
+                    featuresForDaysAndWeatherForAllParticipants.get(i));
+            
+            writerForAllParticipants
+                    .writeInstanceClass(surveyAnswersForAllParticipants.get(i));
         }
         
         writerForAllParticipants.closeFiles();
@@ -197,14 +207,11 @@ public class WekaAnalyzer {
         createdFilesWriter.writeCreatedFiles(listCreatedFiles);
     }
     
-    public static void startWithWekaClassificationTask(String toWorkWith) {
+    public static void startWithWekaClassificationTask(String toWorkWith, 
+                String folder) {
         
-        ArrayList<String> allFileNames = WekaFilesCreatedReader.getCreatedWekaFiles(),
+        ArrayList<String> allFileNames = WekaFilesCreatedReader.getCreatedWekaFiles(folder),
                 filesToUse = new ArrayList<>();
-                /*moreThanZeroAnswers = new ArrayList<>(),
-                moreThanThreshold = new ArrayList<>(),
-                moreThanOnePerDay = new ArrayList<>(), 
-                moreThanInitialAverage = new ArrayList<>();*/
         
         for (String fileName: allFileNames) {
             if (toWorkWith.equals(IWildSenseStressAnalyzer.ONLY_MORE_THAN_ZERO) &&
@@ -233,14 +240,14 @@ public class WekaAnalyzer {
          * Starting weka classification task
          */
         if (toWorkWith.equals(IWildSenseStressAnalyzer.ONLY_MORE_THAN_ZERO)) {
-        System.out.println("*** Classification for participants with more than "
+            System.out.println("*** Classification for participants with more than "
                 + "zero answers ***");
+            /*performWekaClassificationTask(filesToUse, 
+                IWildSenseStressAnalyzer.TITLE_PARTICIPANTS_MORE_ZERO_ANSWERS, 
+                folder, IWildSenseStressAnalyzer.FOLDER_MORE_ZERO_ANSWERS, false);*/
             performWekaClassificationTask(filesToUse, 
                 IWildSenseStressAnalyzer.TITLE_PARTICIPANTS_MORE_ZERO_ANSWERS, 
-                IWildSenseStressAnalyzer.FOLDER_MORE_ZERO_ANSWERS, false);
-            performWekaClassificationTask(filesToUse, 
-                IWildSenseStressAnalyzer.TITLE_PARTICIPANTS_MORE_ZERO_ANSWERS, 
-                IWildSenseStressAnalyzer.FOLDER_MORE_ZERO_ANSWERS, true);
+                folder, IWildSenseStressAnalyzer.FOLDER_MORE_ZERO_ANSWERS, true);
         }
         else if (toWorkWith.equals(IWildSenseStressAnalyzer.ONLY_MORE_THRESHOLD)) {
             
@@ -248,10 +255,10 @@ public class WekaAnalyzer {
                 + "answers than the threshold ***");
             performWekaClassificationTask(filesToUse, 
                 IWildSenseStressAnalyzer.TITLE_MORE_THRESHOLD, 
-                IWildSenseStressAnalyzer.FOLDER_MORE_THRESHOLD, false);
+                folder, IWildSenseStressAnalyzer.FOLDER_MORE_THRESHOLD, false);
             performWekaClassificationTask(filesToUse, 
                 IWildSenseStressAnalyzer.TITLE_MORE_THRESHOLD, 
-                IWildSenseStressAnalyzer.FOLDER_MORE_THRESHOLD, true);
+                folder, IWildSenseStressAnalyzer.FOLDER_MORE_THRESHOLD, true);
         }
         else if (toWorkWith.equals(IWildSenseStressAnalyzer.ONLY_MORE_ONE_PER_DAY)) {
         
@@ -259,10 +266,10 @@ public class WekaAnalyzer {
                 + "one answer per day ***");
             performWekaClassificationTask(filesToUse, 
                 IWildSenseStressAnalyzer.TITLE_MORE_ONE_SURVEY_PER_DAY, 
-                IWildSenseStressAnalyzer.FOLDER_MORE_ONE_SURVEY_PER_DAY, false);
+                folder, IWildSenseStressAnalyzer.FOLDER_MORE_ONE_SURVEY_PER_DAY, false);
             performWekaClassificationTask(filesToUse, 
                 IWildSenseStressAnalyzer.TITLE_MORE_ONE_SURVEY_PER_DAY, 
-                IWildSenseStressAnalyzer.FOLDER_MORE_ONE_SURVEY_PER_DAY, true);
+                folder, IWildSenseStressAnalyzer.FOLDER_MORE_ONE_SURVEY_PER_DAY, true);
         }
         else if (toWorkWith.equals(IWildSenseStressAnalyzer.ONLY_MORE_INITIAL_AVERAGE)) {
         
@@ -270,10 +277,10 @@ public class WekaAnalyzer {
                 + "answers more than the initial average ***");
             performWekaClassificationTask(filesToUse, 
                 IWildSenseStressAnalyzer.TITLE_MORE_THAN_INITIAL_AVERAGE, 
-                IWildSenseStressAnalyzer.FOLDER_MORE_THAN_INITIAL_AVERAGE, false);
+                folder, IWildSenseStressAnalyzer.FOLDER_MORE_THAN_INITIAL_AVERAGE, false);
             performWekaClassificationTask(filesToUse, 
                 IWildSenseStressAnalyzer.TITLE_MORE_THAN_INITIAL_AVERAGE, 
-                IWildSenseStressAnalyzer.FOLDER_MORE_THAN_INITIAL_AVERAGE, true);
+                folder, IWildSenseStressAnalyzer.FOLDER_MORE_THAN_INITIAL_AVERAGE, true);
         }
     }
     
@@ -281,10 +288,11 @@ public class WekaAnalyzer {
      * Performs Classification
      */
     private static void performWekaClassificationTask(ArrayList<String> listFileNames, 
-            String initialMessage, String subfolder, boolean oversampleData) {
+            String initialMessage, String folder, String subfolder, 
+            boolean oversampleData) {
         
         WekaEvaluationOutputWriter outputWriter = 
-                new WekaEvaluationOutputWriter(subfolder, oversampleData);
+                new WekaEvaluationOutputWriter(folder, subfolder, oversampleData);
         
         outputWriter.writeOnOutputFile(initialMessage);
         
@@ -294,16 +302,17 @@ public class WekaAnalyzer {
             String IMEI = elementsFileName[elementsFileName.length - 2];
             //String IMEI = "_ALL";
             
-            if ((fileName.contains("EASY") && !listIMEIsAlreadyTestedEasy.contains(IMEI))
-                    || (fileName.contains("DIFFICULT") && 
-                    !listIMEIsAlreadyTestedDifficult.contains(IMEI))) {
+            if ((fileName.contains("EASY") && 
+                    !IMEIS_ALREADY_TESTED_3CLASSES.contains(IMEI)) || 
+                (fileName.contains("DIFFICULT") && 
+                    !IMEIS_ALREADY_TESTED_5CLASSES.contains(IMEI))) {
                 
                 if (!IMEI.contains("ALL") && fileName.contains("EASY")) {
                     if (fileName.contains("EASY")) {
-                        listIMEIsAlreadyTestedEasy.add(IMEI);
+                        IMEIS_ALREADY_TESTED_3CLASSES.add(IMEI);
                     }
                     else {
-                        listIMEIsAlreadyTestedDifficult.add(IMEI);
+                        IMEIS_ALREADY_TESTED_5CLASSES.add(IMEI);
                     }
                 }
             
@@ -481,7 +490,8 @@ public class WekaAnalyzer {
      * false otherwise
      * @return a formatted String with the results of the classification task
      */
-    private static String evaluateClassificationPerformances(Evaluation eval, boolean easyTask) {
+    private static String evaluateClassificationPerformances(Evaluation eval, 
+            boolean easyTask) {
         
         int numberOfClasses = 5;
         if (easyTask) {
@@ -492,7 +502,6 @@ public class WekaAnalyzer {
                 numberOfClasses);
         
         return evaluator.evaluatePerformances();
-        
     }
     
     /**

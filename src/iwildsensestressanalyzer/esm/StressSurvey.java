@@ -12,6 +12,7 @@ import iwildsensestressanalyzer.userpresenceevent.UnlockedScreen;
 import iwildsensestressanalyzer.userpresenceevent.UserPresenceAdvancedEventsWrapper;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -25,10 +26,15 @@ public class StressSurvey {
     
     private static final int TOTAL_HOURS_VALIDITY = -3;
     
+    public final Integer MORNING_HOUR = 13, AFTERNOON_HOUR = 17, 
+            EVENING_HOUR = 21;
+    
     private final long timestamp;
+    private final GregorianCalendar surveyDate;
     private final int valence;
     private final int energy;
     private final int stress;
+    private final WeatherInfos weather;
     
     private UserPresenceAdvancedEventsWrapper userPresenceAdvancedEventsWrapper;
     /**
@@ -41,7 +47,8 @@ public class StressSurvey {
     
     private ApplicationUsedFeaturesExtractor applicationUsedFeaturesExtractor;
     
-    public StressSurvey(String lineWithAnswer) {
+    public StressSurvey(String lineWithAnswer, 
+            ArrayList<WeatherInfos> weatherInfos) {
         
         String[] answerElements = lineWithAnswer.split(",");
         /**
@@ -52,6 +59,8 @@ public class StressSurvey {
          * [4]: answer provided: energy-valence-stress
          */
         timestamp = Long.valueOf(answerElements[1]);
+        surveyDate = new GregorianCalendar();
+        surveyDate.setTimeInMillis(timestamp);
         
         String[] elementsSurvey = answerElements[4].split("-");
         /**
@@ -62,6 +71,7 @@ public class StressSurvey {
         valence = Integer.valueOf(elementsSurvey[0]);
         energy = Integer.valueOf(elementsSurvey[1]);
         stress = Integer.valueOf(elementsSurvey[2]);
+        weather = WeatherInfos.getWeatherInfosForSurvey(timestamp, weatherInfos);
     }
     
     /**
@@ -114,6 +124,112 @@ public class StressSurvey {
     }
     
     /**
+     * Returns the weather associated with 
+     * @return 
+     */
+    public WeatherInfos getWeather() {
+        return this.weather;
+    }
+    
+    /**
+     * Returns if the survey was provided in the morning
+     * @return true if survey is in the morning, false otherwise
+     */
+    public boolean isInTheMorning() {
+        
+        return surveyDate.get(Calendar.HOUR_OF_DAY) <= MORNING_HOUR;
+    }
+    
+    /**
+     * Returns if the survey was provided in the afternoon
+     * @return true if survey is in the afternoon, false otherwise
+     */
+    public boolean isInTheAfternoon() {
+        
+        return !isInTheMorning() && 
+                surveyDate.get(Calendar.HOUR_OF_DAY) <= AFTERNOON_HOUR;
+    }
+    
+    public boolean isInTheEvening() {
+        
+        return !isInTheMorning() && !isInTheAfternoon();
+    }
+    
+    public String dayMomentToString() {
+        
+        if (isInTheMorning()) {
+            return "1";
+        }
+        else if (isInTheAfternoon()) {
+            return "2";
+        }
+        else {
+            return "3";
+        }
+    }
+    
+    public boolean isMonday() {
+        
+        return surveyDate.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY;
+    }
+    
+    public boolean isTuesday() {
+    
+        return surveyDate.get(Calendar.DAY_OF_WEEK) == Calendar.TUESDAY;
+    }
+    
+    public boolean isWednesday() {
+        
+        return surveyDate.get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY;
+    }
+    
+    public boolean isThursday() {
+        
+        return surveyDate.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY;
+    }
+    
+    public boolean isFriday() {
+        
+        return surveyDate.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY;
+    }
+    
+    public boolean isSaturday() {
+        
+        return surveyDate.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY;
+    }
+    
+    public boolean isSunday() {
+        
+        return surveyDate.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY;
+    }
+    
+    public String dayToString() {
+        
+        if (isMonday()) {
+            return "1";
+        }
+        else if (isTuesday()) {
+            return "2";
+        }
+        else if (isWednesday()) {
+            return "3";
+        }
+        else if (isThursday()) {
+            return "4";
+        }
+        else if (isFriday()) {
+            return "5";
+        }
+        else if (isSaturday()) {
+            return "6";
+        }
+        else if (isSunday()) {
+            return "7";
+        }
+        else return null;
+    }
+    
+    /**
      * Adds to the survey all the Screen events that belongs to the survey. This
      * method creates a ScreenEventsAnalyzer that will hold only valid Events 
      * for the survey
@@ -141,7 +257,8 @@ public class StressSurvey {
             }
         }
         
-        this.userPresenceAdvancedEventsWrapper = new UserPresenceAdvancedEventsWrapper(screenOnOffEvents, 
+        this.userPresenceAdvancedEventsWrapper = 
+            new UserPresenceAdvancedEventsWrapper(screenOnOffEvents, 
                 unlockedScreenEvents);
     }
     
@@ -200,10 +317,22 @@ public class StressSurvey {
     }
     
     /**
+     * Returns if during the time validity of the survey that particular 
+     * application type has been used
+     * @param appType the application type
+     * @return true if the application type has been used, false otherwise
+     */
+    public Boolean isApplicationTypeUsed(String appType) {
+        
+        return applicationUsedFeaturesExtractor.hasUsedApplicationType(appType);
+    }
+    
+    /**
      * Returns the screen events wrapper
      * @return the UserPresenceAdvancedEventsWrapper object
      */
     public UserPresenceAdvancedEventsWrapper getUserPresenceAdvancedEventsWrapper() {
+        
         return this.userPresenceAdvancedEventsWrapper;
     }
     
@@ -212,10 +341,12 @@ public class StressSurvey {
      * @return the UserActivityEventsWrapper object 
      */
     public UserActivityFeaturesExtractor getUserActivityFeaturesExtractor() {
+        
         return this.userActivityFeaturesExtractor;
     }
     
     public ApplicationUsedFeaturesExtractor getApplicationUsedFeaturesExtractor() {
+        
         return this.applicationUsedFeaturesExtractor;
     }
     

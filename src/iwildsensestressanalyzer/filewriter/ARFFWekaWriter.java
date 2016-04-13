@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package iwildsensestressanalyzer.filewriter;
 
 import iwildsensestressanalyzer.weka.WekaFeaturesForApplicationUsed;
+import iwildsensestressanalyzer.weka.WekaFeaturesForDaysAndWeather;
 import iwildsensestressanalyzer.weka.WekaFeaturesForScreenEvents;
 import iwildsensestressanalyzer.weka.WekaFeaturesForTouchesBuffered;
 import iwildsensestressanalyzer.weka.WekaFeaturesForUserActivity;
@@ -105,6 +101,7 @@ public class ARFFWekaWriter extends OutputFileWriter {
         addNumericAttributeToPreamble(WekaFeaturesForUserActivity.featuresName, writer);
         addNumericAttributeToPreamble(WekaFeaturesForScreenEvents.featuresNames, writer);
         addNumericAttributeToPreamble(WekaFeaturesForUserPresenceLight.featuresName, writer);
+        addNumericAttributeToPreamble(WekaFeaturesForDaysAndWeather.featuresName, writer);
     }
     
     /**
@@ -129,22 +126,47 @@ public class ARFFWekaWriter extends OutputFileWriter {
     }
     
     /**
+     * Adds a string feature (attribute) to the weka file
+     * @param features an array of features names
+     * @param writer the output file writer
+     */
+    private void addStringAttributeToPreamble(String[] features, 
+            BufferedWriter writer) {
+     
+        for (String element: features) {
+            try {
+                writer.write("@ATTRIBUTE " + element + " STRING");
+                writer.newLine();
+            }
+            catch(IOException exc) {
+                
+            }
+        }
+    }
+    
+    /**
      * Writes a line of features and stress value on the two output weka files
      * @param features a list of String features to write
-     * @param stressValue the stress value associated with the features
      */
-    public void writeCalculatedFeaturesOnOutputFiles(ArrayList<String> features, 
-            Integer stressValue) {
+    public void writeCalculatedFeaturesOnOutputFiles(ArrayList<String> features) {
         
         String outputString = "";
         for (String feature: features) {
-            outputString += feature + ",";
+            if (feature == null) {
+                feature = "?";
+            }
+            
+            if (feature.contains(" ")) {
+                outputString += "'" + feature + "',";
+            }
+            else {
+                outputString += feature + ",";
+            }
+            
         }
         
         try {
-            outputFileWriterDifficult.write(outputString + stressValue);
-            outputFileWriterDifficult.newLine();
-            outputFileWriterDifficult.flush();
+            outputFileWriterDifficult.write(outputString);
         }
         catch(IOException exc) {
             System.out.println("IOException in writing calculated features for"
@@ -153,20 +175,49 @@ public class ARFFWekaWriter extends OutputFileWriter {
         }
         
         try {
+            outputFileWriterEasy.write(outputString);
+        }
+        catch(IOException exc) {
+            System.out.println("IOException in writing calculated features for"
+                    + " easy file");
+            exc.printStackTrace();
+        }
+    }
+    
+    /**
+     * Writes the stress value of the last instance
+     * @param stressValue the stress value to write
+     */
+    public void writeInstanceClass(Integer stressValue) {
+        
+        try {
+            outputFileWriterDifficult.write(String.valueOf(stressValue));
+            outputFileWriterDifficult.newLine();
+            outputFileWriterDifficult.flush();
+        }
+        catch(IOException exc) {
+            System.out.println("IOException in writing stress value for"
+                    + " difficult file");
+            exc.printStackTrace();
+        }
+        
+        try {
+            String stress = null;
             if (stressValue == 1 || stressValue == 2) {
-                outputFileWriterEasy.write(outputString + "1");
+                stress = "1";
             }
             else if (stressValue == 3) {
-                outputFileWriterEasy.write(outputString + "2");
-            } 
-            else if (stressValue == 4 || stressValue == 5) {
-                outputFileWriterEasy.write(outputString + "3");
+                stress = "2";
             }
+            else if (stressValue == 4 || stressValue == 5) {
+                stress = "3";
+            }
+            outputFileWriterEasy.write(stress);
             outputFileWriterEasy.newLine();
             outputFileWriterEasy.flush();
         }
         catch(IOException exc) {
-            System.out.println("IOException in writing calculated features for"
+            System.out.println("IOException in writing stress value for"
                     + " easy file");
             exc.printStackTrace();
         }
@@ -194,7 +245,7 @@ public class ARFFWekaWriter extends OutputFileWriter {
      */
     public ArrayList<File> getOutputFiles() {
         
-        ArrayList<File> files = new ArrayList<File>();
+        ArrayList<File> files = new ArrayList<>();
         files.add(outputFileEasy); files.add(outputFileDifficult);
          
        return files;

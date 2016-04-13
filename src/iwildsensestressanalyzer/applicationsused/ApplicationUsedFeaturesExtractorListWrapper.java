@@ -57,6 +57,44 @@ public class ApplicationUsedFeaturesExtractorListWrapper {
     }
     
     /**
+     * Creates a list of the influence of the considered application category
+     * over all the features extractor
+     * @param appType the application type
+     * @return a list of influences of the application type
+     */
+    public ArrayList<Double> getAllInfluenceOfAppType(String appType) {
+        
+        ArrayList<Double> listValues = new ArrayList<>();
+        
+        for (ApplicationUsedFeaturesExtractor appFeatureExtractor: 
+                applicationUsedFeaturesExtractorList) {
+            
+            listValues.add(appFeatureExtractor.calculateTimingInfluenceOfAppType(appType));
+        }
+        
+        return listValues;
+    }
+    
+    /**
+     * Calculate statistics information about the influence of an app category
+     * over all the categories
+     * @param appType the name of the app type
+     * @return [average, variance, standard deviation] if more than zero values, 
+     * [-1] otherwise, null if no values available
+     */
+    public Double[] calculateStatisticsInfluenceOfAppType(String appType) {
+        
+        ArrayList<Double> listValues = getAllInfluenceOfAppType(appType);
+        
+        if (listValues != null) {
+            return MathUtils.calculateStatisticInformation(listValues);
+        }
+        else {
+            return null;
+        }
+    }
+    
+    /**
      * Creates a list of influence of the considered application category 
      * over all the features extractor in terms of timing duration
      * @param appCategory the category we are currently considering
@@ -94,16 +132,27 @@ public class ApplicationUsedFeaturesExtractorListWrapper {
         }
     }
     
-    public ArrayList<Double> getAllInfluenceOfAppType(String appType) {
+    public ArrayList<Double> getAllTimingInfluenceOfAppType(String appType) {
         
-        ArrayList<Double> listValues = new ArrayList<>();
+        ArrayList<Double> values = new ArrayList<>();
         
-        for (ApplicationUsedFeaturesExtractor appFeatureExtractor: 
+        for (ApplicationUsedFeaturesExtractor appFeaturesExtractor: 
                 applicationUsedFeaturesExtractorList) {
-            
-            listValues.add(appFeatureExtractor.calculateTimingInfluenceOfAppType(appType));
+            values.add(appFeaturesExtractor.calculateTimingInfluenceOfAppType(appType));
         }
         
-        return listValues;
+        return values;
+    }
+    
+    public Double[] calculateStatisticsOfTimingInfluenceOfAppType(String appType) {
+        
+        ArrayList<Double> listValues = getAllTimingInfluenceOfAppType(appType);
+                
+        if (listValues != null) {
+            return MathUtils.calculateStatisticInformation(listValues);
+        }
+        else {
+            return null;
+        }
     }
 }

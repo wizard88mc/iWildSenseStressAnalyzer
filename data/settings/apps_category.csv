@@ -1,32 +1,337 @@
-com.android.mms, Communication
-com.android.contacts, Contacts
-com.android.phone, Calls
-com.android.launcher, Launcher
-com.google.android.browser, Browser
-com.android.settings, Settings
-com.google.android.gallery3d, Media & Video
-com.google.android.dialer, Communication
-pct.droid, Entertainment
-com.google.android.contacts, Contacts
-com.jayapps.mtube, Media & Video
-com.android.calculator2, Tools
-com.swisscom.tvguide, Media & Video
-ch.orange.android, Communication
-com.cyanogenmod.trebuchet, Launcher
-com.android.dialer, Communication
-com.tfsapps.playtube2, Media & Video
-com.android.documentsui, Productivity
-fr.amazon.mShop.android, Shopping
-ch.neoos.doodle, Productivity
-com.sjbstudio.the15minutemealsrecipes, Lifestyle
-com.android.packageinstaller, Tools
-com.handcent.nextsms, Communication
-com.tripadvisor.android.apps.cityguide.london, Travel & Local
-com.android.htmlviewer, Tools
-com.android.mi.email, Communication
-com.android.deskclock, Tools
-com.quickoffice.android, Productivity
-com.sally.yoga, Health & Fitness
-com.games.shootbubble, Puzzle
-com.jwork.wearable.heartratesync, Health & Fitness
-app.medicalid.free, Health & Fitness
+com.google.android.GoogleCamera,Photography
+com.android.mms,Communication
+com.android.contacts,Contacts
+com.android.phone,Calls
+com.android.launcher,Launcher
+com.google.android.browser,Browser
+com.android.settings,Settings
+com.google.android.gallery3d,Media & Video
+com.google.android.dialer,Communication
+pct.droid,Entertainment
+com.google.android.contacts,Contacts
+com.jayapps.mtube,Media & Video
+com.android.calculator2,Tools
+com.swisscom.tvguide,Media & Video
+ch.orange.android,Communication
+com.cyanogenmod.trebuchet,Launcher
+com.android.dialer,Communication
+com.tfsapps.playtube2,Media & Video
+com.android.documentsui,Productivity
+fr.amazon.mShop.android,Shopping
+ch.neoos.doodle,Productivity
+com.sjbstudio.the15minutemealsrecipes,Lifestyle
+com.android.packageinstaller,Tools
+com.handcent.nextsms,Communication
+com.tripadvisor.android.apps.cityguide.london,Travel & Local
+com.android.htmlviewer,Tools
+com.android.mi.email,Communication
+com.android.deskclock,Tools
+com.quickoffice.android,Productivity
+com.sally.yoga,Health & Fitness
+com.games.shootbubble,Puzzle
+com.jwork.wearable.heartratesync,Health & Fitness
+app.medicalid.free,Health & Fitnesscom.whatsapp,Communication
+com.google.android.deskclock,Tools
+com.google.android.gm,Communication
+com.google.android.inputmethod.latin,Tools
+com.google.android.apps.plus,Social
+com.google.android.apps.maps,Travel & Local
+ch.admin.meteoswiss,Weather
+com.lumiplan.montagne.Chamonix,Sports
+com.google.android.apps.genie.geniewidget,News & Magazines
+com.android.chrome,Communication
+ch.iAgentur.i20MinFr,News & Magazines
+com.google.android.googlequicksearchbox,Tools
+com.lslk.sleepbot,Health & Fitness
+com.facebook.katana,Social
+com.instagram.android,Social
+com.google.android.apps.docs,Productivity
+com.watchup,News & Magazines
+com.snapchat.android,Social
+tunein.player,Music & Audio
+com.soundcloud.android,Music & Audio
+com.duolingo,Education
+com.facebook.orca,Communication
+com.monefy.app.lite,Finance
+com.google.android.keep,Productivity
+ch.tpg.android,Transportation
+com.anydo,Productivity
+com.linkedin.android,Social
+com.google.android.calendar,Productivity
+com.devexpert.weather,Weather
+com.mttnow.droid.easyjet,Travel & Local
+com.netflix.mediaclient,Entertainment
+com.clue.android,Health & Fitness
+com.google.android.youtube,Media & Video
+com.devuni.flashlight,Tools
+ch.sbb.mobile.android.b2c,Transportation
+com.twitter.android,Social
+com.domobile.applock,Tools
+com.tumblr,Social
+org.hola,Tools
+com.google.android.apps.docs.editors.docs,Productivity
+com.google.android.talk,Communication
+de.hp.taskmanager,Tools
+flipboard.app,News & Magazines
+co.vine.android,Social
+com.memrise.android.memrisecompanion,Education
+com.viber.voip,Communication
+com.glanzkinder.MigrosStudios.AndroidActivFitness,Health & Fitness
+org.telegram.messenger,Communication
+com.cleanmaster.mguard,Tools
+com.adobe.reader,Productivity
+com.namcobandaigames.spmoja010E,Role Playing
+com.shazam.android,Music & Audio
+com.google.android.gms,Tools
+com.caynax.a6w,Health & Fitness
+ch.deindeal.android,Shopping
+com.microsoft.office.officehub,Productivity
+com.google.android.apps.inbox,Productivity
+com.ideashower.readitlater.pro,News & Magazines
+com.skype.raider,Communication
+com.devhd.feedly,News & Magazines
+com.ketchapp.springninja,Arcade
+com.aldiko.android,Books & Reference
+org.wikipedia,Books & Reference
+ch.rts.rtsinfo,News & Magazines
+com.secouchermoinsbete,Entertainment
+com.ninegag.android.app,Entertainment
+com.touchtype.swiftkey,Productivity
+com.swisscom.myswisscom,Productivity
+com.estrongs.android.pop,Productivity
+com.teslacoilsw.launcher,Personalization
+com.etermax.apalabrados.pro,Word
+com.appgenix.bizcal,Productivity
+com.lookout,Tools
+com.nubelacorp.javelin,Productivity
+com.alensw.PicFolder,Photography
+fr.nghs.android.paid.dictionnaires,Books & Reference
+com.tbig.playerpro,Music & Audio
+ch.coop.supercard,Shopping
+org.dayup.gtask,Productivity
+com.drippler.android.updates,News & Magazines
+appinventor.ai_progetto2003.SCAN,Tools
+ch.perron2.teletext,News & Magazines
+ch.rts.rtssport,Sports
+com.hb.settings,Productivity
+com.textra,Communication
+com.evernote,Productivity
+net.vivekiyer.GAL,Communication
+com.compute4you.remotecontrol,Music & Audio
+com.dmholdings.denonremoteapp,Music & Audio
+com.eurosport,Sports
+mobi.infolife.appbackup,Productivity
+com.handmark.tweetcaster,Social
+com.google.android.apps.gesturesearch,Tools
+com.spotify.music,Music & Audio
+com.mapfactor.navigator,Travel & Local
+ch.local.android,Travel & Local
+vivino.web.app,Lifestyle
+com.lafourchette.lafourchette,Lifestyle
+com.telerama.fr,Entertainment
+com.endomondo.android,Health & Fitness
+com.greencopper.android.montreuxjazzfestival,Music & Audio
+org.wordpress.android,Social
+com.android.gallery3d,Media & Video
+com.whatsapp,Communication
+com.panasonic.psn.android.tgdect,Communication
+ch.alpsoft.qoqa.ui,Lifestyle
+com.tessi.clubmarie,Lifestyle
+fr.francetv.apps.info,News & Magazines
+com.dropbox.android,Productivity
+com.goodreads,Books & Reference
+com.rrr.macoherencecardiaque,Health & Fitness
+com.pinterest,Social
+fr.playsoft.teleloisirs,Entertainment
+com.venteprivee,Shopping
+com.oanda.currencyconverter,Travel & Local
+com.mobitrendz.unitconverters,Tools
+fr.creditagricole.androidapp,Finance
+com.june.think,Trivia
+com.mylittleparis.mylittle_app,Lifestyle
+fr.meteo,Weather
+com.bodybuilding.mobile,Health & Fitness
+com.blizzard.wtcg.hearthstone,Card
+com.ucool.herohd,Role Playing
+com.versus,Shopping
+com.blizzard.bma,Entertainment
+com.ubercab,Transportation
+com.yahoo.mobile.client.android.mail,Communication
+com.jb.gosms,Communication
+com.amazon.mp3,Music & Audio
+com.chess,Board
+com.google.android.apps.messaging,Communication
+com.bsplayer.bspandroid.full,Media & Video
+com.google.android.apps.fitness,Health & Fitness
+com.audible.application,Books & Reference
+com.slovoed.noreg.pons.french_german,Books & Reference
+ch.subgate.chessvisualizationtrainer,Puzzle
+com.akbur.mathsworkout,Puzzle
+uk.co.nickfines.RealCalcPlus,Productivity
+com.alarmclock.xtreme.free,Productivity
+com.google.android.apps.docs.editors.slides,Productivity
+com.MikaMobile.BattleheartLegacy,Role Playing
+tw.blogspot.karryapps.reactiontraining,Puzzle
+air.nn.mobile.app.main,Education
+com.chingy1788.reactiontime,Puzzle
+com.scee.psxandroid,Entertainment
+com.radio.fmradio,Music & Audio
+com.socialnmobile.dictapps.notepad.color.note,Productivity
+com.huffingtonpost.android,News & Magazines
+com.bitdefender.clueful,Tools
+com.coffeebeanventures.easyvoicerecorder,Productivity
+com.acr.androiddownloadmanager,Tools
+com.aura.ringtones.auramorningalarms,Entertainment
+com.lemonde.androidapp,News & Magazines
+com.mxtech.videoplayer.ad,Media & Video
+com.rhmsoft.fm,Tools
+com.google.android.wearable.app,Communication
+com.google.android.apps.handwriting.ime,Tools
+com.ubs.swidKXJ.android,Finance
+com.npi.wearminilauncher,Communication
+com.mufumbo.android.recipe.search,Lifestyle
+com.motorola.targetnotif,Communication
+com.kiwiwearables.app,Communication
+com.todoist,Productivity
+ch.nzz.mobile,News & Magazines
+org.leo.android.dict,Books & Reference
+com.nth.swisspost,Tools
+org.muth.android.conjugator_demo_fr,Education
+com.popularapp.sevenmins,Health & Fitness
+mmapps.bmi.calculator,Health & Fitness
+com.codium.hydrocoach,Health & Fitness
+com.scimob.ninetyfour.percent,Trivia
+com.withbuddies.yahtzee,Board
+com.namcobandaigames.pacmantournaments,Arcade
+food.manager,Health & Fitness
+bubbleshooter.orig,Casual
+com.nrsmagic.shooter,Puzzle
+com.fastsoft.bubbleshooter,Puzzle
+magory.spacebubbles,Arcade
+com.shootbubble.bubbledexlue,Puzzle
+de.zalando.mobile,Shopping
+ch.post.it.pcc,Photography
+ch.rsi.player,Media & Video
+ch.srf.mobile.srfplayer,Media & Video
+uk.co.nickfines.RealCalc,Productivity
+com.thomsonreuters.reuters,News & Magazines
+com.bsplayer.bspandroid.free,Media & Video
+com.period.tracker.lite,Health & Fitness
+com.airbnb.android,Travel & Local
+com.marcow.birthdaylist,Social
+ch.subgate.spritestudio,Tools
+ch.salt.mobile,Business
+com.socratica.mobile.countries,Education
+air.com.sgn.cookiejam.gp,Puzzle
+com.spacegame.forestmania,Puzzle
+jp.naver.lineplay.android,Social
+jp.naver.line.android,Communication
+ch.unige.tpgcrowd,Transportation
+com.king.candycrushsodasaga,Casual
+com.purplekiwii.mb,Puzzle
+ch.mediaone.androidOneFM,Music & Audio
+com.ezjoynetwork.cookiemania,Puzzle
+com.cleanmaster.security,Tools
+ppl.unity.JuiceCubesBeta,Puzzle
+com.king.candycrushsaga,Casual
+com.ea.game.simcitymobile_row,Simulation
+ch.t_l.tlLive,Transportation
+vdm.activities,Entertainment
+com.mobilesrepublic.appygeek,News & Magazines
+com.gopro.smarty,Photography
+com.dailymotion.dailymotion,Entertainment
+com.strava,Health & Fitness
+com.garmin.android.apps.connectmobile,Health & Fitness
+com.nike.plusgps,Health & Fitness
+com.vkontakte.android,Social
+com.google.android.apps.translate,Tools
+com.waze,Travel & Local
+ch.bitspin.timely,Lifestyle
+com.box.android,Business
+com.stt.android,Health & Fitness
+com.baviux.pillreminder,Medical
+com.yummly.android,Lifestyle
+com.mattdonders.android.wppcalculator,Health & Fitness
+com.pushbullet.android,Productivity
+com.macropinch.pearl,Tools
+com.aufeminin.marmiton.activities,Lifestyle
+com.myfitnesspal.android,Health & Fitness
+ch.postfinance.android,Finance
+com.datasport.eventapp,Sports
+com.bigoven.android,Lifestyle
+com.google.android.apps.docs.editors.sheets,Productivity
+com.eurosport.player,Media & Video
+com.google.zxing.client.android,Shopping
+com.medisafe.android.client,Health & Fitness
+ch.tio.androidv2.app,News & Magazines
+ch.migros.app,Shopping
+udk.android.reader,Productivity
+com.wunderkinder.wunderlistandroid,Productivity
+slide.watchFrenzy,Personalization
+es.treenovum.desktop_app.ui,Transportation
+com.paypal.android.p2pmobile,Finance
+com.android.keepass,Tools
+com.chase.sig.android,Finance
+com.splunchy.android.alarmclock,Tools
+org.mozilla.firefox,Communication
+com.bewoopi.launcher.tdg,News & Magazines
+com.nbaimd.gametime.nba2011,Sports
+com.mg.android,Weather
+com.freeletics.lite,Health & Fitness
+com.tinder,Lifestyle
+com.naturalmotion.csrracing,Racing
+com.bcge.android.mbanking,Finance
+com.dianxinos.dxbs,Tools
+com.cogniance.asoka.srs.android,Lifestyle
+com.mobilityware.solitaire,Card
+com.wooga.jelly_splash,Casual
+de.lotum.whatsinthefoto.fr,Word
+com.my.mail,Communication
+ch.denner,Shopping
+net.krandroid.WeightLog,Health & Fitness
+ch.atipik.police,News & Magazines
+com.yc.weatheralarm,Weather
+com.Seriously.BestFiends,Casual
+com.intsig.BCRLite,Business
+com.allianz.mobile.android.weathersafe,Weather
+com.contapps.android,Communication
+de.stocard.stocard,Shopping
+se.feomedia.quizkampen.fr.lite,Trivia
+dk.divein.andriod.GasMixer,Tools
+com.hhssoftware.multideco,Productivity
+se.msdk.gasblender,Sports
+cn.wps.moffice_eng,Business
+com.embarcadero.PastoDecoNew,Sports
+com.embarcadero.PastoBlend,Sports
+com.avast.android.mobilesecurity,Tools
+com.tappple.followersplus,Social
+com.ninechat.android.chat,Social
+de.motain.iliga,Sports
+com.goodbarber.fetefinale14,Entertainment
+com.dianxinos.optimizer.duplay,Tools
+org.chrisbailey.todo,Productivity
+iddqd.gatm,Entertainment
+com.camerasideas.instashot,Photography
+com.hidglobal.ia.token.generic,Business
+com.battlelancer.seriesguide,Entertainment
+com.payneservices.LifeReminders,Productivity
+finarea.MobileVoip,Communication
+com.estos.apps.procallmobile,Communication
+net.skyscanner.android.main,Travel & Local
+com.kayak.android,Travel & Local
+com.energy98.radio,Music & Audio
+com.google.android.apps.chromecast.app,Tools
+de.gavitec.android,Shopping
+com.google.android.apps.unveil,Productivity
+com.ext.ui,Tools
+com.speedsoftware.rootexplorer,Productivity
+com.qxl.Client,Shopping
+com.antivirus,Communication
+fr.courrierinternational,News & Magazines
+com.livescore,Sports
+com.zattoo.player,Media & Video
+com.kabam.marvelbattle,Action
+com.supercell.clashofclans,Strategy
+com.supercell.boombeach,Strategy
+com.ea.game.dungeonkeeper_row,Strategy
+org.zwanoo.android.speedtest,Tools

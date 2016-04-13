@@ -4,7 +4,6 @@ import iwildsensestressanalyzer.IWildSenseStressAnalyzer;
 import iwildsensestressanalyzer.esm.StressSurvey;
 import iwildsensestressanalyzer.participant.Participant;
 import iwildsensestressanalyzer.utils.MathUtils;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -26,6 +25,11 @@ public class SurveyAnalyzer {
     private static double initialVariance = 0.0;
     private static double initialStandardDeviation = 0.0;
     
+    /**
+     * Analyze the distribution of answers of all the participants, calculating
+     * average and standard deviation of the answers provided by each participant
+     * @param participants 
+     */
     public static void calculateStatisticsAnswers(ArrayList<Participant> participants) {
         
         double average = 0.0, variance = 0.0, standardDeviation = 0.0;

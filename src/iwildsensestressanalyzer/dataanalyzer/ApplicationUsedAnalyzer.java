@@ -23,6 +23,11 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
             ArrayList<Participant> participants, boolean easyJob, 
             boolean useAllTogether) {
         
+        ArrayList<String> labels = EventsAnalyzer.labels5LabelsTaks;
+        if (easyJob) {
+            labels = EventsAnalyzer.labels3LabelsTask;
+        }
+        
         printTitleMessage("*** ANALYZING APPLICATIONS USED FEATURES ***");
         
         if (!useAllTogether) {
@@ -30,19 +35,17 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
             for (String appCategory: ALL_APP_CATEGORIES) {
                 
                 ArrayList<Integer> tTestPassedForAppCategoryFrequency = 
-                            new ArrayList<>(),
-                        tTestPassedForAppCategoryTimingInfluence = 
-                            new ArrayList<>();
-                
+                    new ArrayList<>(),
+                    tTestPassedForAppCategoryTimingInfluence = new ArrayList<>();
+
                 ArrayList<Integer> validTTestsForAppCategoryFrequency = 
-                            new ArrayList<>(), 
-                        validTTestsForAppCategoryTimingInfluence = 
-                            new ArrayList<>();
+                    new ArrayList<>(), 
+                    validTTestsForAppCategoryTimingInfluence = new ArrayList<>();
             
                 for (Participant participant: participants) {
-                    
+
                     printTitleMessage("*** Participant " + participant.getIMEI() + 
-                        " ***");
+                            " ***");
 
                     SurveyDataWrapper[] wrappers;
                     if (!easyJob) {
@@ -54,12 +57,12 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
                     
                     ArrayList<Boolean> results = 
                             workWithAppCategoryFrequency(wrappers, appCategory, 
-                                    easyJob);
+                                    labels);
                     addTTestResultsToFinalContainer(tTestPassedForAppCategoryFrequency, 
                             results, validTTestsForAppCategoryFrequency);
                     
                     results = workWithAppCategoryTimingInfluence(wrappers, 
-                            appCategory, easyJob);
+                            appCategory, labels);
                     addTTestResultsToFinalContainer(tTestPassedForAppCategoryTimingInfluence, 
                             results, validTTestsForAppCategoryTimingInfluence);
                 }
@@ -69,18 +72,71 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
                  * category
                  */
                 performStepsForPrintingPercentageOfSuccess(tTestPassedForAppCategoryFrequency, 
-                        validTTestsForAppCategoryFrequency, easyJob, 
-                        "*** Percentage of success of influence of " + 
-                                appCategory + " application category ***");
-                
+                       validTTestsForAppCategoryFrequency, labels, 
+                       "*** Percentage of success of influence of " + 
+                               appCategory + " application category ***");
+
                 /**
                  * Analyzing percentage of success of the timing influence 
                  * of a particular application category
                  */
                 performStepsForPrintingPercentageOfSuccess(tTestPassedForAppCategoryTimingInfluence, 
-                        validTTestsForAppCategoryTimingInfluence, easyJob, 
-                        "*** Percentage of success of timing influence of " + 
-                                appCategory + " application category ***");
+                       validTTestsForAppCategoryTimingInfluence, labels, 
+                       "*** Percentage of success of timing influence of " + 
+                               appCategory + " application category ***");
+            }
+            /**
+             * Analyzing features for application types
+             */
+            for (String appType: ALL_APP_TYPE) {
+                
+                ArrayList<Integer> tTestPassedForAppTypeFrequency = 
+                                new ArrayList<>(),
+                    tTestPassedForAppTypeTimingInfluence = new ArrayList<>();
+
+                ArrayList<Integer> validTTestsForAppTypeFrequency = 
+                        new ArrayList<>(), 
+                    validTTestsForAppTypeTimingInfluence = new ArrayList<>();
+                
+                for (Participant participant: participants) {
+
+                    SurveyDataWrapper[] wrappers;
+                    if (!easyJob) {
+                        wrappers = participant.getSurveyDataWrappers();
+                    }
+                    else {
+                        wrappers = participant.getEasySurveyDataWrappers();
+                    }
+                    
+                    ArrayList<Boolean> results = 
+                            workWithAppTypeFrequency(wrappers, appType, 
+                                    labels);
+                    addTTestResultsToFinalContainer(tTestPassedForAppTypeFrequency, 
+                            results, validTTestsForAppTypeFrequency);
+                    
+                    results = workWithAppTypeTimingInfluence(wrappers, 
+                            appType, labels);
+                    addTTestResultsToFinalContainer(tTestPassedForAppTypeTimingInfluence, 
+                            results, validTTestsForAppTypeTimingInfluence);
+                }
+                
+                /**
+                 * Analyzing percentage of success of a particular application
+                 * category
+                 */
+                performStepsForPrintingPercentageOfSuccess(tTestPassedForAppTypeFrequency, 
+                    validTTestsForAppTypeFrequency, labels, 
+                    "*** Percentage of success of influence of " + 
+                        appType + " application type ***");
+
+                /**
+                 * Analyzing percentage of success of the timing influence 
+                 * of a particular application category
+                 */
+                performStepsForPrintingPercentageOfSuccess(tTestPassedForAppTypeTimingInfluence, 
+                    validTTestsForAppTypeTimingInfluence, labels, 
+                    "*** Percentage of success of timing influence of " + 
+                        appType + " application type ***");
             }
         }
         else {
@@ -91,9 +147,17 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
             for (String appCategory: ALL_APP_CATEGORIES) {
                 
                 workWithAppCategoryFrequencyOfAllParticipants(allSurveyDataWrappers, 
-                        appCategory, easyJob);
+                        appCategory, labels);
                 workWithAppCategoryTimingOfAllParticipants(allSurveyDataWrappers, 
-                        appCategory, easyJob);
+                        appCategory, labels);
+            }
+            
+            for (String appType: ALL_APP_TYPE) {
+                
+                workWithAppTypeFrequencyOfAllParticipants(allSurveyDataWrappers,
+                       appType, labels);
+                workWithAppTypeTimingOfAllParticipants(allSurveyDataWrappers, 
+                        appType, labels);
             }
         }
     }
@@ -103,32 +167,32 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
      * between all the answers of all the surveys
      * @param wrappers all the surveys and the related data to use
      * @param appCategory the category of the app
-     * @param easyJob true if we are doing the easy test, false otherwise
+     * @param labels the labels for the output table
      */
     private static ArrayList<Boolean> workWithAppCategoryFrequency(SurveyDataWrapper[] wrappers, 
-            String appCategory, boolean easyJob) {
+            String appCategory, ArrayList<String> labels) {
         
         printTitleMessage("*** Influence of " + appCategory + " application" + 
                 " category ***");
             
-        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
                 
         for (SurveyDataWrapper wrapper: wrappers) {
             listValues.add(wrapper.getApplicationUsedFeaturesExtractorListWrapper()
                     .getAllInfluenceOfAppCategory(appCategory));
         }
                 
-        return printTTestResults(listValues, easyJob);
+        return printTTestResults(listValues, labels);
     }
     
     /**
      * Works with App category frequency using data from all the participant
      * @param listWrappers
-     * @param easyJob 
+     * @param labels the list of labels for the output table 
      */
     private static ArrayList<Boolean> workWithAppCategoryFrequencyOfAllParticipants(
             ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, String appCategory, 
-            boolean easyJob) {
+            ArrayList<String> labels) {
             
         printTitleMessage("*** GLOBAL ANALYSIS: Influence of " + appCategory 
             + " application category ***");
@@ -151,7 +215,64 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
             listValues.add(singleValues);
         }
 
-        return printTTestResults(listValues, easyJob);
+        return printTTestResults(listValues, labels);
+    }
+    
+    /**
+     * Works with App Category frequency to calculate p-value using ttest 
+     * between all the answers of all the surveys
+     * @param wrappers all the surveys and the related data to use
+     * @param appCategory the category of the app
+     * @param labels the labels for the output table
+     */
+    private static ArrayList<Boolean> workWithAppTypeFrequency(SurveyDataWrapper[] 
+            wrappers, String appType, ArrayList<String> labels) {
+        
+        printTitleMessage("*** Influence of " + appType + " application" + 
+                " type ***");
+            
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
+                
+        for (SurveyDataWrapper wrapper: wrappers) {
+            listValues.add(wrapper.getApplicationUsedFeaturesExtractorListWrapper()
+                    .getAllInfluenceOfAppType(appType));
+        }
+                
+        return printTTestResults(listValues, labels);
+    }
+    
+    /**
+     * Works with the application type frequency for all the participants
+     * @param listWrappers
+     * @param appType
+     * @param labels a list of labels for the output table 
+     */
+    private static void workWithAppTypeFrequencyOfAllParticipants(
+            ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, String appType, 
+            ArrayList<String> labels) {
+            
+        printTitleMessage("*** GLOBAL ANALYSIS: Influence of " + appType 
+            + " application type ***");
+
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
+
+        for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
+
+            ArrayList<Double> singleValues = new ArrayList<>();
+
+            for (SurveyDataWrapper wrapper: wrappers) {
+                Double[] values = wrapper.getApplicationUsedFeaturesExtractorListWrapper()
+                        .calculateStatisticsInfluenceOfAppType(appType);
+
+                if (values != null && values[0] != -1) {
+                    singleValues.add(values[0]);
+                }
+            }
+
+            listValues.add(singleValues);
+        }
+
+        printTTestResults(listValues, labels);
     }
     
     /**
@@ -159,10 +280,10 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
      * the ttest and calculate the p-value
      * @param wrappers all the surveys and the related data to use
      * @param appCategory the app category
-     * @param easyJob true if we are doing the easy test, false otherwise
+     * @param labels list of labels for the output folder
      */
     private static ArrayList<Boolean> workWithAppCategoryTimingInfluence(
-            SurveyDataWrapper[] wrappers, String appCategory, boolean easyJob) {
+            SurveyDataWrapper[] wrappers, String appCategory, ArrayList<String> labels) {
             
         printTitleMessage("*** Timing influence of " + appCategory +
                 " application category ***");
@@ -176,26 +297,28 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
                     .getAllTimingInfluenceOfAppCategory(appCategory));
         }
             
-        return printTTestResults(listValues, easyJob);
+        return printTTestResults(listValues, labels);
     }
     
     /**
-     * Works with App category timing influence using data from all the participant
+     * Timing influence of application category analysis for all participants
      * @param listWrappers
-     * @param easyJob 
+     * @param appCategory the application category
+     * @param labels list of labels for the output table
+     * @return 
      */
-    private static ArrayList<Boolean> workWithAppCategoryTimingOfAllParticipants(
+    private static void workWithAppCategoryTimingOfAllParticipants(
             ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, String appCategory, 
-            boolean easyJob) {
+            ArrayList<String> labels) {
                     
         printTitleMessage("*** GLOBAL ANALYSIS: Timing influence of " + 
                 appCategory + " application category ***");
             
-        ArrayList<ArrayList<Double>> listValues = new ArrayList<ArrayList<Double>>();
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
 
         for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
 
-            ArrayList<Double> singleValues = new ArrayList<Double>();
+            ArrayList<Double> singleValues = new ArrayList<>();
 
             for (SurveyDataWrapper wrapper: wrappers) {
                 Double[] values = wrapper.getApplicationUsedFeaturesExtractorListWrapper()
@@ -209,7 +332,7 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
             listValues.add(singleValues);
         }
             
-        return printTTestResults(listValues, easyJob);   
+        printTTestResults(listValues, labels);   
     }
     
     /**
@@ -217,25 +340,66 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
      * the ttest and calculate the p-value
      * @param wrappers all the surveys and the related data to use
      * @param appType the app type
-     * @param easyJob true if we are doing the easy test, false otherwise
+     * @param labels list of labels for the output table
      * @return 
      */
-    public static ArrayList<Boolean> workWithAppTypeFrequency(
-            SurveyDataWrapper[] wrappers, String appType, Boolean easyJob) {
+    private static ArrayList<Boolean> workWithAppTypeTimingInfluence(
+            SurveyDataWrapper[] wrappers, String appType, 
+            ArrayList<String> labels) {
         
-        printTitleMessage("*** Influence of " + appType + " application" + 
+        printTitleMessage("*** Timing Influence of " + appType + " application" + 
                 " type ***");
             
         ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
                 
         for (SurveyDataWrapper wrapper: wrappers) {
             listValues.add(wrapper.getApplicationUsedFeaturesExtractorListWrapper()
-                    .getAllInfluenceOfAppType(appType));
+                    .getAllTimingInfluenceOfAppType(appType));
         }
                 
-        return printTTestResults(listValues, easyJob);
+        return printTTestResults(listValues, labels);
     }
     
+    /**
+     * Works with application type timing influence for all the participants
+     * @param listWrappers
+     * @param appType
+     * @param labels list of labels for the output folder
+     */
+    private static void workWithAppTypeTimingOfAllParticipants(
+            ArrayList<ArrayList<SurveyDataWrapper>> listWrappers, String appType, 
+            ArrayList<String> labels) {
+                    
+        printTitleMessage("*** GLOBAL ANALYSIS: Timing influence of " + 
+                appType + " application type ***");
+            
+        ArrayList<ArrayList<Double>> listValues = new ArrayList<>();
+
+        for (ArrayList<SurveyDataWrapper> wrappers: listWrappers) {
+
+            ArrayList<Double> singleValues = new ArrayList<>();
+
+            for (SurveyDataWrapper wrapper: wrappers) {
+                Double[] values = wrapper.getApplicationUsedFeaturesExtractorListWrapper()
+                        .calculateStatisticsOfTimingInfluenceOfAppType(appType);
+
+                if (values != null && values[0] != -1) {
+                    singleValues.add(values[0]);
+                }
+            }
+
+            listValues.add(singleValues);
+        }
+            
+        printTTestResults(listValues, labels);   
+    }
+    
+    /**
+     * Calculates the number of participants that used a particular application
+     * category
+     * @param participants the list of participants
+     * @return Application category => percentage of usage
+     */
     public static HashMap<String, Double> analyzeApplicationsUsage(ArrayList<Participant> participants) {
         
         HashMap<String, Double> categoriesPercentageOfParticipants = new HashMap<>();
@@ -255,6 +419,23 @@ public class ApplicationUsedAnalyzer extends EventsAnalyzer {
             numberOfTimes /= (double) participants.size();
             
             categoriesPercentageOfParticipants.put(category, numberOfTimes);
+        }
+        
+        for (String type: ALL_APP_TYPE) {
+            
+            Double numberOfTimes = 0.0;
+            
+            for (Participant participant: participants) {
+                
+                if (participant.hasUsedTheApplicationType(type)) {
+                    
+                    numberOfTimes += 1.0;
+                }
+            }
+            
+            numberOfTimes /= (double) participants.size();
+            
+            categoriesPercentageOfParticipants.put(type, numberOfTimes);
         }
         
         return categoriesPercentageOfParticipants;

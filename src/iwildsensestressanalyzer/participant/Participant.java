@@ -4,12 +4,15 @@ import iwildsensestressanalyzer.activityservservice.ActivityServServiceEvent;
 import iwildsensestressanalyzer.applicationsused.ApplicationsUsedEvent;
 import iwildsensestressanalyzer.dataanalyzer.SurveyDataWrapper;
 import iwildsensestressanalyzer.esm.StressSurvey;
+import iwildsensestressanalyzer.esm.WeatherInfos;
 import iwildsensestressanalyzer.light.UserPresenceLightEvent;
 import iwildsensestressanalyzer.touches.TouchesBufferedEvent;
 import iwildsensestressanalyzer.useractivity.UserActivityEvent;
 import iwildsensestressanalyzer.userpresenceevent.UserPresenceAdvancedEventsWrapper;
 import iwildsensestressanalyzer.userpresenceevent.UserPresenceEvent;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -38,6 +41,12 @@ public class Participant {
     private final SurveyDataWrapper[] easyDataWrappers = {new SurveyDataWrapper(1, true), 
         new SurveyDataWrapper(3, true), new SurveyDataWrapper(5, true)};
     
+    private ArrayList<ArrayList<Double>> stressValuesPerHours, 
+            stressValuesPerDays;
+    
+    private static ArrayList<ArrayList<Double>> stressValuesPerHoursOfAllParticipants,
+            stressValuesPerDaysOfAllParticipants;
+    
     /**
      * Constructor with the IMEI of the participant
      * 
@@ -59,14 +68,18 @@ public class Participant {
      * Creates a set of StressSurvey objects using the lines that contain
      * the provided answers
      * 
-     * @param linesAnswers the set of lines with the answers to the stress surveys 
+     * @param linesAnswers the set of lines with the answers to the stress 
+     * surveys 
+     * @param weatherInfos a set of weather information to associate with the 
+     * stress surveys
      */
-    public void addSurveyAnswers(ArrayList<String> linesAnswers) {
+    public void addSurveyAnswers(ArrayList<String> linesAnswers, 
+            ArrayList<WeatherInfos> weatherInfos) {
         
         stressSurveyList = new ArrayList<>();
         
         for (String answer: linesAnswers) {
-            stressSurveyList.add(new StressSurvey(answer));
+            stressSurveyList.add(new StressSurvey(answer, weatherInfos));
         }   
     }
     
@@ -258,9 +271,8 @@ public class Participant {
     }
     
     /**
-     * Returns the SurveyDataWrappers used to store data related for each value
-     * of the 
-     * @return 
+     * Returns the SurveyDataWrappers used to store data related to each survey
+     * @return the list of Surveys
      */
     public SurveyDataWrapper[] getSurveyDataWrappers() {
         return this.surveyDataWrappers;
@@ -294,5 +306,192 @@ public class Participant {
         }
         
         return used;
+    }
+    
+    public Boolean hasUsedTheApplicationType(String appType) {
+        
+        Boolean used = false;
+        
+        for (int i = 0; i < stressSurveyList.size() && !used; i++) {
+            
+            if (stressSurveyList.get(i).isApplicationTypeUsed(appType)) {
+                used = true;
+            }
+        }
+        
+        return used;
+    }
+    
+    /**
+     * Divides stress answers to ESM depending on the day of the week
+     * @return a list of stress values for each day of the week
+     */
+    public ArrayList<ArrayList<Double>> getStressValuesPerDay() {
+        
+        ArrayList<ArrayList<Double>> days = new ArrayList<>();
+        for (int i = 0; i < 7; i++) {
+            days.add(new ArrayList<Double>());
+        }
+        
+        for (StressSurvey survey: stressSurveyList) {
+            
+            /**
+             * Dividing stress surveys depending on the day
+             */
+            if (survey.isMonday()) {
+                    
+                days.get(0).add((double) survey.getStress());
+            }
+            else if (survey.isTuesday()) {        
+                
+                days.get(1).add((double) survey.getStress());
+            }
+            else if (survey.isWednesday()) {
+                    
+                days.get(2).add((double) survey.getStress());
+            }
+            else if (survey.isThursday()) {
+                    
+                days.get(3).add((double) survey.getStress());
+            }
+            else if (survey.isFriday()) {        
+                    
+                days.get(4).add((double) survey.getStress());
+            }
+            else if (survey.isSaturday()) {
+                
+                days.get(5).add((double) survey.getStress());
+            }
+            else if (survey.isSunday()) {
+                
+                days.get(6).add((double) survey.getStress());
+            }
+        }
+        
+        return days;
+    }
+    
+    /**
+     * Divides stress answers depending on the hours of the day that they are 
+     * related to
+     * @return a list of stress answers for three different time ranges
+     */
+    public ArrayList<ArrayList<Double>> getStressValuesPerHours() {
+        
+        ArrayList<ArrayList<Double>> hours = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            hours.add(new ArrayList<Double>());
+        }
+        
+        for (StressSurvey survey: stressSurveyList) {
+            
+            if (survey.isInTheMorning()) {
+                
+                hours.get(0).add((double) survey.getStress());
+            }
+            else if (survey.isInTheAfternoon()) {
+                
+                hours.get(1).add((double) survey.getStress());
+            }
+            else if (survey.isInTheEvening()) {
+                
+                hours.get(2).add((double) survey.getStress());
+            }
+        }
+        
+        return hours;
+    }
+    
+    /**
+     * Divides stress answers depending on the hours of the day and the days of
+     * the week
+     * @return a list of stress answers for the different time ranges and days
+     */
+    public ArrayList<ArrayList<Double>> getStressValuesPerHoursPerDay() {
+        
+        ArrayList<ArrayList<Double>> hoursAndDays = new ArrayList<>();
+        for (int i = 0; i < 7 * 3; i++) {
+            hoursAndDays.add(new ArrayList<Double>());
+        }
+        
+        for (StressSurvey survey: stressSurveyList) {
+            
+            int finalIndex = 0;
+            
+            if (survey.isMonday()) {
+                
+                finalIndex = 0;
+            }
+            else if (survey.isTuesday()) {
+                
+                finalIndex = 3;
+            }
+            else if (survey.isWednesday()) {    
+                    
+                finalIndex = 6;
+            }
+            else if (survey.isThursday()) {
+                
+                finalIndex = 9;
+            }
+            else if (survey.isFriday()) {        
+                    
+                finalIndex = 12;
+            }
+            else if (survey.isSaturday()) {
+                    
+                finalIndex = 15;
+            }
+            else if (survey.isSunday()) {
+                    
+                finalIndex = 18;
+            }
+            
+            if (survey.isInTheMorning()) {
+                finalIndex += 0;
+            }
+            else if (survey.isInTheAfternoon()) {
+                finalIndex += 1;
+            }
+            else if (survey.isInTheEvening()) {
+                finalIndex += 2;
+            }
+            
+            hoursAndDays.get(finalIndex).add((double) survey.getStress());
+        }  
+        
+        return hoursAndDays;
+    }
+    
+    public void setStressValuesPerHours(ArrayList<ArrayList<Double>> stressValues) {
+        this.stressValuesPerHours = stressValues;
+    }
+    
+    public ArrayList<ArrayList<Double>> getListStressValuesPerHours() {
+        return this.stressValuesPerHours;
+    }
+    
+    public void setStressValuesPerDays(ArrayList<ArrayList<Double>> stressValues) {
+        this.stressValuesPerDays = stressValues;
+    }
+    
+    public ArrayList<ArrayList<Double>> getListStressValuesPerDays() {
+        return this.stressValuesPerDays;
+    }
+    
+    public static void setStressValuesPerHoursForAllParticipants(ArrayList<ArrayList<Double>> values) {
+        Participant.stressValuesPerHoursOfAllParticipants = values;
+    }
+    
+    public static ArrayList<ArrayList<Double>> getStressValuesPerHoursForAllParticipants() {
+        return Participant.stressValuesPerHoursOfAllParticipants;
+    }
+    
+    public static void setStressValuesPerDaysForAllParticipants(ArrayList<ArrayList<Double>> values) {
+        Participant.stressValuesPerDaysOfAllParticipants = values;
+    }
+    
+    public static ArrayList<ArrayList<Double>> getStressValuesPerDaysForAllParticipants() {
+        return Participant.stressValuesPerDaysOfAllParticipants;
     }
 }

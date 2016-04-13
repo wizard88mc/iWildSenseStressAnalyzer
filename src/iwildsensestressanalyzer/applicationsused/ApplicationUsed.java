@@ -12,7 +12,7 @@ public class ApplicationUsed {
     private final ArrayList<ApplicationsUsedEvent> applicationsUsedEvents;
     private long timestampEndActivity = 0;
     private final String category;
-    private final String appOrGame;
+    private final String appType;
     
     public ApplicationUsed(ArrayList<ApplicationsUsedEvent> applicationsUsedEvents) {
         
@@ -22,10 +22,10 @@ public class ApplicationUsed {
         
         if (appCategorization != null) {
             category = appCategorization[0];
-            appOrGame = appCategorization[1];
+            appType = appCategorization[1];
         }
         else {
-            category = null; appOrGame = null;
+            category = null; appType = null;
         }
     }
     
@@ -66,8 +66,8 @@ public class ApplicationUsed {
      * @return "App" if the application category is an application, 
      * "Game" otherwise
      */
-    public String getAppOrGame() {
-        return this.appOrGame;
+    public String getAppType() {
+        return this.appType;
     }
     
     /**

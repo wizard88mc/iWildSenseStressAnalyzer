@@ -17,14 +17,16 @@ import java.util.ArrayList;
  */
 public class WekaFilesCreatedReader extends BasicFileReader {
     
-    private static final String FILE = FOLDER_DATA + File.separator + "output"
-            + File.separator + "classification" + File.separator + "CreatedWekaFiles.txt";
-    
     /**
      * Returns the list of the file names created for the classification task
+     * @param folderName the name of the folder where to find files
      * @return a list of file names
      */
-    public static ArrayList<String> getCreatedWekaFiles() {
+    public static ArrayList<String> getCreatedWekaFiles(String folderName) {
+        
+        String FILE = FOLDER_DATA + File.separator + "output" + File.separator + 
+                folderName + File.separator + "classification" + File.separator 
+                + "CreatedWekaFiles.txt";
         
         ArrayList<String> files = new ArrayList<>();
         BufferedReader reader;
