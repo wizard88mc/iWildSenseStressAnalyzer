@@ -22,66 +22,53 @@ public class ARFFWekaWriter extends OutputFileWriter {
     private static final String STARTING_OUTPUT_FOLDER = BASE_OUTPUT_FOLDER + 
             "Classification" + File.separator;
     
-    private static final String outpufFileName = "StressClassification";
+    private static final String OUTPUT_FILE_NAME = "StressClassification";
     
-    private File outputFileEasy = null, outputFileDifficult = null;
+    private File outputFile = null;
     
-    private BufferedWriter outputFileWriterEasy = null, 
-                outputFileWriterDifficult = null;
+    private BufferedWriter outputWriter = null;
     
-    public ARFFWekaWriter(String participantIMEI, String subfolder) {
+    public ARFFWekaWriter(String participantIMEI, String subfolder, 
+            String classMappingName) {
         
-        String finalOutputFile = STARTING_OUTPUT_FOLDER + subfolder + File.separator 
-                + participantIMEI + File.separator + outpufFileName + participantIMEI;
+        String finalOutputFile = STARTING_OUTPUT_FOLDER + subfolder + 
+                File.separator + participantIMEI + File.separator + 
+                OUTPUT_FILE_NAME + participantIMEI + classMappingName + ".arff";
         
         try {
-            outputFileEasy = new File(finalOutputFile + "EASY.arff");
-            outputFileEasy.getParentFile().mkdirs();
+            outputFile = new File(finalOutputFile);
+            outputFile.getParentFile().mkdirs();
             
-            outputFileWriterEasy = new BufferedWriter(new FileWriter(outputFileEasy));
-            
-            outputFileDifficult = new File(finalOutputFile + "DIFFICULT.arff");
-            outputFileDifficult.getParentFile().mkdirs();
-            
-            outputFileWriterDifficult = new BufferedWriter(new FileWriter(outputFileDifficult));
-            
-            writePreambleWekaFile(outputFileWriterEasy, true); 
-            writePreambleWekaFile(outputFileWriterDifficult, false);
+            outputWriter = new BufferedWriter(new FileWriter(outputFile));
         }
         catch(IOException exc) {
-            System.out.println("IOException in creting WekaOutputFile");
+            System.out.println("IOException in creating WekaOutputFile");
             exc.printStackTrace();
-            outputFileWriterEasy = null; outputFileWriterDifficult = null;
+            outputWriter = null;
         }
     }
     
     /**
      * Writes the WEKA preamble into the output file
-     * @param writer the output writer
-     * @param easyTask true if it is easy classification (three classes), 
-     * false otherwise
+     * @param listClasses the list of the possible labels
      */
-    private void writePreambleWekaFile(BufferedWriter writer, boolean easyTask) {
+    public void writePreambleWekaFile(String listClasses) {
         
-        if (writer != null) {
+        if (outputWriter != null) {
             
             try {
-                writer.write("@RELATION stress"); 
-                writer.newLine();
+                outputWriter.write("@RELATION stress"); 
+                outputWriter.newLine();
                 
-                createFeaturesPreamble(writer);
+                createFeaturesPreamble();
 
-                if (easyTask) {
-                    writer.write("@ATTRIBUTE class {1,2,3}");
-                }
-                else {
-                    writer.write("@ATTRIBUTE class {1,2,3,4,5}");
-                }
-                writer.newLine();
-                writer.write("@DATA");
-                writer.newLine();
+                outputWriter.write("@ATTRIBUTE class {" + listClasses + "}");
                 
-                writer.flush();
+                outputWriter.newLine();
+                outputWriter.write("@DATA");
+                outputWriter.newLine();
+                
+                outputWriter.flush();
             }
             catch(IOException exc) {
                 System.out.println("Exception in writing preamble weka file");
@@ -94,14 +81,14 @@ public class ARFFWekaWriter extends OutputFileWriter {
      * Creates the preamble for the features name
      * @param writer the output file writer
      */
-    private void createFeaturesPreamble(BufferedWriter writer) {
+    private void createFeaturesPreamble() {
         
-        addNumericAttributeToPreamble(WekaFeaturesForApplicationUsed.featuresName, writer);
-        addNumericAttributeToPreamble(WekaFeaturesForTouchesBuffered.featuresName, writer);
-        addNumericAttributeToPreamble(WekaFeaturesForUserActivity.featuresName, writer);
-        addNumericAttributeToPreamble(WekaFeaturesForScreenEvents.featuresNames, writer);
-        addNumericAttributeToPreamble(WekaFeaturesForUserPresenceLight.featuresName, writer);
-        addNumericAttributeToPreamble(WekaFeaturesForDaysAndWeather.featuresName, writer);
+        addNumericAttributeToPreamble(WekaFeaturesForApplicationUsed.FEATURES_NAMES);
+        addNumericAttributeToPreamble(WekaFeaturesForTouchesBuffered.FEATURES_NAMES);
+        addNumericAttributeToPreamble(WekaFeaturesForUserActivity.FEATURES_NAMES);
+        addNumericAttributeToPreamble(WekaFeaturesForScreenEvents.FEATURES_NAMES);
+        addNumericAttributeToPreamble(WekaFeaturesForUserPresenceLight.FEATURES_NAMES);
+        addNumericAttributeToPreamble(WekaFeaturesForDaysAndWeather.FEATURES_NAMES);
     }
     
     /**
@@ -109,37 +96,17 @@ public class ARFFWekaWriter extends OutputFileWriter {
      * @param features an array of features names
      * @param writer the output file writer
      */
-    private void addNumericAttributeToPreamble(String[] features, 
-            BufferedWriter writer) {
+    private void addNumericAttributeToPreamble(String[] features) {
         
         for (String element: features) {
             try {
-                writer.write("@ATTRIBUTE " + element + " NUMERIC");
-                writer.newLine();
+                outputWriter.write("@ATTRIBUTE " + element + " NUMERIC");
+                outputWriter.newLine();
             }
             catch(IOException exc) {
                 System.out.println("IOException in writing attribute features"
                         + " name: " + element);
                 exc.printStackTrace();
-            }
-        }
-    }
-    
-    /**
-     * Adds a string feature (attribute) to the weka file
-     * @param features an array of features names
-     * @param writer the output file writer
-     */
-    private void addStringAttributeToPreamble(String[] features, 
-            BufferedWriter writer) {
-     
-        for (String element: features) {
-            try {
-                writer.write("@ATTRIBUTE " + element + " STRING");
-                writer.newLine();
-            }
-            catch(IOException exc) {
-                
             }
         }
     }
@@ -156,69 +123,32 @@ public class ARFFWekaWriter extends OutputFileWriter {
                 feature = "?";
             }
             
-            if (feature.contains(" ")) {
-                outputString += "'" + feature + "',";
-            }
-            else {
-                outputString += feature + ",";
-            }
-            
+            outputString += feature + ",";
         }
         
         try {
-            outputFileWriterDifficult.write(outputString);
+            outputWriter.write(outputString);
         }
         catch(IOException exc) {
             System.out.println("IOException in writing calculated features for"
                     + " difficult file");
-            exc.printStackTrace();
-        }
-        
-        try {
-            outputFileWriterEasy.write(outputString);
-        }
-        catch(IOException exc) {
-            System.out.println("IOException in writing calculated features for"
-                    + " easy file");
             exc.printStackTrace();
         }
     }
     
     /**
-     * Writes the stress value of the last instance
-     * @param stressValue the stress value to write
+     * Write an instance on the output file
+     * @param instance the string representation of the instance
      */
-    public void writeInstanceClass(Integer stressValue) {
+    public void writeInstance(String instance) {
         
         try {
-            outputFileWriterDifficult.write(String.valueOf(stressValue));
-            outputFileWriterDifficult.newLine();
-            outputFileWriterDifficult.flush();
+            outputWriter.write(instance);
+            outputWriter.flush();
+            outputWriter.newLine();
         }
         catch(IOException exc) {
-            System.out.println("IOException in writing stress value for"
-                    + " difficult file");
-            exc.printStackTrace();
-        }
-        
-        try {
-            String stress = null;
-            if (stressValue == 1 || stressValue == 2) {
-                stress = "1";
-            }
-            else if (stressValue == 3) {
-                stress = "2";
-            }
-            else if (stressValue == 4 || stressValue == 5) {
-                stress = "3";
-            }
-            outputFileWriterEasy.write(stress);
-            outputFileWriterEasy.newLine();
-            outputFileWriterEasy.flush();
-        }
-        catch(IOException exc) {
-            System.out.println("IOException in writing stress value for"
-                    + " easy file");
+            System.out.println("IOException in writing instance");
             exc.printStackTrace();
         }
     }
@@ -226,28 +156,23 @@ public class ARFFWekaWriter extends OutputFileWriter {
     /**
      * Closes the output files
      */
-    public void closeFiles() {
+    public void closeFile() {
         
         try {
-            outputFileWriterDifficult.flush(); outputFileWriterDifficult.close();
-            outputFileWriterEasy.flush();outputFileWriterEasy.close();
+            outputWriter.flush(); outputWriter.close();
         }
         catch(IOException exc) {
             System.out.println("IOException in closeFiles in ARFFWekaWriter");
             exc.printStackTrace();
-        }
-        
+        }   
     }
     
     /**
      * Return the two output files
      * @return a list with the easy and difficult files
      */
-    public ArrayList<File> getOutputFiles() {
-        
-        ArrayList<File> files = new ArrayList<>();
-        files.add(outputFileEasy); files.add(outputFileDifficult);
+    public File getOutputFiles() {
          
-       return files;
+       return outputFile;
     }
 }

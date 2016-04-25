@@ -25,7 +25,6 @@ public class OutputFileWriter {
                 calendar.get(Calendar.SECOND);
         
         BASE_OUTPUT_FOLDER += secondPart + File.separator;
-        
     }
     
 }

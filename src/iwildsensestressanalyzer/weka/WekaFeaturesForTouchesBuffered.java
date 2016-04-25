@@ -2,7 +2,6 @@ package iwildsensestressanalyzer.weka;
 
 import iwildsensestressanalyzer.esm.StressSurvey;
 import iwildsensestressanalyzer.touches.TouchesBufferedFeaturesExtractor;
-import iwildsensestressanalyzer.utils.MathUtils;
 import java.util.ArrayList;
 
 /**
@@ -42,21 +41,21 @@ public class WekaFeaturesForTouchesBuffered extends WekaFeaturesCreator {
      *     - average
      *     - standard deviation
      */
-    public static final String[] featuresName = {"TouchesBuffered_AVG_Counter", 
-        "TouchesBuffered_STD_Counter", "TouchesBuffered_AVG_MinInterval", 
-        "TouchesBuffered_STD_MinInterval", "TouchesBuffered_AVG_MaxInterval", 
-        "TouchesBuffered_STD_MaxInterval", "TouchesBuffered_AVG_Range", 
-        "TouchesBuffered_STD_Range", "TouchesBuffered_AVG_Mean", 
-        "TouchesBuffered_STD_Mean", "TouchesBuffered_AVG_Median", 
-        "TouchesBuffered_STD_Median", "TouchesBuffered_AVG_Variance", 
-        "TouchesBuffered_STD_Variance", "TouchesBuffered_AVG_StandardDeviation", 
-        "TouchesBuffered_STD_StandardDeviation", "TouchesBuffered_AVG_SessionDuration", 
-        "TouchesBuffered_STD_SessionDuration"};
+    public static final String[] FEATURES_NAMES = {
+        "TouchesBuffered_AVG_Counter", "TouchesBuffered_STD_Counter", 
+        "TouchesBuffered_AVG_MinInterval", "TouchesBuffered_STD_MinInterval", 
+        "TouchesBuffered_AVG_MaxInterval", "TouchesBuffered_STD_MaxInterval", 
+        "TouchesBuffered_AVG_Range", "TouchesBuffered_STD_Range", 
+        "TouchesBuffered_AVG_Mean", "TouchesBuffered_STD_Mean", 
+        "TouchesBuffered_AVG_Median", "TouchesBuffered_STD_Median", 
+        "TouchesBuffered_AVG_Variance", "TouchesBuffered_STD_Variance", 
+        "TouchesBuffered_AVG_StandardDeviation", "TouchesBuffered_STD_StandardDeviation", 
+        "TouchesBuffered_AVG_SessionDuration", "TouchesBuffered_STD_SessionDuration"};
     
     public static ArrayList<Double> getFeaturesForTouchesBufferedEvents(
             StressSurvey survey) {
         
-        ArrayList<Double> features = new ArrayList<Double>();
+        ArrayList<Double> features = new ArrayList<>();
         
         TouchesBufferedFeaturesExtractor featuresExtractor = 
                 new TouchesBufferedFeaturesExtractor(survey.

@@ -225,6 +225,15 @@ public class PerformanceEvaluator {
                 "; Recall: " + MathUtils.DECIMAL_FORMAT.format(macroRecall) + 
                 "; Fscore: " + MathUtils.DECIMAL_FORMAT.format((macroFscore)) + "}";
         
+        result += System.getProperty("line.separator");
+        
+        try {
+        result += evaluation.toMatrixString();
+        }
+        catch(Exception exc) {
+            System.out.println("Exception in writing confusion matrix");
+        }
+        
         return result;
     }
 }

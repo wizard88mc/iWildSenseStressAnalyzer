@@ -1,5 +1,6 @@
 package iwildsensestressanalyzer.esm;
 
+import iwildsensestressanalyzer.filereader.WeatherMappingReader;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -19,7 +20,7 @@ public class WeatherInfos {
     private final String weatherDescription;
     private final Float fifthField;
     
-    private static ArrayList<String> weatherPossibilities = new ArrayList<>();
+    private static final ArrayList<String> WEATHER_POSSIBILITIES = new ArrayList<>();
     
     public WeatherInfos(String line) {
         
@@ -50,9 +51,10 @@ public class WeatherInfos {
             weatherDescription = null;
         }
         else {
-            weatherDescription = elements[7];
-            if (!weatherPossibilities.contains(elements[7])) {
-                weatherPossibilities.add(elements[7]);
+            weatherDescription = 
+                    WeatherMappingReader.getWeatherValue(elements[7]);
+            if (!WEATHER_POSSIBILITIES.contains(weatherDescription)) {
+                WEATHER_POSSIBILITIES.add(weatherDescription);
             }
         }
         if (!elements[8].equals("")) {
@@ -73,7 +75,7 @@ public class WeatherInfos {
     
     public String getWeatherForFeatures() {
         if (weatherDescription != null) {
-            return String.valueOf(weatherPossibilities.indexOf(weatherDescription));
+            return String.valueOf(WEATHER_POSSIBILITIES.indexOf(weatherDescription));
         }
         else return null;
     }
@@ -110,8 +112,8 @@ public class WeatherInfos {
     public static void printWeatherPossibilities() {
         
         System.out.println("****** Weather Conditions ******");
-        for (int i = 0; i < weatherPossibilities.size(); i++) {
-            System.out.println("[" + i + "] => " + weatherPossibilities.get(i));
+        for (int i = 0; i < WEATHER_POSSIBILITIES.size(); i++) {
+            System.out.println("[" + i + "] => " + WEATHER_POSSIBILITIES.get(i));
         }
         System.out.println("*********************************");
     }

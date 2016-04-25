@@ -41,6 +41,7 @@ public class IWildSenseStressAnalyzer {
     
     public static final String DATA_ACQUISITION = "data_acquisition", 
             WEKA_ANALYSIS = "weka_analysis", 
+            PREFERENCE_LEARNING_PREPARATION = "preference_preparation",
             KEEP_ALL = "all", 
             ONLY_MORE_THAN_ZERO = "only_more_zero", 
             ONLY_MORE_THRESHOLD = "only_more_threshold",
@@ -255,20 +256,6 @@ public class IWildSenseStressAnalyzer {
              * have the number of answers higher than the average
              */
             SurveyAnalyzer.printAnalysisParticipantsParticipation(participantList);
-            
-            /**
-             * Step 5: Creating files about answers provided
-             */
-
-            /**
-             * Keeping all the participants
-             */
-            /*System.out.println();
-            System.out.println(TITLE_ALL_PARTICIPANTS);
-            EventsAnalyzer.printTitleMessage(null);
-            EventsAnalyzer.printTitleMessage(TITLE_ALL_PARTICIPANTS);
-
-            performStatisticalAnalysisSteps(participantList);
 
             /**
              * Calculating statistics for participants with more than one answer

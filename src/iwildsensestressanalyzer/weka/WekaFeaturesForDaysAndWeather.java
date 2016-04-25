@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class WekaFeaturesForDaysAndWeather extends WekaFeaturesCreator {
     
-    public static String[] featuresName = {"DAY_WEEK", "MOMENT_DAY", "WEATHER"};
+    public static String[] FEATURES_NAMES = {"DAY_WEEK", "MOMENT_DAY", "WEATHER"};
     
     public static ArrayList<String> getFeaturesForDaysAndWeather(StressSurvey survey) {
         

@@ -24,7 +24,7 @@ public class WekaFeaturesForUserPresenceLight extends WekaFeaturesCreator {
      *    - standard deviation
      */
     
-    public static final String[] featuresName = {
+    public static final String[] FEATURES_NAMES = {
         "UserPresenceLight_AVG_LightValuesScreenOnOff", 
         "UserPresenceLight_STD_LightValuesScreenOnOff", 
         "UserPresenceLight_AVG_LightValuesUnlockedScreen", 
@@ -40,14 +40,13 @@ public class WekaFeaturesForUserPresenceLight extends WekaFeaturesCreator {
     public static ArrayList<Double> getFeaturesForUserPresenceLightEvent(
             StressSurvey survey) {
         
-        ArrayList<Double> features = new ArrayList<Double>();
+        ArrayList<Double> features = new ArrayList<>();
         
         UserPresenceLightFeaturesExtractor featuresExtractor = 
                 new UserPresenceLightFeaturesExtractor(survey.
-                        getUserPresenceAdvancedEventsWrapper().
-                        getScreenOnOffEvents(), survey.
-                                getUserPresenceAdvancedEventsWrapper().
-                                getUnlockedScreenEvents());
+                    getUserPresenceAdvancedEventsWrapper().getScreenOnOffEvents(), 
+                    survey.getUserPresenceAdvancedEventsWrapper().
+                        getUnlockedScreenEvents());
         
         Double[] statisticsLightValuesForScreenOnOffEvents = 
                 featuresExtractor.calculateStatisticsLightValuesForScreenOnOffEvents(), 

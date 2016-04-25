@@ -30,6 +30,10 @@ public class ScreenOnOff {
         return onEvent.getTimestamp();
     }
     
+    public long getOffTimestamp() {
+        return offEvent.getTimestamp();
+    }
+    
     /**
      * Returns the length of the ON-OFF screen event
      * @return the duration of the ON-OFF event if there is an OFF event, 
@@ -82,6 +86,9 @@ public class ScreenOnOff {
         
         return (otherEvent.after(startTimeScreenEvent) && 
                 otherEvent.before(endTimeEventScreenEvent));
-        
+    }
+    
+    public boolean isValid() {
+        return onEvent != null && offEvent != null;
     }
 }

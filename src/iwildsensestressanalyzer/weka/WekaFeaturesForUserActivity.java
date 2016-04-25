@@ -3,7 +3,6 @@ package iwildsensestressanalyzer.weka;
 import iwildsensestressanalyzer.esm.StressSurvey;
 import iwildsensestressanalyzer.useractivity.UserActivityFeaturesExtractor;
 import iwildsensestressanalyzer.useractivity.UserActivityFeaturesExtractorsListWrapper;
-import iwildsensestressanalyzer.utils.MathUtils;
 import java.util.ArrayList;
 
 /**
@@ -13,7 +12,7 @@ import java.util.ArrayList;
  */
 public class WekaFeaturesForUserActivity extends WekaFeaturesCreator {
     
-    public static final String[] featuresName = {
+    public static final String[] FEATURES_NAMES = {
         "UserActivity_AVG_PointsSumOfActivities", 
         "UserActivity_STD_PointsSumOfActivities", 
         "UserActivity_AVG_PercentageOfWorkload", 
@@ -36,10 +35,9 @@ public class WekaFeaturesForUserActivity extends WekaFeaturesCreator {
      */
     public static ArrayList<Double> getFeaturesForUserActivity(StressSurvey survey) {
         
-        ArrayList<Double> features = new ArrayList<Double>();
+        ArrayList<Double> features = new ArrayList<>();
         
-        ArrayList<UserActivityFeaturesExtractor> fExtractor = 
-                new ArrayList<UserActivityFeaturesExtractor>();
+        ArrayList<UserActivityFeaturesExtractor> fExtractor = new ArrayList<>();
         
         fExtractor.add(survey.getUserActivityFeaturesExtractor());
         

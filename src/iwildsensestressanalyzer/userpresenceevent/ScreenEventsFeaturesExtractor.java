@@ -1,9 +1,9 @@
 package iwildsensestressanalyzer.userpresenceevent;
 
 import iwildsensestressanalyzer.dataanalyzer.FeaturesExtractor;
-import iwildsensestressanalyzer.esm.StressSurvey;
 import iwildsensestressanalyzer.utils.MathUtils;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -120,7 +120,7 @@ public class ScreenEventsFeaturesExtractor extends FeaturesExtractor {
         
         if (!unlockedScreenEvents.isEmpty()) {
             
-            ArrayList<Double> values = new ArrayList<Double>();
+            ArrayList<Double> values = new ArrayList<>();
             
             for (UnlockedScreen event: unlockedScreenEvents) {
                 values.add((double) event.getUnlockTime());
@@ -142,6 +142,161 @@ public class ScreenEventsFeaturesExtractor extends FeaturesExtractor {
     public Double[] calculateStatisticUnlockTimeForUnlockedScreenEvents() {
         
         ArrayList<Double> values = getAllUnlockTimeForUnlockedScreenEvents();
+        
+        if (values != null) {
+            return MathUtils.calculateStatisticInformation(values);
+        }
+        else {
+            return null;
+        }
+    }
+    
+    /**
+     * Returns a list of all the time distance between two ScreenOnOff events
+     * @return a list of time distance if there is at least two valid ScreenOnOff events,
+     * null otherwise
+     */
+    public ArrayList<Double> getAllDistancesBetweenTwoScreenOnOffEvents() {
+        
+        if (!screenOnOffEvents.isEmpty()) {
+
+            ArrayList<Double> values = new ArrayList<>();
+            for (int i = 1; i < screenOnOffEvents.size(); i++) {
+                if (screenOnOffEvents.get(i).isValid() && 
+                        screenOnOffEvents.get(i - 1).isValid()) {
+                    
+                    values.add((double) (screenOnOffEvents.get(i).getOnTimestamp() - 
+                        screenOnOffEvents.get(i - 1).getOffTimestamp()));
+                }
+            }
+            
+            if (!values.isEmpty()) {
+                return values;
+            }
+            else {
+                return null;
+            }
+        }
+        else {
+            return null;
+        }
+    }
+    
+    /**
+     * Calculates statistic information about the time distance between two 
+     * consecutive ScreenOnOff events
+     * @return [average, variance, standard deviation] if more than zero values, 
+     * [-1] otherwise
+     */
+    public Double[] calculateStatisticDistanceBetweenTwoScreenOnOffEvents() {
+        
+        ArrayList<Double> values = getAllDistancesBetweenTwoScreenOnOffEvents();
+        
+        if (values != null) {
+            return MathUtils.calculateStatisticInformation(values);
+        }
+        else {
+            return null;
+        }
+    }
+    
+    /**
+     * Returns a list of all the time distance between two UnlockedScreen events
+     * @return a list of time distance if there is at least two valid 
+     * UnlockedScreen events, null otherwise
+     */
+    public ArrayList<Double> getAllDistancesBetweenTwoUnlockedScreenEvents() {
+        
+        if (!unlockedScreenEvents.isEmpty()) {
+            
+            ArrayList<Double> values = new ArrayList<>();
+            
+            for (int i = 1; i < unlockedScreenEvents.size(); i++) {
+                if (unlockedScreenEvents.get(i).isValid() && 
+                        unlockedScreenEvents.get(i - 1).isValid()) {
+                    
+                    values.add((double) (unlockedScreenEvents.get(i).getOnTimestamp() - 
+                        unlockedScreenEvents.get(i - 1).getOffTimestamp()));
+                }
+            }
+            if (!values.isEmpty()) {
+                return values;
+            }
+            else {
+                return null;
+            }
+        }
+        else {
+            return null;
+        }
+    }
+    
+    /**
+     * Calculates statistic information about the time distance between two 
+     * consecutive UnlockedScreen events
+     * @return [average, variance, standard deviation] if more than zero values, 
+     * [-1] otherwise
+     */
+    public Double[] calcualteStatisticDistancesBetweenTwoUnlockedScreenEvents() {
+        
+        ArrayList<Double> values = getAllDistancesBetweenTwoUnlockedScreenEvents();
+        if (values != null) {
+            return MathUtils.calculateStatisticInformation(values);
+        }
+        else {
+            return null;
+        }
+    }
+    
+    /**
+     * Returns the time distance between two consecutive ScreenEvent, both 
+     * ScreenOnOff or UnlockedScreen
+     * @return a list of time distance between two consecutive screen events
+     */
+    public ArrayList<Double> getAllDistancesBetweenTwoScreenEvents() {
+        
+        ArrayList<Double> values = new ArrayList<>();
+        ArrayList<ScreenOnOff> screenEvents  = new ArrayList<>();
+        screenEvents.addAll(screenOnOffEvents);
+        screenEvents.addAll(unlockedScreenEvents);
+        
+        if (!screenEvents.isEmpty()) {
+            for (int i = 0; i < screenEvents.size();) {
+                if (!screenEvents.get(i).isValid()) {
+                    screenEvents.remove(i);
+                }
+                else {
+                    i++;
+                }
+            }
+
+            Collections.sort(screenEvents, new ScreenEventsComparator());
+
+            for (int i = 1; i < screenEvents.size(); i++) {
+                values.add((double)(screenEvents.get(i).getOnTimestamp() - 
+                        screenEvents.get(i - 1).getOffTimestamp()));
+            }
+            if (!values.isEmpty()) {
+                return values;
+            }
+            else {
+                return null;
+            }
+        }
+        else {
+            return null;
+        }
+    }
+    
+    /**
+     * Calculates statistic information about the time distance between two
+     * consecutive screen events
+     * @return [average, variance, standard deviation] if more than zero values, 
+     * [-1] otherwise
+     */
+    public Double[] calculateStatisticDistanceBetweenTwoScreenEvents() {
+        
+        ArrayList<Double> values = getAllDistancesBetweenTwoScreenEvents();
         
         if (values != null) {
             return MathUtils.calculateStatisticInformation(values);

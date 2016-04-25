@@ -31,7 +31,7 @@ public class WekaFeaturesForApplicationUsed extends WekaFeaturesCreator {
      *     - average
      *     - standard deviation
      */
-    public static String[] featuresName;
+    public static String[] FEATURES_NAMES;
     
     /**
      * Creates a list of features for the UserActivity events
@@ -115,7 +115,7 @@ public class WekaFeaturesForApplicationUsed extends WekaFeaturesCreator {
                     "TimingInfluence");
         }
         
-        featuresName = new String[names.size()];
-        featuresName = names.toArray(featuresName);
+        FEATURES_NAMES = new String[names.size()];
+        FEATURES_NAMES = names.toArray(FEATURES_NAMES);
     }
 }

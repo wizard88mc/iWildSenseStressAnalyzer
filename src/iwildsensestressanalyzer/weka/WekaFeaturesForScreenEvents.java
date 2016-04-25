@@ -23,13 +23,19 @@ public class WekaFeaturesForScreenEvents extends WekaFeaturesCreator {
      *    - average
      *    - standard deviation
      */
-    public static final String[] featuresNames = {
+    public static final String[] FEATURES_NAMES = {
         "ScreenEvents_AVG_OnOffForScreenOnOff", 
         "ScreenEvents_STD_OnOffForScreenOnOff", 
         "ScreenEvents_AVG_OnOffForUnlockedScreen", 
         "ScreenEvents_STD_OnOffForUnlockedScreen", 
         "ScreenEvents_AVG_UnlockTimeForUnlockedScreen", 
-        "ScreenEvents_STD_UnlockTimeForUnlockedScreen", 
+        "ScreenEvents_STD_UnlockTimeForUnlockedScreen",
+        "ScreenEvents_AVG_TimeDistanceScreenEvents",
+        "ScreenEvents_STD_TimeDistanceScreenEvents",
+        "ScreenEvents_AVG_TimeDistanceScreenOnOff",
+        "ScreenEvents_STD_TimeDistanceScreenOnOff",
+        "ScreenEvents_AVG_TimeDistanceUnlockedScreen",
+        "ScreenEvents_STD_TimeDistanceUnlockedScreen",
         "ScreenEvents_OnOffScreen_Over_UnlockedScreen"};
     
     /**
@@ -39,25 +45,33 @@ public class WekaFeaturesForScreenEvents extends WekaFeaturesCreator {
      */
     public static ArrayList<Double> getFeaturesForScreenEvents(StressSurvey survey) {
         
-        ArrayList<Double> features = new ArrayList<Double>();
+        ArrayList<Double> features = new ArrayList<>();
         
         ScreenEventsFeaturesExtractor featuresExtractor = 
                 new ScreenEventsFeaturesExtractor(survey.
-                        getUserPresenceAdvancedEventsWrapper().
-                        getScreenOnOffEvents(), survey.
-                                getUserPresenceAdvancedEventsWrapper().
-                                getUnlockedScreenEvents());
+                    getUserPresenceAdvancedEventsWrapper().getScreenOnOffEvents(), 
+                    survey.getUserPresenceAdvancedEventsWrapper().
+                        getUnlockedScreenEvents());
         
         Double[] statisticsOnOffDurationScreenOnOffEvents = 
                     featuresExtractor.calculateStatisticOnOffDurationForScreenOnOffEvents(),
                 statisticsOnOffDurationUnlockedScreenEvents = 
                     featuresExtractor.calculateStatisticOnOffDurationForUnlockScreenEvents(),
                 statisticsUnlockTimeForUnlockedScreenEvents = 
-                    featuresExtractor.calculateStatisticUnlockTimeForUnlockedScreenEvents();
+                    featuresExtractor.calculateStatisticUnlockTimeForUnlockedScreenEvents(), 
+                statisticsDistanceBetweenTwoScreenEvents = 
+                    featuresExtractor.calculateStatisticDistanceBetweenTwoScreenEvents(), 
+                statisticsDistanceBetweenTwoScreenOnOffEvents = 
+                    featuresExtractor.calculateStatisticDistanceBetweenTwoScreenOnOffEvents(), 
+                statisticsDistanceBetweenTwoUnlockedScreenEvents = 
+                    featuresExtractor.calcualteStatisticDistancesBetweenTwoUnlockedScreenEvents();
         
         addCalculatedFeatures(features, statisticsOnOffDurationScreenOnOffEvents);
         addCalculatedFeatures(features, statisticsOnOffDurationUnlockedScreenEvents);
         addCalculatedFeatures(features, statisticsUnlockTimeForUnlockedScreenEvents);
+        addCalculatedFeatures(features, statisticsDistanceBetweenTwoScreenEvents);
+        addCalculatedFeatures(features, statisticsDistanceBetweenTwoScreenOnOffEvents);
+        addCalculatedFeatures(features, statisticsDistanceBetweenTwoUnlockedScreenEvents);
         features.add((double)featuresExtractor.getNumberOfScreenOnOff() / 
                 (double) featuresExtractor.getNumberOfUnlockedScreen());
 

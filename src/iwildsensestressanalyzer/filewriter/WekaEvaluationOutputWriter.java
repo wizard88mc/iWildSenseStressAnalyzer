@@ -21,25 +21,19 @@ public class WekaEvaluationOutputWriter extends OutputFileWriter {
     
     private BufferedWriter outputWriter = null;
     
-    public WekaEvaluationOutputWriter(String folder, String subfolder, 
-            boolean oversample) {
+    public WekaEvaluationOutputWriter(String folder, String subfolder) {
         
         try {
             
             OUTPUT_FOLDER = BASE_OUTPUT_FOLDER + folder + File.separator;
             
-            String finalFile = OUTPUT_FOLDER + subfolder + File.separator;
-            
-            if (oversample) {
-                finalFile += "SMOTHE";
-            }
-            finalFile += OUTPUT_FILE_NAME;
+            String finalFile = OUTPUT_FOLDER + subfolder + File.separator + 
+                    "SMOTHE" + OUTPUT_FILE_NAME;
             
             outputFile = new File(finalFile);
             outputFile.getParentFile().mkdirs();
             
             outputWriter = new BufferedWriter(new FileWriter(outputFile));
-            
         }
         catch(IOException exc) {
             System.out.println("IOException in creating WekaEvaluationOutputWriter");
@@ -68,18 +62,10 @@ public class WekaEvaluationOutputWriter extends OutputFileWriter {
     /**
      * Writes on the output file the number of occurrences for each class
      * @param occurrences the number of occurrences
-     * @param afterFilter true if data is after the usage of the SMOTE filter, 
-     * false otherwise
      */
-    public void writeClassesOccurrences(Integer[] occurrences, boolean afterFilter) {
+    public void writeClassesOccurrences(Integer[] occurrences) {
         
-        String toWrite;
-        if (afterFilter) {
-            toWrite = "Occurrences after SMOTE filter: {";
-        }
-        else {
-            toWrite = "Original occurrences: {";
-        }
+        String toWrite = "Occurrences after SMOTE filter: {";
         
         for (int i = 0; i < occurrences.length; i++) {
             toWrite += "[" + (i+1) + "] => " + occurrences[i] + "; ";

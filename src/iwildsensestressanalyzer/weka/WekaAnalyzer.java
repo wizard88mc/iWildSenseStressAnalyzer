@@ -2,14 +2,18 @@ package iwildsensestressanalyzer.weka;
 
 import iwildsensestressanalyzer.IWildSenseStressAnalyzer;
 import iwildsensestressanalyzer.esm.StressSurvey;
+import iwildsensestressanalyzer.filereader.ClassesMappingReader;
 import iwildsensestressanalyzer.filereader.WekaFilesCreatedReader;
 import iwildsensestressanalyzer.filewriter.ARFFWekaWriter;
 import iwildsensestressanalyzer.filewriter.CreatedFilesWriter;
+import iwildsensestressanalyzer.filewriter.TemporaryWekaFileWriterForFeatures;
 import iwildsensestressanalyzer.filewriter.WekaEvaluationOutputWriter;
 import iwildsensestressanalyzer.participant.Participant;
+import iwildsensestressanalyzer.preference.PreferenceManager;
 import iwildsensestressanalyzer.utils.MathUtils;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import weka.classifiers.Evaluation;
 import weka.classifiers.functions.LibSVM;
@@ -32,9 +36,6 @@ public class WekaAnalyzer {
     
     public static CreatedFilesWriter createdFilesWriter = null;
     
-    private static final ArrayList<String> IMEIS_ALREADY_TESTED_5CLASSES = new ArrayList<>(),
-            IMEIS_ALREADY_TESTED_3CLASSES = new ArrayList<>();
-    
     public static void createWekaFiles(ArrayList<Participant> 
             participants, String subfolderName) {
         
@@ -43,6 +44,8 @@ public class WekaAnalyzer {
         }
         
         ArrayList<File> listCreatedFiles = new ArrayList<>();
+        ArrayList<HashMap<String, String>> maps = 
+                ClassesMappingReader.getAllClassMapping();
         
         /**
          * For Application used we need to create features only once all the 
@@ -59,16 +62,18 @@ public class WekaAnalyzer {
                     new ArrayList<>(),
                 featuresForUserPresenceLightForAllParticipants = 
                     new ArrayList<>();
+        
         ArrayList<ArrayList<String>> featuresForDaysAndWeatherForAllParticipants = 
                 new ArrayList<>();
         
         ArrayList<Integer> surveyAnswersForAllParticipants = 
             new ArrayList<>();
                 
+        int counter = 0; 
         for (Participant participant: participants) {
             
-            ARFFWekaWriter output = new ARFFWekaWriter(participant.getIMEI(), 
-                    subfolderName);
+            System.out.println("*** Creating features for participant " + 
+                    counter + "/" + participants.size());
             
             ArrayList<ArrayList<Double>> featuresForApplicationUsed = 
                         new ArrayList<>(), 
@@ -131,78 +136,151 @@ public class WekaAnalyzer {
                                 0.0, 1.0);
             
             /**
-             * Writing output file for the participant
+             * Iterating over all the possible class mapping
              */
-            for (int i = 0; i < surveyAnswers.size(); i++) {
+            for (HashMap<String, String> map: maps) {
                 
-                ArrayList<Double> features = new ArrayList<>();
-                features.addAll(normalizedFeaturesForApplicationUser.get(i));
-                features.addAll(normalizedFeaturesForTouchesBuffered.get(i));
-                features.addAll(normalizedFeaturesForUserActivity.get(i));
-                features.addAll(normalizedFeaturesForUserPresence.get(i));
-                features.addAll(normalizedFeaturesForUserPresenceLight.get(i));
+                System.out.println("Creating file for map: " + 
+                        map.get("map_name"));
+            
+                String classesString = "";
+                for (String key: map.keySet()) {
+                    if (!key.equals("map_name") && 
+                            !classesString.contains(map.get(key))) {
+                        classesString += "," + map.get(key);
+                    }
+                }
+                classesString = classesString.replaceFirst(",", "");
                 
-                output.writeCalculatedFeaturesOnOutputFiles(
-                        MathUtils.convertFeaturesToASetOfString(features));
+                TemporaryWekaFileWriterForFeatures csvWriter = 
+                        new TemporaryWekaFileWriterForFeatures(classesString);
+
+                /**
+                 * Writing in the temporary file only the instances that have
+                 * an 
+                 */
+                for (int i = 0; i < surveyAnswers.size(); i++) {
+                    
+                    if (!map.get(String.valueOf(surveyAnswers.get(i))).equals("")) {
+
+                        ArrayList<String> features = new ArrayList<>();
+                        features.addAll(MathUtils
+                                .convertFeaturesToASetOfString(
+                                        normalizedFeaturesForApplicationUser.get(i)));
+                        features.addAll(MathUtils
+                                .convertFeaturesToASetOfString(
+                                        normalizedFeaturesForTouchesBuffered.get(i)));
+                        features.addAll(MathUtils
+                                .convertFeaturesToASetOfString(
+                                        normalizedFeaturesForUserActivity.get(i)));
+                        features.addAll(MathUtils
+                                .convertFeaturesToASetOfString(
+                                        normalizedFeaturesForUserPresence.get(i)));
+                        features.addAll(MathUtils
+                                .convertFeaturesToASetOfString(
+                                        normalizedFeaturesForUserPresenceLight.get(i)));
+
+                        features.addAll(featuresForDaysAndWeather.get(i));
+
+                        csvWriter.writeLine(features, 
+                                map.get(String.valueOf(surveyAnswers.get(i))));
+                    }
+                }
+                csvWriter.closeFile();
+
+                try {
+                    
+                    File createdFile = 
+                            createWekaFileFromCSVFile(csvWriter.getFile(), 
+                                classesString, participant.getIMEI(), 
+                                subfolderName, map.get("map_name"));
+
+                    if (createdFile != null) {
+                        listCreatedFiles.add(createdFile);
+                    }
+                    
+                }
+                catch(Exception exc) {
+                    System.out.println("Exception in creating DataSource");
+                    exc.printStackTrace();
+                }
                 
-                output.writeCalculatedFeaturesOnOutputFiles(
-                        featuresForDaysAndWeather.get(i));
-                
-                output.writeInstanceClass(surveyAnswers.get(i));
+                csvWriter.deleteFile();
             }
             
-            output.closeFiles();
-            
-            listCreatedFiles.addAll(output.getOutputFiles());
+            counter++;
         }
         
         /**
          * Normalizing features with all participants
          */
-        ArrayList<ArrayList<Double>> normalizedFeaturesForApplicationsForAllParticipants = 
-                    MathUtils.normalizeSetOfDoubleData(
-                            featuresForApplicationUsedForAllParticipants, 0.0, 1.0),
-                normalizedFeaturesForTouchesBufferedForAllParticipants = 
-                    MathUtils.normalizeSetOfDoubleData(
-                            featuresForTouchesBufferedForAllParticipants, 0.0, 1.0), 
-                normalizedFeaturesForUserActivityForAllParticipants = 
-                    MathUtils.normalizeSetOfDoubleData(
-                            featuresForUserActivityForAllParticipants, 0.0, 1.0), 
-                normalizedFeaturesForUserPresenceEventsForAllParticipants = 
-                    MathUtils.normalizeSetOfDoubleData(
-                            featuresForUserPresenceEventsForAllParticipants, 0.0, 1.0),
-                normalizedFeaturesforUserPresenceLightForAllParticipants = 
-                    MathUtils.normalizeSetOfDoubleData(
-                            featuresForUserPresenceLightForAllParticipants, 0.0, 1.0);
+        ArrayList<ArrayList<Double>> 
+            normalizedFeaturesForApplicationsForAllParticipants = 
+                MathUtils.normalizeSetOfDoubleData(
+                    featuresForApplicationUsedForAllParticipants, 0.0, 1.0),
+            normalizedFeaturesForTouchesBufferedForAllParticipants = 
+                MathUtils.normalizeSetOfDoubleData(
+                    featuresForTouchesBufferedForAllParticipants, 0.0, 1.0), 
+            normalizedFeaturesForUserActivityForAllParticipants = 
+                MathUtils.normalizeSetOfDoubleData(
+                    featuresForUserActivityForAllParticipants, 0.0, 1.0), 
+            normalizedFeaturesForUserPresenceEventsForAllParticipants = 
+                MathUtils.normalizeSetOfDoubleData(
+                    featuresForUserPresenceEventsForAllParticipants, 0.0, 1.0),
+            normalizedFeaturesforUserPresenceLightForAllParticipants = 
+                MathUtils.normalizeSetOfDoubleData(
+                    featuresForUserPresenceLightForAllParticipants, 0.0, 1.0);
         
-        /**
-         * Writing output file for all participants
-         */
-        ARFFWekaWriter writerForAllParticipants = new ARFFWekaWriter("_ALL", 
-                subfolderName);
+        System.out.println("*** Creating files for ALL participants");
+        for (HashMap<String, String> map: maps) {
+            
+            System.out.println("*** Creating file for mapping " + map.get("map_name"));
+            
+            String classesString = "";
+            for(String key: map.keySet()) {
+                if (!key.equals("map_name") && 
+                        !classesString.contains(map.get(key))) {
+                    classesString += "," + map.get(key);
+                }
+            }
+            classesString = classesString.replaceFirst(",", "");
+            
+            TemporaryWekaFileWriterForFeatures csvWriter = 
+                    new TemporaryWekaFileWriterForFeatures(classesString);
         
-        for (int i = 0; i < surveyAnswersForAllParticipants.size(); i++) {
+            for (int i = 0; i < surveyAnswersForAllParticipants.size(); i++) {
             
-            ArrayList<Double> features = new ArrayList<>();
-            features.addAll(normalizedFeaturesForApplicationsForAllParticipants.get(i));
-            features.addAll(normalizedFeaturesForTouchesBufferedForAllParticipants.get(i));
-            features.addAll(normalizedFeaturesForUserActivityForAllParticipants.get(i));
-            features.addAll(normalizedFeaturesForUserPresenceEventsForAllParticipants.get(i));
-            features.addAll(normalizedFeaturesforUserPresenceLightForAllParticipants.get(i));
+                if (!map.get(String.valueOf(surveyAnswersForAllParticipants.get(i))).equals("")) {
             
-            writerForAllParticipants.writeCalculatedFeaturesOnOutputFiles(
-                    MathUtils.convertFeaturesToASetOfString(features));
+                    ArrayList<String> features = new ArrayList<>();
+                    features.addAll(MathUtils.convertFeaturesToASetOfString(
+                            normalizedFeaturesForApplicationsForAllParticipants.get(i)));
+                    features.addAll(MathUtils.convertFeaturesToASetOfString(
+                            normalizedFeaturesForTouchesBufferedForAllParticipants.get(i)));
+                    features.addAll(MathUtils.convertFeaturesToASetOfString(
+                            normalizedFeaturesForUserActivityForAllParticipants.get(i)));
+                    features.addAll(MathUtils.convertFeaturesToASetOfString(
+                            normalizedFeaturesForUserPresenceEventsForAllParticipants.get(i)));
+                    features.addAll(MathUtils.convertFeaturesToASetOfString(
+                            normalizedFeaturesforUserPresenceLightForAllParticipants.get(i)));
+                    features.addAll(featuresForDaysAndWeatherForAllParticipants.get(i));
+                    
+                    csvWriter.writeLine(features, 
+                            map.get(String.valueOf(surveyAnswersForAllParticipants.get(i))));
+                }
+            }
+            csvWriter.closeFile();
+                
+            File createdFile = 
+                createWekaFileFromCSVFile(csvWriter.getFile(), 
+                    classesString, "_ALL", subfolderName, map.get("map_name"));
+                
+            if (createdFile != null) {
+                listCreatedFiles.add(createdFile);
+            }
             
-            writerForAllParticipants.writeCalculatedFeaturesOnOutputFiles(
-                    featuresForDaysAndWeatherForAllParticipants.get(i));
-            
-            writerForAllParticipants
-                    .writeInstanceClass(surveyAnswersForAllParticipants.get(i));
+            csvWriter.deleteFile();
         }
-        
-        writerForAllParticipants.closeFiles();
-        
-        listCreatedFiles.addAll(writerForAllParticipants.getOutputFiles());
         
         createdFilesWriter.writeCreatedFiles(listCreatedFiles);
     }
@@ -240,14 +318,12 @@ public class WekaAnalyzer {
          * Starting weka classification task
          */
         if (toWorkWith.equals(IWildSenseStressAnalyzer.ONLY_MORE_THAN_ZERO)) {
+            
             System.out.println("*** Classification for participants with more than "
                 + "zero answers ***");
-            /*performWekaClassificationTask(filesToUse, 
-                IWildSenseStressAnalyzer.TITLE_PARTICIPANTS_MORE_ZERO_ANSWERS, 
-                folder, IWildSenseStressAnalyzer.FOLDER_MORE_ZERO_ANSWERS, false);*/
             performWekaClassificationTask(filesToUse, 
                 IWildSenseStressAnalyzer.TITLE_PARTICIPANTS_MORE_ZERO_ANSWERS, 
-                folder, IWildSenseStressAnalyzer.FOLDER_MORE_ZERO_ANSWERS, true);
+                folder, IWildSenseStressAnalyzer.FOLDER_MORE_ZERO_ANSWERS);
         }
         else if (toWorkWith.equals(IWildSenseStressAnalyzer.ONLY_MORE_THRESHOLD)) {
             
@@ -255,10 +331,7 @@ public class WekaAnalyzer {
                 + "answers than the threshold ***");
             performWekaClassificationTask(filesToUse, 
                 IWildSenseStressAnalyzer.TITLE_MORE_THRESHOLD, 
-                folder, IWildSenseStressAnalyzer.FOLDER_MORE_THRESHOLD, false);
-            performWekaClassificationTask(filesToUse, 
-                IWildSenseStressAnalyzer.TITLE_MORE_THRESHOLD, 
-                folder, IWildSenseStressAnalyzer.FOLDER_MORE_THRESHOLD, true);
+                folder, IWildSenseStressAnalyzer.FOLDER_MORE_THRESHOLD);
         }
         else if (toWorkWith.equals(IWildSenseStressAnalyzer.ONLY_MORE_ONE_PER_DAY)) {
         
@@ -266,10 +339,7 @@ public class WekaAnalyzer {
                 + "one answer per day ***");
             performWekaClassificationTask(filesToUse, 
                 IWildSenseStressAnalyzer.TITLE_MORE_ONE_SURVEY_PER_DAY, 
-                folder, IWildSenseStressAnalyzer.FOLDER_MORE_ONE_SURVEY_PER_DAY, false);
-            performWekaClassificationTask(filesToUse, 
-                IWildSenseStressAnalyzer.TITLE_MORE_ONE_SURVEY_PER_DAY, 
-                folder, IWildSenseStressAnalyzer.FOLDER_MORE_ONE_SURVEY_PER_DAY, true);
+                folder, IWildSenseStressAnalyzer.FOLDER_MORE_ONE_SURVEY_PER_DAY);
         }
         else if (toWorkWith.equals(IWildSenseStressAnalyzer.ONLY_MORE_INITIAL_AVERAGE)) {
         
@@ -277,10 +347,7 @@ public class WekaAnalyzer {
                 + "answers more than the initial average ***");
             performWekaClassificationTask(filesToUse, 
                 IWildSenseStressAnalyzer.TITLE_MORE_THAN_INITIAL_AVERAGE, 
-                folder, IWildSenseStressAnalyzer.FOLDER_MORE_THAN_INITIAL_AVERAGE, false);
-            performWekaClassificationTask(filesToUse, 
-                IWildSenseStressAnalyzer.TITLE_MORE_THAN_INITIAL_AVERAGE, 
-                folder, IWildSenseStressAnalyzer.FOLDER_MORE_THAN_INITIAL_AVERAGE, true);
+                folder, IWildSenseStressAnalyzer.FOLDER_MORE_THAN_INITIAL_AVERAGE);
         }
     }
     
@@ -288,195 +355,133 @@ public class WekaAnalyzer {
      * Performs Classification
      */
     private static void performWekaClassificationTask(ArrayList<String> listFileNames, 
-            String initialMessage, String folder, String subfolder, 
-            boolean oversampleData) {
+            String initialMessage, String folder, String subfolder) {
         
         WekaEvaluationOutputWriter outputWriter = 
-                new WekaEvaluationOutputWriter(folder, subfolder, oversampleData);
+                new WekaEvaluationOutputWriter(folder, subfolder);
         
         outputWriter.writeOnOutputFile(initialMessage);
         
+        int counter = 1;
+        
         for (String fileName: listFileNames) {
             
-            String[] elementsFileName = fileName.split("/");
-            String IMEI = elementsFileName[elementsFileName.length - 2];
-            //String IMEI = "_ALL";
+            System.out.println("**** Weka analysis file " + counter + "/" + 
+                    listFileNames.size());
             
-            if ((fileName.contains("EASY") && 
-                    !IMEIS_ALREADY_TESTED_3CLASSES.contains(IMEI)) || 
-                (fileName.contains("DIFFICULT") && 
-                    !IMEIS_ALREADY_TESTED_5CLASSES.contains(IMEI))) {
-                
-                if (!IMEI.contains("ALL") && fileName.contains("EASY")) {
-                    if (fileName.contains("EASY")) {
-                        IMEIS_ALREADY_TESTED_3CLASSES.add(IMEI);
-                    }
-                    else {
-                        IMEIS_ALREADY_TESTED_5CLASSES.add(IMEI);
-                    }
+            File file = new File(fileName);
+
+            try {
+                DataSource source = new DataSource(file.getPath());
+                Instances data = source.getDataSet();
+
+                if (data.classIndex() == -1) {
+                    data.setClassIndex(data.numAttributes() - 1);
                 }
-            
-                File file = new File(fileName);
+                
+                int numClasses = data.numClasses();
+
+                outputWriter.writeOnOutputFile(file.getPath());
+
+                outputWriter
+                        .writeClassesOccurrences(countOccurrences(data, numClasses));
 
                 try {
-                    DataSource source = new DataSource(file.getPath());
-                    Instances data = source.getDataSet();
+                    /**
+                     * ZeroR baseline classification test
+                     */
+                    ZeroR zeroR = new ZeroR();
+                    zeroR.buildClassifier(data);
+                    Evaluation zeroREval = new Evaluation(data);
+                    zeroREval.crossValidateModel(zeroR, data, 10, new Random(10));
 
-                    if (data.classIndex() == -1) {
-                        data.setClassIndex(data.numAttributes() - 1);
+                    outputWriter.writeOnOutputFile("ZeroR Classification");
+                    outputWriter.writeOnOutputFile(
+                        evaluateClassificationPerformances(zeroREval, 
+                            numClasses));
+
+                    /**
+                     * Tree classification test
+                     */
+                    J48 tree = new J48();
+                    tree.buildClassifier(data);
+                    Evaluation treeEval = new Evaluation(data);
+                    treeEval.crossValidateModel(tree, data, 10, new Random(10));
+
+                    outputWriter.writeOnOutputFile("TREE Classification");
+                    outputWriter.writeOnOutputFile(
+                        evaluateClassificationPerformances(treeEval, 
+                            numClasses));
+
+                    /**
+                     * kNN classification test
+                     */
+                    for (int k = 2; k < 3; k++) {
+
+                        IBk knn = new IBk(k);
+                        knn.setOptions(weka.core.Utils.
+                            splitOptions("-W 0 -X -A "
+                                + "weka.core.neighboursearch.LinearNNSearch"));
+                        knn.buildClassifier(data);
+                        Evaluation knnEval = new Evaluation(data);
+                        knnEval.crossValidateModel(knn, data, 10, new Random(10));
+
+                        outputWriter.writeOnOutputFile(k + "-kNN Classification");
+                        outputWriter.writeOnOutputFile(
+                            evaluateClassificationPerformances(knnEval, 
+                                numClasses));
                     }
 
-                    if (data.numInstances() > 10) {
+                    /**
+                     * SVM evaluation
+                     */
+                    try {
+                        LibSVM svm = new LibSVM();
+                        svm.setOptions(weka.core.Utils.splitOptions("-S 1 -K 2 "
+                            + "-D 5 -G 0.0 -R 0.0 -N 0.5 -M 40 -C 2.0 "
+                            + "-E 0.001 -P 0.1 -Z -seed 1"));
+                        svm.setDoNotReplaceMissingValues(false);
+                        svm.buildClassifier(data);
+                        Evaluation svmEval = new Evaluation(data);
+                        svmEval.crossValidateModel(svm, data, 10, new Random(10));
 
-                        outputWriter.writeOnOutputFile(file.getPath());
-
-                        boolean easyTask = file.getName().contains("EASY");
-
-                        if (oversampleData) {
-                        /**
-                         * Initial filtering 
-                         */
-                            checkNumberOfIstances(data, easyTask);
-                            data = applySMOTEFilterToTrainingData(data, easyTask);
-                            outputWriter.writeClassesOccurrences(countOccurrences(data, easyTask), 
-                                    true);
-                        }
-                        else {
-                            outputWriter.writeClassesOccurrences(countOccurrences(data, easyTask), 
-                                    false);
-                        }
-
-                        try {
-                            /**
-                             * ZeroR baseline classification test
-                             */
-                            ZeroR zeroR = new ZeroR();
-                            zeroR.buildClassifier(data);
-                            Evaluation zeroREval = new Evaluation(data);
-                            zeroREval.crossValidateModel(zeroR, data, 10, 
-                                    new Random(10));
-
-                            outputWriter.writeOnOutputFile("ZeroR Classification");
-                            outputWriter.writeOnOutputFile(
-                                    evaluateClassificationPerformances(zeroREval, 
-                                            easyTask));
-
-                            /**
-                             * Tree classification test
-                             */
-                            J48 tree = new J48();
-                            tree.buildClassifier(data);
-                            Evaluation treeEval = new Evaluation(data);
-                            treeEval.crossValidateModel(tree, data, 10, new Random(10));
-
-                            outputWriter.writeOnOutputFile("TREE Classification");
-                            outputWriter.writeOnOutputFile(
-                                    evaluateClassificationPerformances(treeEval, 
-                                            easyTask));
-
-                            /**
-                             * kNN classification test
-                             */
-                            for (int k = 2; k < 3; k++) {
-
-                                IBk knn = new IBk(k);
-                                knn.setOptions(weka.core.Utils.
-                                        splitOptions("-W 0 -X -A "
-                                                + "weka.core.neighboursearch.LinearNNSearch"));
-                                knn.buildClassifier(data);
-                                Evaluation knnEval = new Evaluation(data);
-                                knnEval.crossValidateModel(knn, data, 10, 
-                                        new Random(10));
-
-                                outputWriter.writeOnOutputFile(k + "-kNN Classification");
-                                outputWriter.writeOnOutputFile(
-                                        evaluateClassificationPerformances(knnEval, 
-                                                easyTask));
-                            }
-
-                            /**
-                             * SVM evaluation
-                             */
-                            try {
-                                LibSVM svm = new LibSVM();
-                                svm.setOptions(weka.core.Utils.splitOptions("-S 1 -K 2 "
-                                        + "-D 5 -G 0.0 -R 0.0 -N 0.5 -M 40 -C 2.0 "
-                                        + "-E 0.001 -P 0.1 -Z -seed 1"));
-                                svm.setDoNotReplaceMissingValues(false);
-                                svm.buildClassifier(data);
-                                Evaluation svmEval = new Evaluation(data);
-                                svmEval.crossValidateModel(svm, data, 10, 
-                                        new Random(10));
-
-                                outputWriter.writeOnOutputFile("SVM Classification");
-                                outputWriter.writeOnOutputFile(
-                                        evaluateClassificationPerformances(svmEval, 
-                                                easyTask));
-                            }
-                            catch(Exception exc) {
-                                System.out.println("SVM exception: " + exc.toString());
-                            }
-
-                            /**
-                             * Multilayer Perceptron evaluation
-                             */
-                            MultilayerPerceptron multiPerceptron = new MultilayerPerceptron();
-                            multiPerceptron.setOptions(weka.core.Utils.
-                                    splitOptions("-L 0.3 -M 0.2 -N 500 -V 0 "
-                                            + "-S 0 -E 20 -H a"));
-                            multiPerceptron.buildClassifier(data);
-                            Evaluation multiPEval = new Evaluation(data);
-                            multiPEval.crossValidateModel(multiPerceptron, data, 
-                                    10, new Random(10));
-
-                            outputWriter.writeOnOutputFile("Multilayer Perceptron "
-                                    + "Classification");
-                            outputWriter.writeOnOutputFile(
-                                    evaluateClassificationPerformances(multiPEval, 
-                                            easyTask));
-
-                            /**
-                             * Voted Perceptron evaluation
-                             */
-                            /*VotedPerceptron votedPerceptron = new VotedPerceptron();
-                            votedPerceptron.setOptions(weka.core.Utils.splitOptions("-I 10 -E 1.0 -S 2 -M 10000"));
-                            votedPerceptron.buildClassifier(data);
-                            Evaluation votedPEval = new Evaluation(data);
-                            votedPEval.crossValidateModel(votedPerceptron, data, 10, new Random(10));
-
-                            outputWriter.writeOnOutputFile("Voted Perceptron Classification");
-                            outputWriter.writeOnOutputFile(evaluateClassificationPerformances(votedPEval, easyTask));*/
-
-                            /**
-                             * Bayesan Network evaluation
-                             */
-                            /*BayesNet bayes = new BayesNet();
-                            bayes.setOptions(weka.core.Utils.splitOptions("-D -Q "
-                                    + "weka.classifiers.bayes.net.search.local.K2 -- "
-                                    + "-P 1 -S BAYES -E "
-                                    + "weka.classifiers.bayes.net.estimate.SimpleEstimator"
-                                    + " -- -A 0.5"));
-                            bayes.buildClassifier(data);
-                            Evaluation bayesEval = new Evaluation(data);
-                            bayesEval.crossValidateModel(bayes, data, 10, 
-                                    new Random(10));
-
-                            outputWriter.writeOnOutputFile("Bayes network");
-                            outputWriter.writeOnOutputFile(
-                                    evaluateClassificationPerformances(bayesEval, 
-                                            easyTask));*/
-                        }
-                        catch(Exception exc) {
-
-                        }
+                        outputWriter.writeOnOutputFile("SVM Classification");
+                        outputWriter.writeOnOutputFile(
+                            evaluateClassificationPerformances(svmEval, 
+                                numClasses));
+                    }
+                    catch(Exception exc) {
+                        System.out.println("SVM exception: " + exc.toString());
                     }
 
+                    /**
+                     * Multilayer Perceptron evaluation
+                     */
+                    MultilayerPerceptron multiPerceptron = new MultilayerPerceptron();
+                    multiPerceptron.setOptions(weka.core.Utils.
+                        splitOptions("-L 0.3 -M 0.2 -N 500 -V 0 "
+                            + "-S 0 -E 20 -H a"));
+                    multiPerceptron.buildClassifier(data);
+                    Evaluation multiPEval = new Evaluation(data);
+                    multiPEval.crossValidateModel(multiPerceptron, data, 
+                        10, new Random(10));
+
+                    outputWriter.writeOnOutputFile("Multilayer Perceptron "
+                        + "Classification");
+                    outputWriter.writeOnOutputFile(
+                        evaluateClassificationPerformances(multiPEval, numClasses));
                 }
                 catch(Exception exc) {
-                    System.out.println("Exception in performWekaClassificationTask");
+                    System.out.println("Exception in performing weka classification");
                     exc.printStackTrace();
                 }
             }
+            catch(Exception exc) {
+                System.out.println("Exception in performWekaClassificationTask");
+                exc.printStackTrace();
+            }
+            
+            counter++;
         }
         
         outputWriter.closeFile();
@@ -491,12 +496,7 @@ public class WekaAnalyzer {
      * @return a formatted String with the results of the classification task
      */
     private static String evaluateClassificationPerformances(Evaluation eval, 
-            boolean easyTask) {
-        
-        int numberOfClasses = 5;
-        if (easyTask) {
-            numberOfClasses = 3;
-        }
+            int numberOfClasses) {
         
         PerformanceEvaluator evaluator = new PerformanceEvaluator(eval, 
                 numberOfClasses);
@@ -505,19 +505,86 @@ public class WekaAnalyzer {
     }
     
     /**
+     * Creates an .arff file from the temporary .csv file
+     * @param tempCSVFile the original csv file
+     * @param listClasses a comma separated string with all the possible classes
+     * @param IMEI the IMEI of the participant
+     * @param subfolder the subfolder where to save the file
+     * @param mapName the name of the mapping
+     * @return 
+     */
+    private static File createWekaFileFromCSVFile(File tempCSVFile, 
+            String listClasses, String IMEI, String subfolder, String mapName) {
+        
+        try {
+            if (IWildSenseStressAnalyzer.DEBUG) {
+                System.out.println("Importing data from CSV file");
+            }
+            DataSource source = new DataSource(tempCSVFile.getPath());
+            Instances dataSet = source.getDataSet();
+            
+            if (dataSet.classIndex() == -1) {
+                dataSet.setClassIndex(dataSet.numAttributes() - 1);
+            }
+            
+            checkNumberOfIstances(dataSet, listClasses.split(",").length);
+            if (IWildSenseStressAnalyzer.DEBUG) {
+                System.out.println("***** Starting applying SMOTE filter *****");
+            }
+            dataSet = applySMOTEFilterToTrainingData(dataSet, 
+                    listClasses.split(",").length);
+            if (IWildSenseStressAnalyzer.DEBUG) {
+                System.out.println("***** SMOTE filter completed *****");
+            }
+            
+            ARFFWekaWriter writer = new ARFFWekaWriter(IMEI, subfolder, 
+                    mapName);
+
+            PreferenceManager preference = new PreferenceManager(IMEI, 
+                    subfolder, mapName);
+
+            writer.writePreambleWekaFile(listClasses);
+            preference.writePreamble();
+
+            for (int i = 0; i < dataSet.numInstances(); i++) {
+                /**
+                 * Prints an instance on the output file
+                 */
+                writer.writeInstance(dataSet.instance(i).toString());
+                preference.writeInstance(dataSet.instance(i).toString());
+            }
+
+            writer.closeFile();
+            preference.closeFile();
+
+            return writer.getOutputFiles();
+        }
+        catch(Exception exc) {
+            System.out.println("Exception in loading data source");
+            exc.printStackTrace();
+            
+            return null;
+        }
+    }
+    
+    /**
      * Counts the number of instances for each class and duplicates an instance 
      * if it is the only one for a class
      * @param instances the set of instances
-     * @param easy true if it is the 3-class problem, false otherwise
+     * @param numberOfClasses the number of target classes
      */
-    private static void checkNumberOfIstances(Instances instances, boolean easy) {
+    private static void checkNumberOfIstances(Instances instances, 
+            int numberOfClasses) {
         
-        Integer[] classOccurences = countOccurrences(instances, easy);
+        Integer[] classOccurences = countOccurrences(instances, numberOfClasses);
         
         for (int i = 0; i < classOccurences.length; i++) {
             
             if (classOccurences[i] == 1) {
-                //duplicate instance
+                /**
+                 * Duplicating an instance if it is the only one for that 
+                 * particular class
+                 */
                 duplicateInstance(instances, i);
             }
         }
@@ -538,7 +605,9 @@ public class WekaAnalyzer {
                     .value(instances.instance(i).classAttribute());
             
             if (classAttribute == index) {
-                //copy this instance
+                /**
+                 * Copying the single instance
+                 */
                 Instance newInstance = (Instance) instances.instance(i).copy();
                 instances.add(newInstance);
                 
@@ -552,11 +621,11 @@ public class WekaAnalyzer {
      * @param instances the set of instances
      */
     private static Instances applySMOTEFilterToTrainingData(Instances instances, 
-            boolean easy) {
+            int numberOfClasses) {
         /**
          * First of all we count the number of instances for each class
          */
-        Integer[] occurrences = countOccurrences(instances, easy);
+        Integer[] occurrences = countOccurrences(instances, numberOfClasses);
         
         /**
          * Getting the number of max occurrences and the index
@@ -579,14 +648,22 @@ public class WekaAnalyzer {
             if (i != indexMaxOccurrences) {
              
                 try {
-                    while (Math.abs(occurrences[i] - numberOfMaxInstances) > 10) {
+                    /**
+                     * Maximum distance between two classes counter is 2
+                     */
+                    while (Math.abs(occurrences[i] - numberOfMaxInstances) > 5) {
+                        
                         SMOTE filter = new SMOTE();
                         filter.setInputFormat(instances);
 
-                        double percentage = (numberOfMaxInstances - occurrences[i]) * 100 
+                        double percentage = 
+                                (numberOfMaxInstances - occurrences[i]) * 100 
                                 / occurrences[i];
                         if (percentage > 100) {
                             percentage = 100;
+                        }
+                        if (percentage == 0.0) {
+                            percentage = 0.5;
                         }
 
                         filter.setPercentage(percentage);
@@ -604,7 +681,8 @@ public class WekaAnalyzer {
                     
                         instances = Filter.useFilter(instances, filter);
                         
-                        occurrences = countOccurrences(instances, easy);
+                        occurrences = countOccurrences(instances, 
+                                numberOfClasses);
                     }
                 }
                 catch(Exception exc) {
@@ -620,17 +698,15 @@ public class WekaAnalyzer {
     /**
      * Counts the number of occurrences for each class
      * @param instances the set of instances
-     * @param easy true if 3-class problem, false otherwise
+     * @param numberOfClasses the total number of classes of the dataset
      * @return an array with the number of occurrences for each class
      */
-    private static Integer[] countOccurrences(Instances instances, boolean easy) {
+    private static Integer[] countOccurrences(Instances instances, 
+            int numberOfClasses) {
         
-        Integer[] occurrences;
-        if (!easy) {
-            occurrences = new Integer[]{0, 0, 0, 0, 0};
-        }
-        else {
-            occurrences = new Integer[]{0, 0, 0};
+        Integer[] occurrences = new Integer[numberOfClasses];
+        for (int i = 0; i < occurrences.length; i++) {
+            occurrences[i] = 0;
         }
         
         for (int i = 0; i < instances.numInstances(); i++) {
